@@ -1,4 +1,4 @@
-# fivefivefive
+# MOA
 
 세미 프로젝트 5조입니다.
 
