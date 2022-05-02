@@ -2,7 +2,7 @@
 create table community(
 community_no number primary key,
 project_no references project(project_no) on delete cascade not null,
-number_no references member(member_no) on delete cascade not null,
+member_no references member(member_no) on delete cascade not null,
 community_title varchar2(100) not null,
 community_content varchar2(4000) not null,
 community_time date default sysdate not null,
@@ -32,6 +32,6 @@ primary key(community_no, attach_no)
 create table moa_faq(
 faq_no number primary key,
 faq_title varchar2(300) not null,
-faq_category varchar2(100) check(faq_category in ('회원정보', '운영정책', '이용문의', '기타')),
+faq_category varchar2(14) check(faq_category in ('회원정보', '운영정책', '이용문의', '기타')),
 faq_content varchar2(4000) not null
 );
