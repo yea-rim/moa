@@ -42,7 +42,7 @@ funding_post varchar2(6) NOT NULL,
 funding_basic_address varchar2(300) NOT NULL,
 funding_detail_address varchar2(300) NOT NULL CHECK(regexp_like(funding_detail_address,'^[가-힣A-Za-z·\d~\-\.]{2,}$')), 
 funding_post_message varchar2(300),
-funding__phone char(11) NOT NULL CHECK(regexp_like(funding_phone,'^(010)[1-9][0-9]{7}$')),
+funding_phone char(11) NOT NULL CHECK(regexp_like(funding_phone,'^(010)[1-9][0-9]{7}$')),
 funding_delete_date DATE,
 funding_payment_date DATE
 );
