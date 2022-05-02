@@ -1,8 +1,8 @@
 -- 커뮤니티(홍보게시판)
 create table community(
 community_no number primary key,
-project_no references project(project_no) on delete cascade not null,
-member_no references member(member_no) on delete cascade not null,
+community_project_no references project(project_no) on delete cascade not null,
+community_member_no references member(member_no) on delete cascade not null,
 community_title varchar2(100) not null,
 community_content varchar2(4000) not null,
 community_time date default sysdate not null,
@@ -14,8 +14,8 @@ create sequence community_seq;
 -- 커뮤니티댓글
 create table community_reply(
 reply_no number primary key,
-community_no references community(community_no) on delete cascade,
-member_no references member(member_no) on delete set null,
+community_reply_no references community(community_no) on delete cascade,
+community_reply_member_no references member(member_no) on delete set null,
 reply_time date default sysdate not null,
 reply_content varchar2(600) not null
 );
