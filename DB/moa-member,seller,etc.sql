@@ -1,7 +1,7 @@
 -- 회원 테이블 
 create table member(
 member_no number primary key,
-member_email varchar2(100) unique not null check(regexp_like(member_email, '^[a-zA-Z0-9_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$')), 
+member_email varchar2(254) unique not null check(regexp_like(member_email, '^[a-zA-Z0-9_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$')), 
 member_pw varchar2(16) not null check(regexp_like(member_pw, '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,16}$')), 
 member_nick varchar2(30) unique not null check(regexp_like(member_nick, '^[가-힣a-zA-Z0-9]{2,10}$')), 
 member_phone char(11) unique not null check(regexp_like(member_phone, '^010([1-9][0-9]{3})([0-9]{4})$')), /* '-' 제외 */
@@ -18,7 +18,7 @@ create sequence member_seq;
 drop table seller;
 -- 판매자 테이블 
 create table seller(
-seller_no number references member(member_no) on delete cascade not null unique,
+seller_no references member(member_no) on delete cascade not null unique,
 seller_nick varchar2(30) unique not null check(regexp_like(seller_nick, '^[가-힣a-zA-Z0-9()]{2,10}$')),
 seller_regist_date date,
 seller_account_bank varchar2(30) not null,
