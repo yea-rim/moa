@@ -38,7 +38,7 @@ create table moa_question(
 question_no number primary key,
 question_writer references member(member_no) on delete set null,
 question_title varchar2(100) not null,
-question_content varchar2(3000) not null,
+question_content varchar2(4000) not null,
 question_time date default sysdate not null
 );
 create sequence moa_question_seq;
