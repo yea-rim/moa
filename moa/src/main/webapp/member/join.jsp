@@ -30,6 +30,7 @@
             <div class="row">
                 <label>가입 경로</label>
                 <select name="memberRoute" class="form-input input-round">
+                    <option selected disabled>선택</option>                
                     <option value="친구 추천">친구 추천</option>
                     <option value="인터넷 검색">인터넷 검색</option>
                     <option value="광고">광고</option>
