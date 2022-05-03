@@ -20,7 +20,7 @@ PRIMARY KEY(attach_no, progress_no)
 -- 프로젝트 문의 댓글 테이블
 CREATE TABLE pj_qna(
 qna_no NUMBER PRIMARY KEY,
-qna_member_no REFERENCES member(member_no) ON DELETE CASCADE SET NULL,
+qna_member_no REFERENCES member(member_no) ON DELETE SET NULL,
 qna_project_no REFERENCES project(project_no) ON DELETE CASCADE NOT NULL,
 qna_content varchar2(900) NOT NULL,
 qna_time DATE default sysdate NOT NULL, 
@@ -43,7 +43,7 @@ funding_basic_address varchar2(300) NOT NULL,
 funding_detail_address varchar2(300) NOT NULL CHECK(regexp_like(funding_detail_address,'^[가-힣A-Za-z·\d~\-\.]{2,}$')), 
 funding_post_message varchar2(300),
 funding_phone char(11) NOT NULL CHECK(regexp_like(funding_phone,'^(010)[1-9][0-9]{7}$')),
-funding_delete_date DATE,
+funding_cancel_date DATE,
 funding_payment_date DATE
 );
 
