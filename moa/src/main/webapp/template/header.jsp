@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% 
+
+	// 세션에서 login 정보 꺼내기 
+	Integer memberNo = (Integer) session.getAttribute("login"); 
+	
+	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
+	boolean isLogin = memberNo != null; 
+	
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,15 +20,19 @@
     <title>moa</title>
 
     <!-- css 링크 -->
-    <link rel="stylesheet" href="./css/reset.css" type="text/css">
-    <link rel="stylesheet" href="./css/commons.css" type="text/css">
-    <link rel="stylesheet" href="./css/layout.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
     <!-- <link rel="stylesheet" href="./css/test.css" type="text/css"> -->
 
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet"> 
+    
+    <!-- jqeury cdn -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 </head>
 <body>
@@ -37,7 +51,7 @@
                     </a>
                 </div>
                 <div class="float-right layer-5 right m10">
-                    <a href="" class="link">
+                    <a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
                         <h3 class="m0">로그인</h3>
                     </a>
                 </div>
