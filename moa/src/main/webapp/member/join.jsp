@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>moa 회원가입 페이지</title>
+<jsp:include page="/template/header.jsp"></jsp:include>
 
-</head>
-
-<body>
     <form action="join.do" method="post">
         <div class="container w450 m30">
             <div class="row center">
@@ -34,15 +27,15 @@
                 <input type="tel" name="memberPhone" required placeholder="- 제외하고 입력" class="form-input fill input-round" autocomplete="off">
             </div>
 
-<!--             <div class="row"> -->
-<!--                 <label>가입 경로</label> -->
-<!--                 <select name="memberRoute" class="form-input input-round"> -->
-<!--                     <option value="친구 추천">친구 추천</option> -->
-<!--                     <option value="인터넷 검색">인터넷 검색</option> -->
-<!--                     <option value="광고">광고</option> -->
-<!--                     <option value="sns">sns</option> -->
-<!--                     <option value="기타">기타</option> -->
-<!--                 </select> -->
+            <div class="row">
+                <label>가입 경로</label>
+                <select name="memberRoute" class="form-input input-round">
+                    <option value="친구 추천">친구 추천</option>
+                    <option value="인터넷 검색">인터넷 검색</option>
+                    <option value="광고">광고</option>
+                    <option value="sns">sns</option>
+                    <option value="기타">기타</option>
+                </select>
             </div>
 
             <div class="row">
@@ -50,5 +43,4 @@
             </div>
         </div>
     </form>
-</body>
-</html>
+<jsp:include page="/template/footer.jsp"></jsp:include>
