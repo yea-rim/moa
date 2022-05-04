@@ -30,6 +30,7 @@ section::after {
 aside {
     float: left;
     width: 20%;
+    padding: 10px;
 
     min-height: 450px;
     
