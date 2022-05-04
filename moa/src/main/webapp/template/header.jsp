@@ -3,7 +3,7 @@
     
 <% 
 
-	// 세션에서 login 정보 꺼내기 
+	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
 	
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
@@ -23,14 +23,14 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <!-- <link rel="stylesheet" href="./css/test.css" type="text/css"> -->
+    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
 
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet"> 
     
-    <!-- jqeury cdn -->
+    <!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
@@ -41,20 +41,33 @@
         <header>
             <div class="float-container">
                 <div class="float-left layer-5">
-                    <a href="" class="link">
+                    <a href="<%=request.getContextPath() %>" class="link">
                         <h1 class="header-name m0">moa</h1>
                     </a>
                 </div>
-                <div class="float-right layer-5 right m10">
-                    <a href="" class="link">
-                        <h3 class="m0">회원가입</h3>
-                    </a>
-                </div>
-                <div class="float-right layer-5 right m10">
-                    <a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
-                        <h3 class="m0">로그인</h3>
-                    </a>
-                </div>
+                <%if(!isLogin) { // 로그인 상태가 아니면 %>
+                	<div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/member/join.jsp" class="link">
+                			<h3>회원가입</h3>
+                		</a>
+                	</div>
+                	<div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
+	                        <h3>로그인</h3>
+	                    </a>
+                	</div>
+                <%} else { // 로그인 상태면 %>
+                		<div class="float-right layer-5 center m10">
+                			<a href="" class="link">
+                				<h3>프로젝트 신청</h3>
+                			</a>
+                		</div>
+                		<div class="float-right layer-5 center m10">
+                			<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
+                					<h3>마이페이지</h3>
+                			</a>
+                		</div>
+                <%} %>
             </div>
         </header>
 
