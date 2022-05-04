@@ -1,4 +1,4 @@
-package moa.sevlet.attach;
+package moa.servlet.attach;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,8 +16,8 @@ import moa.beans.AttachDto;
 import moa.beans.ProjectAttachDao;
 import moa.beans.ProjectAttachDto;
 
-@WebServlet(urlPatterns = "/attach/download.do")
-public class AttachDownloadServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/attach/projectDownload.do")
+public class ProjectAttachDownloadServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
