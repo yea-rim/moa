@@ -5,24 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class MemberDao {
-	
 
-	// 상세 조회 
+	// 상세 조회
 	public MemberDto selectOne(String memberEmail) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "select * from member where member_email = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, memberEmail);
-		
+
 		ResultSet rs = ps.executeQuery();
-		
+
 		MemberDto memberDto;
-		
-		if(rs.next()) {
+
+		if (rs.next()) {
 			memberDto = new MemberDto();
-			
+
 			memberDto.setMemberNo(rs.getInt("member_no"));
 			memberDto.setMemberEmail(rs.getString("member_email"));
 			memberDto.setMemberPw(rs.getString("member_pw"));
@@ -34,13 +33,13 @@ public class MemberDao {
 			memberDto.setMemberDetailAddress(rs.getString("member_detail_address"));
 			memberDto.setMemberRoute(rs.getString("member_route"));
 		} else {
-			memberDto = null; 
+			memberDto = null;
 		}
-		
+
 		con.close();
-		
-		return memberDto; 
-		
+
+		return memberDto;
+
 	}
 
 	// 등록 (1) 시퀀스 번호 생성
@@ -134,5 +133,19 @@ public class MemberDao {
 		return findDto;
 	}
 
+	// 비밀번호 변경
+	public boolean changePassword(String memberEmail, String changePw) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update member set member_pw = ? where member_email = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, changePw);
+		ps.setString(2, memberEmail);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;		
+	}
 
 }

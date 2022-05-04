@@ -11,28 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MemberDao;
 import moa.beans.MemberDto;
 
-@WebServlet(urlPatterns = "/member/find_email.do")
-public class MemberFindEmailServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/member/find_pw.do")
+public class MemberFindPwServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 준비
 			req.setCharacterEncoding("UTF-8");
 			MemberDto memberDto = new MemberDto();
-			memberDto.setMemberNick(req.getParameter("memberNick"));
+			memberDto.setMemberEmail(req.getParameter("memberEmail"));
 			memberDto.setMemberPhone(req.getParameter("memberPhone"));
+			memberDto.setMemberNick(req.getParameter("memberNick"));
 
 			// 처리
 			MemberDao memberDao = new MemberDao();
-			String memberEmail = memberDao.findEmail(memberDto);
+			MemberDto findDto = memberDao.findPw(memberDto);
 
 			// 출력
-			if (memberEmail == null) {
-				resp.sendRedirect("find_email.jsp?error");
+			if (findDto != null) {
+				resp.sendRedirect("set_pw.jsp?memberEmail=" + findDto.getMemberEmail());
 			} else {
-				resp.sendRedirect("find_email_result.jsp?memberEmail=" + memberEmail);
+				resp.sendRedirect("find_pw.jsp?error");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
