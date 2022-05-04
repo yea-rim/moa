@@ -1,3 +1,7 @@
+@charset "UTF-8";
+
+/* 테마 컬러 : B899CD */
+
 /* 컨테이너(container) */
 .container {
     margin: auto;
@@ -37,6 +41,13 @@
 .center {text-align: center !important;}
 .right {text-align: right !important;}
 
+.fill {
+    width: 100%;
+}
+.fill-h {
+    height: 100%;
+}
+
 
 
 /* margin(top-bottom) */
@@ -56,17 +67,71 @@
 
 /* 기본 link 스타일 */
 .link {
+    padding: 0px;
     text-decoration: none;
     color: black;
 
     margin: 0px;
 }
+.link.link-btn {
+    border: 1px solid #B899CD;
+    background-color: #B899CD;
+    color: white;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
+.link.link-btn:hover {
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+    color: white;
+}
+.link.link-reverse {
+    border: 1px solid #B899CD;
+    background-color: white;
+    color: #B899CD;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
+.link-gray{
+    color: gray;
+}
+.link-purple{
+    color: #B899CD;
+}
+
+
+
+/* 버튼 스타일 */
+.btn {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
+
+    color: white;
+    background-color: #B899CD;
+
+    cursor: pointer;
+
+    font: inherit;
+}
+.btn:hover {
+    color: white;
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+}
+
 
 
 
 /* float */
 .float-container {
-    
+    margin: auto;
 }
 .float-container > .float-left {
     float: left;
@@ -97,7 +162,6 @@
 .layer-5 {
     width: 10%;
 }
-
 
 
 
@@ -202,8 +266,6 @@ ul.menu a {
 /* header 제목 스타일 */
 .header-name{
     font-size: 2.5em;
-    font-weight: bolder;
-
     color: #B899CD;
 }
 
@@ -217,7 +279,53 @@ ul.menu a {
 }
 
 
+
+/* 입력창 */
+.form-input {
+    outline: none;
+    padding: 0.8em;
+    border: 1px solid #B6B6B6;
+    border-radius: 0.3em;
+}
+.form-input:focus {
+    border-color: black;
+}
+
+
+
+
+/* textarea */
+textarea.form-input {
+    resize: none; 
+}
+
+
+
+/* 페이지네이션 */
+.pagination {
+    white-space: nowrap; 
+
+    overflow: hidden;
+}
+.pagination > a {
+    color: rgb(130, 130, 130);
+    text-decoration: none;
+
+    display: inline-block;
+    min-width: 2em; 
+    padding: 0.25em;
+
+    text-align: center;
+}
+.pagination > a:hover {
+    color: black;
+}
+/* 현재 페이지 (class로 설정) */
+.pagination > a.active {
+    color: black;
+}
 /* 준엽 추가 */
+
 .h20{
     height: 20px;
 }
