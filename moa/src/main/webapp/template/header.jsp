@@ -10,9 +10,9 @@
     <title>moa</title>
 
     <!-- css 링크 -->
-    <link rel="stylesheet" href="./css/reset.css" type="text/css">
-    <link rel="stylesheet" href="./css/commons.css" type="text/css">
-    <link rel="stylesheet" href="./css/layout.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/commons.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/layout.css" type="text/css">
     <!-- <link rel="stylesheet" href="./css/test.css" type="text/css"> -->
 
     <!-- 폰트 cdn -->
@@ -27,7 +27,7 @@
         <header>
             <div class="float-container">
                 <div class="float-left layer-5">
-                    <a href="" class="link">
+                    <a href="<%=request.getContextPath() %>" class="link">
                         <h1 class="header-name m0">moa</h1>
                     </a>
                 </div>
