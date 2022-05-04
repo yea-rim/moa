@@ -67,7 +67,7 @@
                 
                 <!-- 관리자 로그인 페이지 -->
                 <div class="float-right layer-2 center">
-                    <a href="" class="link link-purple">관리자</a>
+                    <a href="<%=request.getContextPath() %>/admin/login.jsp" class="link link-purple">관리자</a>
                 </div>
             </div>
         </div>

@@ -5,9 +5,13 @@
 
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
-	
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
 	boolean isLogin = memberNo != null; 
+	
+	// 세션에서 admin 정보 꺼내기
+	String adminId = (String) session.getAttribute("admin");
+	// adminId 데이터 여부 판단 -> 관리자 권한 판단
+	boolean isAdmin = adminId != null; 
 	
 %>
 
@@ -23,8 +27,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
-
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
+    
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +40,7 @@
 
 </head>
 <body>
+임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %>
     <main>
 
         <header>
@@ -68,16 +73,6 @@
                 			</a>
                 		</div>
                 <%} %>
-                <div class="float-right layer-5 right m10">
-                    <a href="<%=request.getContextPath()%>/member/join.jsp" class="link">                    
-                        <h3 class="m0">회원가입</h3>
-                    </a>
-                </div>
-                <div class="float-right layer-5 right m10">
-                    <a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
-                        <h3 class="m0">로그인</h3>
-                    </a>
-                </div>
             </div>
         </header>
 
