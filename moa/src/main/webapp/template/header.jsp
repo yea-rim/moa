@@ -81,7 +81,7 @@
                     <ul>
                         <li><a href="#"><h3 class="m0">공지사항</h3></a></li>
                         <li><a href="#"><h3 class="m0">홍보하기</h3></a></li>
-                    </ul>
+                    </ul> 
                 </li>
                 <li>
                     <a href="#"><h3 class="m0">고객센터</h3></a>
