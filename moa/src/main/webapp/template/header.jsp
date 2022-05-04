@@ -63,7 +63,7 @@
                 	</div>
                 <%} else { // 로그인 상태면 %>
                 		<div class="float-right layer-5 center m10">
-                			<a href="" class="link">
+                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link">
                 				<h3>프로젝트 신청</h3>
                 			</a>
                 		</div>
