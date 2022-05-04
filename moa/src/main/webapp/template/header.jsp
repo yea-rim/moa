@@ -46,7 +46,7 @@
                     </a>
                 </div>
                 <div class="float-right layer-5 right m10">
-                    <a href="" class="link">
+                    <a href="<%=request.getContextPath()%>/member/join.jsp" class="link">                    
                         <h3 class="m0">회원가입</h3>
                     </a>
                 </div>
