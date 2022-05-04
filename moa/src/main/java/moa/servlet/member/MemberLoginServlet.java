@@ -25,7 +25,7 @@ public class MemberLoginServlet extends HttpServlet{
 			String memberPw = req.getParameter("memberPw");
 			
 			
-			// 처리s
+			// 처리
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.selectOne(memberEmail);
 			

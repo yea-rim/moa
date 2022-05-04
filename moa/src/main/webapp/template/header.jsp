@@ -1,3 +1,8 @@
+<%@page import="moa.beans.MemberDto"%>
+<%@page import="moa.beans.MemberDao"%>
+<%@page import="java.util.Date"%>
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -11,8 +16,12 @@
 	// 세션에서 admin 정보 꺼내기
 	String adminId = (String) session.getAttribute("admin");
 	// adminId 데이터 여부 판단 -> 관리자 권한 판단
-	boolean isAdmin = adminId != null; 
+	boolean isAdmin = adminId != null;
 	
+	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
+	Integer sellerRegistDate = (Integer) session.getAttribute("sellerRegistDate");
+	boolean isApprove = sellerRegistDate != null;
+
 %>
 
 <!DOCTYPE html>
@@ -27,7 +36,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
+    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +49,7 @@
 
 </head>
 <body>
-임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %>
+임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerNo = <%=sellerNo %>, <%=sellerRegistDate %>
     <main>
 
         <header>
