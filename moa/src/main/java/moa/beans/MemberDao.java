@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 public class MemberDao {
 
-	// 상세 조회
+	// 상세 조회 (이메일로 조회) 
 	public MemberDto selectOne(String memberEmail) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
@@ -41,6 +41,41 @@ public class MemberDao {
 		return memberDto;
 
 	}
+	// 상세 조회 (회원 번호로 조회) 
+		public MemberDto selectOne(int memberNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+
+			String sql = "select * from member where member_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, memberNo);
+
+			ResultSet rs = ps.executeQuery();
+
+			MemberDto memberDto;
+
+			if (rs.next()) {
+				memberDto = new MemberDto();
+
+				memberDto.setMemberNo(rs.getInt("member_no"));
+				memberDto.setMemberEmail(rs.getString("member_email"));
+				memberDto.setMemberPw(rs.getString("member_pw"));
+				memberDto.setMemberNick(rs.getString("member_nick"));
+				memberDto.setMemberPhone(rs.getString("member_phone"));
+				memberDto.setMemberJoinDate(rs.getDate("member_join_date"));
+				memberDto.setMemberPost(rs.getString("member_post"));
+				memberDto.setMemberBasicAddress(rs.getString("member_basic_address"));
+				memberDto.setMemberDetailAddress(rs.getString("member_detail_address"));
+				memberDto.setMemberRoute(rs.getString("member_route"));
+			} else {
+				memberDto = null;
+			}
+
+			con.close();
+
+			return memberDto;
+
+		}
 
 	// 등록 (1) 시퀀스 번호 생성
 	public int getSequence() throws Exception {
