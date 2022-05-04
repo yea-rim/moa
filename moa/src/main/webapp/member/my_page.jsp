@@ -4,24 +4,24 @@
     pageEncoding="UTF-8"%>
     
 <%
-// 	String memberEmail = (String)session.getAttribute("login");
+// 	Integer memberNo = (Integer)session.getAttribute("login");
 
 // 	MemberDao memberDao = new MemberDao();
-// 	MemberDto memberDto = memberDao.selectOne(memberEmail);
+// 	MemberDto memberDto = memberDao.selectOne(memberNo);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 	
 	<h1>회원 정보</h1>
 
-<a href="confirmPw.jsp">회원정보 설정</a>
-<a href="sellerRequest.jsp">판매자 신청</a>
-<a href="profile.jsp">프로필</a>
-<a href="jjimList.jsp">관심 프로젝트 목록</a>
-<a href="fundingPage.jsp">후원한 펀딩 내역</a>
-<a href="sellerMain.jsp">판매지</a>
-<a href="#">포인트 충전</a>
-<a href="exit.jsp">탈퇴하기</a>
+<h2><a href="confirmPw.jsp">회원정보 설정</a></h2>
+<h2><a href="<%=request.getContextPath()%>/seller/seller_request.jsp">판매자 신청</a></h2>
+<h2><a href="profile.jsp">프로필</a></h2>
+<h2><a href="jjimList.jsp">관심 프로젝트 목록</a></h2>
+<h2><a href="fundingPage.jsp">후원한 펀딩 내역</a></h2>
+<h2><a href="sellerMain.jsp">판매자 패이지 메인</a></h2>
+<h2><a href="#">포인트 충전</a></h2>
+<h2><a href="exit.jsp">탈퇴하기</a></h2>
 	
 <a href = "logout.do">로그아웃</a>
 	
