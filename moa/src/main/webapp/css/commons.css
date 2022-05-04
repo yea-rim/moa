@@ -1,0 +1,422 @@
+@charset "UTF-8";
+
+/* 테마 컬러 : B899CD */
+
+/* 컨테이너(container) */
+.container {
+    margin: auto;
+    text-align: left; 
+}
+.w100 {width: 100px;}
+.w150 {width: 150px;}
+.w200 {width: 200px;}
+.w250 {width: 250px;}
+.w300 {width: 300px;}
+.w350 {width: 350px;}
+.w400 {width: 400px;}
+.w450 {width: 450px;}
+.w500 {width: 500px;}
+.w550 {width: 550px;}
+.w600 {width: 600px;}
+.w650 {width: 650px;}
+.w700 {width: 700px;}
+.w750 {width: 750px;}
+.w800 {width: 800px;}
+.w850 {width: 850px;}
+.w900 {width: 900px;}
+.w950 {width: 950px;}
+.w1000 {width: 1000px;}
+
+
+
+/* 줄(row) */
+.row {
+    margin: 0px 0px;
+}
+
+
+
+/* 위치 정렬 */
+.left {text-align: left !important;}
+.center {text-align: center !important;}
+.right {text-align: right !important;}
+
+.fill {
+    width: 100%;
+}
+.fill-h {
+    height: 100%;
+}
+
+
+
+/* margin(top-bottom) */
+.m0{margin-top: 0px; margin-bottom: 0px;}
+.m5{margin-top: 5px; margin-bottom: 5px;}
+.m10{margin-top: 10px; margin-bottom: 10px;}
+.m15{margin-top: 15px; margin-bottom: 15px;}
+.m20{margin-top: 20px; margin-bottom: 20px;}
+.m25{margin-top: 25px; margin-bottom: 25px;}
+.m30{margin-top: 30px; margin-bottom: 30px;}
+.m35{margin-top: 35px; margin-bottom: 35px;}
+.m40{margin-top: 40px; margin-bottom: 40px;}
+.m45{margin-top: 45px; margin-bottom: 45px;}
+.m50{margin-top: 50px; margin-bottom: 50px;}
+
+
+
+/* 기본 link 스타일 */
+.link {
+    padding: 0px;
+    text-decoration: none;
+    color: black;
+
+    margin: 0px;
+}
+.link.link-btn {
+    border: 1px solid #B899CD;
+    background-color: #B899CD;
+    color: white;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
+.link.link-btn:hover {
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+    color: white;
+}
+.link.link-reverse {
+    border: 1px solid #B899CD;
+    background-color: white;
+    color: #B899CD;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
+.link-gray{
+    color: gray;
+}
+.link-purple{
+    color: #B899CD;
+}
+
+
+
+/* 버튼 스타일 */
+.btn {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
+
+    color: white;
+    background-color: #B899CD;
+
+    cursor: pointer;
+
+    font: inherit;
+}
+.btn:hover {
+    color: white;
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+}
+
+
+
+
+/* float */
+.float-container {
+    margin: auto;
+}
+.float-container > .float-left {
+    float: left;
+}
+.float-container > .float-right {
+    float: right;
+}
+.float-container::after {
+    /* 이 세 속성은 세트이다. */
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* float-layer 설정 */
+.layer-1 {
+    width: 100%;
+}
+.layer-2 {
+    width: 50%;
+}
+.layer-3 {
+    width: 33.3333%;
+}
+.layer-4 {
+    width: 25%;
+}
+.layer-5 {
+    width: 10%;
+}
+
+
+
+
+/* 메뉴 */
+ul.menu,
+ul.menu ul {
+    /* 1 */
+    list-style: none;
+
+    /* 2 */
+    padding: 0;
+    margin: 0;
+
+    text-align: center;
+}
+/* 3. ul의 마지막에는 clear를 해주고 li는 float:lef로 배치한다. */
+ul.menu::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+ul.menu > li {
+    float: left;
+
+    /* 4 */
+    width: 100px;
+}
+
+/* 5. 2차 이상의 메뉴를 숨긴다. */
+ul.menu ul {
+    display: none;
+}
+
+/* 6. 메뉴 항목에 마우스가 올라가면 하위 메뉴를 표시한다. */
+ul.menu li:hover > ul { /* ul.menu li : 모든 메뉴 , ul.menu > li : 1차 메뉴만*/
+    display: block;
+}
+
+/* 7 */
+ul.menu li {
+    position: relative;
+}
+ul.menu ul {
+    position:absolute;
+    top: 100%;
+    left: 0%;
+}
+
+/* 8 */
+ul.menu ul {
+    width: 100%;
+    background-color: white;
+}
+
+/* 9 */ 
+ul.menu {
+    font-size: 16px;
+}
+ul.menu li {
+    padding: 0.5em;
+}
+ul.menu a {
+    text-decoration: none;
+    color: black;
+}
+ul.menu li a:hover {
+    color: #B899CD;
+}
+
+/* 10 */
+ul.menu a {
+    display: block;
+    width: 100%;
+}
+
+/* 11 */
+ul.menu > li.right-menu {
+    float: right;
+}
+
+/* 12 : 3차 메뉴 이상을 선택 */
+ul.menu > li > ul ul {
+    top: 0%;
+    left: 100%;
+}
+
+/* 13 */
+ul.menu > li.right-menu > ul ul {
+    left: -100%;
+}
+
+/* 14 */
+ul.menu a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+/* header 제목 스타일 */
+.header-name{
+    font-size: 2.5em;
+    color: #B899CD;
+}
+
+
+
+/* 글씨 크기 */
+/* 1. 제일 큰 사이즈 (메인 페이지 사용) */
+.big-text{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+
+
+/* 입력창 */
+.form-input {
+    outline: none;
+    padding: 0.8em;
+    border: 1px solid #B6B6B6;
+    border-radius: 0.3em;
+}
+.form-input:focus {
+    border-color: black;
+}
+
+
+
+
+/* textarea */
+textarea.form-input {
+    resize: none; 
+}
+
+
+
+/* 페이지네이션 */
+.pagination {
+    white-space: nowrap; 
+
+    overflow: hidden;
+}
+.pagination > a {
+    color: rgb(130, 130, 130);
+    text-decoration: none;
+
+    display: inline-block;
+    min-width: 2em; 
+    padding: 0.25em;
+
+    text-align: center;
+}
+.pagination > a:hover {
+    color: black;
+}
+/* 현재 페이지 (class로 설정) */
+.pagination > a.active {
+    color: black;
+}
+/* 준엽 추가 */
+
+.h20{
+    height: 20px;
+}
+.h40{
+    height: 40px;
+}
+.h60{
+    height: 60px;
+}
+.h80{
+    height: 80px;
+}
+.h100{
+    height: 100px;
+}
+
+
+.fill {
+    width: 100%;
+}
+
+.btn {
+    border: 1px solid gray;
+    border-radius: 0.25em;
+    padding: 0.5em;
+    
+    color: gray;
+    background-color: white;
+    
+    cursor: pointer;
+    
+    font: inherit;
+}
+
+.p10px{
+    padding: 10px;
+}
+
+.p10px-left{
+    padding-left: 10px;
+}
+
+.margin-auto{
+    margin: auto;
+}
+
+.m-b10{
+    margin-bottom: 10px;
+}
+
+.w10p{
+    width: 10%;
+}
+.w20p{
+    width: 20%;
+}
+.w30p{
+    width: 30%;
+}
+.w40p{
+    width: 40%;
+}
+.w50p{
+    width: 50%;
+}
+.w60p{
+    width: 60%;
+}
+.w70p{
+    width: 70%;
+}
+.w80p{
+    width: 80%;
+}
+.w90p{
+    width: 90%;
+}
+.w100p{
+    width: 100%;
+}
+
+.block{
+    display: block;
+}
+
+.wrap{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.h100p{
+    height: 100%;
+}

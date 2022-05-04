@@ -6,15 +6,14 @@ import java.sql.ResultSet;
 
 
 public class ProjectAttachDao {
-	// 등록
 	public void insert(ProjectAttachDto projectAttachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into project_attach(project_no, attachment_no, attach_type) values(?,?,?)";
+		String sql = "insert into project_attach(attach_no,project_no,attach_type) values(?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, projectAttachDto.getProjectNo());
-		ps.setInt(2, projectAttachDto.getAttachNo());
-		ps.setString(3, projectAttachDto.getAttachType());
+		ps.setInt(1, projectAttachDto.getAttachNo());
+		ps.setInt(2,projectAttachDto.getProjectNo());
+		ps.setString(3,projectAttachDto.getAttachType());
 		ps.execute();
 		
 		con.close();
@@ -48,4 +47,5 @@ public class ProjectAttachDao {
 
 		return projectAttachDto;
 	}
+
 }
