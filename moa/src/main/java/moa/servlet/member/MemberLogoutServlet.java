@@ -18,6 +18,7 @@ public class MemberLogoutServlet extends HttpServlet {
 			
 			// session에 저장된 로그인 정보 없애기
 			req.getSession().removeAttribute("login");
+			req.getSession().removeAttribute("admin");
 			
 			// 메인 페이지로 이동
 			resp.sendRedirect(req.getContextPath());
