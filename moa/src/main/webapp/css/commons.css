@@ -44,6 +44,9 @@
 .fill {
     width: 100%;
 }
+.fill-h {
+    height: 100%;
+}
 
 
 
@@ -85,6 +88,22 @@
     background-color: #d8c8e3;
     color: white;
 }
+.link.link-reverse {
+    border: 1px solid #B899CD;
+    background-color: white;
+    color: #B899CD;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
+.link-gray{
+    color: gray;
+}
+.link-purple{
+    color: #B899CD;
+}
 
 
 
@@ -112,7 +131,7 @@
 
 /* float */
 .float-container {
-    
+    margin: auto;
 }
 .float-container > .float-left {
     float: left;
@@ -143,6 +162,7 @@
 .layer-5 {
     width: 10%;
 }
+
 
 
 
