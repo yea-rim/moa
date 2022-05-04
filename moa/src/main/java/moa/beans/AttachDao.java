@@ -29,7 +29,7 @@ public class AttachDao {
 	public void insert(AttachDto attachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into attachment(attach_no, attach_uploadname, attach_savename, attach_type, attach_size) values(?,?,?,?,?)";
+		String sql = "insert into attach(attach_no, attach_uploadname, attach_savename, attach_type, attach_size) values(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, attachDto.getAttachNo());
 		ps.setString(2, attachDto.getAttachUploadname());

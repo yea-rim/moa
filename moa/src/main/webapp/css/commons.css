@@ -482,7 +482,43 @@ textarea.form-input {
 }
 
 
+/* 테이블 기본 스타일 */
+.table{
+    width: 100%;
+    /*테두리 병합 설정 */
+    border-collapse: collapse;
+}
 
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td
+{
+    text-align: center;
+    padding: 0.5em;
+}
+
+/*
+  확장 스타일
+  1.테두리가 있는 테이블 - .table-border
+  2.줄무늬 테이블 - .table-stripe
+  3.마우스를 감지하는 테이블 - .table-hover
+*/
+
+.table.table-border{
+    border: 1px solid black;
+}
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border .table-border> tfoot > tr > th,
+.table.table-border > tfoot > tr > td
+{
+    border: 1px solid black;
+}
 /* 이미지 */
 /* 이미지 관련 commons */
 .img {
