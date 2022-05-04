@@ -11,7 +11,7 @@ public class PjQnaDto {
 	private int groupNo;
 	private int superNo;
 	private int depth;
-	private int qnaLock;
+	private String qnaLock;
 	
 	public PjQnaDto() {
 		super();
@@ -41,7 +41,7 @@ public class PjQnaDto {
 	public int getDepth() {
 		return depth;
 	}
-	public int getQnaLock() {
+	public String getQnaLock() {
 		return qnaLock;
 	}
 	public void setQnaNo(int qnaNo) {
@@ -68,7 +68,7 @@ public class PjQnaDto {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	public void setQnaLock(int qnaLock) {
+	public void setQnaLock(String qnaLock) {
 		this.qnaLock = qnaLock;
 	}
 	
