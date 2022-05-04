@@ -1,3 +1,5 @@
+<%@page import="moa.beans.MemberProfileDto"%>
+<%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +12,13 @@
 	// 회원 상세 조회
 	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto = memberDao.selectOne(memberNo);
+	
+	// 회원 프로필 사진 조회
+	MemberProfileDao memberProfileDao = new MemberProfileDao();
+	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
+		
+	// 회원 프로필 존재 여부 확인 
+	boolean isExistProfile = memberProfileDto != null; 
 %>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -19,7 +28,17 @@
                     <!-- 마이페이지 상단 바 -->
                     <div class="float-container b-purple">
                         <div class="float-left m20 mlr20">
-                            <img src="https://dummyimage.com/150x150" class="img img-circle left">
+                        
+                        	<!-- 프로필 사진 출력 -->
+                            <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle">
+                                    	
+                                    <%-- <%=memberProfileDto.getAttachNo() %> --%>
+                                    	
+                             <%} else { // 존재하지 않는다면 %>
+                                    <img src="https://dummyimage.com/200x200" alt="기본 프로필" width="200" class="img img-circle">
+                             <%} %>
+                            
                         </div>
                         <div class="float-left m20 mlr20">
                             <div class="row m10">
@@ -37,9 +56,9 @@
                             </div>
                         </div> 
                         <div class="float-right m60 mlr20">
-                            <a href="" class="link link-reverse" style="height: 60px;">
-                                <h3>판매자 신청</h3>
-                                <h3>(신청현황)</h3>
+                            <a href="" class="link link-reverse h60">
+                                <h3 class="center">판매자 신청</h3>
+                                <h4 class="center">(신청현황)</h4>
                             </a>
                         </div>
                     </div>

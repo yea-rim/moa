@@ -60,4 +60,21 @@ public class AttachDao {
 		con.close();
 		return attachDto;
 	}
+	
+	
+	
+	// 파일 삭제 
+	public boolean delete(int attachNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete * from attach where attach_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, attachNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }
