@@ -8,6 +8,22 @@ import java.util.List;
 
 public class RewardDao {
 	
+	//리워드 생성
+	public void insert(RewardDto rewardDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "insert into reward values(reward_seq.nextval,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, rewardDto.getRewardProjectNo());
+		ps.setString(2, rewardDto.getRewardName());
+		ps.setString(3, rewardDto.getRewardContent());
+		ps.setInt(4, rewardDto.getRewardPrice());
+		ps.setInt(5, rewardDto.getRewardStock());
+		ps.execute();
+		
+		con.close();
+	}
 	
 	//프로젝트 번호 입력하면 그에 속하는 리워드 리스트 반환
 	public List<RewardDto> selectProject(int projectNo) throws Exception{
@@ -37,5 +53,6 @@ public class RewardDao {
 		
 		return list;
 	}
+
 
 }
