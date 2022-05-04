@@ -1,0 +1,11 @@
+/* 
+    테스트를 위해 테두리를 보여주는 디자인 파일
+    - 모든 투명 영역에 테두리가 생기도록 처리
+*/
+
+@charset "UTF-8";
+
+div, span, label, p, header, footer, 
+section, article, aside, nav, a, ul, ol, li {
+    border: 1px dotted gray;
+}
