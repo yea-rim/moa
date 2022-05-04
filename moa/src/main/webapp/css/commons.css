@@ -383,3 +383,100 @@ textarea.form-input {
 .b-purple{
     border: 1px solid #B899CD;
 }
+
+/* 준엽 추가 */
+
+.h20{
+    height: 20px;
+}
+.h40{
+    height: 40px;
+}
+.h60{
+    height: 60px;
+}
+.h80{
+    height: 80px;
+}
+.h100{
+    height: 100px;
+}
+
+
+.fill {
+    width: 100%;
+}
+
+.btn {
+    border: 1px solid gray;
+    border-radius: 0.25em;
+    padding: 0.5em;
+    
+    color: gray;
+    background-color: white;
+    
+    cursor: pointer;
+    
+    font: inherit;
+}
+
+.p10px{
+    padding: 10px;
+}
+
+.p10px-left{
+    padding-left: 10px;
+}
+
+.margin-auto{
+    margin: auto;
+}
+
+.m-b10{
+    margin-bottom: 10px;
+}
+
+.w10p{
+    width: 10%;
+}
+.w20p{
+    width: 20%;
+}
+.w30p{
+    width: 30%;
+}
+.w40p{
+    width: 40%;
+}
+.w50p{
+    width: 50%;
+}
+.w60p{
+    width: 60%;
+}
+.w70p{
+    width: 70%;
+}
+.w80p{
+    width: 80%;
+}
+.w90p{
+    width: 90%;
+}
+.w100p{
+    width: 100%;
+}
+
+.block{
+    display: block;
+}
+
+.wrap{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.h100p{
+    height: 100%;
+}
