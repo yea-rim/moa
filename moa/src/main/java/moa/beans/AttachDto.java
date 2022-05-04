@@ -6,7 +6,7 @@ public class AttachDto {
 	private String attachUploadname;
 	private String attachSavename;
 	private String attachType;
-	private int attachSize;
+	private long attachSize;
 	
 	public AttachDto() {
 		super();
@@ -44,11 +44,11 @@ public class AttachDto {
 		this.attachType = attachType;
 	}
 
-	public int getAttachSize() {
+	public long getAttachSize() {
 		return attachSize;
 	}
 
-	public void setAttachSize(int attachSize) {
+	public void setAttachSize(long attachSize) {
 		this.attachSize = attachSize;
 	}
 

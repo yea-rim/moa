@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class AttachDao {
+
 	// 저장 위치를 지정
 	public static final String path = System.getProperty("user.home") + "/upload";
 
-//등록 : 번호생성 + 등록
+	// 등록
+	// 시퀀스 번호 생성
 	public int getSequence() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
@@ -16,16 +18,18 @@ public class AttachDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
-		int number = rs.getInt(1); // ==getInt("nextval");
+		int number = rs.getInt("nextval");
 
 		con.close();
+
 		return number;
 	}
 
+	// 등록
 	public void insert(AttachDto attachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into attach(attach_no, attach_uploadname, attach_savename,attach_type,attach_size) values(?,?,?,?,?)";
+		String sql = "insert into attachment(attach_no, attach_uploadname, attach_savename, attach_type, attach_size) values(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, attachDto.getAttachNo());
 		ps.setString(2, attachDto.getAttachUploadname());
@@ -37,27 +41,35 @@ public class AttachDao {
 		con.close();
 	}
 
-	public AttachDto selectOne(int attachNo) throws Exception {
+	// 단일조회
+	public AttachDto selectOne(int projectNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-
-		String sql = "select * from attach where attach_no=?";
+		
+		String sql = "select * from attach where attach_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, attachNo);
+		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
-
+		
 		AttachDto attachDto;
 		if (rs.next()) {
 			attachDto = new AttachDto();
+			
 			attachDto.setAttachNo(rs.getInt("attach_no"));
 			attachDto.setAttachUploadname(rs.getString("attach_uploadname"));
 			attachDto.setAttachSavename(rs.getString("attach_savename"));
 			attachDto.setAttachType(rs.getString("attach_type"));
-			attachDto.setAttachSize(rs.getInt("attach_size"));
+			attachDto.setAttachSize(rs.getLong("attach_size"));
 		} else {
 			attachDto = null;
 		}
-
+		
 		con.close();
+		
 		return attachDto;
 	}
+	
+	// 
+
+	
+
 }
