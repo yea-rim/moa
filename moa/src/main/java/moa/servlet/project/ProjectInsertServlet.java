@@ -27,14 +27,13 @@ public class ProjectInsertServlet extends HttpServlet{
 			projectDto.setProjectSemiFinish(Date.valueOf(req.getParameter("projectSemiFinish")));
 			projectDto.setProjectFinishDate(Date.valueOf(req.getParameter("projectFinishDate")));
 			
-			System.out.println(req.getParameter("projectCategory"));
-			System.out.println(req.getParameter("projectName"));
-			System.out.println(req.getParameter("projectSummary"));
-			
 			ProjectDao projectDao = new ProjectDao();
 			projectDao.insert(projectDto);
 			
 			resp.sendRedirect("insert_success.jsp");
+			
+			
+			//String [] a = req.getParameterValues('a'); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
