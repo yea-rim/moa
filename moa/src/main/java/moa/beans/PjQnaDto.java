@@ -49,6 +49,7 @@ public class PjQnaDto {
 		return depth;
 	}
 
+
 	public int getQnaLock() {
 		return qnaLock;
 	}
@@ -84,6 +85,7 @@ public class PjQnaDto {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+
 
 	public void setQnaLock(int qnaLock) {
 		this.qnaLock = qnaLock;

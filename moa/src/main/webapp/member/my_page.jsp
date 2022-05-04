@@ -20,7 +20,7 @@
 	// 회원 프로필 존재 여부 확인 
 	boolean isExistProfile = memberProfileDto != null; 
 %>
-    
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 	
 				<div class="container fill">
@@ -59,6 +59,9 @@
                             <a href="" class="link link-reverse h60">
                                 <h3 class="center">판매자 신청</h3>
                                 <h4 class="center">(신청현황)</h4>
+                            <a href="<%=request.getContextPath() %>/seller/seller_request.jsp" class="link link-reverse" style="height: 60px;">
+                                <h3>판매자 신청</h3>
+                                <h3>(신청현황)</h3>
                             </a>
                         </div>
                     </div>
