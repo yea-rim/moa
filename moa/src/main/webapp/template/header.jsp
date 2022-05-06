@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
+    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +37,7 @@
     <!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+	
 
 </head>
 <body>
@@ -63,7 +64,7 @@
                 	</div>
                 <%} else { // 로그인 상태면 %>
                 		<div class="float-right layer-5 center m10">
-                			<a href="" class="link">
+                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link">
                 				<h3>프로젝트 신청</h3>
                 			</a>
                 		</div>
@@ -79,13 +80,13 @@
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="#"><h3 class="m0">프로젝트</h3></a>
+                    <a href="<%=request.getContextPath()%>/project/ongoingList.jsp"><h3 class="m0">프로젝트</h3></a>
                 </li>
                 <li>
-                    <a href="#"><h3 class="m0">커뮤니티</h3></a>
+                    <a href="<%=request.getContextPath()%>/community/list.jsp"><h3 class="m0">커뮤니티</h3></a>
                     <ul>
                         <li><a href="#"><h3 class="m0">공지사항</h3></a></li>
-                        <li><a href="#"><h3 class="m0">홍보하기</h3></a></li>
+                        <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0">홍보하기</h3></a></li>
                     </ul> 
                 </li>
                 <li>

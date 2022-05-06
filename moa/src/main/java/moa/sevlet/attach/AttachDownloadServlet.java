@@ -21,20 +21,12 @@ public class AttachDownloadServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			// 만드는 중
 			// 준비 : attachmentNo
-			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
-			
-			ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-			// 프로젝트에 프로필 하나 정보만 가져옴
-			ProjectAttachDto projectAttachDto = projectAttachDao.selectOneProfile(projectNo); 
-			
-			AttachDto attachDto = new AttachDto();
+			int attachNo = Integer.parseInt(req.getParameter("attachNo"));
 
 			// 처리
-			
-//			AttachDao attachDao = new AttachDao();
-//			AttachDto attachDto = attachDao.selectOne(projectNo);
+			AttachDao attachDao = new AttachDao();
+			AttachDto attachDto = attachDao.selectOne(attachNo);
 
 			if (attachDto == null) {
 				resp.sendError(404);
@@ -45,9 +37,7 @@ public class AttachDownloadServlet extends HttpServlet {
 			File target = new File(AttachDao.path, attachDto.getAttachSavename());
 
 			resp.setHeader("Content-Type", "application/octest-stream");
-
 			resp.setHeader("Content-Encoding", "UTF-8");
-
 			resp.setHeader("Content-Length", String.valueOf(attachDto.getAttachSize()));
 
 			String filename = URLEncoder.encode(attachDto.getAttachUploadname(), "UTF-8");

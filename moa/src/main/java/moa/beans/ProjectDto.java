@@ -15,7 +15,17 @@ public class ProjectDto {
 	private Date projectSemiFinish;
 	private Date projectFinishDate;
 	private String projectPermission;
+	private int projectReadcount;
 	
+	
+	public int getProjectReadcount() {
+		return projectReadcount;
+	}
+
+	public void setProjectReadcount(int projectReadcount) {
+		this.projectReadcount = projectReadcount;
+	}
+
 	public ProjectDto() {
 		super();
 	}

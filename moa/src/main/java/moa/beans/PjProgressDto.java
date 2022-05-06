@@ -5,12 +5,11 @@ import java.sql.Date;
 public class PjProgressDto {
 	private int progressNo;
 	private int progressProjectNo;
-	private int progressTitle;
-	private int progressContent;
+	private String progressTitle;
+	private String progressContent;
 	private Date progressTime;
 	public PjProgressDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getProgressNo() {
 		return progressNo;
@@ -18,10 +17,10 @@ public class PjProgressDto {
 	public int getProgressProjectNo() {
 		return progressProjectNo;
 	}
-	public int getProgressTitle() {
+	public String getProgressTitle() {
 		return progressTitle;
 	}
-	public int getProgressContent() {
+	public String getProgressContent() {
 		return progressContent;
 	}
 	public Date getProgressTime() {
@@ -33,10 +32,10 @@ public class PjProgressDto {
 	public void setProgressProjectNo(int progressProjectNo) {
 		this.progressProjectNo = progressProjectNo;
 	}
-	public void setProgressTitle(int progressTitle) {
+	public void setProgressTitle(String progressTitle) {
 		this.progressTitle = progressTitle;
 	}
-	public void setProgressContent(int progressContent) {
+	public void setProgressContent(String progressContent) {
 		this.progressContent = progressContent;
 	}
 	public void setProgressTime(Date progressTime) {
