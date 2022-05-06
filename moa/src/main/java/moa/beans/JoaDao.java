@@ -12,7 +12,9 @@ public class JoaDao {
 	public List<JoaDto> selectList(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from where member_no = ?";
+		String sql = "select * from joa J "
+				+ "inner join project P on P.project_no = J.project_no "
+				+ "where J.member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, memberNo);
 		
