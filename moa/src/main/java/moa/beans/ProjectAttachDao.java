@@ -19,33 +19,24 @@ public class ProjectAttachDao {
 		con.close();
 	}
 	
-	// 프로필 단일조회
-	public ProjectAttachDto selectOneProfile(int projectNo) throws Exception {
+	// 해당 프로젝트 프로필중에 하나의 attachNo만 가져오는 메소드 
+	public int getAttachNo(int projectNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "SELECT * FROM("
 				+ "SELECT rownum rn, TMP.*from("
-				+ "SELECT* FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필'"
+				+ "SELECT* FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
 				+ ")TMP"
-				+ ") WHERE rn = 1;";
+				+ ") WHERE rn = 1";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
-		
-		ProjectAttachDto projectAttachDto;
-		if (rs.next()) {
-			projectAttachDto = new ProjectAttachDto();
+		rs.next();
 
-			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
-			projectAttachDto.setProjectNo(rs.getInt("project_no"));
-			projectAttachDto.setAttachType(rs.getString("attach_type"));
-		} else {
-			projectAttachDto = null;
-		}
-
+		int attachNo = rs.getInt("attach_no");
 		con.close();
 
-		return projectAttachDto;
+		return attachNo;
 	}
 
 }

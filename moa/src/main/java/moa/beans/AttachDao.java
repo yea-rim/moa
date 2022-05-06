@@ -29,7 +29,7 @@ public class AttachDao {
 	public void insert(AttachDto attachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into attachment(attach_no, attach_uploadname, attach_savename, attach_type, attach_size) values(?,?,?,?,?)";
+		String sql = "insert into attach(attach_no, attach_uploadname, attach_savename, attach_type, attach_size) values(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, attachDto.getAttachNo());
 		ps.setString(2, attachDto.getAttachUploadname());
@@ -68,8 +68,22 @@ public class AttachDao {
 		return attachDto;
 	}
 	
-	// 
+	
+	
+	// 파일 삭제 
+	public boolean delete(int attachNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete * from attach where attach_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, attachNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 
 	
-
 }

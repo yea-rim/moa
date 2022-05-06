@@ -480,3 +480,158 @@ textarea.form-input {
 .h100p{
     height: 100%;
 }
+
+
+/* 테이블 기본 스타일 */
+.table{
+    width: 100%;
+    /*테두리 병합 설정 */
+    border-collapse: collapse;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td
+{
+    text-align: center;
+    padding: 0.5em;
+}
+
+/*
+  확장 스타일
+  1.테두리가 있는 테이블 - .table-border
+  2.줄무늬 테이블 - .table-stripe
+  3.마우스를 감지하는 테이블 - .table-hover
+*/
+
+.table.table-border{
+    border: 1px solid black;
+}
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border .table-border> tfoot > tr > th,
+.table.table-border > tfoot > tr > td
+{
+    border: 1px solid black;
+}
+/* 이미지 */
+/* 이미지 관련 commons */
+.img {
+    /* transparent는 투명을 의미 */
+    border: 2px solid transparent;
+}
+
+/* class에 img가 있는 항목 중에서 .img-border라는 항목을 선택하라 */
+.img.img-border {
+    border: 3px solid black;
+}
+
+.img.img-circle {
+    border-radius: 50%;
+}
+
+.img.img-round {
+    border-radius: 20px;
+}
+
+.img.img-blur {
+    /* opacity는 불투명도이며 0부터 1사이로 설정한다. (0 투명, 1 불투명) */
+    opacity: 0.4;
+}
+
+
+/* margin(left-right) */
+.mlr0{margin-left: 0px; margin-right: 0px;}
+.mlr5{margin-left: 5px; margin-right: 5px;}
+.mlr10{margin-left: 10px; margin-right: 10px;}
+.mlr15{margin-left: 15px; margin-right: 15px;}
+.mlr20{margin-left: 20px; margin-right: 20px;}
+.mlr25{margin-left: 25px; margin-right: 25px;}
+.mlr30{margin-left: 30px; margin-right: 30px;}
+.mlr35{margin-left: 35px; margin-right: 35px;}
+.mlr40{margin-left: 40px; margin-right: 40px;}
+.mlr45{margin-left: 45px; margin-right: 45px;}
+.mlr50{margin-left: 50px; margin-right: 50px;}
+
+
+
+
+
+/* border(purple color) */
+.b-purple{
+    border: 1px solid #B899CD;
+}
+
+
+
+/* input[type=file] 디자인 변경 */
+/* 기존 디자인 리셋 */
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+/* 인풋 스타일 변경 */
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    border-radius: 0.3em;
+    width: 30%;
+    color: #999999;
+}
+/* label 스타일 변경 */
+.filebox label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    vertical-align: middle;
+    background-color: #B899CD;
+    border-radius: 0.3em;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+.filebox label:hover {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    vertical-align: middle;
+    background-color: #d8c8e3;
+    border-radius: 0.3em;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+
+
+
+/* btn 스타일 */
+.btn.btn-purple {
+    border: 1px solid #B899CD;
+    border-radius: 0.25em;
+    padding: 0.5em;
+    
+    color: #B899CD;
+    background-color: B899CD;
+    
+    cursor: pointer;
+    
+    font: inherit;
+}
+.btn.btn-purple:hover {
+    border-color: #B899CD;
+    background-color: #B899CD;
+
+    color: white;
+}
