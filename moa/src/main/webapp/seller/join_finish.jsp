@@ -17,8 +17,11 @@
 	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
 	Integer sellerRegistDate = (Integer) session.getAttribute("sellerRegistDate");
 	boolean isApprove = sellerRegistDate != null;	
-%>
 	
+	// 아직 승인 대기 처리 안 함 !!!!!!
+	
+%>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 	<h1>판매자 신청 완료!</h1>

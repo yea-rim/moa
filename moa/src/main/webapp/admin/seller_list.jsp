@@ -14,9 +14,9 @@
 	SellerDao sellerDao = new SellerDao();
 	List<SellerDto> list;
 	if(isSearch){
-		list = sellerDao.selectSellerList(keyword);
+		list = sellerDao.selectSeller(keyword);
 	} else {
-		list = sellerDao.selectSellerList();
+		list = sellerDao.selectSeller();
 	}
 %>
 
@@ -25,7 +25,7 @@
 	<div class="container w800">
 	
 		<div class="row m30 center">
-			<h1>판매자 신청 목록(미승인))</h1>
+			<h1>판매자 목록(승인 완료)</h1>
 		</div>
 		
 	<!-- 검색창 -->
@@ -48,7 +48,7 @@
 					<th>계좌</th>
 					<th>유형</th>
 					<th>판매자 정보</th>
-					<th>판매자 승인</th>
+					<th>승인 날짜</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,9 +62,7 @@
 					<td>
 						<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">ℹ️</a>
 					</td>
-					<td>
-						<a href="approve.do?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">✔</a>
-					</td>
+					<td><%=sellerDto.getSellerRegistDate() %></td>
 				</tr>
 				<%} %>
 			</tbody>

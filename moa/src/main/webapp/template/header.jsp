@@ -19,7 +19,7 @@
 	boolean isAdmin = adminId != null;
 	
 	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-	Integer sellerRegistDate = (Integer) session.getAttribute("sellerRegistDate");
+	String sellerRegistDate = (String) session.getAttribute("sellerRegistDate");
 	boolean isApprove = sellerRegistDate != null;
 
 %>

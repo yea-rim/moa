@@ -1,3 +1,5 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.MemberProfileDto"%>
 <%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.MemberDto"%>
@@ -9,9 +11,12 @@
 	// 현재 세션에 저장된 로그인 정보 가져오기
 	Integer memberNo = (Integer) session.getAttribute("login");
 
-	// 회원 상세 조회
-	MemberDao memberDao = new MemberDao();
-	MemberDto memberDto = memberDao.selectOne(memberNo);
+	// 준비
+	int sellerNo = Integer.parseInt(request.getParameter("sellerNo"));
+
+	// 판매자 상세 조회
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(sellerNo);
 	
 	// 회원 프로필 사진 조회
 	MemberProfileDao memberProfileDao = new MemberProfileDao();
@@ -38,27 +43,29 @@
                              <%} else { // 존재하지 않는다면 %>
                                     <img src="https://dummyimage.com/200x200" alt="기본 프로필" width="200" class="img img-circle">
                              <%} %>
-                            
                         </div>
+                        
+                        <%if(sellerDto == null) {%>
+                        <h1>존재하지 않는 판매자입니다.</h1>
+                        <%} else { %>
                         <div class="float-left m20 mlr20">
                             <div class="row m10">
                             	<div class="float-container">
                             		<div class="float-left">
-                            			<h4>(회원번호) </h4>
+                            			<h4>(판매자번호) </h4>
                             		</div>
                             		<div class="float-left mlr10">
-                            			<h3><%=memberDto.getMemberNo()%></h3>
+                            			<h3><%=sellerDto.getSellerNo() %></h3>
                             		</div>
                             	</div>
                             </div>
                             <div class="row">
-                                <h2><%=memberDto.getMemberNick()%></h2>
+                                <h2><%=sellerDto.getSellerNick() %></h2>
                             </div>
                         </div> 
                         <div class="float-right m60 mlr20">
-                            <a href="<%=request.getContextPath()%>/seller/seller_join.jsp" class="link link-reverse" style="height: 60px;">
-                                <h3>판매자 신청</h3>
-                                <h3>(신청현황)</h3>
+                            <a href="" class="link link-reverse">
+                                <h3 class="center">판매자 구독</h3>
                             </a>
                         </div>
                     </div>
@@ -66,25 +73,33 @@
                     <!-- 개인정보 설정 -->
                     <div class="row m20">
                         <h3 class="right">
-                            <a href="information.jsp" class="link">개인정보 설정</a>
+                            <a href="" class="link">✉️ 판매자 1:1 문의</a>
                         </h3>
                     </div>
 
-                    <!-- 관심 프로젝트 -->
                     <div class="row m20">
                         <h2>
-                            <a href="" class="link">관심 프로젝트</a>
+                            <a href="" class="link">예정 프로젝트</a>
                         </h2>
                         <hr>
                     </div>
                     <div class="row m20">
                         내용
                     </div>
-                    
-                    <!-- 후원한 프로젝트 -->
+
                     <div class="row m20">
                         <h2>
-                            <a href="" class="link">후원 프로젝트</a>
+                            <a href="" class="link">펀딩 중인 프로젝트</a>
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="row m20">
+                        내용
+                    </div>
+
+                    <div class="row m20">
+                        <h2>
+                            <a href="" class="link">마감된 프로젝트</a>
                         </h2>
                         <hr>
                     </div>
@@ -92,7 +107,6 @@
                         내용
                     </div>
                 </div>
-	
-	<a href = "logout.do" class="link link-gray">로그아웃</a>
-	
+             <%} %>
+		
 <jsp:include page="/template/footer.jsp"></jsp:include>
