@@ -10,16 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.CommunityDao;
 import moa.beans.CommunityDto;
+import moa.beans.MemberDao;
+import moa.beans.MemberDto;
 
-@WebServlet(urlPatterns="/community/write.kh")
+@WebServlet(urlPatterns="/community/write.do")
 public class CommunityWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int communityProjectNo = Integer.parseInt(req.getParameter("communityProjectNo"));
-			String communityMemberNo = (String)req.getSession().getAttribute("login");
+			int communityMemberNo = (Integer)req.getSession().getAttribute("login");
+			
 			
 			CommunityDto communityDto = new CommunityDto();
+			communityDto.setCommunityProjectNo(communityProjectNo);
+			communityDto.setCommunityMemberNo(communityMemberNo);
 			communityDto.setCommunityTitle(req.getParameter("communityTitle"));
 			communityDto.setCommunityContent(req.getParameter("communityContent"));
 			
