@@ -28,7 +28,6 @@
 	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 	
 	boolean isSeller = sellerDto != null; // true면 seller 
-	boolean isExistProfile = memberProfileDto != null;
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
