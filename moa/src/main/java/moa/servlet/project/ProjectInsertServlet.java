@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -31,7 +33,6 @@ public class ProjectInsertServlet extends HttpServlet{
 			
 			//파일 저장
 			String path = System.getProperty("user.home")+"/upload";//저장할 경로 /운영체제에서 사용자에게 제공되는 home폴더
-			System.out.println(path);
 
 			File dir = new File(path);
 			dir.mkdirs(); //폴더생성
@@ -82,7 +83,7 @@ public class ProjectInsertServlet extends HttpServlet{
 			projectDto.setProjectSemiFinish(Date.valueOf(mRequest.getParameter("projectSemiFinish")));
 			projectDto.setProjectFinishDate(Date.valueOf(mRequest.getParameter("projectFinishDate")));
 			
-			//projectDao.insert(projectDto); 
+			projectDao.insert(projectDto); 
 		
 			
 			//프로필 파일 정보 저장											
@@ -95,7 +96,7 @@ public class ProjectInsertServlet extends HttpServlet{
 				attachDto.setAttachType(profilecontentType);
 				attachDto.setAttachSize(profilefileSize);
 				
-				//attachDao.insert(attachDto);
+				attachDao.insert(attachDto);
 				
 				ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setProjectNo(projectNo);
@@ -104,7 +105,7 @@ public class ProjectInsertServlet extends HttpServlet{
 			
 				
 				ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-				//projectAttachDao.insert(projectAttachDto);			
+				projectAttachDao.insert(projectAttachDto);			
 			}		
 			
 			//상세사진 저장
@@ -116,7 +117,7 @@ public class ProjectInsertServlet extends HttpServlet{
 				attachDto.setAttachType(detailcontentType);
 				attachDto.setAttachSize(detailfileSize);
 				
-				//attachDao.insert(attachDto);
+				attachDao.insert(attachDto);
 				
 				ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setProjectNo(projectNo);
@@ -125,7 +126,7 @@ public class ProjectInsertServlet extends HttpServlet{
 			
 				
 				ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-				//projectAttachDao.insert(projectAttachDto);			
+				projectAttachDao.insert(projectAttachDto);			
 			}		
 			
 			//리워드 신청 처리
@@ -144,11 +145,10 @@ public class ProjectInsertServlet extends HttpServlet{
 				rewardDto.setRewardPrice(Integer.parseInt(rewardPrice[i]));
 				rewardDto.setRewardStock(Integer.parseInt(rewardStock[i]));
 				
-				//rewardDao.insert(rewardDto);
+				rewardDao.insert(rewardDto);
 			}
 			
 			
-			System.out.println("성공");
 
 			resp.sendRedirect("insert_success.jsp");
 			

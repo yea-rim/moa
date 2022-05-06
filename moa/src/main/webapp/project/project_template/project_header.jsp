@@ -6,6 +6,7 @@
 <%@page import="moa.beans.ProjectDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:include page="/template/header.jsp"></jsp:include>
 <%
 	/* int ProjectNo = Integer.parseInt(request.getParameter("projectNo")); */
 	ProjectDao projectDao = new ProjectDao();
@@ -47,10 +48,36 @@
     .h100p{
         height: 100%;
     }
+    
+    .pre{
+        white-space: pre-wrap;
+        overflow: hidden;
+        word-break: break-all;
+    }
+    
+    pre{
+    	white-space: pre-wrap;
+    	text-align: left; 
+    	height: 250px;
+    }
+    
+    .font12{
+    	font-size: 12px;
+    }
+    
+    
 </style>
 
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script type="text/javascript">
-		
+	//시작하면 바로 이동
+	$(function(){
+    	var offset = $("#start-anc").offset(); //해당 위치 반환
+    	$("html, body").animate({scrollTop: offset.top},0);
+	})
+
 </script>
 
 <body>
@@ -141,10 +168,11 @@
 
 
 <!-- 상세페이지 / 커뮤니티 메뉴바 -->
-        <div class="row left h20 m10">
-            <a href="./detail/body.jsp" class="link">펀딩소개</a>
-            <a href="./detail/notice.jsp" class="link">공지</a>
-            <a href="./detail/ask.jsp" class="link">문의</a>
+        <div class="row left h20 m10" id="start-anc">
+            <a href="./body.jsp" class="link">펀딩소개</a>
+            <a href="./notice.jsp" class="link">공지</a>
+            <a href="./ask.jsp" class="link">문의</a>
+
         </div>
 
 
@@ -153,32 +181,3 @@
             <!-- 상세페이지 본문 부분-->
 
             <div class="float-left w70p">
-                <img src="https://via.placeholder.com/500x2000" width="100%">
-            </div>
-            
-            <!-- 본문 오른쪽 리워드 부분 -->
-               <div class="float-left w30p p10px-left">
-               		<%for(RewardDto rewardDto : rewardList){ %>	
-	                	<div class="fill m-b10">
-                    		<a href="#" class="link"><button class="btn fill reward" style="text-align: left;">
-		                        리워드 이름
-		                        <%=rewardDto.getRewardName() %>
-		                        <br>
-		                        리워드 내용
-		                        <%=rewardDto.getRewardContent() %>
-		                        <br>
-		                        리워드 가격
-		                        <%=rewardDto.getRewardPrice() %>
-		                        <br>
-		                        리워드 재고
-		                        <%=rewardDto.getRewardStock() %>
-                    		</button></a>
-                		</div>
-                	<%} %>
-            	</div>
-            
-        </div>
-    </div>
-
-</body>
-</html>

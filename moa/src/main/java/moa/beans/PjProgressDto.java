@@ -8,9 +8,11 @@ public class PjProgressDto {
 	private String progressTitle;
 	private String progressContent;
 	private Date progressTime;
+	
 	public PjProgressDto() {
 		super();
 	}
+	
 	public int getProgressNo() {
 		return progressNo;
 	}
@@ -41,6 +43,5 @@ public class PjProgressDto {
 	public void setProgressTime(Date progressTime) {
 		this.progressTime = progressTime;
 	}
-	
-	
+
 }
