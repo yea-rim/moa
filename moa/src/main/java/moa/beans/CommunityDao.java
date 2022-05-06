@@ -132,11 +132,13 @@ public class CommunityDao {
 	public void insert(CommunityDto communityDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into community(community_no, community_title, community_content) values(?,?,?,)";
+		String sql = "insert into community(community_no, community_project_no, community_member_no, community_title, community_content) values(?, ?, ?, ?,?,)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, communityDto.getCommunityNo());
-		ps.setString(2, communityDto.getCommunityTitle());
-		ps.setString(3, communityDto.getCommunityContent());
+		ps.setInt(2, communityDto.getCommunityProjectNo());
+		ps.setInt(2, communityDto.getCommunityMemberNo());
+		ps.setString(4, communityDto.getCommunityTitle());
+		ps.setString(5, communityDto.getCommunityContent());
 		
 		con.close();
 	}
