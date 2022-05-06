@@ -63,7 +63,7 @@
 						<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">ℹ️</a>
 					</td>
 					<td>
-						<a href="approve.do?seller_no=<%=sellerDto.getSellerNo()%>" class="link">✔</a>
+						<a href="approve.do?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">✔</a>
 					</td>
 				</tr>
 				<%} %>

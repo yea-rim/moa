@@ -125,5 +125,19 @@ public class SellerDao {
 		con.close();
 		return list;
 	}
+
+// 승인
+	public boolean approve(int sellerNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update seller set seller_regist_date = sysdate where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, sellerNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
 	
 }

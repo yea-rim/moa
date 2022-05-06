@@ -56,10 +56,7 @@
                             </div>
                         </div> 
                         <div class="float-right m60 mlr20">
-                            <a href="" class="link link-reverse h60">
-                                <h3 class="center">판매자 신청</h3>
-                                <h4 class="center">(신청현황)</h4>
-                            <a href="<%=request.getContextPath() %>/seller/seller_request.jsp" class="link link-reverse" style="height: 60px;">
+                            <a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-reverse" style="height: 60px;">
                                 <h3>판매자 신청</h3>
                                 <h3>(신청현황)</h3>
                             </a>
