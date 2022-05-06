@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+<%-- 첨부파일 수정 필요 --%>
+
 <%
 	Integer memberNo = (Integer)session.getAttribute("login");
 
