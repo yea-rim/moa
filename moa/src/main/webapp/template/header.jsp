@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+    <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">-->
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet"> 
     
     <!-- jquery cdn -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 </head>
@@ -59,18 +61,7 @@
                         <h1 class="header-name m0">moa</h1>
                     </a>
                 </div>
-                <%if(!isLogin) { // 로그인 상태가 아니면 %>
-                	<div class="float-right layer-5 center m10">
-                		<a href="<%=request.getContextPath() %>/member/join.jsp" class="link">
-                			<h3>회원가입</h3>
-                		</a>
-                	</div>
-                	<div class="float-right layer-5 center m10">
-                		<a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
-	                        <h3>로그인</h3>
-	                    </a>
-                	</div>
-                <%} else { // 로그인 상태면 %>
+                <%if(isLogin) { // 로그인 상태라면 %>               	
                 		<div class="float-right layer-5 center m10">
                 			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link">
                 				<h3>프로젝트 신청</h3>
@@ -81,6 +72,28 @@
                 					<h3>마이페이지</h3>
                 			</a>
                 		</div>
+                <%}else if(isAdmin){ //관리자 상태이면%> 
+                    <div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/admin/admin_main.jsp" class="link">
+                			<h3>관리자 메뉴</h3>
+                		</a>
+                	</div>
+                	<div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/member/logout.do" class="link">
+	                        <h3>로그아웃</h3>
+	                    </a>
+                	</div>
+                	<%}else { // 로그인 상태가 아니면 %>           
+                	<div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/member/join.jsp" class="link">
+                			<h3>회원가입</h3>
+                		</a>
+                	</div>
+                	<div class="float-right layer-5 center m10">
+                		<a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
+	                        <h3>로그인</h3>
+	                    </a>
+                	</div>         	
                 <%} %>
             </div>
         </header>

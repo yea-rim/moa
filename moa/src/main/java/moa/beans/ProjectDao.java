@@ -539,9 +539,46 @@ public class ProjectDao {
 		return projectVo;
 	}
 	
+	// 전체 목록
+	public List<ProjectDto> allSelectList(int p, int s) throws Exception {
+
+		int end = p * s;
+		int begin = end - (s - 1);
+
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from (" + "select rownum rn, TMP.* from ("
+				+ "SELECT * FROM project order by project_no desc"
+				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+
+		List<ProjectDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setProjectNo(rs.getInt("project_no"));
+			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
+			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectSummary(rs.getString("project_summary"));
+			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
+			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
+			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+			projectDto.setProjectPermission(rs.getString("project_permission"));
+
+			list.add(projectDto);
+		}
+
+		return list;
+	}
 	
 	// 승인이 필요한 프로젝트 목록
-	public List<ProjectDto> approveSelectList(int p, int s) throws Exception {
+	public List<ProjectDto> permitSelectList(int p, int s) throws Exception {
 
 		int end = p * s;
 		int begin = end - (s - 1);
@@ -577,5 +614,44 @@ public class ProjectDao {
 
 		return list;
 	}
-
+	
+	
+	//프로젝트 승인 (permission update)
+	public boolean projectPermit(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update project set project_permission = 1 where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
+	
+	//프로젝트 거절 (permission update)
+	public boolean projectRefuse(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update project set project_permission = 2 where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
+	
+	//프로젝트 삭제
+	public boolean delete(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete project where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
 }

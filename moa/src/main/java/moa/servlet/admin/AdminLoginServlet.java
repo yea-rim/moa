@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.AdminDao;
 import moa.beans.AdminDto;
 
-@WebServlet(urlPatterns = "/admin/login.do")
+@WebServlet(urlPatterns = "/member/adminLogin.do")
 public class AdminLoginServlet extends HttpServlet {
 	
 	@Override

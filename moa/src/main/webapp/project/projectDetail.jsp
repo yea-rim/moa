@@ -142,9 +142,7 @@
 
 <!-- 상세페이지 / 커뮤니티 메뉴바 -->
         <div class="row left h20 m10">
-            <a href="./detail/body.jsp" class="link">펀딩소개</a>
-            <a href="./detail/notice.jsp" class="link">공지</a>
-            <a href="./detail/ask.jsp" class="link">문의</a>
+            <h5>펀딩소개</h5>
         </div>
 
 
