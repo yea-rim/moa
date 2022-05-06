@@ -10,14 +10,14 @@
 	/* int ProjectNo = Integer.parseInt(request.getParameter("projectNo")); */
 	ProjectDao projectDao = new ProjectDao();
 	/* 나중에 파라미터로 바꿔주기 */
-	ProjectDto projectDto = projectDao.selectOne(10); /* 프로젝트불러오기 */
+	ProjectDto projectDto = projectDao.selectOne(11); /* 프로젝트불러오기 */
 	/* 나중에 파라미터로 바꿔주기 */
-	ProjectVo projectVo = projectDao.selectVo(10);
+	ProjectVo projectVo = projectDao.selectVo(11);
 	
 	RewardDao rewardDao = new RewardDao();
 	
 	/* 나중에 파라미터로 바꿔주기 */
-	List<RewardDto> rewardList = rewardDao.selectProject(10); /* 해당 리워드목록 리스트 불러오기 */
+	List<RewardDto> rewardList = rewardDao.selectProject(11); /* 해당 리워드목록 리스트 불러오기 */
 	
 	
 	
@@ -142,9 +142,7 @@
 
 <!-- 상세페이지 / 커뮤니티 메뉴바 -->
         <div class="row left h20 m10">
-            <a href="./detail/body.jsp" class="link">펀딩소개</a>
-            <a href="./detail/notice.jsp" class="link">공지</a>
-            <a href="./detail/ask.jsp" class="link">문의</a>
+            <h5>펀딩소개</h5>
         </div>
 
 

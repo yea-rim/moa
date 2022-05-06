@@ -40,6 +40,7 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
@@ -55,6 +56,10 @@ public class ProjectDao {
 			standard = "PROJECT_FINISH_DATE ASC";
 		} else if (sort.equals("펀딩액순")) {
 			standard = "PROJECT_PRESENT_MONEY DESC";
+		} else if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "PROJECT_READCOUNT DESC";
 		} else {
 			standard = "PROJECT_NO DESC";
 		}
@@ -64,9 +69,11 @@ public class ProjectDao {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from (" + "select rownum rn, TMP.* from ("
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate order by #2"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
@@ -88,6 +95,7 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
@@ -103,6 +111,10 @@ public class ProjectDao {
 			standard = "PROJECT_FINISH_DATE ASC";
 		} else if (sort.equals("펀딩액순")) {
 			standard = "PROJECT_PRESENT_MONEY DESC";
+		} else if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "PROJECT_READCOUNT DESC";
 		} else {
 			standard = "PROJECT_NO DESC";
 		}
@@ -114,9 +126,10 @@ public class ProjectDao {
 		
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate AND instr(#1,?) > 0 order by #2"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
-		sql = sql.replace("#2", type);
+		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setInt(2, begin);
@@ -138,11 +151,44 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
 		
 		return list;
+	}
+	
+	// 진행중인 펀딩 페이지네이션(검색어 x)
+	public int ongoingCountByPaging() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+
+		con.close();
+
+		return count;
+	}
+	
+	// 진행중인 펀딩 페이지네이션(검색어 o)
+	public int ongoingCountByPaging(String type, String keyword) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate and instr(#1,?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+
+		con.close();
+
+		return count;
 	}
 	
 	
@@ -155,7 +201,8 @@ public class ProjectDao {
 		
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from (" + "select rownum rn, TMP.* from ("
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate AND instr(#1,?) > 0 order by project_no desc"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
@@ -180,6 +227,7 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
@@ -193,6 +241,10 @@ public class ProjectDao {
 		String standard;
 		if (sort.equals("펀딩액순")) {
 			standard = "PROJECT_PRESENT_MONEY DESC";
+		} else if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "PROJECT_READCOUNT DESC";
 		} else {
 			standard = "PROJECT_NO DESC";
 		}
@@ -226,6 +278,7 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
@@ -239,6 +292,10 @@ public class ProjectDao {
 		String standard;
 		if (sort.equals("펀딩액순")) {
 			standard = "PROJECT_PRESENT_MONEY DESC";
+		} else if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "";
 		} else {
 			standard = "PROJECT_NO DESC";
 		}
@@ -252,7 +309,7 @@ public class ProjectDao {
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate AND instr(#1,?) > 0 order by #2"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
-		sql = sql.replace("#2", type);
+		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setInt(2, begin);
@@ -274,6 +331,7 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
 		}
@@ -281,15 +339,47 @@ public class ProjectDao {
 		return list;
 	}
 	
+	// 마감된 펀딩 페이지네이션(검색어 x)
+	public int closingCountByPaging() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+		
+		con.close();
+		
+		return count;
+	}
+	
+	// 마감된 펀딩 페이지네이션(검색어 x)
+	public int closingCountByPaging(String type, String keyword) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate AND instr(#1,?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+		
+		con.close();
+		
+		return count;
+	}
+	
 	
 	// 예정된 펀딩 목록(검색어 o, 정렬x)
 	public List<ProjectDto> comingSelectList(int p, int s, String type, String keyword) throws Exception {
-
+		
 		int end = p * s;
 		int begin = end - (s - 1);
-
+		
 		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date > sysdate AND instr(#1,?) > 0 order by project_no desc"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
@@ -299,7 +389,7 @@ public class ProjectDao {
 		ps.setInt(2, begin);
 		ps.setInt(3, end);
 		ResultSet rs = ps.executeQuery();
-
+		
 		List<ProjectDto> list = new ArrayList<>();
 		while (rs.next()) {
 			ProjectDto projectDto = new ProjectDto();
@@ -315,23 +405,31 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
-
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+			
 			list.add(projectDto);
 		}
-
+		
 		return list;
 	}
-
+	
 	// 예정된 펀딩 목록(검색어 x, 정렬 o)
 	public List<ProjectDto> comingSelectList(int p, int s, String sort) throws Exception {
-
-		String standard = "PROJECT_NO DESC";
-
+		
+		String standard;
+		if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "PROJECT_READCOUNT DESC";
+		} else {
+			standard = "PROJECT_NO DESC";
+		}
+		
 		int end = p * s;
 		int begin = end - (s - 1);
-
+		
 		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date > sysdate order by #2"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
@@ -340,7 +438,7 @@ public class ProjectDao {
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
 		ResultSet rs = ps.executeQuery();
-
+		
 		List<ProjectDto> list = new ArrayList<>();
 		while (rs.next()) {
 			ProjectDto projectDto = new ProjectDto();
@@ -356,34 +454,42 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
-
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+			
 			list.add(projectDto);
 		}
-
+		
 		return list;
 	}
-
+	
 	// 예정된 펀딩 목록(검색어 o, 정렬 o)
 	public List<ProjectDto> comingSelectList(int p, int s, String type, String keyword, String sort) throws Exception {
-
-		String standard = "PROJECT_NO DESC";
-
+		
+		String standard;
+		if (sort.equals("좋아요순")) {
+			standard = "PROJECT_NO DESC";
+		} else if (sort.equals("인기순")) {
+			standard = "PROJECT_READCOUNT DESC";
+		} else {
+			standard = "PROJECT_NO DESC";
+		}
+		
 		int end = p * s;
 		int begin = end - (s - 1);
-
+		
 		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date > sysdate AND instr(#1,?) > 0 order by #2"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
-		sql = sql.replace("#2", type);
+		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setInt(2, begin);
 		ps.setInt(3, end);
 		ResultSet rs = ps.executeQuery();
-
+		
 		List<ProjectDto> list = new ArrayList<>();
 		while (rs.next()) {
 			ProjectDto projectDto = new ProjectDto();
@@ -399,17 +505,19 @@ public class ProjectDao {
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
-
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+			
 			list.add(projectDto);
 		}
-
+		
 		return list;
 	}
-
-	public int countByPaging() throws Exception {
+	
+	// 편딩예정 페이지네이션(검색어 x)
+	public int comingCountByPaging() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select count(*) from project";
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date > sysdate";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
@@ -419,11 +527,12 @@ public class ProjectDao {
 
 		return count;
 	}
-
-	public int countByPaging(String type, String keyword) throws Exception {
+	
+	// 편딩예정 페이지네이션(검색어 x)
+	public int comingCountByPaging(String type, String keyword) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select count(*) from project where instr(#1,?) > 0";
+		String sql = "select count(*) from project WHERE project_permission = 1 AND project_start_date > sysdate AND instr(#1,?) > 0";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -435,6 +544,7 @@ public class ProjectDao {
 
 		return count;
 	}
+	
 	
 	// 프로젝트 번호 시퀀스 생성
 	public int getSequence() throws Exception {
@@ -499,6 +609,7 @@ public class ProjectDao {
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
 			projectDto.setProjectPermission(rs.getString("project_permission"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 		} else {
 			projectDto = null;
 		}
@@ -510,7 +621,9 @@ public class ProjectDao {
 	}
 
 	public ProjectVo selectVo(int ProjectNo) throws Exception {
-		String sql = "select " + "project_no, " + "(project_semi_finish - trunc(sysdate) + 1) daycount, "
+		String sql = "select " 
+				+ "project_no, " 
+				+ "(project_semi_finish - trunc(sysdate) + 1) daycount, "
 				+ "trunc(project_present_money/project_target_money*100, 1) percent, "
 				+ "(select count(j.member_no) from project p left outer join joa j on p.project_no = j.project_no where p.project_no=?) joacount "
 				+ "from project where project_no = ?";
@@ -528,7 +641,7 @@ public class ProjectDao {
 			projectVo = new ProjectVo();
 			projectVo.setProjectNo(rs.getInt("project_no"));
 			projectVo.setDaycount(rs.getInt("daycount"));
-			projectVo.setPercent(rs.getDouble("percent"));
+			projectVo.setPercent(rs.getInt("percent"));
 			projectVo.setJoacount(rs.getInt("joacount"));
 		} else {
 			projectVo = null;
@@ -539,9 +652,46 @@ public class ProjectDao {
 		return projectVo;
 	}
 	
+	// 전체 목록
+	public List<ProjectDto> allSelectList(int p, int s) throws Exception {
+
+		int end = p * s;
+		int begin = end - (s - 1);
+
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from (" + "select rownum rn, TMP.* from ("
+				+ "SELECT * FROM project order by project_no desc"
+				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+
+		List<ProjectDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setProjectNo(rs.getInt("project_no"));
+			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
+			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectSummary(rs.getString("project_summary"));
+			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
+			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
+			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+			projectDto.setProjectPermission(rs.getString("project_permission"));
+
+			list.add(projectDto);
+		}
+
+		return list;
+	}
 	
 	// 승인이 필요한 프로젝트 목록
-	public List<ProjectDto> approveSelectList(int p, int s) throws Exception {
+	public List<ProjectDto> permitSelectList(int p, int s) throws Exception {
 
 		int end = p * s;
 		int begin = end - (s - 1);
@@ -577,5 +727,44 @@ public class ProjectDao {
 
 		return list;
 	}
-
+	
+	
+	//프로젝트 승인 (permission update)
+	public boolean projectPermit(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update project set project_permission = 1 where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
+	
+	//프로젝트 거절 (permission update)
+	public boolean projectRefuse(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update project set project_permission = 2 where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
+	
+	//프로젝트 삭제
+	public boolean delete(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete project where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
 }

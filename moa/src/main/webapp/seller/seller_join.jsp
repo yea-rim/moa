@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+<%-- 첨부파일 수정 필요 --%>
+
 <%
 	Integer memberNo = (Integer)session.getAttribute("login");
 
@@ -12,7 +14,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<form action="sellerRequest.do" method="post">
+<form action="join.do" method="post">
 
 	<div class="container w450 m30">
 

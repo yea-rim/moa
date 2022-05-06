@@ -6,7 +6,7 @@ public class CommunityDto {
 
 	private int communityNo;
 	private int communityProjectNo;
-	private int communityNumberNo;
+	private int communityMemberNo;
 	private String communityTitle;
 	private String communityContent;
 	private Date communityTime;
@@ -33,12 +33,12 @@ public class CommunityDto {
 		this.communityProjectNo = communityProjectNo;
 	}
 
-	public int getCommunityNumberNo() {
-		return communityNumberNo;
+	public int getCommunityMemberNo() {
+		return communityMemberNo;
 	}
 
-	public void setCommunityNumberNo(int communityNumberNo) {
-		this.communityNumberNo = communityNumberNo;
+	public void setCommunityMemberNo(int communityMemberNo) {
+		this.communityMemberNo = communityMemberNo;
 	}
 
 	public String getCommunityTitle() {

@@ -319,6 +319,13 @@ ul.menu a {
     border-color: black;
 }
 
+.form-date{
+	outline: none;
+    padding: 0.4em;
+    border: 1px solid #B6B6B6;
+    border-radius: 0.3em;
+    width: 150px;
+}
 
 
 
@@ -365,6 +372,25 @@ textarea.form-input {
 .flex-container.flex-vertical {
     flex-direction: column;
 }
+
+.display-center {
+    display: flex;
+    justify-content: center;/*display가 flex인 경우 가로 정렬 옵션 */
+   align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
+}
+
+.list-admin {
+    min-height: 800px;
+    border: 1px solid gray;
+}
+.menu-wrapper {
+    width:20%;
+    background-color:  #B6B6B6;
+}
+.content-wrapper {
+    flex-grow: 1;/* 나머지 전부 다 라는 의미로 쓰임 */
+}
+
 
 
 
@@ -648,3 +674,4 @@ textarea.form-input {
 
     color: white;
 }
+
