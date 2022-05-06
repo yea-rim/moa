@@ -9,14 +9,15 @@
 	PjProgressDao pjProgressDao = new PjProgressDao();
 	
 	/* 파라미터 나중에 바꿔주기!!!!!!!!!!!!!!!!!!!!!!!! */
-	List<PjProgressDto> list = pjProgressDao.selectPjProgress(10);
+	List<PjProgressDto> list = pjProgressDao.selectPjProgress(11);
 	
 	
 	
 %>
 <jsp:include page="/project/project_template/project_header.jsp"></jsp:include>
 
-<div class="detail-body">
+<!-- 공지 부분 -->
+<div>
 	<%for(PjProgressDto pjProgressDto : list) {%>
                     <div class="row left m-b10">
                         <div class="row">
@@ -32,21 +33,7 @@
                         </h1>
                     </div>
                     <div class="row">
-<pre class="pre">
-<%=pjProgressDto.getProgressContent() %>
-fdsafjkdasfhjskadfhlasjkdfhdasjlkfsajlkfhsdfhdsalf
-asdfhdsjlfkhsadjlkfhsdajlfkhsdajlkfhdsjlkfhdsajlkfhasf
-fhasdfjlkashdfjlkashfjlkshdfjlkdasfjlksahkflas
-fdsafjkdasfhjskadfhlasjkdfhdasjlkfsajlkfhsdfhdsalf
-asdfhdsjlfkhsadjlkfhsdajlfkhsdajlkfhdsjlkfhdsajlkfhasf
-fhasdfjlkashdfjlkashfjlkshdfjlkdasfjlksahkflas
-fdsafjkdasfhjskadfhlasjkdfhdasjlkfsajlkfhsdfhdsalf
-asdfhdsjlfkhsadjlkfhsdajlfkhsdajlkfhdsjlkfhdsajlkfhasf
-fhasdfjlkashdfjlkashfjlkshdfjlkdasfjlksahkflas
-fdsafjkdasfhjskadfhlasjkdfhdasjlkfsajlkfhsdfhdsalf
-asdfhdsjlfkhsadjlkfhsdajlfkhsdajlkfhdsjlkfhdsajlkfhasf
-fhasdfjlkashdfjlkashfjlkshdfjlkdasfjlksahkflas
-</pre>
+<pre class="pre-list"><%=pjProgressDto.getProgressContent() %></pre>
                     </div>
                     <div class="row right m30">
                         <a href="./noticeDetail.jsp?progressNo=<%=pjProgressDto.getProgressNo() %>" class="link">

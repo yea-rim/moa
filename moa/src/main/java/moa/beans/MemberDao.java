@@ -79,16 +79,22 @@ public class MemberDao {
 		}
 	
 	public MemberDto selectOne(Integer memberNo) throws Exception {
-		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "select * from member where member_no = ?";
+		MemberDto memberDto;
+		
+		if(memberNo == null) {
+			memberDto = null;
+			return memberDto;
+		}
+		
+		
+		Connection con = JdbcUtils.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
-
 		ps.setInt(1, memberNo);
 
 		ResultSet rs = ps.executeQuery();
 
-		MemberDto memberDto;
 
 		if (rs.next()) {
 			memberDto = new MemberDto();

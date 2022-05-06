@@ -3,6 +3,17 @@
     
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    
+<script type="text/javascript">
+	$(function(){
+		$(".check-pw").on("input", function(){
+    		$("input[name=memberPw]").prop("type", "text"); // 비밀번호 보여주기 
+    	});
+	});
+</script>
+
     <form action="join.do" method="post">
     
         <div class="container w450 m30">

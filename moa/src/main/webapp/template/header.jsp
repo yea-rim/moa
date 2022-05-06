@@ -19,7 +19,7 @@
 	boolean isAdmin = adminId != null;
 	
 	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-	Integer sellerRegistDate = (Integer) session.getAttribute("sellerRegistDate");
+	String sellerRegistDate = (String) session.getAttribute("sellerRegistDate");
 	boolean isApprove = sellerRegistDate != null;
 
 %>
@@ -48,6 +48,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+	
 
 </head>
 <body>
@@ -101,13 +102,13 @@
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="#"><h3 class="m0">프로젝트</h3></a>
+                    <a href="<%=request.getContextPath()%>/project/ongoingList.jsp"><h3 class="m0">프로젝트</h3></a>
                 </li>
                 <li>
-                    <a href="#"><h3 class="m0">커뮤니티</h3></a>
+                    <a href="<%=request.getContextPath()%>/community/list.jsp"><h3 class="m0">커뮤니티</h3></a>
                     <ul>
                         <li><a href="#"><h3 class="m0">공지사항</h3></a></li>
-                        <li><a href="#"><h3 class="m0">홍보하기</h3></a></li>
+                        <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0">홍보하기</h3></a></li>
                     </ul> 
                 </li>
                 <li>

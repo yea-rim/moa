@@ -22,7 +22,7 @@ public class MemberProfileDao {
 			memberProfileDto.setMemberNo(rs.getInt("member_no"));
 			memberProfileDto.setAttachNo(rs.getInt("attach_no"));
 		} else {
-			memberProfileDto = null; 
+			memberProfileDto = null;
 		}
 		
 		con.close();
