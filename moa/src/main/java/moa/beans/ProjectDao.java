@@ -511,7 +511,7 @@ public class ProjectDao {
 
 	public ProjectVo selectVo(int ProjectNo) throws Exception {
 		String sql = "select " + "project_no, " + "(project_semi_finish - trunc(sysdate) + 1) daycount, "
-				+ "trunc(project_present_money/project_target_money*100, 1) percent, "
+				+ "trunc(project_present_money/project_target_money*100) percent, "
 				+ "(select count(j.member_no) from project p left outer join joa j on p.project_no = j.project_no where p.project_no=?) joacount "
 				+ "from project where project_no = ?";
 
@@ -528,7 +528,7 @@ public class ProjectDao {
 			projectVo = new ProjectVo();
 			projectVo.setProjectNo(rs.getInt("project_no"));
 			projectVo.setDaycount(rs.getInt("daycount"));
-			projectVo.setPercent(rs.getDouble("percent"));
+			projectVo.setPercent(rs.getInt("percent"));
 			projectVo.setJoacount(rs.getInt("joacount"));
 		} else {
 			projectVo = null;

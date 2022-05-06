@@ -12,6 +12,16 @@ public class PjQnaDto {
 	private int superNo;
 	private int depth;
 	private int qnaLock;
+	private String qnaTitle;
+
+	
+	public String getQnaTitle() {
+		return qnaTitle;
+	}
+
+	public void setQnaTitle(String qnaTitle) {
+		this.qnaTitle = qnaTitle;
+	}
 
 	public PjQnaDto() {
 		super();

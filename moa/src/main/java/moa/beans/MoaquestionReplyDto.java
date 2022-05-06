@@ -5,7 +5,7 @@ import java.sql.Date;
 public class MoaquestionReplyDto {
 	private int questionReplyNo;
 	private int questionTargetNo;
-	private String questionReplyAdmin;
+	private int questionReplyAdmin;
 	private int questionReplyMember;
 	private Date questionReplyTime;
 	private String questionReplyContent;
@@ -14,15 +14,19 @@ public class MoaquestionReplyDto {
 		super();
 	}
 	
+	public int getQuestionReplyAdmin() {
+		return questionReplyAdmin;
+	}
+	public void setQuestionReplyAdmin(int questionReplyAdmin) {
+		this.questionReplyAdmin = questionReplyAdmin;
+	}
 	public int getQuestionReplyNo() {
 		return questionReplyNo;
 	}
 	public int getQuestionTargetNo() {
 		return questionTargetNo;
 	}
-	public String getQuestionReplyAdmin() {
-		return questionReplyAdmin;
-	}
+	
 	public int getQuestionReplyMember() {
 		return questionReplyMember;
 	}
@@ -38,9 +42,7 @@ public class MoaquestionReplyDto {
 	public void setQuestionTargetNo(int questionTargetNo) {
 		this.questionTargetNo = questionTargetNo;
 	}
-	public void setQuestionReplyAdmin(String questionReplyAdmin) {
-		this.questionReplyAdmin = questionReplyAdmin;
-	}
+	
 	public void setQuestionReplyMember(int questionReplyMember) {
 		this.questionReplyMember = questionReplyMember;
 	}
