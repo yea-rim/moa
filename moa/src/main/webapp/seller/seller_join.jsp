@@ -12,7 +12,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<form action="sellerRequest.do" method="post">
+<form action="sellerJoin.do" method="post">
 
 	<div class="container w450 m30">
 

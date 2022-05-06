@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.SellerDao;
 import moa.beans.SellerDto;
 
-@WebServlet(urlPatterns = "/seller/sellerRequest.do")
-public class SellerRequestServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/seller/join.do")
+public class SellerJoinServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -30,7 +30,7 @@ public class SellerRequestServlet extends HttpServlet {
 			sellerDao.insert(sellerDto);
 
 			// 출력
-			resp.sendRedirect(req.getContextPath() + "/seller/request_finish.jsp");
+			resp.sendRedirect(req.getContextPath() + "/seller/join_finish.jsp");
 			
 			req.getSession().setAttribute("sellerNo", sellerDto.getSellerNo());
 			req.getSession().setAttribute("sellerRegistDate", sellerDto.getSellerRegistDate());
