@@ -63,6 +63,7 @@
 .m45{margin-top: 45px; margin-bottom: 45px;}
 .m50{margin-top: 50px; margin-bottom: 50px;}
 .m60{margin-top: 60px; margin-bottom: 60px;}
+.m70{margin-top: 70px; margin-bottom: 70px;}
 
 
 
@@ -141,7 +142,18 @@
     border: 1px solid #d8c8e3;
     background-color: #d8c8e3;
 }
+.btn-reverse {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
 
+    color: #B899CD;
+    background-color: white;
+
+    cursor: pointer;
+
+    font: inherit;
+}
 
 
 
@@ -433,7 +445,8 @@ textarea.form-input {
     width: 100%;
 }
 
-.btn {
+/* 상단에 btn 관련 스타일 이미 있어서 주석 처리합니다. */
+/* .btn {
     border: 1px solid gray;
     border-radius: 0.25em;
     padding: 0.5em;
@@ -444,7 +457,7 @@ textarea.form-input {
     cursor: pointer;
     
     font: inherit;
-}
+} */
 
 .p10px{
     padding: 10px;
