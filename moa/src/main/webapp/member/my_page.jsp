@@ -18,7 +18,7 @@
 	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
 		
 	// 회원 프로필 존재 여부 확인 
-	boolean isExistProfile = memberProfileDto != null; 
+	boolean isExistProfile = memberProfileDto != null;
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -31,7 +31,7 @@
                         
                         	<!-- 프로필 사진 출력 -->
                             <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle"  onerror="javascript:this.src='https://dummyimage.com/200x200'">
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
                                     	
                                     <%-- <%=memberProfileDto.getAttachNo() %> --%>
                                     	
@@ -47,16 +47,16 @@
                             			<h4>(회원번호) </h4>
                             		</div>
                             		<div class="float-left mlr10">
-                            			<h3><%=memberDto.getMemberNo() %></h3>
+                            			<h3><%=memberDto.getMemberNo()%></h3>
                             		</div>
                             	</div>
                             </div>
                             <div class="row">
-                                <h2><%=memberDto.getMemberNick() %></h2>
+                                <h2><%=memberDto.getMemberNick()%></h2>
                             </div>
                         </div> 
                         <div class="float-right m60 mlr20">
-                            <a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-reverse" style="height: 60px;">
+                            <a href="<%=request.getContextPath()%>/seller/seller_join.jsp" class="link link-reverse" style="height: 60px;">
                                 <h3>판매자 신청</h3>
                                 <h3>(신청현황)</h3>
                             </a>
