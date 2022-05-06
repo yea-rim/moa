@@ -11,7 +11,7 @@
 	});
 </script>
 
-	<form action="login.do" method="post">
+	<form action="adminLogin.do" method="post">
 
         <div class="container w400">
             <div class="row m50">
