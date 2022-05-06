@@ -29,6 +29,14 @@ public class ProjectDto {
 	public ProjectDto() {
 		super();
 	}
+	
+	public int getProjectReadCount() {
+		return projectReadcount;
+	}
+
+	public void setProjectReadCount(int projectReadCount) {
+		this.projectReadcount = projectReadCount;
+	}
 
 	public int getProjectNo() {
 		return projectNo;
