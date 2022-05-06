@@ -75,10 +75,10 @@ public class MemberInformationServlet extends HttpServlet{
 				fileSize = (int) target.length();
 			}
 			
-			System.out.println(uploadName);
-			System.out.println(saveName);
-			System.out.println(contentType);
-			System.out.println(fileSize);
+//			System.out.println(uploadName);
+//			System.out.println(saveName);
+//			System.out.println(contentType);
+//			System.out.println(fileSize);
 			
 			
 			if(uploadName != null) { // uploadName에 정보가 있으면 

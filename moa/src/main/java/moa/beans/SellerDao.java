@@ -32,7 +32,8 @@ public class SellerDao {
 	public SellerDto selectOne(int sellerNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select seller_regist_date from seller where seller_no = ?";
+//		String sql = "select seller_regist_date from seller where seller_no = ?"; // 원래 쓰여져있던 코드 
+		String sql = "select * from seller where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, sellerNo);
