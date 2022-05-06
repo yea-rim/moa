@@ -1,0 +1,117 @@
+.reward {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: left; /* 가로 - 중앙으로 */
+    justify-content: flex-start; /* 세로 - 상단으로 */
+  }
+  
+  .h100p{
+      height: 100%;
+  }
+  
+  .pre-list{
+      white-space: pre-wrap;
+      overflow: hidden;
+      word-break: break-all;
+      height: 250px;
+      text-align: left;
+  }
+  
+  .pre{
+      white-space: pre-wrap;
+      text-align: left; 
+      height: auto;
+  }
+  
+  .font12{
+      font-size: 12px;
+  }
+
+  .table {
+    border: 1px solid black;
+}
+
+.table>thead>tr>td,
+.table>thead>tr>th,
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th {
+    border-bottom: 1px solid grey;
+    font-size: 17px;
+    padding: 0.3em;
+}
+
+.table>thead {
+    background-color: #e3d9eb;
+}
+
+.table>tbody>.body:hover {
+    background-color: #e3d9eb;
+}
+
+.table-title {
+    text-align: left;
+    padding-left: 1em !important;
+}
+
+.table-title:hover {
+    cursor: pointer;
+}
+
+pre {
+    text-align: left;
+    padding-left: 1em;
+}
+
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+/* 확장 스타일 : 세로배치 */
+.flex-container.flex-vertical {
+    flex-direction: column;
+}
+
+/* flex를 이용하면 가운데 배치를 쉽게 할 수 있다 */
+.display-center {
+    display: flex;
+    justify-content: left;
+    /* display가 flex인 경우 가로 정렬 옵션 */
+    align-items: center;
+    /* display가 flex인 경우 세로 정렬 옵션 */
+}
+
+.display-center-right {
+    display: flex;
+    justify-content: right;
+    /* display가 flex인 경우 가로 정렬 옵션 */
+    align-items: center;
+    /* display가 flex인 경우 세로 정렬 옵션 */
+}
+
+.flex-container div {
+    flex-grow: 1;
+}
+
+.list-item {
+    height: 150px;
+    border: 3px solid black;
+    border-collapse: collapse;
+}
+
+.image-wrapper {
+    width: 25%;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+}
+
+label[for=hide-secret]:hover {
+    cursor: pointer;
+}

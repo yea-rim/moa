@@ -5,7 +5,7 @@ import java.sql.Date;
 public class MoaNoticeDto {
 
 	private int noticeNo;
-	private String noticeWriter;
+	private int noticeAdminNo;
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeTime;
@@ -23,12 +23,12 @@ public class MoaNoticeDto {
 		this.noticeNo = noticeNo;
 	}
 
-	public String getNoticeWriter() {
-		return noticeWriter;
+	public int getNoticeAdminNo() {
+		return noticeAdminNo;
 	}
 
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
+	public void setNoticeAdminNo(int noticeAdminNo) {
+		this.noticeAdminNo = noticeAdminNo;
 	}
 
 	public String getNoticeTitle() {

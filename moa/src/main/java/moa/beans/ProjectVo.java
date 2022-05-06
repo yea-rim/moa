@@ -4,7 +4,7 @@ public class ProjectVo {
 	
 	private int projectNo;
 	private int daycount;
-	private double percent;
+	private int percent;
 	private int joacount;
 	
 	public int getProjectNo() {
@@ -13,7 +13,7 @@ public class ProjectVo {
 	public int getDaycount() {
 		return daycount;
 	}
-	public double getPercent() {
+	public int getPercent() {
 		return percent;
 	}
 	public int getJoacount() {
@@ -25,7 +25,7 @@ public class ProjectVo {
 	public void setDaycount(int daycount) {
 		this.daycount = daycount;
 	}
-	public void setPercent(double percent) {
+	public void setPercent(int percent) {
 		this.percent = percent;
 	}
 	public void setJoacount(int joacount) {

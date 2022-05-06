@@ -7,21 +7,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <jsp:include page="/template/header.jsp"></jsp:include>
+
 <%
 	/* int ProjectNo = Integer.parseInt(request.getParameter("projectNo")); */
 	ProjectDao projectDao = new ProjectDao();
 	/* 나중에 파라미터로 바꿔주기 */
-	ProjectDto projectDto = projectDao.selectOne(10); /* 프로젝트불러오기 */
+	ProjectDto projectDto = projectDao.selectOne(11); /* 프로젝트불러오기 */
 	/* 나중에 파라미터로 바꿔주기 */
-	ProjectVo projectVo = projectDao.selectVo(10);
+	ProjectVo projectVo = projectDao.selectVo(11);
 	
 	RewardDao rewardDao = new RewardDao();
 	
 	/* 나중에 파라미터로 바꿔주기 */
-	List<RewardDto> rewardList = rewardDao.selectProject(10); /* 해당 리워드목록 리스트 불러오기 */
-	
-	
-	
+	List<RewardDto> rewardList = rewardDao.selectProject(11); /* 해당 리워드목록 리스트 불러오기 */
 	
 %>
 <!DOCTYPE html>
@@ -34,37 +32,11 @@
 
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/project_header.css">
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/test.css"> --%>
 </head>
 
 <style>
-    .reward {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: left; /* 가로 - 중앙으로 */
-      justify-content: flex-start; /* 세로 - 상단으로 */
-    }
-    
-    .h100p{
-        height: 100%;
-    }
-    
-    .pre{
-        white-space: pre-wrap;
-        overflow: hidden;
-        word-break: break-all;
-    }
-    
-    pre{
-    	white-space: pre-wrap;
-    	text-align: left; 
-    	height: 250px;
-    }
-    
-    .font12{
-    	font-size: 12px;
-    }
-    
     
 </style>
 
@@ -171,7 +143,7 @@
         <div class="row left h20 m10" id="start-anc">
             <a href="./body.jsp" class="link">펀딩소개</a>
             <a href="./notice.jsp" class="link">공지</a>
-            <a href="./ask.jsp" class="link">문의</a>
+            <a href="./qna.jsp" class="link">문의</a>
 
         </div>
 
@@ -180,4 +152,4 @@
         
             <!-- 상세페이지 본문 부분-->
 
-            <div class="float-left w70p">
+            <div class="float-left w70p m-b10">
