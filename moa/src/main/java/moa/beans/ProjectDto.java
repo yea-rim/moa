@@ -16,8 +16,17 @@ public class ProjectDto {
 	private Date projectFinishDate;
 	private String projectPermission;
 	private int projectReadcount;
+	private String projectRefuseMsg;
 	
 	
+	public String getProjectRefuseMsg() {
+		return projectRefuseMsg;
+	}
+
+	public void setProjectRefuseMsg(String projectRefuseMsg) {
+		this.projectRefuseMsg = projectRefuseMsg;
+	}
+
 	public int getProjectReadcount() {
 		return projectReadcount;
 	}

@@ -59,7 +59,7 @@ public class ProjectInsertServlet extends HttpServlet{
 			projectDto.setProjectTargetMoney(Integer.parseInt(mRequest.getParameter("projectTargetMoney")));
 			projectDto.setProjectStartDate(Date.valueOf(mRequest.getParameter("projectStartDate")));
 			projectDto.setProjectSemiFinish(Date.valueOf(mRequest.getParameter("projectSemiFinish")));
-			projectDto.setProjectFinishDate(Date.valueOf(mRequest.getParameter("projectFinishDate")));
+			projectDto.setProjectFinishDate(Date.valueOf(mRequest.getParameter("projectSemiFinish")));
 			
 			projectDao.insert(projectDto); 
 		
@@ -91,7 +91,7 @@ public class ProjectInsertServlet extends HttpServlet{
 				ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setProjectNo(projectNo);
 				projectAttachDto.setAttachNo(attachDto.getAttachNo());
-				if(name.equals("profileAttach")) {	
+				if(name.contains("profileAttach")) {	
 					projectAttachDto.setAttachType("프로필");
 				}else {
 					projectAttachDto.setAttachType("본문");
