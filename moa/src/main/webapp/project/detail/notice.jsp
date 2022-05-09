@@ -3,13 +3,16 @@
 <%@page import="moa.beans.PjProgressDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+   
 <%
-	/* int ProjectNo = Integer.parseInt(request.getParameter("projectNo")); */
+	
+	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+
 	PjProgressDao pjProgressDao = new PjProgressDao();
 	
 	/* 파라미터 나중에 바꿔주기!!!!!!!!!!!!!!!!!!!!!!!! */
-	List<PjProgressDto> list = pjProgressDao.selectPjProgress(11);
+	List<PjProgressDto> list = pjProgressDao.selectPjProgress(projectNo);
 	
 	
 	

@@ -125,6 +125,7 @@
 
 
 /* 버튼 스타일 */
+
 .btn {
     border: 1px solid #B899CD;
     padding: 0.5em;
@@ -445,19 +446,6 @@ textarea.form-input {
     width: 100%;
 }
 
-/* 상단에 btn 관련 스타일 이미 있어서 주석 처리합니다. */
-/* .btn {
-    border: 1px solid gray;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    
-    color: gray;
-    background-color: white;
-    
-    cursor: pointer;
-    
-    font: inherit;
-} */
 
 .p10px{
     padding: 10px;
@@ -467,12 +455,23 @@ textarea.form-input {
     padding-left: 10px;
 }
 
+.p80px-left{
+    padding-left: 80px;
+}
+
 .margin-auto{
     margin: auto;
 }
 
 .m-b10{
     margin-bottom: 10px;
+}
+
+.m-t30{
+	margin-top: 30px;
+}
+.m-t40{
+	margin-top: 40px
 }
 
 .w10p{
@@ -652,26 +651,3 @@ textarea.form-input {
     height: 40px;
     margin-left: 10px;
 }
-
-
-
-/* btn 스타일 */
-.btn.btn-purple {
-    border: 1px solid #B899CD;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    
-    color: #B899CD;
-    background-color: B899CD;
-    
-    cursor: pointer;
-    
-    font: inherit;
-}
-.btn.btn-purple:hover {
-    border-color: #B899CD;
-    background-color: #B899CD;
-
-    color: white;
-}
-

@@ -23,10 +23,10 @@
 </div>
             
             <!-- 본문 오른쪽 리워드 부분 -->
-               <div class="float-left w30p p10px-left">
+               <div class="float-left right-container p80px-left">
                		<%for(RewardDto rewardDto : rewardList){ %>	
 	                	<div class="fill m-b10">
-                    		<a href="#" class="link"><button class="btn fill reward" style="text-align: left;">
+                    		<a href="#" class="link"><button class="btn btn-reverse fill reward" style="text-align: left;">
 		                        리워드 이름
 		                        <%=rewardDto.getRewardName() %>
 		                        <br>

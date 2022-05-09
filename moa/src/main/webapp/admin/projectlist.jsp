@@ -68,9 +68,9 @@ List<ProjectDto> list = projectDao.allSelectList(p, s);
 					<td><%=projectDto.getProjectTargetMoney() %></td>
 					<td><%=projectDto.getProjectStartDate() %></td>
 					<td>
-						<%if(projectDto.getProjectPermission().equals("0")){ %>
+						<%if(projectDto.getProjectPermission() == 0){ %>
 							<span style="color: red">승인필요</span>
-						<%}else if(projectDto.getProjectPermission().equals("1")){ %>
+						<%}else if(projectDto.getProjectPermission() == 1){ %>
 							<span style="color: blue">승인완료</span>
 <%-- 						<%}else{ %>
 							거절 --%>

@@ -12,7 +12,7 @@ public class RewardDao {
 	public void insert(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into reward values(reward_seq.nextval,?,?,?,?,?)";
+		String sql = "insert into reward values(reward_seq.nextval,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, rewardDto.getRewardProjectNo());
@@ -20,6 +20,10 @@ public class RewardDao {
 		ps.setString(3, rewardDto.getRewardContent());
 		ps.setInt(4, rewardDto.getRewardPrice());
 		ps.setInt(5, rewardDto.getRewardStock());
+		ps.setInt(6, rewardDto.getRewardDelivery());
+		ps.setInt(7, rewardDto.getRewardEach());
+		
+	
 		ps.execute();
 		
 		con.close();
@@ -35,7 +39,7 @@ public class RewardDao {
 		ps.setInt(1, projectNo);
 		
 		ResultSet rs = ps.executeQuery();
-		
+//		수정
 		
 		List<RewardDto> list = new ArrayList<>();
 		while(rs.next()) {
@@ -46,6 +50,8 @@ public class RewardDao {
 			rewardDto.setRewardContent(rs.getString("reward_content"));
 			rewardDto.setRewardPrice(rs.getInt("reward_price"));
 			rewardDto.setRewardStock(rs.getInt("reward_stock"));
+			rewardDto.setRewardDelivery(rs.getInt("reward_delivery"));
+			rewardDto.setRewardEach(rs.getInt("reward_each"));
 			list.add(rewardDto);
 		}
 		
