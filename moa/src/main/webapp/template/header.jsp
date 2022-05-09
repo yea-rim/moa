@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">-->
+   	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -131,7 +131,10 @@
                             <button class="btn w90p h100p">문의</button>
                         </div>
                         <div class="float-left right layer-3 h40" style="font-size: 14px;">
+                        	<%-- 커뮤니티 글쓰기 용으로 잠시 사용하는 코드 --%>
+                        	<a href="<%=request.getContextPath() %>/community/insert.jsp?projectNo=<%=projectDto.getProjectNo() %>">
                             <button class="btn w90p h100p">홍보</button>
+                            </a>
                         </div>
                     </div>
                 </div>

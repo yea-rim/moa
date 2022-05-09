@@ -1,29 +1,28 @@
+<%@page import="moa.beans.ProjectDto"%>
+<%@page import="moa.beans.ProjectDao"%>
+<%@page import="moa.beans.MemberDao"%>
+<%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.CommunityDto"%>
 <%@page import="moa.beans.CommunityDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%-- 준비 --%>
 <%
-//목록과 검색을 한페이지에서 한다.
-// 구분이 되어야 한다.
-// 주소에 type, keyword가 있으면 검색으로 간주
-// 없으면 목록으로 간주
 request.setCharacterEncoding("UTF-8");
-String memberId = (String) session.getAttribute("login");
 
 String type = request.getParameter("type");
 String keyword = request.getParameter("keyword");
 
-// 페이징 관련 파라미터들을 수신
  int p;
- try { // p에 정상적인 숫자가 들어온 경우 -0 이하인 경우 
+ try {  
 	 p = Integer.parseInt(request.getParameter("p"));
  	 if(p <= 0){
  		 throw new Exception();
  	 }
  }
- catch(Exception e){ // p가 없거나 숫자가 아닌 경우 +0 이하인 경우
+ catch(Exception e){ 
 	 p = 1;
  }
  
@@ -51,10 +50,8 @@ boolean isSearch = type != null && keyword != null;
 CommunityDao communityDao = new CommunityDao();
 List<CommunityDto> list;
 if (isSearch) {
-	//list = boardDao.search(type, keyword);
 	list = communityDao.selectList(p, s, type, keyword);
 } else {
-	//list = boardDao.selectAll();
 	list = communityDao.selectList(p, s);
 }
 %>
@@ -65,87 +62,105 @@ if (isSearch) {
 <title>moa 홍보게시판</title>
 	
 <style>
- .table {
-        width: 100%;
-        border-collapse: collapse;
+.flex-container1 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
 }
-.table > thead > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > th,
-.table > tbody > tr > td,
-.table > tfoot > tr > th,
-.table > tfoot > tr > td {
-        text-align: center;
-        padding: 0.5em;
+.flex-container2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
 }
-
-.table.table-border > thead > tr > th,
-.table.table-border > thead > tr > td,
-.table.table-border > tbody > tr > th,
-.table.table-border > tbody > tr > td,
-.table.table-border > tfoot > tr > th,
-.table.table-border > tfoot > tr > td {
-        border: 1px solid black;
+.flex-items1 {
+	flex-basis:10%;
 }
-
-.table.table-hover {}
-.table.table-hover > thead > tr,
-.table.table-hover > tfoot > tr {
-        background-color: #dcdcf1;
+.flex-items2 {
+	flex-basis:50%;
 }
-.table.table-hover > tbody > tr :hover {
-        background-color: #dcdcf1;
+.flex-items3 {
+	flex-basis:25%;
 }
-
-.btn .btn-primary {
+.flex-items4 {
+	flex-basis:15%;
 }
-
+button[type=submit]{
+	height: 42px;
+} 
+.community-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 3em; 
+}
 </style>
-<%-- 출력 --%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 
-<%-- 검색창 --%>
-<div class="container w1000 m50">
-	<div class="row center">
-		<form action="list.jsp" method="get">
-			<select name="type" required class="form-input input-round">
-				<option value="commuity_title">제목</option>
-				<option value="board_writer">작성자</option>
-			</select> 
-		   	 <input type="text" name="keyword" placeholder="검색어 입력" required class="form-input">
-			<input type="submit" value="검색" class="btn">
-		</form>
-	</div>
-
 
 <%-- 검색결과 --%>
-	<div class="row right m10">
-		<a href="write.jsp" class="link link-btn">글쓰기</a>
+<hr style="border:solid 0.5px lightgray">
+<div class="container m50">
+	<div class="row center">
+		<a href="list.jsp?p=1&s=10" class="link">
+			<h1>홍보게시판</h1>
+		</a>
 	</div>
-	
-<div class="row center">
-
-<table class="table table-border table-hover">
-	<thead>
-		<tr>
-			<th>글번호</th>
-			<th width="40%">제목</th>
-			<th>작성자</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<%for (CommunityDto communityDto : list) {%>
-		<tr>
-			<td><%=communityDto.getCommunityNo() %></td>
-			<td><%=communityDto.getCommunityTitle() %></td>
-		</tr>
-		<%}%>
-	</tbody>
-
-
-</table>
 </div>
+<div class="container w800 m70">
+				
+				<hr style="border:solid 1px #B899CD">
+			<div class="row flex-container2 m30">
+				<div class="flex-items1">번호</div>
+				<div class="flex-items2 center">제목 / 프로젝트이름</div>
+				<div class="flex-items3">날짜</div>
+				<div class="flex-items4 right">작성자</div>
+			</div>
+			
+		<%for (CommunityDto communityDto : list) {%>
+			<div class="row flex-container1 m10">
+			
+				<div class="row flex-container2">
+				
+					<div class="flex-items1">
+						<span><%=communityDto.getCommunityNo() %> </span>
+					</div>
+					
+					<% 
+						ProjectDao projectDao = new ProjectDao();
+						ProjectDto projectDto = projectDao.selectOne(communityDto.getCommunityProjectNo());
+					%>
+					<div class="flex-items2 community-name">
+						<span>
+							<a href="detail.jsp?communityNo=<%=communityDto.getCommunityNo() %>" class="link">
+								<h3><%=communityDto.getCommunityTitle() %>(<%=communityDto.getCommunityReplycount() %>)</h3>
+							</a>
+						</span>
+						<span>
+							<h5>/ <%=projectDto.getProjectName() %></h5>
+						</span>
+					</div>
+
+					<div class="flex-items3">
+						<span><%=communityDto.getCommunityTime() %></span>
+					</div>
+								
+					<% 
+						MemberDao memberDao = new MemberDao();
+						MemberDto memberDto = memberDao.selectOne(communityDto.getCommunityMemberNo());
+					%>
+					<div class="flex-items4 row right">
+						<span><%=memberDto.getMemberNick() %></span>
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			<hr style="border:solid 0.5px lightgray">
+		<%}%>
+
 <!--  순자 페이지네이션 -->
 <%
 int count;
@@ -176,9 +191,9 @@ if(endBlock>lastPage)
 }
 %>
 
-<h4>
+<h3>
 	<!-- 이전 버튼 영역 -->
-<div class="pagination">
+<div class="pagination center m50">
 <%if(p>1){ // 첫페이지가 아니라면 %>
 	<%if (isSearch) {%>
 	<a href="list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
@@ -233,7 +248,22 @@ if(endBlock>lastPage)
 	<%}%>
 <%}%>
 </div>
-</h4>
+
+</h3>
+<%-- 검색창 --%>
+	<div class="row center m30">
+		<form action="list.jsp" method="get">
+			<select name="type" required class="form-input">
+				<option value="commuity_title">제목+내용</option>
+				<option value="commuity_title">제목</option>
+				<option value="commuity_content">내용</option>
+			</select> 
+		   	 <input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
+			 <button type="submit" class="btn-reverse">검색</button>
+		</form>
+	</div>
+	
+<hr style="border:solid 1px #B899CD">
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
