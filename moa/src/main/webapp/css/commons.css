@@ -63,6 +63,7 @@
 .m45{margin-top: 45px; margin-bottom: 45px;}
 .m50{margin-top: 50px; margin-bottom: 50px;}
 .m60{margin-top: 60px; margin-bottom: 60px;}
+.m70{margin-top: 70px; margin-bottom: 70px;}
 
 
 
@@ -92,6 +93,27 @@
 .mb30{margin-bottom: 30px;}
 .mb40{margin-bottom: 40px;}
 .mb50{margin-bottom: 50px;}
+
+/* margin(top) */
+.mt0{margin-top: 0px;}
+.mt5{margin-top: 5px;}
+.mt10{margin-top: 10px;}
+.mt15{margin-top: 15px;}
+.mt20{margin-top: 20px;}
+.mt25{margin-top: 25px;}
+.mt30{margin-top: 30px;}
+.mt35{margin-top: 35px;}
+.mt40{margin-top: 40px;}
+.mt45{margin-top: 45px;}
+.mt50{margin-top: 50px;}
+.mt55{margin-top: 55px;}
+.mt60{margin-top: 60px;}
+.mt65{margin-top: 65px;}
+.mt70{margin-top: 70px;}
+.mt100{margin-top: 100px;}
+.mt130{margin-top: 130px;}
+
+
 
 /* 기본 link 스타일 */
 .link {
@@ -136,6 +158,7 @@
 
 
 /* 버튼 스타일 */
+
 .btn {
     border: 1px solid #B899CD;
     padding: 0.5em;
@@ -153,7 +176,18 @@
     border: 1px solid #d8c8e3;
     background-color: #d8c8e3;
 }
+.btn-reverse {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
 
+    color: #B899CD;
+    background-color: white;
+
+    cursor: pointer;
+
+    font: inherit;
+}
 
 
 
@@ -250,7 +284,8 @@ ul.menu {
     font-size: 16px;
 }
 ul.menu li {
-    padding: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 ul.menu a {
     text-decoration: none;
@@ -398,6 +433,29 @@ textarea.form-input {
     flex-grow: 1;/* 나머지 전부 다 라는 의미로 쓰임 */
 }
 
+.flex-container3 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: space-between;
+	justify-content: flex-start;
+}
+
+.list-card {
+	height: 350px;
+	background-color: white;
+	border: 1px solid rgb(208, 208, 208);
+}
+
+.flex-title {
+	width: 230px;
+	height: 50px;
+}
+
+.card-image-wrapper {
+	width: 250px;
+	height: 200px;
+}
 
 
 
@@ -458,18 +516,6 @@ textarea.form-input {
     width: 100%;
 }
 
-.btn {
-    border: 1px solid gray;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    
-    color: gray;
-    background-color: white;
-    
-    cursor: pointer;
-    
-    font: inherit;
-}
 
 .p10px{
     padding: 10px;
@@ -479,12 +525,23 @@ textarea.form-input {
     padding-left: 10px;
 }
 
+.p80px-left{
+    padding-left: 80px;
+}
+
 .margin-auto{
     margin: auto;
 }
 
 .m-b10{
     margin-bottom: 10px;
+}
+
+.m-t30{
+	margin-top: 30px;
+}
+.m-t40{
+	margin-top: 40px
 }
 
 .w10p{
@@ -676,24 +733,37 @@ textarea.form-input {
 
 
 
-/* btn 스타일 */
-.btn.btn-purple {
-    border: 1px solid #B899CD;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    
-    color: #B899CD;
-    background-color: B899CD;
-    
-    cursor: pointer;
-    
-    font: inherit;
-}
-.btn.btn-purple:hover {
-    border-color: #B899CD;
-    background-color: #B899CD;
 
-    color: white;
+/* text-overflow */
+.txt-overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  width: 230px;
+	height: 50px;
+}
+.txt-overflow2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    width: 300px;
+    height: 37px;
+}
+.txt-overflow3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    width: 300px;
+    height: 80px;
 }
 
 /*글씨크기,색상*/
@@ -712,3 +782,7 @@ textarea.form-input {
 .gray{
 	color: gray;
 }
+.p-red {
+	color: rgb(241, 99, 99);
+}
+

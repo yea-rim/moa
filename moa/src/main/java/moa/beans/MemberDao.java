@@ -244,4 +244,20 @@ public class MemberDao {
 		return count > 0; 
 		
 	}
+	
+	
+	// 탈퇴 
+	public boolean exit(int memberNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete member where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }

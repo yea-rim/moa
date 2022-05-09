@@ -14,7 +14,7 @@ public class ProjectDto {
 	private Date projectStartDate;
 	private Date projectSemiFinish;
 	private Date projectFinishDate;
-	private String projectPermission;
+	private int projectPermission;
 	private int projectReadcount;
 	private String projectRefuseMsg;
 	
@@ -135,12 +135,13 @@ public class ProjectDto {
 		this.projectFinishDate = projectFinishDate;
 	}
 
-	public String getProjectPermission() {
+	public int getProjectPermission() {
 		return projectPermission;
 	}
 
-	public void setProjectPermission(String projectPermission) {
+	public void setProjectPermission(int projectPermission) {
 		this.projectPermission = projectPermission;
 	}
-
+	
+	
 }

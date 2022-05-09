@@ -42,8 +42,7 @@ article {
     width: 100%;
 
     min-height: 450px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     
     text-align: center;
 }

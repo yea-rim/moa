@@ -39,7 +39,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -94,7 +94,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -150,7 +150,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -226,7 +226,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -277,7 +277,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -330,7 +330,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -404,7 +404,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -453,7 +453,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -504,7 +504,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 			
 			list.add(projectDto);
@@ -607,7 +607,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 		} else {
@@ -694,7 +694,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 
 			list.add(projectDto);
 		}
@@ -732,7 +732,7 @@ public class ProjectDao {
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getString("project_permission"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
 
 			list.add(projectDto);
 		}

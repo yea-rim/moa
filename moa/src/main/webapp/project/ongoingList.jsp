@@ -1,3 +1,5 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectDto"%>
@@ -88,7 +90,7 @@ if (isSearch) {
 }
 
 .category{
-	padding: 30px;
+	padding: 20px 30px;
 }
 
 
@@ -109,6 +111,7 @@ if (isSearch) {
     text-overflow: ellipsis;
     overflow: hidden;
     height: 3em; 
+    font-size: 20px;
 }
 </style>
 
@@ -243,6 +246,7 @@ if (isSearch) {
 			</form>
 			<%}%>
 			</div>
+			<hr style="border: 0.5px solid lightgray">
 		
 			
 	
@@ -266,11 +270,19 @@ if (isSearch) {
               </div>
               <div class="row project-name">
               	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
-              	<%=projectDto.getProjectName() %>
+              		<%=projectDto.getProjectName() %>
               	</a>
               </div>
               
-              <div class="row"><%=projectDto.getProjectCategory() %></div>
+              <% 
+              	SellerDao sellerDao = new SellerDao();
+              	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+              %>
+              <div class="row" style="color:gray">
+              	<%=projectDto.getProjectCategory() %>
+              	|
+              	<%=sellerDto.getSellerNick() %>
+              </div>
 
               <hr style="border: solid #B899CD 2px" />
 				

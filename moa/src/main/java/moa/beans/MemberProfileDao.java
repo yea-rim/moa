@@ -56,4 +56,5 @@ public class MemberProfileDao {
 		
 		return count > 0;
 	}
+	
 }
