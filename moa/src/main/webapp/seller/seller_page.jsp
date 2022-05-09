@@ -1,0 +1,112 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
+<%@page import="moa.beans.MemberProfileDto"%>
+<%@page import="moa.beans.MemberProfileDao"%>
+<%@page import="moa.beans.MemberDto"%>
+<%@page import="moa.beans.MemberDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	// 현재 세션에 저장된 로그인 정보 가져오기
+	Integer memberNo = (Integer) session.getAttribute("login");
+
+	// 준비
+	int sellerNo = Integer.parseInt(request.getParameter("sellerNo"));
+
+	// 판매자 상세 조회
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(sellerNo);
+	
+	// 회원 프로필 사진 조회
+	MemberProfileDao memberProfileDao = new MemberProfileDao();
+	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
+		
+	// 회원 프로필 존재 여부 확인 
+	boolean isExistProfile = memberProfileDto != null;
+%>
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+	
+				<div class="container fill">
+				
+                    <!-- 마이페이지 상단 바 -->
+                    <div class="float-container b-purple">
+                        <div class="float-left m20 mlr20">
+                        
+                        	<!-- 프로필 사진 출력 -->
+                            <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+                                    	
+                                    <%-- <%=memberProfileDto.getAttachNo() %> --%>
+                                    	
+                             <%} else { // 존재하지 않는다면 %>
+                                    <img src="https://dummyimage.com/200x200" alt="기본 프로필" width="200" class="img img-circle">
+                             <%} %>
+                        </div>
+                        
+                        <%if(sellerDto == null) {%>
+                        <h1>존재하지 않는 판매자입니다.</h1>
+                        <%} else { %>
+                        <div class="float-left m20 mlr20">
+                            <div class="row m10">
+                            	<div class="float-container">
+                            		<div class="float-left">
+                            			<h4>(판매자번호) </h4>
+                            		</div>
+                            		<div class="float-left mlr10">
+                            			<h3><%=sellerDto.getSellerNo() %></h3>
+                            		</div>
+                            	</div>
+                            </div>
+                            <div class="row">
+                                <h2><%=sellerDto.getSellerNick() %></h2>
+                            </div>
+                        </div> 
+                        <div class="float-right m60 mlr20">
+                            <a href="" class="link link-reverse">
+                                <h3 class="center">판매자 구독</h3>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 개인정보 설정 -->
+                    <div class="row m20">
+                        <h3 class="right">
+                            <a href="" class="link">✉️ 판매자 1:1 문의</a>
+                        </h3>
+                    </div>
+
+                    <div class="row m20">
+                        <h2>
+                            <a href="" class="link">예정 프로젝트</a>
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="row m20">
+                        내용
+                    </div>
+
+                    <div class="row m20">
+                        <h2>
+                            <a href="" class="link">펀딩 중인 프로젝트</a>
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="row m20">
+                        내용
+                    </div>
+
+                    <div class="row m20">
+                        <h2>
+                            <a href="" class="link">마감된 프로젝트</a>
+                        </h2>
+                        <hr>
+                    </div>
+                    <div class="row m20">
+                        내용
+                    </div>
+                </div>
+             <%} %>
+		
+<jsp:include page="/template/footer.jsp"></jsp:include>

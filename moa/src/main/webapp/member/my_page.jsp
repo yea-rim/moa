@@ -1,3 +1,5 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.MemberProfileDto"%>
 <%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.MemberDto"%>
@@ -18,7 +20,14 @@
 	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
 		
 	// 회원 프로필 존재 여부 확인 
-	boolean isExistProfile = memberProfileDto != null; 
+	boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 존재 
+	
+	
+	// seller인지 판단 
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
+	
+	boolean isSeller = sellerDto != null; // true면 seller 
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -31,35 +40,64 @@
                         
                         	<!-- 프로필 사진 출력 -->
                             <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle">
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150px" height="150px" class="img img-circle">
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
                                     	
                                     <%-- <%=memberProfileDto.getAttachNo() %> --%>
                                     	
                              <%} else { // 존재하지 않는다면 %>
-                                    <img src="https://dummyimage.com/200x200" alt="기본 프로필" width="200" class="img img-circle">
+                                    <img src="https://dummyimage.com/200x200" alt="기본 프로필" width="150px" height="150px" class="img img-circle">
                              <%} %>
                             
                         </div>
                         <div class="float-left m20 mlr20">
                             <div class="row m10">
                             	<div class="float-container">
+                            		 <%if(isSeller) { // 판매자이면 %>
+                            		 		<div class="float-left">
+                            					<h4>(판매자 번호) </h4>
+	                            			</div>
+	                            			<div class="float-left mlr10">
+	                            				<h3><%=sellerDto.getSellerNo() %></h3>
+	                            			</div>
+                            		<%} else { // 일반 회원이면 %>
+	                            			<div class="float-left">
+	                            				<h4>(회원번호) </h4>
+	                            			</div>
+	                            			<div class="float-left mlr10">
+	                            				<h3><%=memberDto.getMemberNo() %></h3>
+	                            			</div>
+                            		<% } %>
                             		<div class="float-left">
                             			<h4>(회원번호) </h4>
                             		</div>
                             		<div class="float-left mlr10">
-                            			<h3><%=memberDto.getMemberNo() %></h3>
+                            			<h3><%=memberDto.getMemberNo()%></h3>
                             		</div>
                             	</div>
                             </div>
                             <div class="row">
-                                <h2><%=memberDto.getMemberNick() %></h2>
+                                <%if(isSeller) { %>
+                                		<h2><%=sellerDto.getSellerNick() %></h2>
+                                <%} else { %>
+                                		<h2><%=memberDto.getMemberNick() %></h2>
+                                <% } %>
+                                <h2><%=memberDto.getMemberNick()%></h2>
                             </div>
                         </div> 
+                        <div class="float-right m70 mlr20">
+                        	<%if(isSeller) { %>
+                        			<a href="" class="link link-reverse h40">
+	                                	<h3>나의 프로젝트 관리</h3>
+	                            	</a>
+                        	<%} else { %>
+                        			<a href="<%=request.getContextPath() %>/seller/seller_request.jsp" class="link link-reverse h60">
+	                                	<h3>판매자 신청</h3>
+	                                	<h3 class="center">(신청현황)</h3>
+	                            	</a>
+                        	<%} %>
                         <div class="float-right m60 mlr20">
-                            <a href="" class="link link-reverse h60">
-                                <h3 class="center">판매자 신청</h3>
-                                <h4 class="center">(신청현황)</h4>
-                            <a href="<%=request.getContextPath() %>/seller/seller_request.jsp" class="link link-reverse" style="height: 60px;">
+                            <a href="<%=request.getContextPath()%>/seller/seller_join.jsp" class="link link-reverse" style="height: 60px;">
                                 <h3>판매자 신청</h3>
                                 <h3>(신청현황)</h3>
                             </a>
@@ -69,7 +107,8 @@
                     <!-- 개인정보 설정 -->
                     <div class="row m20">
                         <h3 class="right">
-                            <a href="information.jsp" class="link">개인정보 설정</a>
+                        	<a href="profile.jsp" class="link mlr20">프로필 설정</a>
+                            <a href="confirm_pw.jsp" class="link">개인정보 설정</a>
                         </h3>
                     </div>
 

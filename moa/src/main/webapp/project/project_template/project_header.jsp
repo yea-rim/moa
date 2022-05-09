@@ -114,7 +114,7 @@
                         <%=projectDto.getProjectPresentMoney() %>원 달성
                     </h2>
                 </div>
-                <div class="row fill h40">
+                <div class="row fill h40 m-b10">
                     <h4 class="m10">
                         후원자수
                     </h4>
@@ -133,10 +133,10 @@
                         목표금액 <%=projectDto.getProjectTargetMoney() %>
                     </h5>
                 </div>
-                <div class="row fill h60 m-b10">
+                <div class="row fill h60 m10 m-t40">
                     <button class="btn btn-reverse fill h40">후원하기</button>
                 </div>
-                <div class="row fill h40">
+                <div class="row fill h40 m-t30">
                     <div class="float-container h40">
                         <div class="float-left left layer-3 h100p">
                             <button class="btn btn-reverse w90p wrap h100p" id="joa-btn" style="font-size: 12px;">

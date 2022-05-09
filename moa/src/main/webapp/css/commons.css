@@ -63,6 +63,7 @@
 .m45{margin-top: 45px; margin-bottom: 45px;}
 .m50{margin-top: 50px; margin-bottom: 50px;}
 .m60{margin-top: 60px; margin-bottom: 60px;}
+.m70{margin-top: 70px; margin-bottom: 70px;}
 
 
 
@@ -125,7 +126,35 @@
 
 /* 버튼 스타일 */
 
+.btn {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
 
+    color: white;
+    background-color: #B899CD;
+
+    cursor: pointer;
+
+    font: inherit;
+}
+.btn:hover {
+    color: white;
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+}
+.btn-reverse {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
+
+    color: #B899CD;
+    background-color: white;
+
+    cursor: pointer;
+
+    font: inherit;
+}
 
 
 
@@ -291,6 +320,13 @@ ul.menu a {
     border-color: black;
 }
 
+.form-date{
+	outline: none;
+    padding: 0.4em;
+    border: 1px solid #B6B6B6;
+    border-radius: 0.3em;
+    width: 150px;
+}
 
 
 
@@ -337,6 +373,25 @@ textarea.form-input {
 .flex-container.flex-vertical {
     flex-direction: column;
 }
+
+.display-center {
+    display: flex;
+    justify-content: center;/*display가 flex인 경우 가로 정렬 옵션 */
+   align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
+}
+
+.list-admin {
+    min-height: 800px;
+    border: 1px solid gray;
+}
+.menu-wrapper {
+    width:20%;
+    background-color:  #B6B6B6;
+}
+.content-wrapper {
+    flex-grow: 1;/* 나머지 전부 다 라는 의미로 쓰임 */
+}
+
 
 
 
@@ -391,6 +446,7 @@ textarea.form-input {
     width: 100%;
 }
 
+
 .p10px{
     padding: 10px;
 }
@@ -409,6 +465,13 @@ textarea.form-input {
 
 .m-b10{
     margin-bottom: 10px;
+}
+
+.m-t30{
+	margin-top: 30px;
+}
+.m-t40{
+	margin-top: 40px
 }
 
 .w10p{
@@ -587,38 +650,4 @@ textarea.form-input {
     cursor: pointer;
     height: 40px;
     margin-left: 10px;
-}
-
-
-
-/* btn 스타일 */
-
-.btn {
-    border: 1px solid #B899CD;
-    padding: 0.5em;
-    border-radius: 0.2em;
-
-    color: white;
-    background-color: #B899CD;
-
-    cursor: pointer;
-
-    font: inherit;
-}
-.btn:hover {
-    color: white;
-    border: 1px solid #d8c8e3;
-    background-color: #d8c8e3;
-}
-.btn-reverse {
-    border: 1px solid #B899CD;
-    padding: 0.5em;
-    border-radius: 0.2em;
-
-    color: #B899CD;
-    background-color: white;
-
-    cursor: pointer;
-
-    font: inherit;
 }
