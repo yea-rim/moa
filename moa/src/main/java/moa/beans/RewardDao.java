@@ -12,7 +12,8 @@ public class RewardDao {
 	public void insert(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into reward values(reward_seq.nextval,?,?,?,?,?,?,?)";
+		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock)"
+				+ " values(reward_seq.nextval,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, rewardDto.getRewardProjectNo());
@@ -59,6 +60,23 @@ public class RewardDao {
 		
 		return list;
 	}
-
-
+	
+	
+	//리워드 수정
+	public boolean edit(RewardDto rewardDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update reward set reward_name=?,reward_content=?,reward_price=?,reward_stock=? where reward_no =?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, rewardDto.getRewardName());
+		ps.setString(2, rewardDto.getRewardContent());	
+		ps.setInt(3, rewardDto.getRewardPrice());
+		ps.setInt(4, rewardDto.getRewardStock());
+		ps.setInt(5, rewardDto.getRewardNo());
+		int count = ps.executeUpdate();
+				
+		con.close();
+		return count>0;
+	}
+	
 }

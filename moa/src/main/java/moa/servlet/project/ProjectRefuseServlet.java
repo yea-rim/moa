@@ -13,15 +13,16 @@ import moa.beans.ProjectDao;
 @WebServlet(urlPatterns = "/admin/projectRefuse.do")
 public class ProjectRefuseServlet extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
+			String projectRefuseMsg = req.getParameter("projectRefuseMsg");
 			
 			ProjectDao projectDao = new ProjectDao();
-			boolean success = projectDao.projectPermit(projectNo);
+			boolean success = projectDao.projectRefuse(projectNo,projectRefuseMsg);
 			
 			if(success) {
-				resp.sendRedirect(req.getContextPath()+"/admin/projectlist.jsp");
+				resp.sendRedirect(req.getContextPath()+"/admin/projectList.jsp");
 			}	
 			else {
 				resp.sendError(404);
