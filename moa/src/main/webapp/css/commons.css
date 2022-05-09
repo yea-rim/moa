@@ -80,7 +80,19 @@
 .mlr45{margin-left: 45px; margin-right: 45px;}
 .mlr50{margin-left: 50px; margin-right: 50px;}
 
+.mt10{margin-top: 10px;}
+.mt20{margin-top: 20px;}
+.mt30{margin-top: 30px;}
+.mt40{margin-top: 40px;}
+.mt50{margin-top: 50px;}
+.mt100{margin-top: 100px;}
+.mt150{margin-top: 100px;}
 
+.mb10{margin-bottom: 10px;}
+.mb20{margin-bottom: 20px;}
+.mb30{margin-bottom: 30px;}
+.mb40{margin-bottom: 40px;}
+.mb50{margin-bottom: 50px;}
 
 /* margin(top) */
 .mt0{margin-top: 0px;}
@@ -402,13 +414,20 @@ textarea.form-input {
    align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
 }
 
+.left-wrapper {
+    flex-grow: 1;
+}
+.right-wrapper {
+    flex-grow: 1;
+}
+
 .list-admin {
     min-height: 800px;
     border: 1px solid gray;
 }
 .menu-wrapper {
-    width:20%;
-    background-color:  #B6B6B6;
+    width:250px;
+    background-color:  #f1f2f6;
 }
 .content-wrapper {
     flex-grow: 1;/* 나머지 전부 다 라는 의미로 쓰임 */
@@ -473,8 +492,14 @@ textarea.form-input {
 .h20{
     height: 20px;
 }
+.h30{
+    height: 30px;
+}
 .h40{
     height: 40px;
+}
+.h50{
+    height: 50px;
 }
 .h60{
     height: 60px;
@@ -580,7 +605,7 @@ textarea.form-input {
 .table > tfoot > tr > td
 {
     text-align: center;
-    padding: 0.5em;
+    padding: 0.8em;
 }
 
 /*
@@ -602,6 +627,15 @@ textarea.form-input {
 {
     border: 1px solid black;
 }
+
+/*제목은 배경색상을 칠해준다*/
+ .table.table-stripe > thead > tr{
+            background-color: #B899CD;
+}
+ .table.table-hover > tbody > tr:hover{
+            background-color: #d8c8e3;
+        }
+
 /* 이미지 */
 /* 이미지 관련 commons */
 .img {
@@ -732,6 +766,23 @@ textarea.form-input {
     height: 80px;
 }
 
+/*글씨크기,색상*/
+.f12{
+	font-size: 12px;
+}
+.f13{
+	font-size: 13px;
+}
+.f14{
+	font-size: 14px;
+}
+.red{
+	color: red;
+}
+.gray{
+	color: gray;
+}
 .p-red {
 	color: rgb(241, 99, 99);
 }
+

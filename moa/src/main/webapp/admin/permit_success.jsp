@@ -9,5 +9,5 @@
 <h1>펀딩 목록에 업데이트 되었습니다.</h1>
 </div>
 
-<a href="projectlist.jsp">목록으로 돌아가기</a>
+<a href="projectList.jsp">목록으로 돌아가기</a>
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -567,7 +567,7 @@ public class ProjectDao {
 
 		String sql = "insert into project(project_no, project_seller_no, project_category, project_name, project_summary,"
 				+ " project_target_money, project_start_date, project_semi_finish, project_finish_date)"
-				+ " values(?,?,?,?,?,?,?,?,?)";
+				+ " values(?,?,?,?,?,?,?,?,?+30)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectDto.getProjectNo());
 		ps.setInt(2, 23);
@@ -653,16 +653,28 @@ public class ProjectDao {
 	}
 	
 	// 전체 목록
-	public List<ProjectDto> allSelectList(int p, int s) throws Exception {
+	public List<ProjectDto> allSelectList(int p, int s, String sort) throws Exception {
 
+		String standard;
+		if (sort.equals("펀딩액순")) {
+			standard = "order by PROJECT_PRESENT_MONEY DESC";
+		} else if (sort.equals("최신순")) {
+			standard = "order by PROJECT_NO DESC";
+		} else if (sort.equals("시작일임박순")) {
+			standard = "where sysdate < project_start_date order by project_start_date asc";
+		} else {
+			standard = "order by project_permission asc"; 
+		}
+		
 		int end = p * s;
 		int begin = end - (s - 1);
 
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "SELECT * FROM project order by project_no desc"
+				+ "SELECT * FROM project #1"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+		sql = sql.replace("#1", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
@@ -743,12 +755,13 @@ public class ProjectDao {
 	}
 	
 	//프로젝트 거절 (permission update)
-	public boolean projectRefuse(int projectNo) throws Exception {
+	public boolean projectRefuse(int projectNo,String projectRefuseMsg) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update project set project_permission = 2 where project_no = ?";
+		String sql = "update project set project_permission = 2, project_refuse_msg=? where project_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, projectNo);
+		ps.setString(1, projectRefuseMsg);
+		ps.setInt(2, projectNo);
 		int count = ps.executeUpdate();
 		
 		con.close();
@@ -768,5 +781,41 @@ public class ProjectDao {
 		return count>0;
 	}
 	
+	//프로젝트 수정
+	public boolean edit(ProjectDto projectDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update project set project_category=?,project_name=?,project_summary=?,project_target_money=?,"
+				+ "project_start_date=?,project_semi_finish=?,project_finish_date=?+30 where project_no =?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, projectDto.getProjectCategory());
+		ps.setString(2, projectDto.getProjectName());
+		ps.setString(3, projectDto.getProjectSummary());		
+		ps.setInt(4, projectDto.getProjectTargetMoney());
+		ps.setDate(5, projectDto.getProjectStartDate());
+		ps.setDate(6, projectDto.getProjectSemiFinish());
+		ps.setDate(7, projectDto.getProjectFinishDate());
+		ps.setInt(8, projectDto.getProjectNo());
+		int count = ps.executeUpdate();
+				
+		con.close();
+		return count>0;
+		
+	}
 	
+	
+	// 관리자 프로젝트 목록(전체목록) 페이지 네이션
+	public int adminCountByPaging() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from project";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+		
+		con.close();
+		
+		return count;
+	}
 }
