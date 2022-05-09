@@ -82,6 +82,27 @@
 
 
 
+/* margin(top) */
+.mt0{margin-top: 0px;}
+.mt5{margin-top: 5px;}
+.mt10{margin-top: 10px;}
+.mt15{margin-top: 15px;}
+.mt20{margin-top: 20px;}
+.mt25{margin-top: 25px;}
+.mt30{margin-top: 30px;}
+.mt35{margin-top: 35px;}
+.mt40{margin-top: 40px;}
+.mt45{margin-top: 45px;}
+.mt50{margin-top: 50px;}
+.mt55{margin-top: 55px;}
+.mt60{margin-top: 60px;}
+.mt65{margin-top: 65px;}
+.mt70{margin-top: 70px;}
+.mt100{margin-top: 100px;}
+.mt130{margin-top: 130px;}
+
+
+
 /* 기본 link 스타일 */
 .link {
     padding: 0px;
@@ -250,7 +271,8 @@ ul.menu {
     font-size: 16px;
 }
 ul.menu li {
-    padding: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 ul.menu a {
     text-decoration: none;
@@ -391,6 +413,29 @@ textarea.form-input {
     flex-grow: 1;/* 나머지 전부 다 라는 의미로 쓰임 */
 }
 
+.flex-container3 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: space-between;
+	justify-content: flex-start;
+}
+
+.list-card {
+	height: 350px;
+	background-color: white;
+	border: 1px solid rgb(208, 208, 208);
+}
+
+.flex-title {
+	width: 230px;
+	height: 50px;
+}
+
+.card-image-wrapper {
+	width: 250px;
+	height: 200px;
+}
 
 
 
@@ -655,7 +700,7 @@ textarea.form-input {
 
 
 
-/* btn 스타일 */
+/* btn 스타일 : 삭제 고려 */
 .btn.btn-purple {
     border: 1px solid #B899CD;
     border-radius: 0.25em;
@@ -675,3 +720,40 @@ textarea.form-input {
     color: white;
 }
 
+
+
+/* text-overflow */
+.txt-overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  width: 230px;
+	height: 50px;
+}
+.txt-overflow2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    width: 300px;
+    height: 37px;
+}
+.txt-overflow3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    width: 300px;
+    height: 80px;
+}
+
+.p-red {
+	color: rgb(241, 99, 99);
+}

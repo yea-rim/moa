@@ -114,7 +114,7 @@
                             <!-- 프로필 사진 변경 -->
                             <div class="float-left layer-2 center">
                                 <!-- 프로필 사진 출력 -->
-                                <div class="row m10">
+                                <div class="row">
                                     <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
                                     	<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="200px" height="200px"class="img img-circle">
                                     	
@@ -126,14 +126,18 @@
                                 </div>
                                 
                                 <!-- 프로필 사진 등록 (attach table)-->
-                                <div class="row m30 right">
+                                <div class="row m20 right">
                                     <div class="filebox center">
                                         <input class="upload-name" value="첨부파일" placeholder="첨부파일">
                                         <label for="file">파일찾기</label> 
                                         <input type="file" id="file" name="attach">
                                     </div>
                                 </div>
+                            <div>
+								<a href="delete_profile.do?memberNo=<%=memberNo%>"><button class="btn">삭제</button></a>
                             </div>
+                            </div>
+                            
 
                             <div class="float-left layer-2 center">
     
@@ -175,6 +179,14 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
+                
+                <%-- <div class="float-left layer-2 center">
+                    	<form action="delete_profile.do" method="post">
+                    		<input type="hidden" name="memberNo" value="<%=memberNo%>">
+                    		<input type="submit" value="프로필 사진 삭제" class="btn">
+                    	</form>
+                    </div> --%>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

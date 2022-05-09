@@ -245,4 +245,5 @@ public class SellerDao {
 		return list;
 	}
 
+	
 }

@@ -82,12 +82,20 @@ public class MemberInformationServlet extends HttpServlet{
 			
 			
 			if(uploadName != null) { // uploadName에 정보가 있으면 
-				// AttachDto 저장 
+
+				// 도구 준비
 				AttachDto attachDto = new AttachDto();
 				AttachDao attachDao = new AttachDao();
 				MemberProfileDto memberProfileDto = new MemberProfileDto();
 				MemberProfileDao memberProfileDao = new MemberProfileDao();
-
+				
+				if(attachDao.selectAttachNo(memberDto.getMemberNo()) != null) {
+					// 기존에 있던 AttachNo 삭제  
+					int currentAttachNo = attachDao.selectAttachNo(memberDto.getMemberNo());
+					attachDao.delete(currentAttachNo);
+				}
+				
+				// AttachDto 저장 
 				attachDto.setAttachUploadname(uploadName);
 				attachDto.setAttachSavename(saveName);
 				attachDto.setAttachType(contentType);

@@ -3,6 +3,15 @@
     
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<script type="text/javascript">
+	$(function(){
+		$(".check-pw").on("input", function(){
+    		$("input[name=currentPw]").prop("type", "text"); // 비밀번호 보여주기
+    		$("input[name=changePw]").prop("type", "text");
+    	});
+	});
+</script>
+
 	<div class="container fill m40">
 					<div class="flex-container m20">
                             <!-- 마이페이지 메인으로 이동 -->
@@ -36,6 +45,14 @@
                     </div>
                 </label>
             </div>
+            
+            <div class="row m10">
+				<label>
+					<input type="checkbox" class="form-input check-pw">
+					<span class="link-gray">비밀번호 보기</span>
+				</label>
+			</div>
+            
             <div class="row m20">
                 <input type="submit" value="확인" class="btn fill">
             </div>

@@ -22,6 +22,8 @@
 	String sellerRegistDate = (String) session.getAttribute("sellerRegistDate");
 	boolean isApprove = sellerRegistDate != null;
 
+	// 판매자 여부 판단 
+	boolean isSeller = sellerNo != null; 
 %>
 
 <!DOCTYPE html>
@@ -36,7 +38,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">-->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +54,7 @@
 
 </head>
 <body>
-임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerNo = <%=sellerNo %>, <%=sellerRegistDate %>
+임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerNo = <%=sellerNo %>, sellerRegistDate = <%=sellerRegistDate %>
     <main>
 
         <header>
@@ -63,12 +65,24 @@
                     </a>
                 </div>
                 <%if(isLogin) { // 로그인 상태라면 %>               	
-                		<div class="float-right layer-5 center m10">
-                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link">
-                				<h3>프로젝트 신청</h3>
-                			</a>
-                		</div>
-                		<div class="float-right layer-5 center m10">
+                		<%if(isSeller) { // 판매자라면 %>
+                			<div class="float-right layer-5 center m10">
+	                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link link-purple">
+	                				<button class="btn-reverse">
+	                					<h3>프로젝트 신청</h3>
+	                				</button>
+	                			</a>
+	                		</div>
+                		<%} else { // 일반 회원이라면 %>
+                				<div class="float-right layer-5 center m10">
+		                			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-purple">
+		                				<button class="btn-reverse">
+		                					<h3>프로젝트 신청</h3>
+		                				</button>
+		                			</a>
+		                		</div>
+                		<%} %>
+                		<div class="float-right layer-5 center m10 mt20">
                 			<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
                 					<h3>마이페이지</h3>
                 			</a>
@@ -108,7 +122,7 @@
                     <a href="<%=request.getContextPath()%>/community/list.jsp"><h3 class="m0">커뮤니티</h3></a>
                     <ul>
                         <li><a href="#"><h3 class="m0">공지사항</h3></a></li>
-                        <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0">홍보하기</h3></a></li>
+                        <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0 ft">홍보하기</h3></a></li>
                     </ul> 
                 </li>
                 <li>
