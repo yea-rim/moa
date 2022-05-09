@@ -13,10 +13,20 @@ public class MemberDto {
 	private String memberBasicAddress;
 	private String memberDetailAddress;
 	private String memberRoute;
+	private int memberAdmin;
 	
 	public MemberDto() {
 		super();
 	}
+	
+	public int getMemberAdmin() {
+		return memberAdmin;
+	}
+
+	public void setMemberAdmin(int memberAdmin) {
+		this.memberAdmin = memberAdmin;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}

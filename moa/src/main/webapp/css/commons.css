@@ -124,23 +124,7 @@
 
 
 /* 버튼 스타일 */
-.btn {
-    border: 1px solid #B899CD;
-    padding: 0.5em;
-    border-radius: 0.2em;
 
-    color: white;
-    background-color: #B899CD;
-
-    cursor: pointer;
-
-    font: inherit;
-}
-.btn:hover {
-    color: white;
-    border: 1px solid #d8c8e3;
-    background-color: #d8c8e3;
-}
 
 
 
@@ -407,25 +391,16 @@ textarea.form-input {
     width: 100%;
 }
 
-.btn {
-    border: 1px solid gray;
-    border-radius: 0.25em;
-    padding: 0.5em;
-    
-    color: gray;
-    background-color: white;
-    
-    cursor: pointer;
-    
-    font: inherit;
-}
-
 .p10px{
     padding: 10px;
 }
 
 .p10px-left{
     padding-left: 10px;
+}
+
+.p80px-left{
+    padding-left: 80px;
 }
 
 .margin-auto{
@@ -617,21 +592,33 @@ textarea.form-input {
 
 
 /* btn 스타일 */
-.btn.btn-purple {
+
+.btn {
     border: 1px solid #B899CD;
-    border-radius: 0.25em;
     padding: 0.5em;
-    
-    color: #B899CD;
-    background-color: B899CD;
-    
-    cursor: pointer;
-    
-    font: inherit;
-}
-.btn.btn-purple:hover {
-    border-color: #B899CD;
-    background-color: #B899CD;
+    border-radius: 0.2em;
 
     color: white;
+    background-color: #B899CD;
+
+    cursor: pointer;
+
+    font: inherit;
+}
+.btn:hover {
+    color: white;
+    border: 1px solid #d8c8e3;
+    background-color: #d8c8e3;
+}
+.btn-reverse {
+    border: 1px solid #B899CD;
+    padding: 0.5em;
+    border-radius: 0.2em;
+
+    color: #B899CD;
+    background-color: white;
+
+    cursor: pointer;
+
+    font: inherit;
 }

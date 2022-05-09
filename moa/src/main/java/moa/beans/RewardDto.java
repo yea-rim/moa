@@ -7,9 +7,25 @@ public class RewardDto {
 	private String rewardContent;
 	private int rewardPrice;
 	private int rewardStock;
+	private int rewardDelivery;
+	private int rewardEach;
 	
 	public RewardDto() {
 		super();
+	}
+	
+	
+	public int getRewardDelivery() {
+		return rewardDelivery;
+	}
+	public int getRewardEach() {
+		return rewardEach;
+	}
+	public void setRewardDelivery(int rewardDelivery) {
+		this.rewardDelivery = rewardDelivery;
+	}
+	public void setRewardEach(int rewardEach) {
+		this.rewardEach = rewardEach;
 	}
 	public int getRewardNo() {
 		return rewardNo;
