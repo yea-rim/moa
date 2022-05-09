@@ -102,5 +102,24 @@ public class AttachDao {
 		return count > 0;
 	}
 
-	
+	// 특정 회원이 등록한 attachNo 가져오기 
+	public Integer selectAttachNo(int memberNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select attach_no from member_profile where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		
+		ResultSet rs = ps.executeQuery();
+		Integer attachNo;
+		if(rs.next()) {
+			attachNo = rs.getInt("attach_no");
+		} else {
+			attachNo = null; 
+		}
+		
+		con.close();
+		
+		return attachNo; 
+	}
 }

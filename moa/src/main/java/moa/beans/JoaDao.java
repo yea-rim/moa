@@ -72,7 +72,7 @@ public class JoaDao {
 		
 		List<JoaDto> list = new ArrayList<>();
 		
-		if(rs.next()) {
+		while(rs.next()) {
 			JoaDto joaDto = new JoaDto();
 			
 			joaDto.setProjectNo(rs.getInt("project_no"));
@@ -85,4 +85,22 @@ public class JoaDao {
 		
 		return list; 
 	}
+	
+	
+	// 좋아요 취소
+	public boolean delete(int memberNo, int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete joa where member_no = ? and project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ps.setInt(2, projectNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }
+
