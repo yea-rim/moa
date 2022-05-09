@@ -115,3 +115,18 @@ pre {
 label[for=hide-secret]:hover {
     cursor: pointer;
 }
+
+.left-container {
+	width:600px;
+}
+
+.right-container{
+	width:400px
+}
+.h450px{
+	height: 450px;
+}
+
+h2{
+	display:inline;
+}

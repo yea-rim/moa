@@ -42,12 +42,12 @@ public class AttachDao {
 	}
 
 	// 단일조회
-	public AttachDto selectOne(int projectNo) throws Exception {
+	public AttachDto selectOne(int attachNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from attach where attach_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, projectNo);
+		ps.setInt(1, attachNo);
 		ResultSet rs = ps.executeQuery();
 		
 		AttachDto attachDto;
@@ -74,7 +74,7 @@ public class AttachDao {
 	public boolean delete(int attachNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "delete attach where attach_no = ?";
+		String sql = "DELETE attach WHERE attach_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, attachNo);
 		
@@ -83,6 +83,23 @@ public class AttachDao {
 		con.close();
 		
 		return count > 0; 
+	}
+	
+	public boolean edit(AttachDto attachDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update attach set attach_uploadname = ?, attach_savename =?, attach_type = ?, attach_size =? where attach_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, attachDto.getAttachUploadname());
+		ps.setString(2, attachDto.getAttachSavename());
+		ps.setString(3, attachDto.getAttachType());
+		ps.setLong(4, attachDto.getAttachSize());
+		ps.setInt(5, attachDto.getAttachNo());
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
 	}
 
 	// 특정 회원이 등록한 attachNo 가져오기 

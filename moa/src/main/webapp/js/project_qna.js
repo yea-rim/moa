@@ -3,10 +3,7 @@ $(function () {
     // 문의글 리스트 눌렀는데 비밀글이면 경고 표시
     $(".table-title").each(function () {
         var secret = $(this).children(".secret");
-        if (secret.text() == 0) {
-
-            secret.next("span").hide();
-
+        if (secret.attr("value") == "1") {
             $(this).click(function () {
                 var content = $(this).parent("tr").next(".qna-content");
                 if (content.is(":visible")) {
@@ -15,12 +12,33 @@ $(function () {
                     content.show();
                 }
             });
-        } else {
+        }else {
             $(this).click(function () {
                 alert("작성자만 볼 수 있습니다.");
             });
         }
     });
+    
+    // 삭제하기 확인버튼 숨김처리 클릭시 보이게
+    
+	
+	$(".delete-confirm").hide();
+		$(".delete-btn").each(function(){
+			var confirm = $(this).parent("div").parent("td").children(".delete-confirm");
+			$(this).click(function(){
+				confirm.show();
+			});
+		});
+		
+		$(".cancel-delete").each(function(){
+			$(this).click(function(){
+				$(this).parent(".delete-confirm").hide();
+			});
+		});
+		
+		$(".no-auth").click(function(){
+			alert("권한이 없습니다.");
+		});
 
     // 문의하기 답글 숨김 처리
     $(".qna").hide();
@@ -30,31 +48,24 @@ $(function () {
     $(".hide-qna").click(function(){
         $(".qna").hide();
     });
-
+	
     $(".answer").hide();
     $(".btn-answer").each(function(){
-        var answer = $(this).parent("div").next(".answer");
+        var answer = $(this).parent("div").parent("td").children(".answer");
         
 
         $(this).click(function(){
             answer.show();
         });
     });
+    
     $(".hide-answer").each(function(){
         var answer = $(this).parent("div").parent("form").parent(".answer");
         $(this).click(function(){
             answer.hide();
         });
-    })
-
-    // 비밀글에 답글달 경우 답글 자동 비밀글 설정 수정 불가
-    $(".answer-secret").each(function(){
-        var check = $(this).nextAll("#check-answer-secret");
-        if($(this).text() != 0){
-           check.attr("checked", "checked");
-           check.attr("disabled", "disabled");
-        }
     });
+
 
     // 작성자 이메일 마스킹
     $(".writer").each(function(){
@@ -75,29 +86,23 @@ $(function () {
     });
 
     // 비밀글 숨기기
-    if($("#hide-secret").is(":checked")){
+    /*if($("#hide-secret").is(":checked")){
         $(".secret").each(function(){
-            if($(this).text() != 0){
+            if($(this).text() == 1){
                 $(this).parent("td").parent("tr").hide();
             }
         });
-    }
+    }*/
     $("#hide-secret").on("input", function(){
+		var projectNo = new URL(window.location.href).searchParams.get("projectNo");
         if($(this).is(":checked")){
-            $(".secret").each(function(){
-                if($(this).text() != 0){
-                    $(this).parent("td").parent("tr").hide();
-                }
-            });
+                location.replace("/moa/project/detail/qna.jsp?secret=1&projectNo=" + projectNo);
         }else{
-			$(".secret").each(function(){
-                if($(this).text() != 0){
-                    $(this).parent("td").parent("tr").show();
-                }
-            });
+                location.replace("/moa/project/detail/qna.jsp?projectNo=" + projectNo);
 		}
     })
     
+    //페이지네이션 링크 클릭시 비밀글 숨김처리 상태면 유지
     $(".pagination").children("a").each(function(){
         
         $(this).click(function(){

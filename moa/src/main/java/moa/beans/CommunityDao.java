@@ -121,7 +121,7 @@ public class CommunityDao {
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		
-		int communityNo = rs.getInt("community_no");
+		int communityNo = rs.getInt("nextval");
 		
 		con.close();
 		
@@ -132,14 +132,74 @@ public class CommunityDao {
 	public void insert(CommunityDto communityDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into community(community_no, community_title, community_content) values(?,?,?,)";
+		String sql = "INSERT INTO community(community_no, COMMUNITY_PROJECT_NO, COMMUNITY_MEMBER_NO, COMMUNITY_TITLE, COMMUNITY_CONTENT) values(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, communityDto.getCommunityNo());
-		ps.setString(2, communityDto.getCommunityTitle());
-		ps.setString(3, communityDto.getCommunityContent());
+		ps.setInt(2, communityDto.getCommunityProjectNo());
+		ps.setInt(3, communityDto.getCommunityMemberNo());
+		ps.setString(4, communityDto.getCommunityTitle());
+		ps.setString(5, communityDto.getCommunityContent());
+		ps.execute();
 		
 		con.close();
 	}
 	
+	public CommunityDto selectOne(int communityNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from community where community_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityNo);
+		ResultSet rs = ps.executeQuery();
+		
+		CommunityDto communityDto;
+		if(rs.next()) {
+			communityDto = new CommunityDto();
+			
+			communityDto.setCommunityNo(rs.getInt("community_no"));
+			communityDto.setCommunityProjectNo(rs.getInt("community_project_no"));
+			communityDto.setCommunityMemberNo(rs.getInt("community_member_no"));
+			communityDto.setCommunityTitle(rs.getString("community_title"));
+			communityDto.setCommunityContent(rs.getString("community_content"));
+			communityDto.setCommunityTime(rs.getDate("community_time"));
+			communityDto.setCommunityReplycount(rs.getInt("community_replycount"));
+			communityDto.setCommunityReadcount(rs.getInt("community_readcount"));
+		}
+		else {
+			communityDto = null;
+		}
+		
+		con.close();
+		
+		return communityDto;
+	}
+	
+	public boolean delete(int communityNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete community where community_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	public boolean edit(CommunityDto communityDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update community set community_title =?, community_content = ? where community_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, communityDto.getCommunityTitle());
+		ps.setString(2, communityDto.getCommunityContent());
+		ps.setInt(3, communityDto.getCommunityNo());
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
 	
 }
