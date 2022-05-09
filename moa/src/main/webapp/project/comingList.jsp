@@ -1,3 +1,5 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
@@ -261,10 +263,16 @@ if (isSearch) {
                 </a>
               </div>
               <div class="row project-name"><%=projectDto.getProjectName() %></div>
-
               <div class="row">
               	<h3 style="color:rgb(174, 144, 196)"><%=projectDto.getProjectStartDate() %>   오픈예정</h3>
               </div>
+				<% 
+              	SellerDao sellerDao = new SellerDao();
+              	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+              	%>
+              	<div class="row" style="color:gray">
+              		<%=sellerDto.getSellerNick() %>
+              	</div>
             </div>
           <%} %>
           </div>
