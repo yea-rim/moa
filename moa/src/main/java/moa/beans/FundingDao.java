@@ -25,7 +25,7 @@ public class FundingDao {
 			FundingDto fundingDto = new FundingDto();
 			
 			fundingDto.setFundingNo(rs.getInt("funding_no"));
-			fundingDto.setFundingPackageNo(rs.getInt("funding_package_no"));
+			fundingDto.setFundingMemberNo(rs.getInt("funding_member_no"));
 			fundingDto.setFundingDate(rs.getDate("funding_date"));
 			fundingDto.setFundingPost(rs.getString("funding_post"));
 			fundingDto.setFundingBasicAddress(rs.getString("funding_basic_address"));
@@ -60,7 +60,7 @@ public class FundingDao {
 			fundingDto = new FundingDto();
 			
 			fundingDto.setFundingNo(rs.getInt("funding_no"));
-			fundingDto.setFundingPackageNo(rs.getInt("funding_package_no"));
+			fundingDto.setFundingMemberNo(rs.getInt("funding_member_no"));
 			fundingDto.setFundingDate(rs.getDate("funding_date"));
 			fundingDto.setFundingPost(rs.getString("funding_post"));
 			fundingDto.setFundingBasicAddress(rs.getString("funding_basic_address"));

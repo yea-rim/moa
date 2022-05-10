@@ -74,7 +74,7 @@ public class JoaDao {
 	
 	
 	// 좋아요 취소
-	public boolean delete(int memberNo, int projectNo) throws Exception {
+	public boolean delete(int projectNo, int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "delete joa where member_no = ? and project_no = ?";

@@ -12,8 +12,8 @@ public class RewardDao {
 	public void insert(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock)"
-				+ " values(reward_seq.nextval,?,?,?,?,?)";
+		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock, reward_delivery, reward_each)"
+				+ " values(reward_seq.nextval,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, rewardDto.getRewardProjectNo());
