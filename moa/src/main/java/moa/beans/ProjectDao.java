@@ -916,7 +916,6 @@ public class ProjectDao {
 
 		return count;
 	}
-<<<<<<< HEAD
 	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o)
 		public List<ProjectDto> ongoingSelectList(int p, int s, String sort, int sellerNo) throws Exception {
@@ -973,7 +972,5 @@ public class ProjectDao {
 			
 			return list;
 		}
-=======
->>>>>>> refs/remotes/origin/main
 
 }
