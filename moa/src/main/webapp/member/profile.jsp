@@ -121,7 +121,7 @@
                                     	<%-- <%=memberProfileDto.getAttachNo() %> --%>
                                     	
                                     <%} else { // 존재하지 않는다면 %>
-                                    	<img src="https://dummyimage.com/200x200" alt="기본 프로필" width="200px" height="200px" class="img img-circle">
+                                    	<img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="200px" height="200px" class="img img-circle">
                                     <%} %>
                                 </div>
                                 
@@ -134,7 +134,9 @@
                                     </div>
                                 </div>
                             <div>
-								<a href="delete_profile.do?memberNo=<%=memberNo%>"><button type="button" class="btn">삭제</button></a>
+                            	<%if(isExistProfile) { // 프로필 사진 존재한다면 %>
+									<a href="delete_profile.do?memberNo=<%=memberNo%>"><button type="button" class="btn">프로필 사진 삭제</button></a>
+								<%} %>
                             </div>
                             </div>
                             
