@@ -37,8 +37,8 @@
 	SellerDao sellerDao = new SellerDao();
 	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 	
-	
-	boolean isSeller = sellerDto != null; // true면 seller 
+	boolean isSellerWait = sellerDto != null && sellerDto.getSellerRegistDate() == null; // Dto에 정보는 있지만 registDate가 없으면 대기 상태 
+	boolean isSeller = sellerDto != null && sellerDto.getSellerRegistDate() != null; // true면 seller 
 	
 	
 	// 관심 프로젝트 조회
@@ -111,11 +111,16 @@
                         <div class="float-right m70 mlr40">
                             
                             <!-- 프로젝트 관련 버튼 -->
-                            <%if(isSeller) { %>
+                            <%if(isSellerWait) { // 판매자 대기일 때 (판매자 신청 현황으로 이동) %>
+		                            <a href="<%=request.getContextPath() %>/seller/seller_wait.jsp" class="link link-reverse h60">
+			                             <h3>판매자 신청</h3>
+	                                	<h3 class="center">(신청현황)</h3>
+			                        </a>
+                            <%} else if(isSeller) { // 판매자일 때 프로젝트 관리 페이지로 이동 %>
                         			<a href="" class="link link-reverse h40">
 	                                	<h3>나의 프로젝트 관리</h3>
 	                            	</a>
-                        	<%} else { %>
+                        	<%} else { // 일반회원일 때 판매자 신청 페이지로 이동 %>
                         			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-reverse h60">
 	                                	<h3>판매자 신청</h3>
 	                                	<h3 class="center">(신청현황)</h3>
@@ -155,7 +160,7 @@
             					
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
-								// int profileNo = projectAttachDao.getAttachNo(projectNo); 
+								/* int profileNo = projectAttachDao.getAttachNo(projectNo);  */
 								
 								// projectAttach로 대표 이미지 가져오기 실패 
 								%> 
@@ -164,7 +169,7 @@
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
 					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
-					                        	<img src="<%-- <%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectProfileNo%> --%>" alt="" class="card-image-wrapper">
+					                        	<img src="https://dummyimage.com/200x150" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        </a>
 					                    </div>
 					                    

@@ -57,7 +57,7 @@
 
 			<!-- 프로젝트 대표 이미지 -->
             <div class="float-left m20 mlr20">
-                <img src="https://dummyimage.com/150x150" alt="">
+                <img src="https://dummyimage.com/150x112" alt="" width="150px" height="112px">
             </div>
 
             <div class="float-left m20 mlr20 h150">

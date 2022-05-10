@@ -32,7 +32,7 @@
 					
                     <form action="confirm_pw.do" method="post">
                         <div class="row m10">
-                            <input type="password" class="form-input fill" name="memberPw">
+                            <input type="password" class="form-input fill" name="memberPw" autocomplete="off">
                         </div>
                         <div class="row m10">
 			                    <label>
