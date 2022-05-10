@@ -117,7 +117,7 @@
 	                                	<h3 class="center">(신청현황)</h3>
 			                        </a>
                             <%} else if(isSeller) { // 판매자일 때 프로젝트 관리 페이지로 이동 %>
-                        			<a href="" class="link link-reverse h40">
+                        			<a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link link-reverse h40">
 	                                	<h3>나의 프로젝트 관리</h3>
 	                            	</a>
                         	<%} else { // 일반회원일 때 판매자 신청 페이지로 이동 %>

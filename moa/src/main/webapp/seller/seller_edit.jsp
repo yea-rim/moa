@@ -23,7 +23,11 @@
                                 <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
                             </a>
                             <a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link mlr5">
-                                <h2>판매자 신청 정보 변경하기</h2>
+                                <%if(sellerDto.getSellerPermission() == 1) { // 판매자이면 %>
+                                	<h2>판매자 정보 변경하기</h2>
+                                <%} else { // 판매자 신청 대기 중이면 %>
+                                	<h2>판매자 신청 정보 변경하기</h2>
+                                <%} %>
                             </a>
         </div>
         

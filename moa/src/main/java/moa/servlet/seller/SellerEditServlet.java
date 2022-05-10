@@ -19,19 +19,28 @@ public class SellerEditServlet extends HttpServlet{
 		try {
 			
 			// 준비
-			SellerDto sellerDto = new SellerDto();
-			sellerDto.setSellerNick(req.getParameter("sellerNick"));
-			sellerDto.setSellerAccountBank(req.getParameter("sellerAccountBank"));
-			sellerDto.setSellerAccountNo(req.getParameter("sellerAccountNo"));
-			sellerDto.setSellerNo(Integer.parseInt(req.getParameter("sellerNo")));
+			SellerDto changeDto = new SellerDto();
+			changeDto.setSellerNick(req.getParameter("sellerNick"));
+			changeDto.setSellerAccountBank(req.getParameter("sellerAccountBank"));
+			changeDto.setSellerAccountNo(req.getParameter("sellerAccountNo"));
+			changeDto.setSellerNo(Integer.parseInt(req.getParameter("sellerNo")));
 			
 			// 처리
 			SellerDao sellerDao = new SellerDao();
-			boolean isSuccess = sellerDao.edit(sellerDto);
+			SellerDto sellerDto = sellerDao.selectOne(Integer.parseInt(req.getParameter("sellerNo")));
+			boolean isSuccess = sellerDao.edit(changeDto);
+			boolean isSeller = sellerDto.getSellerPermission() == 1;
+			
+//			System.out.println(sellerDto2.getSellerPermission());
+//			System.out.println(isSeller);
 			
 			// 출력
 			if(isSuccess) { // 수정 성공시 
-				resp.sendRedirect(req.getContextPath()+"/seller/seller_wait.jsp");
+				if(isSeller) { // 판매자 승인이 났으면  
+					resp.sendRedirect(req.getContextPath()+"/seller/my_page.jsp");
+				} else { // 판매자 승인이 나지 않았으면 
+					resp.sendRedirect(req.getContextPath()+"/seller/seller_wait.jsp");
+				}
 			} else { // 수정 실패시 
 				resp.sendRedirect(req.getContextPath()+"/seller/seller_wait.jsp?error");
 			}
