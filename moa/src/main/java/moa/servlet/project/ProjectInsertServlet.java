@@ -108,6 +108,8 @@ public class ProjectInsertServlet extends HttpServlet{
 			String [] rewardContent = mRequest.getParameterValues("rewardContent"); 
 			String [] rewardPrice = mRequest.getParameterValues("rewardPrice"); 
 			String [] rewardStock = mRequest.getParameterValues("rewardStock"); 	
+			String [] rewardDelivery = mRequest.getParameterValues("rewardDelivery"); 
+			String [] rewardEach = mRequest.getParameterValues("rewardEach"); 	
 			 
 			 RewardDao rewardDao = new RewardDao();
 			for(int i=0; i<rewardName.length; i++) {
@@ -118,6 +120,8 @@ public class ProjectInsertServlet extends HttpServlet{
 				rewardDto.setRewardContent(rewardContent[i]);
 				rewardDto.setRewardPrice(Integer.parseInt(rewardPrice[i]));
 				rewardDto.setRewardStock(Integer.parseInt(rewardStock[i]));
+				rewardDto.setRewardDelivery(Integer.parseInt(rewardDelivery[i]));
+				rewardDto.setRewardEach(Integer.parseInt(rewardEach[i]));
 				
 				rewardDao.insert(rewardDto);
 			}

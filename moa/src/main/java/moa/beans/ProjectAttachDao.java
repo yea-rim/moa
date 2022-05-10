@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 
 
 public class ProjectAttachDao {
+	
+	//추가
 	public void insert(ProjectAttachDto projectAttachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
@@ -39,4 +41,17 @@ public class ProjectAttachDao {
 		return attachNo;
 	}
 
+	//프로젝트 첨부파일 삭제
+	public boolean delete(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete project_attach where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
+	}
+	
 }
