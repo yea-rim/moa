@@ -11,6 +11,77 @@
 		$(".check-pw").on("input", function(){
     		$("input[name=memberPw]").prop("type", "text"); // 비밀번호 보여주기 
     	});
+		
+		var status = {
+                //이름 : 값
+                memberEmail : false,
+                memberNick : false,
+                memberPhone : false,
+                memberRoute : false
+            };
+
+            $("input[name=memberEmail]").blur(function(){
+
+                var regex = /[a-z][a-z0-9]{7,19}/;
+                var memberEmail = $(this).val();
+
+                var judge = regex.test(memberEmail);
+                if(!judge) {
+                    $(this).next("span").text("아이디를 형식에 맞게 작성해 주세요.");
+                    status.email = false;
+                    return;
+                }
+
+                var that = this;
+
+                $.ajax({
+                    url:"http://localhost:8080/study/ajax/id.do?memberEmail="+memberEmail,
+                    type:"get",
+                    success:function(resp) {
+                        // resp는 "NNNNN" 또는 "NNNNY"
+                        if(resp == "NNNNN"){
+                            $(that).next("span").text("이미 사용 중인 이메일입니다.");
+                            status.email = false;
+                        }
+                        else if(resp == "NNNNY"){
+                            $(that).next("span").text("사용 가능한 이메일입니다.");
+                            status.email = true;
+                        }
+                    }
+                });
+            });
+
+            $("input[name=memberNick]").blur(function(){
+                var regex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+                var memberNick = $(this).val();
+                var span = $(this).next("span");
+
+                var judge = regex.test(memberNick);
+                if(!judge){
+                    span.text("형식에 맞는 닉네임을 사용하세요.");
+                    status.nickname = false;
+                    return;
+                }
+
+                $.ajax({
+                    url:"http://localhost:8080/moa/member/join.do",
+                    type:"post",
+                    data:{
+                        memberNick : memberNick
+                    },
+                    success:function(resp) {
+                        if(resp === "Y") {
+                            span.text("사용 가능한 닉네임입니다");
+                            status.nickname = true;
+                        }
+                        else if(resp === "N") {
+                            span.text("사용 불가능한 닉네임입니다");
+                            status.nickname = false;
+                        }
+                    }
+                });
+            });
+
 	});
 </script>
 

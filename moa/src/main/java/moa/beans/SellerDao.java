@@ -14,7 +14,7 @@ public class SellerDao {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "insert into seller(seller_no, seller_regist_date, seller_account_bank, seller_account_no, "
-				+ "seller_nick, seller_type) values (?, ?, ?, ?, ?, ?)";
+				+ "seller_nick, seller_type, seller_permission) values (?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, sellerDto.getSellerNo());
@@ -23,6 +23,7 @@ public class SellerDao {
 		ps.setString(4, sellerDto.getSellerAccountNo());
 		ps.setString(5, sellerDto.getSellerNick());
 		ps.setString(6, sellerDto.getSellerType());
+		ps.setInt(7, sellerDto.getSellerPermission());
 		ps.execute();
 
 		con.close();
@@ -32,7 +33,6 @@ public class SellerDao {
 	public SellerDto selectOne(int sellerNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-//		String sql = "select seller_regist_date from seller where seller_no = ?"; // 원래 쓰여져있던 코드 
 		String sql = "select * from seller where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -51,6 +51,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 		} else {
 			sellerDto = null;
 		}
@@ -60,6 +61,7 @@ public class SellerDao {
 		return sellerDto;
 	}
 
+	// 승인 날짜
 	public boolean selectRegistDate(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
@@ -72,6 +74,21 @@ public class SellerDao {
 		con.close();
 
 		return registDate > 0;
+	}
+	
+	// 승인 여부
+	public boolean selectPermission(int memberNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select seller_permission from seller where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setInt(1, memberNo);
+		int permission = ps.executeUpdate();
+
+		con.close();
+
+		return permission > 0;
 	}
 
 //	목록
@@ -91,6 +108,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 
 			list.add(sellerDto);
 		}
@@ -119,6 +137,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 
 			list.add(sellerDto);
 		}
@@ -131,7 +150,7 @@ public class SellerDao {
 	public boolean approve(int sellerNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update seller set seller_regist_date = sysdate where seller_no = ?";
+		String sql = "update seller set seller_regist_date = sysdate, seller_permission = 1 where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, sellerNo);
 		int count = ps.executeUpdate();
@@ -141,11 +160,11 @@ public class SellerDao {
 		return count > 0;
 	}
 
-//	목록 (admin 판매자 관리 페이지 : 승인 날짜 순)
+//	목록 (admin 판매자 관리 페이지)
 	public List<SellerDto> selectSeller() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from seller order by seller_regist_date asc";
+		String sql = "select * from seller order by seller_permission asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -158,6 +177,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 
 			list.add(sellerDto);
 		}
@@ -166,11 +186,11 @@ public class SellerDao {
 		return list;
 	}
 
-//	검색 (admin 판매자 관리 페이지 : 승인 날짜 순)
+//	검색 (admin 판매자 관리 페이지)
 	public List<SellerDto> selectSeller(String keyword) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from seller where instr(seller_nick, ?) > 0 order by seller_regist_date asc";
+		String sql = "select * from seller where instr(seller_nick, ?) > 0 order by seller_permission asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
@@ -185,6 +205,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 
 			list.add(sellerDto);
 		}
@@ -197,7 +218,7 @@ public class SellerDao {
 	public List<SellerDto> selectSellerList() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from seller where seller_regist_date = null order by seller_regist_date asc";
+		String sql = "select * from seller where seller_permission = 0";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -210,6 +231,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
 
 			list.add(sellerDto);
 		}
@@ -245,5 +267,4 @@ public class SellerDao {
 		return list;
 	}
 
-	
 }
