@@ -20,12 +20,12 @@
 	}
 %>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 	<div class="container w800">
 	
 		<div class="row m30 center">
-			<h1>판매자 목록(승인 완료)</h1>
+			<h1>판매자 목록 (승인됨)</h1>
 		</div>
 		
 	<!-- 검색창 -->
@@ -49,6 +49,7 @@
 					<th>유형</th>
 					<th>판매자 정보</th>
 					<th>승인 날짜</th>
+					<th>승인 여부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +64,9 @@
 						<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">ℹ️</a>
 					</td>
 					<td><%=sellerDto.getSellerRegistDate() %></td>
+					<td>
+						<%if (sellerDto.getSellerPermission()==1) {%>승인<%} %>
+					</td>
 				</tr>
 				<%} %>
 			</tbody>
@@ -71,4 +75,4 @@
 	
 	</div>
 
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>

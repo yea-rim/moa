@@ -164,7 +164,7 @@ public class SellerDao {
 	public List<SellerDto> selectSeller() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from seller order by seller_permission asc";
+		String sql = "select * from seller where seller_permission = 1 order by seller_permission asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
