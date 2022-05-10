@@ -15,6 +15,7 @@ public class FundingDto {
 	private Date fundingPaymentDate;
 	private int fundingTotalprice;
 	private int fundingTotaldelivery;
+
 	
 	
 	

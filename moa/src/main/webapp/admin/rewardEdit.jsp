@@ -21,8 +21,15 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 		int num =1;
 		for (RewardDto rewardDto : rewardList) {
 		%>
-		<div class="row" style="margin-top: 50px;">
-			<h3>리워드 <%=num %></h3>
+		<div class="row mt50">
+			<div class="flex-container">
+				<div class="left-wrapper">
+					<h3>리워드 <%=num %></h3>
+				</div>
+				<div class="right-wrapper right">
+					<a href="rewardDelete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
+				</div>
+			</div>
 		</div>
 			<input type="hidden" name="rewardNo" value="<%=rewardDto.getRewardNo()%>">
 			<div class="row m20">
@@ -40,6 +47,13 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 			<div class="row m20">
 				<label>리워드 재고</label> <input type="number" name="rewardStock"
 					class="form-input fill"  value="<%=rewardDto.getRewardStock()%>">
+			</div>
+			<div class="row m20">
+				<div class="row"><label>배송비</label></div>
+				<input type="number" name="rewardDelivery" class="form-input w80p" value="<%=rewardDto.getRewardDelivery()%>">
+				<input type="checkbox"  class="form-input rewardEach-cb" value="<%=rewardDto.getRewardEach()%>">
+				<input type="hidden" name="rewardEach" value="<%=rewardDto.getRewardEach()%>">
+				<label class="f12 gray">개별 배송 여부</label>
 			</div>
 		<%num++; 
 		} %>

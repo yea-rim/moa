@@ -76,22 +76,36 @@
 				<span class="f12 gray">　각각 최대 3장 까지 설정 가능합니다.</span>
 			</div>
 			<div class="row m10">
-				<h4>대표이미지</h4>
-			</div>
-			<div class="row m5">
-				<input type="file" name="profileAttach" accept="image/*">
-				<button type="button" class="addbtn btn-addProfile">+</button>
-				<br> <div class="buttons1"></div>
-			</div>
-			<br>
-			<div class="row m10">
-				<h4 class="m5">상세이미지</h4>
-			</div>
-			<div class="row">
-				<input type="file" name="detailAttach" accept="image/*">
-				<button type="button" class="addbtn btn-addDetail">+</button>
-				<br> <span class="buttons2"></span>
-			</div>
+					<h4>대표이미지</h4>
+				</div>
+				<div class="row m5">
+					<input type="file" name="profileAttach1" accept="image/*">
+					<button type="button" class="btn-add">+</button><br>
+					<div class="profileAttach2">
+						<input type="file" name="profileAttach2" accept="image/*" disabled>
+						<button type="button" class="btn-del">-</button><br>
+					</div>
+					<div class="profileAttach3">
+						<input type="file" name="profileAttach3" accept="image/*" disabled>
+						<button type="button" class="btn-del">-</button><br>
+					</div>
+				</div>
+				<br>
+				<div class="row m10">
+					<h4 class="m5">상세이미지</h4>
+				</div>
+				<div class="row">
+					<input type="file" name="detailAttach1" accept="image/*">
+					<button type="button" class="btn-add">+</button><br>
+					<div class="row detailAttach2">
+						<input type="file" name="detailAttach2" accept="image/*" disabled>
+						<button type="button" class="btn-del">-</button>
+					</div>
+					<div class="row detailAttach3">
+						<input type="file" name="detailAttach3" accept="image/*" disabled>
+						<button type="button" class="btn-del">-</button>
+					</div>
+				</div>
 			<br><br><hr>
 			<div class="row center m30">
 				<button type="button" class="btn btn-prev">이전 단계</button>
@@ -111,13 +125,13 @@
 			<div class="row center m60">
 				<h1>펀딩 일정 선택</h1>
 			</div>
-
-						<div class="row m30">
+				<div class="row m30">
 					<ul>
 						<li class="insert-li">
 							<div class="row">펀딩 시작일</div>
 							<div class="row m5">
 								<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
+								<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
 							</div>
 						</li>
 						<li class="insert-li">
@@ -175,12 +189,21 @@
 				<textarea name="rewardContent" rows="5" class="form-input fill"></textarea>
 			</div>
 			<div class="row m20">
+				<div class="">
 				<label>리워드 가격</label> <input type="number" name="rewardPrice"
 					class="form-input fill">
+				</div>	
 			</div>
 			<div class="row m20">
 				<label>리워드 재고</label> <input type="number" name="rewardStock"
 					class="form-input fill">
+			</div>
+			<div class="row m20">
+				<div class="row"><label>배송비</label></div>
+				<input type="number" name="rewardDelivery" class="form-input w80p" value="0">
+				<input type="checkbox" class="form-input each-ckbox">
+				<input type="hidden" name="rewardEach" value="0">
+				<label class="f12 gray">개별 배송 여부</label>
 			</div>
 			<h3 class="reward-num"></h3>
 			<div id="add-reward"></div>
