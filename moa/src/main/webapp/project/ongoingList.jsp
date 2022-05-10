@@ -120,6 +120,8 @@ if (isSearch) {
     $(function () {
       $(".sort").change(function () {
     	  this.form.submit();
+    	  
+    	  this.prop("selected",true);
       });
 });
 </script>
