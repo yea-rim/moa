@@ -25,7 +25,7 @@ public class SellerDao {
 		ps.setString(6, sellerDto.getSellerType());
 		ps.setInt(7, sellerDto.getSellerPermission());
 		ps.execute();
-
+// tt
 		con.close();
 	}
 
