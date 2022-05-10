@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class FundingDto {
 	private int fundingNo;
-	private int fundingPackageNo;
+	private int fundingMemberNo;
 	private Date fundingDate;
 	private String fundingPost;
 	private String fundingBasicAddress;
@@ -21,17 +21,20 @@ public class FundingDto {
 	
 	public FundingDto() {
 	}
-	public int getFundingPackageNo() {
-		return fundingPackageNo;
+	
+	public int getFundingMemberNo() {
+		return fundingMemberNo;
 	}
+
+	public void setFundingMemberNo(int fundingMemberNo) {
+		this.fundingMemberNo = fundingMemberNo;
+	}
+
 	public int getFundingTotalprice() {
 		return fundingTotalprice;
 	}
 	public int getFundingTotaldelivery() {
 		return fundingTotaldelivery;
-	}
-	public void setFundingPackageNo(int fundingPackageNo) {
-		this.fundingPackageNo = fundingPackageNo;
 	}
 	public void setFundingTotalprice(int fundingTotalprice) {
 		this.fundingTotalprice = fundingTotalprice;
