@@ -267,4 +267,21 @@ public class SellerDao {
 		return list;
 	}
 
+	// 판매자 신청 정보 수정 
+	public boolean edit(SellerDto sellerDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update seller set seller_nick = ?, seller_account_bank = ?, seller_account_no = ? where seller_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, sellerDto.getSellerNick());
+		ps.setString(2, sellerDto.getSellerAccountBank());
+		ps.setString(3, sellerDto.getSellerAccountNo());
+		ps.setInt(4, sellerDto.getSellerNo());
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }

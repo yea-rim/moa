@@ -12,42 +12,59 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-	<div class="container w300">
-			<div class="row center">
-				<h2>판매자 신청 현황</h2>
-			</div>
+	<div class="container mt40">
 		
-			<div class="row mt30">
-				<h3>판매자 닉네임</h3>
+		<div class="flex-container">
+                            <!-- 마이페이지 메인으로 이동 -->
+                            <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
+                            <a href="<%=request.getContextPath() %>/member/my_page.jsp">
+                                <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
+                            </a>
+                            <a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link mlr5">
+                                <h2>판매자 신청 현황</h2>
+                            </a>
+        </div>
+        
+        <div class="row m30"><hr></div>
+        
+        <div class="container w400 mt100">
+		        <div class="row m30 center">
+		        	<h1 class="link-purple">판매자 승인 대기 중입니다.</h1>
+		        </div>
+
+				<div class="row mt100">
+					<h2>판매자 닉네임</h2>
+				</div>
+				<div class="row m10">
+					<p class="link-gray"><%=sellerDto.getSellerNick() %></p>
+				</div>
+				
+				<div class="row mt40">
+					<h2>입금 은행</h2>
+				</div>
+				<div class="row m10">
+					<p class="link-gray"><%=sellerDto.getSellerAccountBank()%></p>
+				</div>
+				
+				<div class="row mt40">
+					<h2>입금 계좌</h2>
+				</div>
+				<div class="row m10">
+					<p class="link-gray"><%=sellerDto.getSellerAccountNo()%></p>
+				</div>
+				
+				<div class="row mt40">
+					<h2>판매자 유형</h2>
+				</div>
+				<div class="row m10">
+					<p class="link-gray"><%=sellerDto.getSellerType()%></p>
+				</div>
+			<div class="row m20 mt50 center">
+				<a href="seller_edit.jsp" class="link link-btn fill">변경하기</a>
 			</div>
-			<div class="row m5">
-				<input type="text" value="<%=sellerDto.getSellerNick()%>" class="form-input" readonly>
 			</div>
 			
-			<div class="row mt30">
-				<h3>입금 은행</h3>
-			</div>
-			<div class="row m10">
-				<input type="text" value="<%=sellerDto.getSellerAccountBank()%>" class="form-input" readonly>
-			</div>
 			
-			<div class="row mt30">
-				<h3>입금 계좌</h3>
-			</div>
-			<div class="row m10">
-				<input type="text" value="<%=sellerDto.getSellerAccountNo()%>" class="form-input" readonly>
-			</div>
-			
-			<div class="row mt30">
-				<h3>판매자 유형</h3>
-			</div>
-			<div class="row m10">
-				<input type="text" value="<%=sellerDto.getSellerType()%>" class="form-input" readonly>
-			</div>
-			
-			<div class="row m10">
-				<a href="seller_edit.jsp"><button class="btn fill">수정하기</button></a>
-			</div>
-	</div>
+		</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -28,7 +28,7 @@ public class MemberProfileDeleteServlet extends HttpServlet{
 			
 			// 처리
 			MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
-			memberProfileDao.delete(memberNo);
+			memberProfileDao.delete(memberNo); // attachNo가 삭제되면 cascade로 memberProfile도 수정됨 
 			attachDao.delete(memberProfileDto.getAttachNo());
 			
 			// 출력 
