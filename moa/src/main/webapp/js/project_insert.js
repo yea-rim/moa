@@ -30,7 +30,7 @@ $(function() {
 					dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ], //요일 이름 지정
 					monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8",
 							"9", "10", "11", "12" ], //월 이름 지정
-					minDate : 0
+					minDate : '+3D'
 				//오늘 이전 날짜를 선택할 수 없음
 				}).on("change", function() {
 			to.datepicker("option", "minDate", getDate(this)); //종료일의 minDate 지정
@@ -42,7 +42,7 @@ $(function() {
 					dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
 					monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8",
 							"9", "10", "11", "12" ],
-					minDate : '+1D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
+					minDate : '+4D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y)
 				}).on("change", function() {
 			from.datepicker("option", "maxDate", getDate(this)); //시작일의 maxDate 지정
 		});
@@ -51,7 +51,7 @@ $(function() {
 			var date;
 			try {
 				date = $.datepicker.parseDate(dateFormat, element.value);
-				if (element.id == 'from') {
+				if (element.id == 'start') {
 					date.setDate(date.getDate() + 1); //종료일은 시작보다 하루 이후부터 지정할 수 있도록 설정
 				} else {
 					date.setDate(date.getDate() - 1); //시작일은 종료일보다 하루 전부터 지정할 수 있도록 설정
@@ -93,7 +93,9 @@ $(function() {
 			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill"></div>\
 	                <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill"></textarea></div>\
 	                <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"></div>\
-	                <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>');
+	                <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>\
+	                <div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="rewardDelivery" class="form-input w80p">\
+					<input type="checkbox" class="form-input each-ckbox"><input type="hidden" name="rewardEach" value="0"><label class="f12 gray">개별 배송 여부</label></div>');
 	
 			div.append(h3).append(content);
 			$("#add-reward").append(div);
@@ -116,32 +118,39 @@ $(function() {
 		});
 
 
-		//파일 추가 함수
-		var fileNum = 1;
-		function addFile(fileName,fileBtn) {
-				var div = $(".buttons"+fileBtn);
-				var input = $('<input type="file" accept="image/*">');
-				var btn = $('<button type="button" class="addbtn btn-removeFile">-</button><br>');
-				input.attr("name",fileName+fileNum);
-				
-				div.append(input).append(btn);
-				fileNum++
+		//개별 배송 여부 체크 시 
+		$("input[name=rewardEach]").on("input",function(){
+			if($(this).prop("checked")){
+				$(this).attr("value","1");
+				console.log("ok");
+			}else{
+				$(this).attr("value","0");
 			}
+		});
+		
+		//파일 숨김
+		$(".btn-del").parent("div").hide();
 
-		//대표 이미지 파일 추가
-		var profileMax = 1;
-		$(".btn-addProfile").click(function(){
-			if(profileMax>=3) return;
-			addFile("profileAttach",1)
-			profileMax++;
+		//파일추가
+		$(".btn-add").click(function(){
+			var target =$(this).next().next('div');
+			if(target.css('display')=='none'){
+				target.show();
+				target.children('input').removeAttr('disabled');
+			}
+			else{
+				target.next('div').show();
+				target.next('div').children('input').removeAttr('disabled');
+			}
 		});
 
-		//본문 이미지 파일 추가
-		var detailMax = 1;
-		$(".btn-addDetail").click(function(){
-			if(detailMax>=3) return;
-			addFile("detailAttach",2)
-			detailMax++;
+
+		//파일삭제
+		$(".btn-del").each(function(){
+			$(this).click(function(){
+				$(this).parent("div").hide();
+				$(this).parent("div").children("input").attr("disabled","disabled");
+			});
 		});
 		
 		
@@ -194,5 +203,23 @@ $(function() {
 				$(this).next(".length").children(".msg").text($(this).data("fail-msg"));
 			}
         });
+        
+        	//개별 배송여부 체크 시 value값 수정
+	$(".each-ckbox").on("input",function(){
+			if ($(this).is(":checked")) {
+			    $(this).next().attr("value","1");
+			} else {
+			     $(this).next().attr("value","0");
+			}
+	});
+	
+	//추가한 리워드 체크박스 값 설정
+	$(document).on("input",".each-ckbox",function(){
+			if ($(this).is(":checked")) {
+			    $(this).next().attr("value","1");
+			} else {ㄴ
+			     $(this).next().attr("value","0");
+			}
+		});
 			
 	});

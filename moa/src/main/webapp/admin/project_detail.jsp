@@ -8,20 +8,6 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
-<script type="text/javascript">
-	$(function() {
-		$(".refuse-msg").hide();
-		
-		$(".btn-refuse").click(function() {
-			$(".refuse-msg").toggle();
-		});
-		
-		$(".del").click(function() {
-			return confirm("정말 삭제 하시겠습니까?");
-		});
-
-	});
-</script>
 <%
 int ProjectNo = Integer.parseInt(request.getParameter("projectNo"));
 
@@ -35,7 +21,7 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 %>
 
 <div class="row center">
-	<h1 class="m40">
+	<h1 class="mb50">
 		<%=projectDto.getProjectName()%>
 	</h1>
 </div>
@@ -49,17 +35,20 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 			<div class="img block">
 				<img src="https://via.placeholder.com/400x300" width="100%">
 			</div>
-
 		</div>
 	</div>
 	<div class="float-left w40p left p10px">
 		<!-- 프로필부분의 오른쪽 플로트 -->
-
 		<div class="row fill m20">
-			<h2>[카테고리]　<%=projectDto.getProjectCategory()%></h2>
+			<h2>
+				[카테고리]
+				<%=projectDto.getProjectCategory()%></h2>
 		</div>
 		<div class="row fill m20">
-			<h2>[목표금액]　<%=f.format(projectDto.getProjectTargetMoney())%>원</h2>
+			<h2>
+				[목표금액]
+				<%=f.format(projectDto.getProjectTargetMoney())%>원
+			</h2>
 		</div>
 		<div class="row fill m20 h150">
 			<h2>[설명]</h2>
@@ -73,7 +62,7 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 				<%=projectDto.getProjectSemiFinish()%>
 			</h3>
 		</div>
-		
+
 		<div class="row fill mt100">
 			<div class="float-container">
 				<div class="float-left center layer-2 h40 " style="font-size: 14px;">
@@ -91,40 +80,36 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 				</div>
 			</div>
 			<div class="row fill m5">
-			<div class="float-container ">
-				<div class="float-left center layer-2 h40 " style="font-size: 14px;">
-					<a
-						href="<%=request.getContextPath()%>/admin/projectPermit.do?projectNo=<%=projectDto.getProjectNo()%>">
-						<button class="btn w90p h100p">승인</button>
-					</a>
+				<div class="float-container ">
+					<div class="float-left center layer-2 h40 "
+						style="font-size: 14px;">
+						<a
+							href="<%=request.getContextPath()%>/admin/projectPermit.do?projectNo=<%=projectDto.getProjectNo()%>">
+							<button class="btn w90p h100p">승인</button>
+						</a>
+					</div>
+					<div class="float-left center layer-2 h40" style="font-size: 14px;">
+						<a href="#" class="btn-refuse">
+							<button class="btn w90p h100p">거절</button>
+						</a>
+					</div>
 				</div>
-				<div class="float-left center layer-2 h40" style="font-size: 14px;">
-					<a href="#" class="btn-refuse">
-						<button class="btn w90p h100p">거절</button>
-					</a>
+				<div class="row m20 refuse-msg">
+					<form action="projectRefuse.do" method="post">
+						<label>거절 메세지 입력</label> <input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
+						<textarea name="projectRefuseMsg" rows="5" class="float-right fill form-input mt5" placeholder="내용입력" autocomplete="off"></textarea>
+						<div class="row center">
+							<button class="btn btn-reverse fill">거절하기</button>
+						</div>
+					</form>
 				</div>
 			</div>
-                           <div class="row m20 refuse-msg">
-                           <form action="projectRefuse.do" method="post">
-                                <label>거절 메세지 입력</label>
-                                <input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
-                                <textarea name="projectRefuseMsg" rows="10" class="float-right fill form-input" placeholder="내용입력"autocomplete="off"></textarea>
-                                    <div class="row right">
-                       			<button class="btn right">거절하기</button>				
-                       				</div>
-                       				</form>		
-                            </div>
-		</div>
 		</div>
 	</div>
 </div>
 
-
-
 <div class="float-container center m30">
-
 	<!-- 상세페이지 본문 부분-->
-
 	<div class="float-left w60p">
 		<h3 class="left m10">펀딩소개</h3>
 		<img src="https://via.placeholder.com/400x500" width="100%">
@@ -132,19 +117,18 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 
 	<!-- 본문 오른쪽 리워드 부분 -->
 	<div class="float-left w40p p10px-left">
-		<h3 class="left m10">리워드　
-			<a href="rewardEdit.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-btn">리워드 수정</a>
-			</h3>
-		
+		<div class="row left mb10">
+			<span>리워드 </span> <a
+				href="rewardEdit.jsp?projectNo=<%=projectDto.getProjectNo()%>"
+				class="link link-reverse">리워드 수정</a>
+		</div>
 		<%for (RewardDto rewardDto : rewardList) {%>
 		<div class="fill m-b10">
 			<a href="#" class="link">
-			<button class="btn fill reward"style="text-align: left;">
-					리워드 이름<%=rewardDto.getRewardName()%><br> 
-					리워드 내용<%=rewardDto.getRewardContent()%><br> 
-					리워드 가격<%=rewardDto.getRewardPrice()%><br> 
-					리워드 재고<%=rewardDto.getRewardStock()%>
-			</button>
+				<button class="btn btn-reverse fill reward" style="text-align: left;">
+					리워드 이름<%=rewardDto.getRewardName()%><br> 리워드 내용<%=rewardDto.getRewardContent()%><br>
+					리워드 가격<%=rewardDto.getRewardPrice()%><br> 리워드 재고<%=rewardDto.getRewardStock()%>
+				</button>
 			</a>
 		</div>
 		<%}%>

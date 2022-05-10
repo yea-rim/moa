@@ -89,13 +89,10 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 				for (ProjectDto projectDto : list) {
 				SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 				%>
-				<tr>
+				<tr onclick="location.href='<%=request.getContextPath()%>/admin/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>';" style="width:100%;cursor:pointer;">
 					<td><%=sellerDto.getSellerNick() %></td>
 					<td><%=projectDto.getProjectCategory() %></td>
-					<td class="left">
-					<a href="<%=request.getContextPath()%>/admin/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
-						<%=projectDto.getProjectName() %>
-					</a></td>
+					<td class="left" ><%=projectDto.getProjectName() %></td>
 					<td><%=f.format(projectDto.getProjectTargetMoney()) %></td>
 					<td><%=projectDto.getProjectStartDate() %></td>
 					<td>
@@ -134,7 +131,9 @@ if (endBlock > lastPage) {
 <div class="pagination cente m40">
 	<h4>
 		<!-- 이전 버튼 영역 -->
+		<%if (p > 1) { // 첫페이지가 아니라면 %>
 		<a href="projectList.jsp?p=1&s=<%=s%>&sort=<%=sort%>">&laquo;</a>
+		<%}%>
 
 		<%
 		if (startBlock > 1) { // 이전 블록이 있으면

@@ -32,8 +32,8 @@ public class joaAjaxServlet extends HttpServlet{
 			
 			if(joaDao.isSearch(projectNo, memberNo)) {
 				joaDao.delete(projectNo, memberNo);
-				
 				resp.getWriter().print("delete");
+				
 			}else {
 				joaDao.insert(projectNo, memberNo);
 				resp.getWriter().print("insert");
