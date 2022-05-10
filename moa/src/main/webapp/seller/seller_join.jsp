@@ -3,8 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<%-- 첨부파일 수정 필요 --%>
-
 <%
 	Integer memberNo = (Integer)session.getAttribute("login");
 
@@ -18,28 +16,28 @@
 
 	<div class="container w450 m30">
 
-		<div class="row center">
+		<div class="row center m30">
 			<h1>판매자 신청</h1>
 		</div>
 		
 		<input type="hidden" name="sellerNo" value="<%=memberDto.getMemberNo()%>">
 
-		<div class="row">
+		<div class="row m30">
 			<label>판매자 닉네임</label> <input type="text" name="sellerNick" required
 				class="form-input fill input-round" autocomplete="off">
 		</div>
 		
-		<div class="row">
+		<div class="row m30">
 			<label>입금 은행</label> <input type="text" name="sellerAccountBank"
 				required class="form-input fill input-round" autocomplete="off">
 		</div>
 		
-		<div class="row">
+		<div class="row m30">
 			<label>계좌 번호</label> <input type="text" name="sellerAccountNo"
 				required class="form-input fill input-round" autocomplete="off">
 		</div>
 		
-		<div class="row">
+		<div class="row m30">
 		<label>판매자 타입</label>
 		<select name="sellerType" class="form-input input-round">
           	<option selected disabled>선택</option>                
@@ -48,8 +46,13 @@
 			<option value="개인 판매자">개인 판매자</option>
 		</select>
 		</div>
+		
+		<div class="row m30">
+		<h4>인증 첨부파일</h4>
+		<input class="m20" type="file" name="sellerAttach" accept="image/*">
+		</div>
 
-		<div class="row">
+		<div class="row m30">
 			<button type="submit" class="btn btn-primary fill">판매자 신청</button>
 		</div>
 	</div>

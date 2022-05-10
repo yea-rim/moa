@@ -1,3 +1,5 @@
+<%@page import="moa.beans.MoaNoticeDto"%>
+<%@page import="moa.beans.MoaNoticeDao"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="moa.beans.ProjectDao"%>
 <%@page import="moa.beans.MemberDao"%>
@@ -47,32 +49,32 @@ String keyword = request.getParameter("keyword");
 <%
 boolean isSearch = type != null && keyword != null;
 
-CommunityDao communityDao = new CommunityDao();
-List<CommunityDto> list;
+MoaNoticeDao moaNoticeDao = new MoaNoticeDao();
+List<MoaNoticeDto> list;
 if (isSearch) {
-	list = communityDao.selectList(p, s, type, keyword);
+	list = moaNoticeDao.selectList(p, s, type, keyword);
 } else {
-	list = communityDao.selectList(p, s);
+	list = moaNoticeDao.selectList(p, s);
 }
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>moa 홍보게시판</title>
+<title>moa 공지사항</title>
 	
 <style>
 .flex-container1 {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 .flex-container2 {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 }
 .flex-items1 {
 	flex-basis:10%;
@@ -101,75 +103,58 @@ button[type=submit]{
 
 <%-- 검색결과 --%>
 <hr style="border:solid 0.5px lightgray">
-<div class="container m50">
+<div class="container w800 m30">
 	<div class="row center">
 		<a href="list.jsp?p=1&s=10" class="link">
-			<h1>홍보게시판</h1>
+			<h1>공지사항</h1>
 		</a>
+		<hr style="border:solid 0.5px #B899CD">
 	</div>
 </div>
+
 <div class="container w800 m70">
 				
-				<hr style="border:solid 1px #B899CD">
-			<div class="row flex-container2 m30">
-				<div class="flex-items1">번호</div>
-				<div class="flex-items2 center">제목 / 프로젝트이름</div>
-				<div class="flex-items3">날짜</div>
-				<div class="flex-items4 right">작성자</div>
-			</div>
 			
-		<%for (CommunityDto communityDto : list) {%>
-			<div class="row flex-container1 m10">
-			
-				<div class="row flex-container2">
-				
-					<div class="flex-items1">
-						<span><%=communityDto.getCommunityNo() %> </span>
-					</div>
-					
-					<% 
-						ProjectDao projectDao = new ProjectDao();
-						ProjectDto projectDto = projectDao.selectOne(communityDto.getCommunityProjectNo());
-					%>
-					<div class="flex-items2 community-name">
-						<span>
-							<a href="detail.jsp?communityNo=<%=communityDto.getCommunityNo() %>" class="link">
-								<h3><%=communityDto.getCommunityTitle() %>(<%=communityDto.getCommunityReplycount() %>)</h3>
-							</a>
-						</span>
-						<span>
-							<h5>/ <%=projectDto.getProjectName() %></h5>
-						</span>
-					</div>
-
-					<div class="flex-items3">
-						<span><%=communityDto.getCommunityTime() %></span>
-					</div>
-								
-					<% 
-						MemberDao memberDao = new MemberDao();
-						MemberDto memberDto = memberDao.selectOne(communityDto.getCommunityMemberNo());
-					%>
-					<div class="flex-items4 row right">
-						<span><%=memberDto.getMemberNick() %></span>
-					</div>
-					
-					
-				</div>
-				
+			<div class="row right m10">
+				<a href="insert.jsp" class="link btn">공지 작성하기</a>
 			</div>
-			<hr style="border:solid 0.5px lightgray">
-		<%}%>
-
+			<%-- 목록 --%>
+				<div class="row flex-container1">
+	                <div class="row">
+    	                <div class="row flex-container2">
+    	                
+    	                <%for (MoaNoticeDto moaNoticeDto : list) {%>
+    	                <div class="container fill" style="border-bottom:0.5px solid black">
+    	               		<div class="row flex-container1">
+    	                	<div class="row flex-container2">
+	    	                	<div class="row">
+	    	                		<a href="<%=request.getContextPath() %>/detail.jsp?noticeNo = <%=moaNoticeDto.getNoticeNo() %>" class="link">
+	    	                			<%=moaNoticeDto.getNoticeTitle() %>
+	    	                		</a>
+	    	                	</div>
+	    	                	
+	    	                	<div class="row "><%=moaNoticeDto.getNoticeTitle() %> </div>
+	    	                </div>
+    	                		
+    	                		<div class="row">
+	    	                			<img src="https://dummyimage.com/100x100" width="100%">
+	    	                	</div>
+	    	                </div> 
+	    	               </div>
+    	                <%} %>
+    	                
+    	                </div>
+        	        </div>
+        	     </div>
 <!--  순자 페이지네이션 -->
 <%
 int count;
 if(isSearch)
 {
-	count = communityDao.countByPaging(type, keyword);
+	count = moaNoticeDao.countByPaging(type, keyword);
 }else
 {
-	count = communityDao.countByPaging();
+	count = moaNoticeDao.countByPaging();
 }
 
 // 마지막 페이지 번호 계산
@@ -254,8 +239,8 @@ if(endBlock>lastPage)
 	<div class="row center m30">
 		<form action="list.jsp" method="get">
 			<select name="type" required class="form-input">
-				<option value="community_title">제목</option>
-				<option value="community_content">내용</option>
+				<option value="notice_title">제목</option>
+				<option value="notice_content">내용</option>
 			</select> 
 		   	 <input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
 			 <button type="submit" class="btn-reverse">검색</button>
@@ -264,5 +249,4 @@ if(endBlock>lastPage)
 	
 <hr style="border:solid 1px #B899CD">
 </div>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

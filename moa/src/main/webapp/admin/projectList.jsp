@@ -1,4 +1,3 @@
-
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
