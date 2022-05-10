@@ -32,6 +32,7 @@ public class MemberDao {
 			memberDto.setMemberBasicAddress(rs.getString("member_basic_address"));
 			memberDto.setMemberDetailAddress(rs.getString("member_detail_address"));
 			memberDto.setMemberRoute(rs.getString("member_route"));
+			memberDto.setMemberAdmin(rs.getInt("member_admin"));
 		} else {
 			memberDto = null;
 		}
@@ -68,6 +69,7 @@ public class MemberDao {
 				memberDto.setMemberBasicAddress(rs.getString("member_basic_address"));
 				memberDto.setMemberDetailAddress(rs.getString("member_detail_address"));
 				memberDto.setMemberRoute(rs.getString("member_route"));
+				memberDto.setMemberAdmin(rs.getInt("member_admin"));
 			} else {
 				memberDto = null;
 			}
