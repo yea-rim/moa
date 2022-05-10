@@ -786,3 +786,8 @@ textarea.form-input {
 	color: rgb(241, 99, 99);
 }
 
+
+/* 컨테이너 배경 색 */
+.container-gray {
+	background-color: #f7f2f2;
+}
