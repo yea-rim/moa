@@ -11,9 +11,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = {
+/*@WebFilter(urlPatterns = {
 		
-})
+})*/
 public class LoginMemberFilter implements Filter{
 
 	@Override

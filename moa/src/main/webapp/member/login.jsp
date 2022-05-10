@@ -58,18 +58,10 @@
             <div class="row m50">
                 <hr>
             </div>
-            
-            <div class="float-container">
             	<!-- 회원가입 페이지 -->
-                <div class="float-left layer-2 right">
-                    <a href="" class="link">아직 계정이 없으신가요?</a>
-                </div>
-                
-                <!-- 관리자 로그인 페이지 -->
-                <div class="float-right layer-2 center">
-                    <a href="<%=request.getContextPath() %>/member/admin_login.jsp" class="link link-purple">관리자</a>
-                </div>
-            </div>
+               <div class="row center">
+                   <a href="" class="link">아직 계정이 없으신가요?</a>
+               </div>
         </div>
         
     </form>

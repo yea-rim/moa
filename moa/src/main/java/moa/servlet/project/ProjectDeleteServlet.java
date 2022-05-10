@@ -1,6 +1,7 @@
 package moa.servlet.project;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import moa.beans.AttachDao;
 import moa.beans.ProjectAttachDao;
+import moa.beans.ProjectAttachDto;
 import moa.beans.ProjectDao;
 
 @WebServlet(urlPatterns = "/project/delete.do")
@@ -22,14 +25,19 @@ public class ProjectDeleteServlet extends HttpServlet{
 			ProjectDao projectDao = new ProjectDao();
 			boolean delProject = projectDao.delete(projectNo);
 			
-			//첨부파일 삭제
+			//프로젝트 첨부파일 정보 삭제 & 첨부파일 삭제
+			AttachDao attachDao = new AttachDao();
 			ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-			boolean delAttach = projectAttachDao.delete(projectNo);
 			
-			boolean success =  delProject&&delAttach;
-			System.out.println(success);
-			System.out.println("성공");
-			if(success) {
+			List<ProjectAttachDto> list = projectAttachDao.AttachList(projectNo);
+			for(ProjectAttachDto dto : list) {
+				boolean delAttach = attachDao.delete(dto.getAttachNo());
+				if(!delAttach) {
+					resp.sendError(404);
+				}
+			}
+							
+			if(delProject) {
 				resp.sendRedirect(req.getContextPath()+"/admin/projectList.jsp");
 			}
 			else {
