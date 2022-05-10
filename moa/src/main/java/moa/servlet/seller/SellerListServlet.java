@@ -20,7 +20,7 @@ public class SellerListServlet extends HttpServlet {
 
 			// 처리
 			SellerDao sellerDao = new SellerDao();
-			List<SellerDto> list = sellerDao.selectList();
+			List<SellerDto> list = sellerDao.selectSeller();
 
 			// 출력
 			for (SellerDto sellerDto : list) {
