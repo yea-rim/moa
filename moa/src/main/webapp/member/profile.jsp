@@ -134,7 +134,7 @@
                                     </div>
                                 </div>
                             <div>
-								<a href="delete_profile.do?memberNo=<%=memberNo%>"><button class="btn">삭제</button></a>
+								<a href="delete_profile.do?memberNo=<%=memberNo%>"><button type="button" class="btn">삭제</button></a>
                             </div>
                             </div>
                             

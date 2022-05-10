@@ -19,11 +19,9 @@
 	boolean isAdmin = adminId != null;
 	
 	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-	String sellerRegistDate = (String) session.getAttribute("sellerRegistDate");
+	Date sellerRegistDate = (Date) session.getAttribute("sellerRegistDate");
 	boolean isApprove = sellerRegistDate != null;
 
-	// 판매자 여부 판단 
-	boolean isSeller = sellerNo != null; 
 %>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +50,7 @@
 
 </head>
 <body>
-임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerNo = <%=sellerNo %>, sellerRegistDate = <%=sellerRegistDate %>
+임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerRegistDate = <%=sellerRegistDate %>
     <main>
 
         <header>
@@ -63,7 +61,7 @@
                     </a>
                 </div>
                 <%if(isLogin) { // 로그인 상태라면 %>               	
-                		<%if(isSeller) { // 판매자라면 %>
+                		<%if(isApprove) { // 판매자라면 %>
                 			<div class="float-right layer-5 center m10">
 	                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link link-purple">
 	                				<button class="btn-reverse">

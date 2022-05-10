@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.MemberDao;
 import moa.beans.MemberDto;
+import moa.beans.SellerDao;
+import moa.beans.SellerDto;
 
 @WebServlet(urlPatterns = "/member/login.do")
 public class MemberLoginServlet extends HttpServlet{
@@ -28,12 +30,14 @@ public class MemberLoginServlet extends HttpServlet{
 			// 처리
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.selectOne(memberEmail);
+			SellerDao sellerDao = new SellerDao();
+			SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 			
 			
 			// memberDto가 존재하면서 비밀번호 일치 여부 검사 
 			boolean isLogin = memberDto != null && memberDto.getMemberPw().equals(memberPw);
 			
-			System.out.println(isLogin);
+//			System.out.println(isLogin);
 			
 			
 			// 출력 
@@ -42,6 +46,10 @@ public class MemberLoginServlet extends HttpServlet{
 				
 				// 세션에 login 추가
 				req.getSession().setAttribute("login", memberDto.getMemberNo());
+				
+				if(sellerDto.getSellerRegistDate() != null) {
+					req.getSession().setAttribute("sellerRegistDate", sellerDto.getSellerRegistDate());
+				}
 				
 			} else { // 로그인 실패 
 				resp.sendRedirect(req.getContextPath()+"/member/login.jsp?error");
