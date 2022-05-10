@@ -3,6 +3,8 @@ package moa.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProjectAttachDao {
@@ -53,5 +55,27 @@ public class ProjectAttachDao {
 		con.close();
 		return count>0;
 	}
+	
+	// 한 프로젝트의 첨부파일 리스트 
+	public List<ProjectAttachDto> AttachList(int projecNo) throws Exception {	
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from project_attach where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projecNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ProjectAttachDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+			projectAttachDto.setProjectNo(rs.getInt("project_no"));
+			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			
+			list.add(projectAttachDto);
+		}
+		return list;
+	}
+	
+	
 	
 }
