@@ -50,9 +50,13 @@ public class ProjectInsertServlet extends HttpServlet{
 			ProjectDao projectDao = new ProjectDao();
 			int projectNo = projectDao.getSequence();
 			
+			//판매자 번호
+			int sellerNo = (int)req.getSession().getAttribute("login");
+			
 			//프로젝트 신청 처리
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(projectNo); //가져온 시퀀스 번호 넣어주기
+			projectDto.setProjectSellerNo(sellerNo);
 			projectDto.setProjectCategory(mRequest.getParameter("projectCategory"));
 			projectDto.setProjectName(mRequest.getParameter("projectName"));
 			projectDto.setProjectSummary(mRequest.getParameter("projectSummary"));
@@ -75,8 +79,7 @@ public class ProjectInsertServlet extends HttpServlet{
 			    File target = mRequest.getFile(name);
 			    int fileSize = 0;
 			 	if(target != null)	fileSize = (int)target.length();	
-						
-			 	System.out.println("파일이름:"+name);
+
 			 	//파일 정보 저장
 				AttachDto attachDto = new AttachDto();
 				attachDto.setAttachNo(attachDao.getSequence());

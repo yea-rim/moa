@@ -673,7 +673,7 @@ public class ProjectDao {
 				+ " values(?,?,?,?,?,?,?,?,?+30)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectDto.getProjectNo());
-		ps.setInt(2, 23);
+		ps.setInt(2, projectDto.getProjectSellerNo());
 		ps.setString(3, projectDto.getProjectCategory());
 		ps.setString(4, projectDto.getProjectName());
 		ps.setString(5, projectDto.getProjectSummary());
@@ -916,7 +916,6 @@ public class ProjectDao {
 
 		return count;
 	}
-<<<<<<< HEAD
 	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o)
 		public List<ProjectDto> ongoingSelectList(int p, int s, String sort, int sellerNo) throws Exception {
@@ -973,7 +972,4 @@ public class ProjectDao {
 			
 			return list;
 		}
-=======
->>>>>>> refs/remotes/origin/main
-
 }

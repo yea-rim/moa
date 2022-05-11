@@ -21,22 +21,23 @@ public class ProjectDeleteServlet extends HttpServlet{
 		try {
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
-			//프로젝트 삭제
+			//준비
 			ProjectDao projectDao = new ProjectDao();
-			boolean delProject = projectDao.delete(projectNo);
-			
-			//프로젝트 첨부파일 정보 삭제 & 첨부파일 삭제
 			AttachDao attachDao = new AttachDao();
-			ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-			
-			List<ProjectAttachDto> list = projectAttachDao.AttachList(projectNo);
+			ProjectAttachDao projectAttachDao = new ProjectAttachDao();			
+						
+			//프로젝트 첨부파일 정보 삭제 & 첨부파일 삭제
+			List<ProjectAttachDto> list = projectAttachDao.attachList(projectNo);
 			for(ProjectAttachDto dto : list) {
 				boolean delAttach = attachDao.delete(dto.getAttachNo());
+				System.out.println(dto.getAttachNo());
 				if(!delAttach) {
 					resp.sendError(404);
 				}
 			}
-							
+			//프로젝트 삭제
+			boolean delProject = projectDao.delete(projectNo);
+			
 			if(delProject) {
 				resp.sendRedirect(req.getContextPath()+"/admin/projectList.jsp");
 			}

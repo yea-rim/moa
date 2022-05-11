@@ -55,14 +55,53 @@ public class ProjectAttachDao {
 		con.close();
 		return count>0;
 	}
-	
-	// 한 프로젝트의 첨부파일 리스트 
-	public List<ProjectAttachDto> AttachList(int projecNo) throws Exception {	
+	// 한 프로젝트 첨부파일 리스트 
+	public List<ProjectAttachDto> attachList(int projectNo) throws Exception {	
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from project_attach where project_no=?";
+		String sql = "select * from project_attach where project_no=? and attach_type='프로필'";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, projecNo);
+		ps.setInt(1, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ProjectAttachDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+			projectAttachDto.setProjectNo(rs.getInt("project_no"));
+			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			
+			list.add(projectAttachDto);
+		}
+		return list;
+	}
+	
+	// 한 프로젝트의 프로필 리스트 
+	public List<ProjectAttachDto> selectProfileList(int projectNo) throws Exception {	
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from project_attach where project_no=? and attach_type='프로필'";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ProjectAttachDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+			projectAttachDto.setProjectNo(rs.getInt("project_no"));
+			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			
+			list.add(projectAttachDto);
+		}
+		return list;
+	}
+	
+	// 한 프로젝트의 본문 리스트 
+	public List<ProjectAttachDto> selectDetailList(int projectNo) throws Exception {	
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from project_attach where project_no=? and attach_type='본문'";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
 		
 		List<ProjectAttachDto> list = new ArrayList<>();
