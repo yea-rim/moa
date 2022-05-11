@@ -4,7 +4,7 @@ public class RewardSelectionDto {
 	private int selectionFundingNo;
 	private int selectionRewardNo;
 	private int selectionRewardAmount;
-	private int selectionOption;
+	private String selectionOption;
 	
 	
 	public RewardSelectionDto() {
@@ -19,15 +19,13 @@ public class RewardSelectionDto {
 		this.selectionFundingNo = selectionFundingNo;
 	}
 
-	public int getSelectionOption() {
+	public String getSelectionOption() {
 		return selectionOption;
 	}
 
-
-	public void setSelectionOption(int selectionOption) {
+	public void setSelectionOption(String selectionOption) {
 		this.selectionOption = selectionOption;
 	}
-	
 
 	public int getSelectionRewardNo() {
 		return selectionRewardNo;

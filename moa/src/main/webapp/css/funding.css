@@ -1,0 +1,181 @@
+.reward-select {
+    background-color: #eeeeee;
+    width: 100%;
+    border-radius: 0.5em;
+}
+
+.is-check {
+    background-color: #eae0f0;
+}
+
+.check-reward {
+    flex-grow: 1;
+    width: 100px;
+    position: relative;
+}
+
+.reward-checkbox {
+    accent-color: #B899CD;
+    position: absolute;
+    top: 90px;
+    left: 50px;
+}
+
+.reward-checkbox:hover {
+    accent-color: #B899CD;
+}
+
+.reward {
+    flex-grow: 8;
+}
+
+.amount {
+    flex-grow: 1;
+}
+
+.detail-option {
+    width: 80%;
+    padding-left: 40px;
+}
+
+.amount>input {
+    width: 40%;
+}
+
+
+.amount>div>.minus-btn,
+.amount>div>.plus-btn {
+    width: 30px;
+    height: 100%;
+    border: 1px solid #B899CD;
+    padding: auto;
+    border-radius: 0.2em;
+    color: #B899CD;
+    background-color: white;
+    cursor: pointer;
+    font: inherit;
+    margin-bottom: 0;
+}
+
+
+.detail-option>input {
+    width: 90%
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+/* 확장 스타일 : 세로배치 */
+.flex-container.flex-vertical {
+    flex-direction: column;
+}
+
+/* flex를 이용하면 가운데 배치를 쉽게 할 수 있다 */
+.display-center {
+    display: flex;
+    justify-content: center;
+    /* display가 flex인 경우 가로 정렬 옵션 */
+    align-items: center;
+    /* display가 flex인 경우 세로 정렬 옵션 */
+}
+
+.next-btn {
+    width: 200px;
+    height: 40px;
+}
+
+#reward-checklist {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+
+.reward-checklist-name {
+    color: #B899CD;
+    font-size: 20px;
+}
+
+.reward-checklist-content {
+    color: rgb(185, 185, 185);
+}
+
+/* .reward-checklist-price > hr {
+    border: ;
+    background-color: rgb(214, 202, 202);
+    height: 0.05px;
+} */
+
+.m-b20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pay-box {
+    border: 1px solid #ddd3e4;
+    background-color: #f0ebf3;
+    border-radius: 0.5em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.dotline {
+    background-color: 0;
+    border: none;
+    border-bottom: 1px dotted #ddd3e4;
+
+}
+
+#supporter {
+    background-color: #eeeeee;
+    border-radius: 0.5em;
+    height: 300px;
+    margin-right: 30px;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.font-gray {
+    color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#location {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.reserve-btn {
+    width: 200px;
+    height: 40px;
+}
+
+.empty {
+    width: 100%;
+    height: 150px;
+    background-color: #eeeeee;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 0.5em;
+    font-size: xx-large;
+}
+
+input[name=selectionRewardAmount]{
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 50px;
+	padding-left: 1.5em
+	
+}

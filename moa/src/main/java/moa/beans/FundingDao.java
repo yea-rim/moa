@@ -12,9 +12,7 @@ public class FundingDao {
 	public List<FundingDto> selectList(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from funding F"
-				+ "	inner join member M on M.member_no = F.funding_member_no"
-				+ "	where F.funding_member_no = ?";
+		String sql = "select * from funding where funding_member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, memberNo);
 		
@@ -46,7 +44,7 @@ public class FundingDao {
 	}
 
 	// 상세 조회 (회원번호) 
-	public FundingDto selectOne(int memberNo) throws Exception {
+	public FundingDto selectOne(int fundingNo, int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from funding where funding_member_no = ?";
@@ -80,5 +78,43 @@ public class FundingDao {
 		return fundingDto;
 	}
 	
+	public int getFundingSequence() throws Exception{
+		String sql = "select funding_seq.nextval from dual";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int fundingSeq = rs.getInt(1);
+		
+		con.close();
+		return fundingSeq;
+	}
+	
+	public void insert(FundingDto fundingDto) throws Exception{
+		String sql = "insert into funding(funding_no, funding_member_no, funding_getter, funding_post, "
+				+ "funding_basic_address, funding_detail_address, funding_phone, funding_post_message, "
+				+ "funding_payment_date, funding_totalprice, funding_totaldelivery) "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, fundingDto.getFundingNo());
+		ps.setInt(2, fundingDto.getFundingMemberNo());
+		ps.setString(3, fundingDto.getFundingGetter());
+		ps.setString(4, fundingDto.getFundingPost());
+		ps.setString(5, fundingDto.getFundingBasicAddress());
+		ps.setString(6, fundingDto.getFundingDetailAddress());
+		ps.setString(7, fundingDto.getFundingPhone());
+		ps.setString(8, fundingDto.getFundingPostMessage());
+		ps.setDate(9, fundingDto.getFundingPaymentDate());
+		ps.setInt(10, fundingDto.getFundingTotalprice());
+		ps.setInt(11, fundingDto.getFundingTotaldelivery());
+		
+		ps.execute();
+		con.close();
+	}
 	
 }
