@@ -57,7 +57,7 @@
 
 			<!-- 프로젝트 대표 이미지 -->
             <div class="float-left m20 mlr20">
-                <img src="https://dummyimage.com/150x112" alt="" width="150px" height="112px">
+                <img src="https://dummyimage.com/150x112" alt="" width="200px" height="150px">
             </div>
 
             <div class="float-left m20 mlr20 h150">
@@ -65,14 +65,14 @@
             	<!-- 프로젝트 제목 -->
                 <div class="row w300 txt-overflow2">
                     <h3>
-                        <a href="" class="link"><%=projectDto.getProjectName() %></a>
+                        <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>" class="link"><%=projectDto.getProjectName() %></a>
                     </h3>
                 </div>
                 
                 <!-- 프로젝트 요약 -->
                 <div class="row w300 txt-overflow3 mt30">
                     <p>
-                        <a href="" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
+                        <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
                     </p>
                 </div>
             </div>

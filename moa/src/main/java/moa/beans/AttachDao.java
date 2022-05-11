@@ -3,6 +3,8 @@ package moa.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttachDao {
 
@@ -85,6 +87,8 @@ public class AttachDao {
 		return count > 0; 
 	}
 	
+	
+	//파일 정보 수정
 	public boolean edit(AttachDto attachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
@@ -122,4 +126,5 @@ public class AttachDao {
 		
 		return attachNo; 
 	}
+	
 }

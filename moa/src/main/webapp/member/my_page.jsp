@@ -55,7 +55,7 @@
 	
 	// 펀딩한 프로젝트 조회 
 /* 	FundingDao fundingDao = new FundingDao();
-	List<FundingDto> list2 = fundingDao.selectList(memberNo);
+	List<FundingDto> fundingList = fundingDao.selectList(memberNo);
 	
 	// 리워드 셀렉션 Dao 준비
 	RewardSelectionDao rewardSelectionDao = new RewardSelectionDao(); */
@@ -117,7 +117,7 @@
 	                                	<h3 class="center">(신청현황)</h3>
 			                        </a>
                             <%} else if(isSeller) { // 판매자일 때 프로젝트 관리 페이지로 이동 %>
-                        			<a href="" class="link link-reverse h40">
+                        			<a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link link-reverse h40">
 	                                	<h3>나의 프로젝트 관리</h3>
 	                            	</a>
                         	<%} else { // 일반회원일 때 판매자 신청 페이지로 이동 %>
@@ -160,7 +160,7 @@
             					
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
-								/* int profileNo = projectAttachDao.getAttachNo(projectNo);  */
+								/* int profileNo = projectAttachDao.getAttachNo(projectNo); */
 								
 								// projectAttach로 대표 이미지 가져오기 실패 
 								%> 
@@ -169,7 +169,7 @@
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
 					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
-					                        	<img src="https://dummyimage.com/200x150" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        </a>
 					                    </div>
 					                    
@@ -209,10 +209,10 @@
                        	<div class="container">
             				<div class="flex-container3">
             			
-            				<%-- <%for(FundingDto fundingDto : list2) {
+            				<%-- <%for(FundingDto fundingDto : fundingList) {
             					int fundingNo = fundingDto.getFundingNo();
             					
-            					RewardSelectionDto rewardSelectionDto = rewardSelectionDao.selectOne(fundingNo);
+            					RewardSelectionDto rewardSelectionDto = rewardSelectionDao.;
 								int projectNo = rewardSelectionDto.getSelectionProjectNo();
 								
 								ProjectDto projectDto = projectDao.selectOne(projectNo);

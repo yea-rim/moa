@@ -20,12 +20,12 @@
 	}
 %>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 	<div class="container w800">
 	
 		<div class="row m30 center">
-			<h1>판매자 신청 목록(미승인))</h1>
+			<h1>판매자 신청 목록 (미승인)</h1>
 		</div>
 		
 	<!-- 검색창 -->
@@ -73,4 +73,4 @@
 	
 	</div>
 
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
