@@ -44,6 +44,10 @@
 	font-size: 25px;
 	padding: 10px;
 }
+.new-name {
+	font-size: 20px;
+	padding: 5px;
+}
 .percent{
 	color: #B899CD;
 	font-size: 15px;
@@ -88,7 +92,7 @@
     	                		
     	                		<div class="row flex-items-b m10">
     	                			<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
-	    	                			<img src="https://dummyimage.com/100x100" width="100%">
+	    	                			<img src="https://dummyimage.com/500x400" width="110px" height="110px">
 	    	                		</a>
 	    	                	</div>
 	    	                </div> 
@@ -115,9 +119,9 @@
 				<%for(ProjectDto projectDto : list2){ %>
 					<div class="row flex-items1 m10">
 						<div class="row">
-							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="100%"></a>
+							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="240px" height="240px"></a>
 						</div>
-						<div class="row left m10">
+						<div class="row left m10 new-name">
 							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
 								<span><%=projectDto.getProjectName() %></span>
 							</a>

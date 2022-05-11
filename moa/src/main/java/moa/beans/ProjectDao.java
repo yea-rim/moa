@@ -33,15 +33,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -86,15 +77,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -184,15 +166,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -273,15 +246,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -324,15 +288,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -377,15 +332,6 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -448,17 +394,8 @@ public class ProjectDao {
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
-			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -497,17 +434,8 @@ public class ProjectDao {
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
-			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -588,17 +516,8 @@ public class ProjectDao {
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
-			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -669,17 +588,7 @@ public class ProjectDao {
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
-			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
@@ -704,17 +613,7 @@ public class ProjectDao {
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
-			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectName(rs.getString("project_name"));
-			projectDto.setProjectSummary(rs.getString("project_summary"));
-			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
-			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
-			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
-			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
-			projectDto.setProjectPermission(rs.getInt("project_permission"));
-			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
