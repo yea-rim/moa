@@ -1,14 +1,17 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.MemberDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%
+<%-- 오류 페이지 --%>
 
+<%
 	String sort = request.getParameter("sort");
 	if (sort == null){
-		sort = "최신순";
+		sort = "가입최신순";
 	}
 	
 	//페이징 관련 파라미터들을 수신
@@ -35,7 +38,7 @@
 	MemberDao memberDao = new MemberDao();
 	List<MemberDto> list = memberDao.allSelectList(p, s, sort);
 %>
-    
+
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 <script type="text/javascript">
@@ -56,7 +59,7 @@
 		<form action="member_list.jsp" method="get">
 			<select name="sort" class="sort">
 				<option>선택</option>
-				<option>최신순</option>
+				<option>가입최신순</option>
 				<option>판매자신청중</option>
 				<option>판매자승인</option>
 				<option>판매자거절</option>
@@ -77,11 +80,18 @@
 					<th>주소</th>
 					<th>상세주소</th>
 					<th>가입 경로</th>
+					<th>판매자 여부</th>
 				</tr>
 			</thead>
+			
 			<tbody align="center">
-				<%for(MemberDto memberDto : list){ %>
-				<tr onclick="location.href='<%=request.getContextPath()%>/member/detail.jsp?memberNo=<%=memberDto.getMemberNo() %>';" style="width:100%; cursor:pointer;">
+
+<%
+	SellerDao sellerDao = new SellerDao();
+	for(MemberDto memberDto : list){
+	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
+%>
+				<tr onclick="location.href='<%=request.getContextPath()%>/member/member_detail.jsp?memberNo=<%=memberDto.getMemberNo() %>';" style="width:100%; cursor:pointer;">
 					<td><%=memberDto.getMemberNo()%></td>
 					<td><%=memberDto.getMemberEmail()%></td>
 					<td><%=memberDto.getMemberNick()%></td>
@@ -91,6 +101,15 @@
 					<td><%=memberDto.getMemberBasicAddress()%></td>
 					<td><%=memberDto.getMemberDetailAddress()%></td>
 					<td><%=memberDto.getMemberRoute()%></td>
+					<td>
+					<%if(sellerDto.getSellerPermission()==0){ %>
+							<span style="color: red">승인필요</span>
+						<%}else if(sellerDto.getSellerPermission()==1){%>
+							<span style="color: blue">승인완료</span>
+ 						<%}else{ %>
+							거절 
+						<%} %>
+					</td>
 				</tr>
 				<%} %>
 			</tbody>
@@ -99,7 +118,7 @@
 	
 	<!-- 숫자(페이지네이션) 링크 -->
 <%
-	int count = memberDao.countByPaging();
+int count = memberDao.countByPaging();
 	
 	//마지막 페이지 번호 계산
 	int lastPage = (count + s - 1) / s;
