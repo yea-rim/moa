@@ -86,7 +86,8 @@
             
 	        // 파일명 input에 출력하는 JS
 	        $("#file").on('change',function(){
-	            var fileName = $("#file").val();
+	            var fileFullName = $("#file").val();	      
+	            var fileName = fileFullName.substring(12,fileFullName.length);
 	            $(".upload-name").val(fileName);
 	        });
         });

@@ -156,6 +156,16 @@
     color: #B899CD;
 }
 
+.link-small {
+    border: 1px solid #B899CD;
+    background-color: white;
+    color: #B899CD;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
 
 
 /* 버튼 스타일 */
@@ -427,7 +437,7 @@ textarea.form-input {
     border: 1px solid gray;
 }
 .menu-wrapper {
-    width:250px;
+    width:230px;
     background-color:  #f1f2f6;
 }
 .content-wrapper {
@@ -444,6 +454,11 @@ textarea.form-input {
 
 .list-card {
 	height: 350px;
+	background-color: white;
+	border: 1px solid rgb(208, 208, 208);
+}
+.list-card2 {
+	height: 270px;
 	background-color: white;
 	border: 1px solid rgb(208, 208, 208);
 }
@@ -511,7 +526,9 @@ textarea.form-input {
 .h100{
     height: 100px;
 }
-
+.h150{
+    height: 100px;
+}
 
 .fill {
     width: 100%;

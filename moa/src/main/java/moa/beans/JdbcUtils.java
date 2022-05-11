@@ -25,7 +25,7 @@ public class JdbcUtils {
 //	}
 	
 	public static Connection getConnection() throws Exception {
-	      Class.forName("oracle.jdbc.OracleDriver");
-	      return DriverManager.getConnection("jdbc:oracle:thin:@www.sysout.co.kr:11521:xe", "kh20", "kh20");
-	   }
+		Class.forName("oracle.jdbc.OracleDriver");
+		return DriverManager.getConnection("jdbc:oracle:thin:@www.sysout.co.kr:11521:xe", "kh20", "kh20");
+	}
 }

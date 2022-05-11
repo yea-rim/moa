@@ -29,7 +29,7 @@ public class SellerProjectDeleteServlet extends HttpServlet{
 			AttachDao attachDao = new AttachDao();
 			ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			
-			List<ProjectAttachDto> list = projectAttachDao.AttachList(projectNo);
+			List<ProjectAttachDto> list = projectAttachDao.attachList(projectNo);
 			for(ProjectAttachDto dto : list) {
 				boolean delAttach = attachDao.delete(dto.getAttachNo());
 				if(!delAttach) {

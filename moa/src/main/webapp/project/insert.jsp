@@ -28,8 +28,8 @@
 			</div>
 			<div class="row m30"><h3>* 프로젝트 기본 정보</h3></div>
 			<div class="row m20">
-				<label>카테고리</label> <select name="projectCategory"
-					class="form-input fill">
+				<label>카테고리</label> 
+				<select name="projectCategory" class="form-input fill">
 					<option value="">선택</option>
 					<option>패션/잡화</option>
 					<option>뷰티</option>
@@ -41,21 +41,21 @@
 			</div>
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill text-length" data-len="30" 
-				data-success-msg="" data-fail-msg="30자 이내로 입력해주세요." required>
+				<input type="text" name="projectName" class="form-input fill text-length" data-len="50" 
+				data-success-msg="" data-fail-msg="50자 이내로 입력해주세요.">
 				<div class="flex-container length">
 					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/30</span>
+					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/50</span>
 				</div>
 
 			</div>
 			<div class="row m20">
 				<label>프로젝트 요약글</label>
-				<textarea name="projectSummary" rows="5" class="form-input fill text-length" data-len="100"
-				data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."></textarea>
+				<textarea name="projectSummary" rows="5" class="form-input fill text-length" data-len="200"
+				data-success-msg="" data-fail-msg="200자 이내로 입력해주세요."></textarea>
 				<div class="flex-container length">
 					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span>
+					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/200</span>
 				</div>
 			</div>
 			<div class="row m20">
@@ -114,58 +114,58 @@
 		</div>
 
 		<!--펀딩 일정 선택-->
-		<div class="container w500 m30 page">
-			<div class="row center">
-				<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert2_ck.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert3.png" width="80">
-			</div>
-			<div class="row center m60">
-				<h1>펀딩 일정 선택</h1>
-			</div>
-				<div class="row m30">
-					<ul>
-						<li class="insert-li">
-							<div class="row">펀딩 시작일</div>
-							<div class="row m5">
-								<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
-								<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
-							</div>
-						</li>
-						<li class="insert-li">
-							<div class="row">
-								<span>펀딩기간</span>
-								<span class="days gray"></span>
-							</div>
-						</li>
-						<li class="insert-li">
-							<div class="row">펀딩 마감일</div>
-							<div class="row m5">
-								<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
-							</div>
-						</li>
-						<li class="insert-li">
-							<div class="row">정산일</div>
-							<div class="row m5">
-								<span class="f13 gray">펀딩 마감과 동시에 정산이 진행됩니다.</span>
-							</div>
-						</li>
-						<li class="insert-li">
-							<div class="row">배송 마감일</div>
-							<div class="row m5">
-								<span class="f13 gray">배송 마감일은 펀딩 마감일로 부터 30일 이후 입니다.</span><br>
-								<span class="f13 gray">한달 이내에 배송을 모두 완료 해야합니다.</span>
-							</div>
-						</li>
-					</ul>
-			<div class="row center m50">
-				<button type="button" class="btn btn-prev">이전 단계</button>
-				<button type="button" class="btn btn-next">다음 단계</button>
-			</div>
-		</div>
-</div>
+								<div class="container w500 m30 page">
+									<div class="row center">
+										<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="80">
+										<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
+										<img src="<%=request.getContextPath()%>/image/pj_insert2_ck.png" width="80">
+										<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
+										<img src="<%=request.getContextPath()%>/image/pj_insert3.png" width="80">
+									</div>
+									<div class="row center m60">
+										<h1>펀딩 일정 선택</h1>
+									</div>
+										<div class="row m30">
+											<ul>
+												<li class="insert-li">
+													<div class="row">펀딩 시작일</div>
+													<div class="row m5">
+														<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
+														<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
+													</div>
+												</li>
+												<li class="insert-li">
+													<div class="row">
+														<span>펀딩기간</span>
+														<span class="days gray"></span>
+													</div>
+												</li>
+												<li class="insert-li">
+													<div class="row">펀딩 마감일</div>
+													<div class="row m5">
+														<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
+													</div>
+												</li>
+												<li class="insert-li">
+													<div class="row">정산일</div>
+													<div class="row m5">
+														<span class="f13 gray">펀딩 마감과 동시에 정산이 진행됩니다.</span>
+													</div>
+												</li>
+												<li class="insert-li">
+													<div class="row">배송 마감일</div>
+													<div class="row m5">
+														<span class="f13 gray">배송 마감일은 펀딩 마감일로 부터 30일 이후 입니다.</span><br>
+														<span class="f13 gray">한달 이내에 배송을 모두 완료 해야합니다.</span>
+													</div>
+												</li>
+											</ul>
+								</div>
+									<div class="row center m50">
+										<button type="button" class="btn btn-prev">이전 단계</button>
+										<button type="button" class="btn btn-next">다음 단계</button>
+									</div>
+						</div>
 
 		<!--리워드 추가 페이지-->
 		<div class="container w500 m30 page">
@@ -181,12 +181,22 @@
 			</div>
 			<h3>* 리워드1</h3>
 			<div class="row m20">
-				<label>리워드 이름</label> <input type="text" name="rewardName"
-					class="form-input fill">
+				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill text-length" data-len="30" 
+				data-success-msg="" data-fail-msg="30자 이내로 입력해주세요.">
+				<div class="flex-container length">
+					<div class="left-wrapper msg f12 red"></div>
+					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/30</span>
+				</div>
+
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill"></textarea>
+				<textarea name="rewardContent" rows="5" class="form-input fill text-length" data-len="100"
+				data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."></textarea>
+				<div class="flex-container length">
+					<div class="left-wrapper msg f12 red"></div>
+					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span>
+				</div>
 			</div>
 			<div class="row m20">
 				<div class="">

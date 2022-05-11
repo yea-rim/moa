@@ -30,13 +30,9 @@ public class MemberLoginServlet extends HttpServlet{
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.selectOne(memberEmail);
 			
-			SellerDao sellerDao = new SellerDao();
-			SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
-			
 			
 			// memberDto가 존재하면서 비밀번호 일치 여부 검사 
 			boolean isLogin = memberDto != null && memberDto.getMemberPw().equals(memberPw);			
-			
 			
 			
 			// 출력 
@@ -46,6 +42,8 @@ public class MemberLoginServlet extends HttpServlet{
 				
 			
 				//판매자 세션 생성
+				SellerDao sellerDao = new SellerDao();
+				SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 				if(sellerDto != null) {
 					if(sellerDto.getSellerPermission()==1) {
 						req.getSession().setAttribute("seller", sellerDto.getSellerPermission());	

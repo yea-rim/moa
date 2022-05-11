@@ -1,6 +1,7 @@
 package moa.beans;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -745,7 +746,7 @@ public class ProjectDao {
 				+ " values(?,?,?,?,?,?,?,?,?+30)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectDto.getProjectNo());
-		ps.setInt(2, 23);
+		ps.setInt(2, projectDto.getProjectSellerNo());
 		ps.setString(3, projectDto.getProjectCategory());
 		ps.setString(4, projectDto.getProjectName());
 		ps.setString(5, projectDto.getProjectSummary());
@@ -1043,6 +1044,43 @@ public class ProjectDao {
 
 		return count;
 	}
+
+	public Date paymentDate(int projectNo) throws Exception {
+		String sql = "select project_semi_finish + 1 from project where project_no = ?";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, projectNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		
+		Date paymentDate = rs.getDate(1);
+		
+		con.close();
+		
+		return paymentDate;
+	}
+	
+	//프로젝트 후원자수+1 현재모금액 업데이트
+	public boolean fundingUpdate(int totalPrice) throws Exception {
+		String sql = "update project set project_present_money = project_present_money + ?";
+		
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, totalPrice);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count > 0;
+	}
+	
+
 	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o)
 		public List<ProjectDto> ongoingSelectList(int p, int s, String sort, int sellerNo) throws Exception {

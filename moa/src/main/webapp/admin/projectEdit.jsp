@@ -157,23 +157,12 @@
 		</div>
 		
 		<hr>
-<!-- 		<div class="row m30">
-			<h3>*프로젝트 이미지</h3>
-		</div>
-			<div class="row">
-			<h4 class="h20">대표 이미지</h4>
-			<input type="file" name="profileAttach1" accept="image/*" ><br>
-			<input type="file" name="profileAttach2" accept="image/*"><br>
-			<input type="file" name="profileAttach3" accept="image/*"><br>
-		</div>
-		<div class="row m20">
-			<h4 class="h20">프로젝트 상세이미지</h4>
-			<input type="file" class="filebox" name="detailAttach1" accept="image/*"><br>
-			<input type="file" class="filebox" name="detailAttach2" accept="image/*"><br>
-			<input type="file" class="filebox" name="detailAttach3" accept="image/*"><br>
-		</div> -->			
-		<div class="row m50">
+	
+		<div class="row mt50">
 			<input type="submit" class="btn fill" value="수정하기"> 
+		</div>
+		<div class="row m10 mb50">
+			<a href="project_detail.jsp?projectNo=<%=projectNo%>" class="link link-reverse fill center">돌아가기</a> 
 		</div>
 </form>
 	</div>
