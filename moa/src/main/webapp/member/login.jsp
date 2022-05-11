@@ -47,7 +47,8 @@
                 
                 <!-- 아이디 / 비밀번호 찾기 -->
                 <div class="float-right">
-                    <a href="" class="link link-gray">아이디 | 비밀번호 찾기</a>
+                    <a href="find_email.jsp" class="link link-gray">아이디</a>
+                    <a href="find_pw.jsp" class="link link-gray"> | 비밀번호 찾기</a>
                 </div>
             </div>
             
@@ -60,7 +61,7 @@
             </div>
             	<!-- 회원가입 페이지 -->
                <div class="row center">
-                   <a href="" class="link">아직 계정이 없으신가요?</a>
+                   <a href="join.jsp" class="link">아직 계정이 없으신가요?</a>
                </div>
         </div>
         

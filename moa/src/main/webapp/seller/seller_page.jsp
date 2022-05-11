@@ -32,6 +32,48 @@
 	List<ProjectDto> list2 = projectDao.selectNew();
 %>
 
+<style>
+.flex-container1 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.flex-container2 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.flex-items1 {
+	flex-basis: 20%;
+	padding: 10px;
+}
+
+.flex-items2 {
+	flex-basis: 50%;
+	padding: 10px;
+}
+
+.flex-items-a{
+	flex-basis: 80%;
+}
+.flex-items-b{
+	flex-basis: 20%;
+}
+.project-name {
+	font-size: 25px;
+	padding: 10px;
+}
+.percent{
+	color: #B899CD;
+	font-size: 15px;
+	padding: 10px;
+}
+.seller{
+	font-size: 15px;
+	padding: 0px 10px;
+}
+</style>
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
