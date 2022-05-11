@@ -6,9 +6,17 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".check-pw").on("input", function(){
-    		$("input[name=memberPw]").prop("type", "text"); // 비밀번호 보여주기 
-    	});
+		$(".check-pw").click(function(){
+            var checkList = $(".check-pw").prop("checked");
+
+            if(checkList) {
+                // 체크되었으면
+                $("input[name=memberPw]").prop("type", "text");
+            } else {
+                // 체크 해제되면 
+                $("input[name=memberPw]").prop("type", "password");
+            }
+        });
 	});
 </script>
 

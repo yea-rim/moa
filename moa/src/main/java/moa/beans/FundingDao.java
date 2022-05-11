@@ -12,9 +12,7 @@ public class FundingDao {
 	public List<FundingDto> selectList(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from funding F"
-				+ "	inner join member M on M.member_no = F.funding_member_no"
-				+ "	where F.funding_member_no = ?";
+		String sql = "select * from funding where funding_member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, memberNo);
 		
@@ -46,12 +44,12 @@ public class FundingDao {
 	}
 
 	// 상세 조회 (회원번호) 
-	public FundingDto selectOne(int memberNo) throws Exception {
+	public FundingDto selectOne(int fundingNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from funding where funding_member_no = ?";
+		String sql = "select * from funding where funding_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, memberNo);
+		ps.setInt(1, fundingNo);
 		
 		ResultSet rs = ps.executeQuery();
 		
