@@ -13,7 +13,6 @@
 
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
-	memberNo = 23; // 나중에 지우기
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
 	boolean isLogin = memberNo != null; 
 	
@@ -42,7 +41,7 @@
 	
 	JoaDao joaDao = new JoaDao();
 	
-	
+	int rewardCount = 1;
 %>
 
 
@@ -91,6 +90,8 @@
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- 좋아요 비동기통신 js파일 -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/joa.js"></script>
 
 <script type="text/javascript">
@@ -110,12 +111,7 @@
 
             <div class="float-left left-container">
                 <!-- 프로필부분의 왼쪽 플로트-->
-                <div class="row layer-1">
-                    <div class="img block">
                         <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
-                    </div>
-					
-                </div>
             </div>
 
 
@@ -158,14 +154,14 @@
                     </h5>
                 </div>
                 <div class="row fill h60 m10 m-t40">
-                    <button class="btn btn-reverse fill h40">후원하기</button>
+                    <a href="<%=request.getContextPath()%>/project/funding.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse fill h40">후원하기</button></a>
                 </div>
                 <div class="row fill h40 m-t30">
                     <div class="float-container h40">
                         <div class="float-left left layer-3 h100p">
                             <button class="btn btn-reverse w90p wrap h100p" id="joa-btn" style="font-size: 12px;">
                             	<span id="joa">
-                            		<%if(joaDao.isSearch(projectNo, memberNo)){ %>
+                            		<%if(isLogin && joaDao.isSearch(projectNo, memberNo)){ %>
                             		좋아요취소
                             		<%} else{ %>
                             		좋아요
@@ -210,14 +206,14 @@
             </div>
             
             <!-- 본문 오른쪽 리워드 부분 -->
-               <div class="float-left right-container p10px-left">
+               <div class="float-left right-container p80px-left">
                				<!-- 펀딩 요약 -->
 			        <div class="row center">
 			        	<%=projectDto.getProjectSummary() %>
 			        </div>
                		<%for(RewardDto rewardDto : rewardList){ %>	
 	                	<div class="fill m-b10">
-                    		<a href="#" class="link"><button class="btn btn-reverse fill reward" style="text-align: left;">
+                    		<a href="funding.jsp?projectNo=<%=projectNo%>&rewardCount=<%=rewardCount++ %>" class="link"><button class="btn btn-reverse fill reward" style="text-align: left;">
 		                        리워드 이름
 		                        <%=rewardDto.getRewardName() %>
 		                        <br>

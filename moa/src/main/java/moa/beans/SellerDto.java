@@ -10,11 +10,16 @@ public class SellerDto {
 	private String sellerAccountNo;
 	private String sellerType;
 	private int sellerPermission;
-
 	public SellerDto() {
 		super();
 	}
-
+	
+	public int getSellerPermission() {
+		return sellerPermission;
+	}
+	public void setSellerPermission(int sellerPermission) {
+		this.sellerPermission = sellerPermission;
+	}
 	public int getSellerNo() {
 		return sellerNo;
 	}
@@ -63,12 +68,6 @@ public class SellerDto {
 		this.sellerType = sellerType;
 	}
 
-	public int getSellerPermission() {
-		return sellerPermission;
-	}
-
-	public void setSellerPermission(int sellerPermission) {
-		this.sellerPermission = sellerPermission;
-	}
+	
 
 }

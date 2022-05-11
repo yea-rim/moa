@@ -134,7 +134,7 @@
                     </h5>
                 </div>
                 <div class="row fill h60 m10 m-t40">
-                    <button class="btn btn-reverse fill h40">후원하기</button>
+                    <a href="<%=request.getContextPath()%>/project/funding.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse fill h40">후원하기</button></a>
                 </div>
                 <div class="row fill h40 m-t30">
                     <div class="float-container h40">
