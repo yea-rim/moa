@@ -63,7 +63,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 			<div class="filebox">
 				<input class="upload-name" value="첨부파일" placeholder="첨부파일">
 				<label for="file">파일찾기</label> <input class="m20" type="file"
-					id="file" name="attach">
+					id="file" name="attach" accept="image/*">
 			</div>
 		</div>
 

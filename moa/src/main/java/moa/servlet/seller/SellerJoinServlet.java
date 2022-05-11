@@ -15,8 +15,12 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import moa.beans.AttachDao;
 import moa.beans.AttachDto;
+import moa.beans.MemberDao;
+import moa.beans.MemberDto;
 import moa.beans.MemberProfileDao;
 import moa.beans.MemberProfileDto;
+import moa.beans.ProjectDao;
+import moa.beans.ProjectDto;
 import moa.beans.SellerAttachDao;
 import moa.beans.SellerAttachDto;
 import moa.beans.SellerDao;
@@ -44,7 +48,11 @@ public class SellerJoinServlet extends HttpServlet {
 			MultipartRequest mRequest = new MultipartRequest(req, path, max, encoding, policy);
 
 			// 준비
+			MemberDto memberDto = new MemberDto();
+			int memberNo = memberDto.getMemberNo();
 			SellerDto sellerDto = new SellerDto();
+			sellerDto.setSellerNo(memberNo);
+
 			sellerDto.setSellerNo(Integer.parseInt(mRequest.getParameter("sellerNo")));
 			sellerDto.setSellerNick(mRequest.getParameter("sellerNick"));
 			sellerDto.setSellerAccountBank(mRequest.getParameter("sellerAccountBank"));
@@ -72,41 +80,32 @@ public class SellerJoinServlet extends HttpServlet {
 				fileSize = (int) target.length();
 			}
 
-			if (uploadName != null) { // uploadName에 정보가 있으면
+			// 도구 준비
+			AttachDto attachDto = new AttachDto();
+			AttachDao attachDao = new AttachDao();
+			SellerAttachDto sellerAttachDto = new SellerAttachDto();
+			SellerAttachDao sellerAttachDao = new SellerAttachDao();
 
-				// 도구 준비
-				AttachDto attachDto = new AttachDto();
-				AttachDao attachDao = new AttachDao();
-				SellerAttachDto sellerAttachDto = new SellerAttachDto();
-				SellerAttachDao sellerAttachDao = new SellerAttachDao();
+			// AttachDto 저장
+			attachDto.setAttachUploadname(uploadName);
+			attachDto.setAttachSavename(saveName);
+			attachDto.setAttachType(contentType);
+			attachDto.setAttachSize(fileSize);
+			attachDto.setAttachNo(attachDao.getSequence());
 
-				if (attachDao.selectAttachNo(sellerDto.getSellerNo()) != null) {
-					// 기존에 있던 AttachNo 삭제
-					int currentAttachNo = attachDao.selectAttachNo(sellerDto.getSellerNo());
-					attachDao.delete(currentAttachNo);
-				}
+			attachDao.insert(attachDto);
 
-				// AttachDto 저장
-				attachDto.setAttachUploadname(uploadName);
-				attachDto.setAttachSavename(saveName);
-				attachDto.setAttachType(contentType);
-				attachDto.setAttachSize(fileSize);
-				attachDto.setAttachNo(attachDao.getSequence());
+			// 데이터 등록 진행
+			sellerAttachDto.setAttachNo(attachDto.getAttachNo());
+			sellerAttachDto.setSellerNo(sellerDto.getSellerNo());
 
-				attachDao.insert(attachDto);
-
-				// 데이터 등록 진행
-				sellerAttachDto.setAttachNo(attachDto.getAttachNo());
-				sellerAttachDto.setSellerNo(sellerDto.getSellerNo());
-
-				sellerAttachDao.insert(sellerAttachDto);
-			}
+			sellerAttachDao.insert(sellerAttachDto);
 
 			// 출력
 			resp.sendRedirect(req.getContextPath() + "/seller/join_finish.jsp");
 
 			req.getSession().setAttribute("sellerNo", sellerDto.getSellerNo());
-			req.getSession().setAttribute("sellerRegistDate", sellerDto.getSellerRegistDate());
+			req.getSession().setAttribute("sellerPermission", sellerDto.getSellerPermission());
 
 		} catch (Exception e) {
 			e.printStackTrace();

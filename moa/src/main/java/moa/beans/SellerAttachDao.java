@@ -10,11 +10,10 @@ public class SellerAttachDao {
 	public void insert(SellerAttachDto sellerAttachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into seller_attach(attach_no, seller_no, attach_type) values(?,?,?)";
+		String sql = "insert into seller_attach(attach_no, seller_no) values(?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, sellerAttachDto.getAttachNo());
 		ps.setInt(2, sellerAttachDto.getSellerNo());
-		ps.setString(3, sellerAttachDto.getAttachType());
 		ps.execute();
 
 		con.close();
@@ -32,26 +31,26 @@ public class SellerAttachDao {
 		con.close();
 		return count > 0;
 	}
-	
-	// 특정 판매자가 등록한 attachNo 가져오기 
-		public Integer selectAttachNo(int sellerNo) throws Exception {
-			Connection con = JdbcUtils.getConnection();
-			
-			String sql = "select attach_no from seller_attach where seller_no = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, sellerNo);
-			
-			ResultSet rs = ps.executeQuery();
-			Integer attachNo;
-			if(rs.next()) {
-				attachNo = rs.getInt("attach_no");
-			} else {
-				attachNo = null; 
-			}
-			
-			con.close();
-			
-			return attachNo; 
+
+	// 특정 판매자가 등록한 attachNo 가져오기
+	public Integer selectAttachNo(int sellerNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select attach_no from seller_attach where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, sellerNo);
+
+		ResultSet rs = ps.executeQuery();
+		Integer attachNo;
+		if (rs.next()) {
+			attachNo = rs.getInt("attach_no");
+		} else {
+			attachNo = null;
 		}
-		
+
+		con.close();
+
+		return attachNo;
+	}
+
 }
