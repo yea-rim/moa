@@ -12,7 +12,7 @@ public class RewardDao {
 	public void insert(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock, reward_delivery, reward_each)"
+		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock,reward_delivery,reward_each)"
 				+ " values(reward_seq.nextval,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
@@ -65,13 +65,15 @@ public class RewardDao {
 	public boolean edit(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update reward set reward_name=?,reward_content=?,reward_price=?,reward_stock=? where reward_no =?";
+		String sql = "update reward set reward_name=?,reward_content=?,reward_price=?,reward_stock=?,reward_delivery=?,reward_each=? where reward_no =?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, rewardDto.getRewardName());
 		ps.setString(2, rewardDto.getRewardContent());	
 		ps.setInt(3, rewardDto.getRewardPrice());
 		ps.setInt(4, rewardDto.getRewardStock());
-		ps.setInt(5, rewardDto.getRewardNo());
+		ps.setInt(5, rewardDto.getRewardDelivery());
+		ps.setInt(6, rewardDto.getRewardEach());
+		ps.setInt(7, rewardDto.getRewardNo());
 		int count = ps.executeUpdate();
 				
 		con.close();
@@ -119,6 +121,18 @@ public class RewardDao {
 		con.close();
 		
 		return delivery;
+	}
+	//리워드 삭제
+	public boolean delete(int rewardNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete reward where reward_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, rewardNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		return count>0;
 	}
 	
 	

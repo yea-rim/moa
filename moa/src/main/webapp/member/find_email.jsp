@@ -8,19 +8,19 @@
 	    <div class="row center">
 	        <h1>아이디 찾기</h1>
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <label>전화번호</label>
 	        <input type="tel" name="memberPhone" autocomplete="off" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <label>닉네임</label>
 	        <input type="text" name="memberNick" autocomplete="off" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <button type="submit" class="btn btn-primary fill">아이디 찾기</button>
 	    </div>
 		<%if(request.getParameter("error") != null){ %>
-		<div class="row center">
+		<div class="row center m20">
 			<h3 style="color:red;">정보가 일치하는 아이디가 존재하지 않습니다</h3>
 		</div>
 		<%} %>

@@ -14,16 +14,14 @@
 	boolean isLogin = memberNo != null; 
 	
 	// 세션에서 admin 정보 꺼내기
-	String adminId = (String) session.getAttribute("admin");
+	Integer admin = (Integer) session.getAttribute("admin");
 	// adminId 데이터 여부 판단 -> 관리자 권한 판단
-	boolean isAdmin = adminId != null;
+	boolean isAdmin = admin !=null;
 	
-	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-	String sellerRegistDate = (String) session.getAttribute("sellerRegistDate");
-	boolean isApprove = sellerRegistDate != null;
+	// 판매자 세션 가져오기
+	Integer seller = (Integer) session.getAttribute("seller");
+	boolean isSeller = seller !=null;
 
-	// 판매자 여부 판단 
-	boolean isSeller = sellerNo != null; 
 %>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css">
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +50,7 @@
 
 </head>
 <body>
-임시 출력 : memberNo = <%=memberNo %> , adminId = <%=adminId %> , sellerNo = <%=sellerNo %>, sellerRegistDate = <%=sellerRegistDate %>
+임시 출력 : memberNo = <%=memberNo %> , admin = <%=admin %> , seller = <%=seller %>
     <main>
 
         <header>
@@ -71,11 +69,19 @@
 	                				</button>
 	                			</a>
 	                		</div>
+                		<%} else if(isAdmin) { // 관리자라면 %>
+                				<div class="float-right layer-5 center m10">
+		                			<a href="<%=request.getContextPath() %>/admin/admin_main.jsp" class="link link-purple">
+		                				<button class="btn-reverse">
+		                					<h3>관리자 메뉴</h3>
+		                				</button>
+		                			</a>
+		                		</div>
                 		<%} else { // 일반 회원이라면 %>
                 				<div class="float-right layer-5 center m10">
 		                			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-purple">
 		                				<button class="btn-reverse">
-		                					<h3>프로젝트 신청</h3>
+		                					<h3>판매자 신청</h3>
 		                				</button>
 		                			</a>
 		                		</div>
@@ -85,18 +91,7 @@
                 					<h3>마이페이지</h3>
                 			</a>
                 		</div>
-                <%}else if(isAdmin){ //관리자 상태이면%> 
-                    <div class="float-right layer-5 center m10">
-                		<a href="<%=request.getContextPath() %>/admin/admin_main.jsp" class="link">
-                			<h3>관리자 메뉴</h3>
-                		</a>
-                	</div>
-                	<div class="float-right layer-5 center m10">
-                		<a href="<%=request.getContextPath() %>/member/logout.do" class="link">
-	                        <h3>로그아웃</h3>
-	                    </a>
-                	</div>
-                	<%}else { // 로그인 상태가 아니면 %>           
+                <%}else { // 로그인 상태가 아니면 %>           
                 	<div class="float-right layer-5 center m10">
                 		<a href="<%=request.getContextPath() %>/member/join.jsp" class="link">
                 			<h3>회원가입</h3>

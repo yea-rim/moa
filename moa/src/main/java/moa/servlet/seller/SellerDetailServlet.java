@@ -34,6 +34,7 @@ public class SellerDetailServlet extends HttpServlet{
 				resp.getWriter().println("은행 : " + sellerDto.getSellerAccountBank());
 				resp.getWriter().println("계좌 : " + sellerDto.getSellerAccountNo());
 				resp.getWriter().println("판매자 유형 : " + sellerDto.getSellerType());
+				resp.getWriter().println("승인 날짜 : " + sellerDto.getSellerPermission());
 			}
 		}
 		catch(Exception e) {

@@ -254,9 +254,8 @@ if(endBlock>lastPage)
 	<div class="row center m30">
 		<form action="list.jsp" method="get">
 			<select name="type" required class="form-input">
-				<option value="commuity_title">제목+내용</option>
-				<option value="commuity_title">제목</option>
-				<option value="commuity_content">내용</option>
+				<option value="community_title">제목</option>
+				<option value="community_content">내용</option>
 			</select> 
 		   	 <input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
 			 <button type="submit" class="btn-reverse">검색</button>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import moa.beans.CommunityDao;
 import moa.beans.CommunityReplyDao;
 import moa.beans.CommunityReplyDto;
 
@@ -28,7 +29,11 @@ public class CommunityReplyInsertServlet extends HttpServlet {
 			communityReplyDto.setCommunityReplyNo(communityReplyDao.getCommunityReplySeq());
 			
 			// communityReply 등록
+			
 			communityReplyDao.insert(communityReplyDto);
+			
+			CommunityDao communityDao = new CommunityDao();
+			communityDao.updateReplyCount(communityNo);
 			
 			resp.sendRedirect("detail.jsp?communityNo="+communityNo);
 		}

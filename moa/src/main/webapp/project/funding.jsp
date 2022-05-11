@@ -155,7 +155,7 @@
                     <br>
                     <span style="font-size: 13px;">배송비 : <span class="delivery" data-value="<%=rewardDto.getRewardEach() %>"><%=rewardDto.getRewardDelivery() %></span></span>
                     <br>
-                    <span style="font-size: 13px;">재고 : <%=rewardDto.getRewardStock() %>개     ||     결제 예정일 : <%=projectDao.purchaseDate(projectNo) %></span>
+                    <span style="font-size: 13px;">재고 : <%=rewardDto.getRewardStock() %>개     ||     결제 예정일 : <%=projectDao.paymentDate(projectNo) %></span>
                     <div class="flex-container m20 detail">
                         <div class="amount">
                             <label style="margin-bottom: 10px;">수량</label>

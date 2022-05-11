@@ -21,10 +21,10 @@ public class CommunityReplyDao {
 
 		return communityReplyNo;
 	}
-	
+
 	public void insert(CommunityReplyDto communityReplyDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "INSERT INTO community_reply(community_reply_no,community_no, community_member_no, community_reply_content) values(?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, communityReplyDto.getCommunityReplyNo());
@@ -32,33 +32,60 @@ public class CommunityReplyDao {
 		ps.setInt(3, communityReplyDto.getCommunityMemberNo());
 		ps.setString(4, communityReplyDto.getCommunityReplyContent());
 		ps.execute();
-		
+
 		con.close();
 	}
-	
+
 	public List<CommunityReplyDto> selectAll(int communityNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "SELECT * FROM COMMUNITY_REPLY WHERE community_no = ? order by community_reply_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, communityNo);
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<CommunityReplyDto> list = new ArrayList<>();
-		
-		while(rs.next()) {
+
+		while (rs.next()) {
 			CommunityReplyDto communityReplyDto = new CommunityReplyDto();
 			communityReplyDto.setCommunityReplyNo(rs.getInt("community_reply_no"));
 			communityReplyDto.setCommunityNo(rs.getInt("community_no"));
 			communityReplyDto.setCommunityMemberNo(rs.getInt("community_member_no"));
-			communityReplyDto.setCommunityReplyTime(rs.getDate("community_reply_date"));
+			communityReplyDto.setCommunityReplyTime(rs.getDate("community_reply_time"));
 			communityReplyDto.setCommunityReplyContent(rs.getString("community_reply_content"));
-			
+
 			list.add(communityReplyDto);
 		}
-		
+
 		con.close();
-		
+
 		return list;
+	}
+
+	public boolean edit(int communityReplyNo, String communityReplyContent) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "UPDATE community_reply SET COMMUNITY_REPLY_CONTENT = ? WHERE COMMUNITY_REPLY_NO = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, communityReplyContent);
+		ps.setInt(2, communityReplyNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
+	}
+
+	public boolean delete(int communityReplyNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "delete community_reply where community_reply_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityReplyNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
 	}
 }

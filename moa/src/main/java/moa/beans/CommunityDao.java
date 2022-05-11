@@ -202,4 +202,34 @@ public class CommunityDao {
 		return count > 0;
 	}
 	
+	// 조회수
+	public boolean editReadCount(int communityNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "update community set community_readcount = community_readcount+1 where community_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
+	}
+
+	// 댓글 수 갱신 기능
+	public boolean updateReplyCount(int communityNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "update community set community_replycount = (" 
+				+ "select count(*) from community_reply where community_no = ?"
+				+ ") where community_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityNo);
+		ps.setInt(2, communityNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
+	}
 }
