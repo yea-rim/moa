@@ -62,8 +62,11 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 				<a class="btn-delReward"><img src="<%=request.getContextPath()%>/image/del-icon.png" width="20"></a>
 				<a class="btn-addReward"><img src="<%=request.getContextPath()%>/image/add-icon.png" width="20"></a>
 			</div>
-		<div class="row m50">
+		<div class="row mt50">
 			<button type="submit"  class="btn fill">수정하기</button>
+		</div>
+				<div class="row m10 mb50">
+			<a href="project_detail.jsp?projectNo=<%=projectNo%>" class="link link-reverse fill center">돌아가기</a> 
 		</div>
 </form>
 </div>

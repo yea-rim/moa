@@ -46,10 +46,15 @@ public class ProjectInsertServlet extends HttpServlet {
 			// 프로젝트 신청 시퀀스번호 생성
 			ProjectDao projectDao = new ProjectDao();
 			int projectNo = projectDao.getSequence();
+			
+			//판매자 번호
+			int sellerNo = (int)req.getSession().getAttribute("login");
+
 
 			// 프로젝트 신청 처리
 			ProjectDto projectDto = new ProjectDto();
-			projectDto.setProjectNo(projectNo); // 가져온 시퀀스 번호 넣어주기
+			projectDto.setProjectNo(projectNo); //가져온 시퀀스 번호 넣어주기
+			projectDto.setProjectSellerNo(sellerNo);
 			projectDto.setProjectCategory(mRequest.getParameter("projectCategory"));
 			projectDto.setProjectName(mRequest.getParameter("projectName"));
 			projectDto.setProjectSummary(mRequest.getParameter("projectSummary"));
@@ -62,19 +67,18 @@ public class ProjectInsertServlet extends HttpServlet {
 
 			// 다중 파일 저장 처리
 			AttachDao attachDao = new AttachDao();
-			Enumeration files = mRequest.getFileNames(); // 파일명정보를 배열로 만들다(files에 name들이 담겨있다)
-			while (files.hasMoreElements()) {
-				String name = (String) files.nextElement(); // 각각의 파일 name을 String name에 담는다.
-				String uploadName = mRequest.getOriginalFileName(name);
-				String saveName = mRequest.getFilesystemName(name); // 각각의 파일 name을 통해서 파일의 정보를 얻는다.
-				String contentType = mRequest.getContentType(name);
-				File target = mRequest.getFile(name);
-				int fileSize = 0;
-				if (target != null)
-					fileSize = (int) target.length();
 
-				System.out.println("파일이름:" + name);
-				// 파일 정보 저장
+			Enumeration files = mRequest.getFileNames(); //파일명정보를 배열로 만들다(files에 name들이 담겨있다)
+			while(files.hasMoreElements()){
+			    String name = (String)files.nextElement(); //각각의 파일 name을 String name에 담는다.
+			    String uploadName = mRequest.getOriginalFileName(name);
+			    String saveName = mRequest.getFilesystemName(name); //각각의 파일 name을 통해서 파일의 정보를 얻는다.
+			    String contentType = mRequest.getContentType(name);
+			    File target = mRequest.getFile(name);
+			    int fileSize = 0;
+			 	if(target != null)	fileSize = (int)target.length();	
+
+			 	//파일 정보 저장
 				AttachDto attachDto = new AttachDto();
 				attachDto.setAttachNo(attachDao.getSequence());
 				attachDto.setAttachUploadname(uploadName);
