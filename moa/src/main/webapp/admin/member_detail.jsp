@@ -26,6 +26,9 @@ MemberProfileDao memberProfileDao = new MemberProfileDao();
 MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
 boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 존재
 
+SellerAttachDao sellerAttachDao = new SellerAttachDao();
+SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
+
 // 인증 첨부파일 꺼내와야 함
 %>
 
@@ -46,8 +49,7 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 			<%
 			if (isExistProfile) { // 프로필 사진 존재한다면
 			%>
-			<img
-				src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>"
+			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>"
 				width="150" height="150px" class="img img-circle"
 				onerror="javascript:this.src='https://dummyimage.com/200x200'">
 			<%-- <%=memberProfileDto.getAttachNo() %> --%>
@@ -62,8 +64,7 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 		</div>
 		<div class="float-container">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
-				<a
-					href="<%=request.getContextPath()%>/admin/member_edit.jsp?memberNo=<%=memberDto.getMemberNo()%>">
+				<a href="<%=request.getContextPath()%>/admin/member_edit.jsp?memberNo=<%=memberDto.getMemberNo()%>">
 					<button class="btn w90p h100p">정보 수정</button>
 				</a>
 			</div>
@@ -121,7 +122,11 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 
 		<h3 class="left m10">판매자 관련 상세 정보</h3>
 		<h4 class="left m10">판매자 인증 첨부파일</h4>
-		<img src="https://via.placeholder.com/400x300" width="75%">
+		<%if (sellerAttachDto == null) {%>
+		<img src="https://dummyimage.com/300x300" width="75%">
+		<%} else { %>
+		<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=sellerAttachDto.getAttachNo()%>"
+		width="75%" onerror="javascript:this.src='https://dummyimage.com/300x300'"> <%} %>
 		<div class="float-container ">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
 				<a
@@ -183,7 +188,7 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 		</div>
 	</div>
 </div>
-						<%} %>
+						<%}%>
 
 
 <jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>

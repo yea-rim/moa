@@ -52,5 +52,29 @@ public class SellerAttachDao {
 
 		return attachNo;
 	}
+	
+	public SellerAttachDto selectOne(int sellerNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from seller_attach where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, sellerNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		SellerAttachDto sellerAttachDto;
+		if(rs.next()) {
+			sellerAttachDto = new SellerAttachDto();
+			
+			sellerAttachDto.setSellerNo(rs.getInt("seller_no"));
+			sellerAttachDto.setAttachNo(rs.getInt("attach_no"));
+		} else {
+			sellerAttachDto = null;
+		}
+		
+		con.close();
+		
+		return sellerAttachDto; 
+	}
 
 }

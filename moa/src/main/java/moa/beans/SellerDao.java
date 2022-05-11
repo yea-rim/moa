@@ -75,7 +75,7 @@ public class SellerDao {
 
 		return registDate > 0;
 	}
-	
+
 	// 승인 여부
 	public boolean selectPermission(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -153,6 +153,21 @@ public class SellerDao {
 		String sql = "update seller set seller_regist_date = sysdate, seller_permission = 1 where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, sellerNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
+	}
+
+	// 거절
+	public boolean refuse(int sellerNo, String sellerRefuseMsg) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "update seller set seller_regist_date = sysdate, seller_permission = 2 seller_refuse_msg = ? where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, sellerNo);
+		ps.setString(2, sellerRefuseMsg);
 		int count = ps.executeUpdate();
 
 		con.close();
@@ -267,21 +282,21 @@ public class SellerDao {
 		return list;
 	}
 
-	// 판매자 신청 정보 수정 
+	// 판매자 신청 정보 수정
 	public boolean edit(SellerDto sellerDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "update seller set seller_nick = ?, seller_account_bank = ?, seller_account_no = ? where seller_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, sellerDto.getSellerNick());
 		ps.setString(2, sellerDto.getSellerAccountBank());
 		ps.setString(3, sellerDto.getSellerAccountNo());
 		ps.setInt(4, sellerDto.getSellerNo());
-		
+
 		int count = ps.executeUpdate();
-		
+
 		con.close();
-		
-		return count > 0; 
+
+		return count > 0;
 	}
 }
