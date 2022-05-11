@@ -209,7 +209,7 @@ if (isSearch) {
 				
 				<div class="row center category">
 					<a href="ongoingList.jsp?type=project_category&keyword=기타" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/etc-카테고리.jpeg" class="img" id="etc">
+					<img src="<%=request.getContextPath() %>/project/image/etc-카테고리.jpeg" class="img" id="etc">
 					<hr style="border: solid #B899CD 1px">
 					<label for="etc">기타</label>
 					</a>
@@ -256,7 +256,7 @@ if (isSearch) {
 		<div class="container">
 		 <div class="row flex-container2" id="mainList">
 		 <%for(ProjectDto projectDto : list) { %>
-	 	 	<%-- <% 
+	 <%-- 	 	<% 
 		 		int projectNo = projectDto.getProjectNo();
 				ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			
@@ -264,10 +264,10 @@ if (isSearch) {
 				int attachNo = projectAttachDao.getAttachNo(projectNo);
 		 	%>  --%>
             <div class="flex-items">
-              <div class="row center">
+              <div class="row center m10">
               	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 			       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%"> --%>
-                	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="100%">
+                	<img src="https://dummyimage.com/1305x250" width="372px" height="250px">
                 </a>
               </div>
               <div class="row project-name">

@@ -73,26 +73,29 @@ if (isSearch) {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	height: 60px;
 }
 .flex-items1 {
 	flex-basis:10%;
 }
 .flex-items2 {
-	flex-basis:50%;
+	flex-basis:60%;
 }
 .flex-items3 {
-	flex-basis:25%;
+	flex-basis:15%;
 }
 .flex-items4 {
 	flex-basis:15%;
 }
-button[type=submit]{
-	height: 42px;
-} 
+.bottom{
+	align-self: flex-end;
+}
 .community-name {
     text-overflow: ellipsis;
     overflow: hidden;
-    height: 3em; 
+}
+.search{
+	justify-content: center;
 }
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -101,6 +104,7 @@ button[type=submit]{
 
 <%-- 검색결과 --%>
 <hr style="border:solid 0.5px lightgray">
+
 <div class="container m50">
 	<div class="row center">
 		<a href="list.jsp?p=1&s=10" class="link">
@@ -108,6 +112,7 @@ button[type=submit]{
 		</a>
 	</div>
 </div>
+
 <div class="container w800 m70">
 				
 				<hr style="border:solid 1px #B899CD">
@@ -123,7 +128,7 @@ button[type=submit]{
 			
 				<div class="row flex-container2">
 				
-					<div class="flex-items1">
+					<div class="flex-items1 bottom">
 						<span><%=communityDto.getCommunityNo() %> </span>
 					</div>
 					
@@ -131,18 +136,18 @@ button[type=submit]{
 						ProjectDao projectDao = new ProjectDao();
 						ProjectDto projectDto = projectDao.selectOne(communityDto.getCommunityProjectNo());
 					%>
-					<div class="flex-items2 community-name">
+					<div class="flex-items2 bottom community-name">
 						<span>
 							<a href="detail.jsp?communityNo=<%=communityDto.getCommunityNo() %>" class="link">
 								<h3><%=communityDto.getCommunityTitle() %>(<%=communityDto.getCommunityReplycount() %>)</h3>
 							</a>
 						</span>
-						<span>
+						<span class="m10">
 							<h5>/ <%=projectDto.getProjectName() %></h5>
 						</span>
 					</div>
 
-					<div class="flex-items3">
+					<div class="flex-items3 bottom">
 						<span><%=communityDto.getCommunityTime() %></span>
 					</div>
 								
@@ -150,7 +155,7 @@ button[type=submit]{
 						MemberDao memberDao = new MemberDao();
 						MemberDto memberDto = memberDao.selectOne(communityDto.getCommunityMemberNo());
 					%>
-					<div class="flex-items4 row right">
+					<div class="flex-items4 row right bottom">
 						<span><%=memberDto.getMemberNick() %></span>
 					</div>
 					
@@ -251,14 +256,22 @@ if(endBlock>lastPage)
 
 </h3>
 <%-- 검색창 --%>
-	<div class="row center m30">
+	
 		<form action="list.jsp" method="get">
-			<select name="type" required class="form-input">
-				<option value="community_title">제목</option>
-				<option value="community_content">내용</option>
-			</select> 
-		   	 <input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
-			 <button type="submit" class="btn-reverse">검색</button>
+			<div class="flex-container search">
+				<div>
+					<select name="type" required class="form-input">
+						<option value="community_title">제목</option>
+						<option value="community_content">내용</option>
+					</select> 
+				</div>
+				<div>
+			   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
+			   	 </div>
+			   	 <div>
+				 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
+				 </div>
+			</div>
 		</form>
 	</div>
 	

@@ -30,10 +30,8 @@ public class MoaNoticeDao {
 				MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 				moaNoticeDto.setNoticeNo(rs.getInt("notice_no"));
 				moaNoticeDto.setNoticeTitle(rs.getString("notice_title"));
-				moaNoticeDto.setNoticeContent(rs.getString("notice_content"));
 				moaNoticeDto.setNoticeTime(rs.getDate("notice_time"));
 				moaNoticeDto.setNoticeReadcount(rs.getInt("notice_readcount"));
-				moaNoticeDto.setNoticeAdminNo(rs.getInt("notice_admin_no"));
 				list.add(moaNoticeDto);
 			}
 
@@ -66,10 +64,8 @@ public class MoaNoticeDao {
 				MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 				moaNoticeDto.setNoticeNo(rs.getInt("notice_no"));
 				moaNoticeDto.setNoticeTitle(rs.getString("notice_title"));
-				moaNoticeDto.setNoticeContent(rs.getString("notice_content"));
 				moaNoticeDto.setNoticeTime(rs.getDate("notice_time"));
 				moaNoticeDto.setNoticeReadcount(rs.getInt("notice_readcount"));
-				moaNoticeDto.setNoticeAdminNo(rs.getInt("notice_admin_no"));
 				list.add(moaNoticeDto);
 			}
 
@@ -168,47 +164,47 @@ public class MoaNoticeDao {
 		}
 		
 		
-//		
-//		public boolean delete(int communityNo) throws Exception {
-//			Connection con = JdbcUtils.getConnection();
-//			
-//			String sql = "delete community where community_no = ?";
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setInt(1, communityNo);
-//			int count = ps.executeUpdate();
-//			
-//			con.close();
-//			
-//			return count > 0;
-//		}
-//		
-//		public boolean edit(CommunityDto communityDto) throws Exception {
-//			Connection con = JdbcUtils.getConnection();
-//			
-//			String sql = "update community set community_title =?, community_content = ? where community_no = ?";
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setString(1, communityDto.getCommunityTitle());
-//			ps.setString(2, communityDto.getCommunityContent());
-//			ps.setInt(3, communityDto.getCommunityNo());
-//			int count = ps.executeUpdate();
-//			
-//			con.close();
-//			
-//			return count > 0;
-//		}
-//		
-//		// 조회수
-//		public boolean editReadCount(int communityNo) throws Exception {
-//			Connection con = JdbcUtils.getConnection();
-//
-//			String sql = "update community set community_readcount = community_readcount+1 where community_no=?";
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setInt(1, communityNo);
-//			int count = ps.executeUpdate();
-//
-//			con.close();
-//
-//			return count > 0;
-//		}
+		
+		public boolean delete(int noticeNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "delete moa_notice where notice_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, noticeNo);
+			int count = ps.executeUpdate();
+			
+			con.close();
+			
+			return count > 0;
+		}
+		
+		public boolean edit(MoaNoticeDto moaNoticeDto) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "update moa_notice set notice_title =?, notice_content = ? where notice_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, moaNoticeDto.getNoticeTitle());
+			ps.setString(2, moaNoticeDto.getNoticeContent());
+			ps.setInt(3, moaNoticeDto.getNoticeNo());
+			int count = ps.executeUpdate();
+			
+			con.close();
+			
+			return count > 0;
+		}
+		
+		// 조회수
+		public boolean editReadCount(int noticeNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+
+			String sql = "update moa_notice set notice_readcount = notice_readcount+1 where notice_no=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, noticeNo);
+			int count = ps.executeUpdate();
+
+			con.close();
+
+			return count > 0;
+		}
 
 }
