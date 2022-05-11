@@ -19,7 +19,7 @@ public class joaAjaxServlet extends HttpServlet{
 			
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			Integer memberNo = (Integer)req.getSession().getAttribute("login");
-			memberNo= 23;
+
 			boolean login = memberNo != null;
 			resp.setContentType("text/plain; charset=UTF-8");
 			

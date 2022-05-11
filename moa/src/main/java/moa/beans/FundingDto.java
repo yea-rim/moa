@@ -15,6 +15,7 @@ public class FundingDto {
 	private Date fundingPaymentDate;
 	private int fundingTotalprice;
 	private int fundingTotaldelivery;
+	private String fundingGetter;
 	
 	
 	
@@ -95,6 +96,15 @@ public class FundingDto {
 	public void setFundingPaymentDate(Date fundingPaymentDate) {
 		this.fundingPaymentDate = fundingPaymentDate;
 	}
+
+	public String getFundingGetter() {
+		return fundingGetter;
+	}
+
+	public void setFundingGetter(String fundingGetter) {
+		this.fundingGetter = fundingGetter;
+	}
+	
 	
 	
 }

@@ -40,7 +40,6 @@ public class RewardDao {
 		ps.setInt(1, projectNo);
 		
 		ResultSet rs = ps.executeQuery();
-//		수정
 		
 		List<RewardDto> list = new ArrayList<>();
 		while(rs.next()) {
@@ -78,5 +77,49 @@ public class RewardDao {
 		con.close();
 		return count>0;
 	}
+	
+	// 프로젝트 번호랑 리워드번호 넣으면 그 리워드 정보(가격,재고,배송비,개별배송여부)반환
+	public RewardDto selectOne(int projectNo, int rewardNo) throws Exception {
+		String sql = "select reward_price, reward_stock, reward_delivery, reward_each from reward where reward_no = ? and reward_project_no = ?";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, rewardNo);
+		ps.setInt(2, projectNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		RewardDto rewardDto = null;
+		if(rs.next()) {
+			rewardDto.setRewardPrice(rs.getInt(1));
+			rewardDto.setRewardStock(rs.getInt(2));
+			rewardDto.setRewardDelivery(rs.getInt(3));
+			rewardDto.setRewardEach(rs.getInt(4));
+		}
+		con.close();
+		return rewardDto;
+	}
+	
+	//프로젝트 번호를 넣으면 묶음배송이 가능한 목록중 가장 높은 배송비 하나만 반환
+	public int selectDeliveryOne(int projectNo) throws Exception {
+		String sql = "select reward_delivery from reward where reward_project_no = ? and reward_each = 0 order by reward_delivery desc";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, projectNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		
+		int delivery = rs.getInt(1);
+		
+		con.close();
+		
+		return delivery;
+	}
+	
 	
 }
