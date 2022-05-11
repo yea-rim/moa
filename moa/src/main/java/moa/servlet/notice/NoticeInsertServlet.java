@@ -39,7 +39,7 @@ public class NoticeInsertServlet extends HttpServlet {
 
 			MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 			moaNoticeDto.setNoticeTitle(mRequest.getParameter("noticeTitle"));
-			String noticeContent = mReques
+			String noticeContent = mRequest.getParameter("noticeContent");
 			// textarea 줄바꿈 처리
 			noticeContent = noticeContent.replace("\r\n", "<br>");
 			moaNoticeDto.setNoticeContent(noticeContent);
