@@ -93,9 +93,8 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 		<input type="hidden" name="memberNo" value="<%=memberNo%>">
 
 		<div class="flex-container">
-			<a href="member_list.jsp"> <img
-				src="<%=request.getContextPath()%>/image/arrow.png" alt="왼쪽 화살표"
-				width="25">
+			<a href="<%=request.getContextPath()%>/admin/member_detail.jsp?memberNo=<%=memberDto.getMemberNo()%>">
+			<img src="<%=request.getContextPath()%>/image/arrow.png" alt="왼쪽 화살표" width="25">
 			</a>
 		</div>
 

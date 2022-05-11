@@ -10,17 +10,19 @@ MemberDao memberDao = new MemberDao();
 MemberDto memberDto = memberDao.selectOne(memberNo);
 %>
 
+
+<jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript">
 	$(function() {
 		// 파일명 input에 출력하는 JS
+		// 근데 왜 안 될까?
 		$("#file").on('change', function() {
-			var fileName = $("#file").val();
+			var fileFullName = $(this).val();
+			var fileName = fileFullName.substring(12,fileFullName.length);
 			$(".upload-name").val(fileName);
 		});
 	});
 </script>
-
-<jsp:include page="/template/header.jsp"></jsp:include>
 
 <form action="join.do" method="post" enctype="multipart/form-data">
 

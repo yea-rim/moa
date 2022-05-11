@@ -30,7 +30,7 @@
 		if(s <= 0) throw new Exception();
 	}
 	catch(Exception e){
-		s = 10;
+		s = 20;
 	}
 %>
 
@@ -74,12 +74,7 @@
 					<th>회원 번호</th>
 					<th>이메일</th>
 					<th>닉네임</th>
-					<th>전화번호</th>
-					<th>가입일</th>
-					<th>우편번호</th>
-					<th>주소</th>
-					<th>상세주소</th>
-					<th>가입 경로</th>
+					<th>등급?</th>
 					<th>판매자 여부</th>
 				</tr>
 			</thead>
@@ -91,17 +86,13 @@
 	for(MemberDto memberDto : list){
 	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 %>
-				<tr onclick="location.href='<%=request.getContextPath()%>/member/member_detail.jsp?memberNo=<%=memberDto.getMemberNo() %>';" style="width:100%; cursor:pointer;">
+				<tr onclick="location.href='<%=request.getContextPath()%>/admin/member_detail.jsp?memberNo=<%=memberDto.getMemberNo() %>';" style="width:100%; cursor:pointer;">
 					<td><%=memberDto.getMemberNo()%></td>
 					<td><%=memberDto.getMemberEmail()%></td>
 					<td><%=memberDto.getMemberNick()%></td>
-					<td><%=memberDto.getMemberPhone()%></td>
-					<td><%=memberDto.getMemberJoinDate()%></td>
-					<td><%=memberDto.getMemberPost()%></td>
-					<td><%=memberDto.getMemberBasicAddress()%></td>
-					<td><%=memberDto.getMemberDetailAddress()%></td>
-					<td><%=memberDto.getMemberRoute()%></td>
+					<td><%if(sellerDto != null) { %>판매자<%} else {%>일반회원<%} %></td>
 					<td>
+					<%if(sellerDto != null) {%>
 					<%if(sellerDto.getSellerPermission()==0){ %>
 							<span style="color: red">승인필요</span>
 						<%}else if(sellerDto.getSellerPermission()==1){%>
@@ -109,6 +100,8 @@
  						<%}else{ %>
 							거절 
 						<%} %>
+						<%} %>
+						
 					</td>
 				</tr>
 				<%} %>

@@ -307,7 +307,7 @@ public class MemberDao {
 		} else if (sort.equals("판매자거절")) {
 			standard = "where seller_permission = 2 order by seller_regist_date desc";
 		} else {
-			standard = "order by member_no desc";
+			standard = "order by member_no asc";
 		}
 
 		int end = p * s;

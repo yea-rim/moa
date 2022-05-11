@@ -1,3 +1,6 @@
+<%@page import="moa.beans.ProjectDao"%>
+<%@page import="java.util.List"%>
+<%@page import="moa.beans.ProjectDto"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.MemberProfileDto"%>
@@ -24,7 +27,12 @@
 		
 	// 회원 프로필 존재 여부 확인 
 	boolean isExistProfile = memberProfileDto != null;
+	
+	ProjectDao projectDao = new ProjectDao();
+	List<ProjectDto> list2 = projectDao.selectNew();
 %>
+
+
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 	
@@ -78,9 +86,25 @@
                     </div>
 
                     <div class="row m20">
-                        <h2>
-                            <a href="" class="link">예정 프로젝트</a>
-                        </h2>
+				 <hr style="border: solid lightgray 0.5px" />
+                <div class="row left big-text mt50 mlr10">
+                    <a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">예정된 프로젝트</a>
+                </div>
+                
+				<div class="row flex-container1">
+				<%for(ProjectDto projectDto : list2){ %>
+					<div class="row flex-items1 m10">
+						<div class="row">
+							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="100%"></a>
+						</div>
+						<div class="row left m10">
+							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+								<span><%=projectDto.getProjectName() %></span>
+							</a>
+						</div>
+					</div>
+				<%} %>
+				</div>
                         <hr>
                     </div>
                     <div class="row m20">
