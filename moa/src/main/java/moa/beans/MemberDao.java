@@ -298,25 +298,30 @@ public class MemberDao {
 	public List<MemberDto> allSelectList(int p, int s, String sort) throws Exception {
 
 		String standard;
-		if (sort.equals("최신순")) {
-			standard = "order by member_no asc";
+		if (sort.equals("가입최신순")) {
+			standard = "order by member_no desc";
 		} else if (sort.equals("판매자신청중")) {
 			standard = "where seller_permission = 0";
 		} else if (sort.equals("판매자승인")) {
-			standard = "where seller_permission = 1 order by seller_regist_date asc";
+			standard = "where seller_permission = 1 order by seller_regist_date desc";
 		} else if (sort.equals("판매자거절")) {
-			standard = "where seller_permission = 2 order by seller_regist_date asc";
+			standard = "where seller_permission = 2 order by seller_regist_date desc";
 		} else {
-			standard = "order by member_no desc";
+			standard = "order by member_no asc";
 		}
-		
+
 		int end = p * s;
 		int begin = end - (s - 1);
 
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from (select rownum rn, TMP.* from (select * from member #1" + ")TMP"
-				+ ")where rn between ? and ?";
+		String sql = "select * from "
+				+ "(select rownum rn, tmp.* from "
+				+ "(select * from member m "
+				+ "left outer join seller s "
+				+ "on m.member_no = s.seller_no #1)tmp) "
+				+ "where rn between ? and ?";
+		
 		sql = sql.replace("#1", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);

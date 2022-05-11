@@ -8,19 +8,19 @@
 	    <div class="row center">
 	        <h1>비밀번호 찾기</h1>
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <label>이메일</label>
 	        <input type="text" name="memberEmail" autocomplete="off" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <label>닉네임</label>
 	        <input type="text" name="memberNick" autocomplete="off" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <label>전화번호</label>
 	        <input type="tel" name="memberPhone" autocomplete="off" required class="form-input fill input-round">
 	    </div>
-	    <div class="row">
+	    <div class="row m20">
 	        <button type="submit" class="btn btn-primary fill">비밀번호 찾기</button>
 	    </div>
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>
