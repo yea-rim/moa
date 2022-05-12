@@ -143,11 +143,11 @@ if (isSearch) {
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
 									<a href="detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
-										<h2><%=moaNoticeDto.getNoticeTitle() %>(<%=moaNoticeDto.getNoticeReadcount() %>)</h2>
+										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
 							<div class="row left m10">
-								<h5>moa &nbsp;&nbsp;&nbsp; <%=moaNoticeDto.getNoticeTime() %></h5>
+								<h5>moa &nbsp;&nbsp;&nbsp; <%=moaNoticeDto.getNoticeTime() %>(<%=moaNoticeDto.getNoticeReadcount() %>)</h5>
 							</div>
 						</div>
 	

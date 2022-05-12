@@ -18,7 +18,8 @@ public class ProjectDao {
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate AND instr(#1,?) > 0 order by project_no desc"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
