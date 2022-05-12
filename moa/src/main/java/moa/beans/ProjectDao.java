@@ -18,7 +18,8 @@ public class ProjectDao {
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
 				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate AND instr(#1,?) > 0 order by project_no desc"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -1058,21 +1059,35 @@ public class ProjectDao {
 		}
 
 		// 거절된 프로젝트 페이지네이션(검색어 x)
-				public int rejectedCountByPaging(int sellerNo) throws Exception {
-					Connection con = JdbcUtils.getConnection();
+		public int rejectedCountByPaging(int sellerNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
 
-					String sql = "select count(*) from project where project_permission = 2 and project_seller_no = ?";
-					PreparedStatement ps = con.prepareStatement(sql);
-					ps.setInt(1, sellerNo);
-					ResultSet rs = ps.executeQuery();
-					rs.next();
-					int count = rs.getInt("count(*)");
+			String sql = "select count(*) from project where project_permission = 2 and project_seller_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt("count(*)");
 
-					con.close();
+			con.close();
 
-					return count;
-				}
+			return count;
+		}
 				
+		//조회수 증가 메서드
+		public boolean readCountUp(int projectNo) throws Exception{
+			String sql = "update project set project_readcount = project_readcount + 1 where project_no = ?";
+			
+			Connection con = JdbcUtils.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, projectNo);
+			
+			int count = ps.executeUpdate();
+			
+			con.close();
+			
+			return count > 0;
+		}
 		
-	
 }

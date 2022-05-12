@@ -38,7 +38,6 @@
 		<div class="row">
 			<h5><%=moaNoticeDto.getNoticeTime() %></h5>
 		</div>
-	<hr style="border:solid 0.5px #B899CD">
 	<div class="row m20">
  		<%if(isExistPhoto){ %>
 		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%">

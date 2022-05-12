@@ -41,7 +41,10 @@ public class CommunityEditServlet extends HttpServlet {
 			CommunityDto communityDto = new CommunityDto();
 			communityDto.setCommunityNo(communityNo);
 			communityDto.setCommunityTitle(mRequest.getParameter("communityTitle"));
-			communityDto.setCommunityContent(mRequest.getParameter("communityContent"));
+			
+			String noticeContent = mRequest.getParameter("communityContent");
+			noticeContent = noticeContent.replace("\r\n", "<br>");
+			communityDto.setCommunityContent(noticeContent);
 			
 			
 			// 수정

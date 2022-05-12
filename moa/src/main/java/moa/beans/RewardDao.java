@@ -52,6 +52,7 @@ public class RewardDao {
 			rewardDto.setRewardStock(rs.getInt("reward_stock"));
 			rewardDto.setRewardDelivery(rs.getInt("reward_delivery"));
 			rewardDto.setRewardEach(rs.getInt("reward_each"));
+			rewardDto.setRewardIsoption(rs.getInt("reward_isoption"));
 			list.add(rewardDto);
 		}
 		
@@ -135,6 +136,23 @@ public class RewardDao {
 		
 		con.close();
 		return count>0;
+	}
+	
+	//리워드 재고조절 DAO
+	public boolean stockCount(int rewardNo, int amount) throws Exception{
+		String sql = "update reward set reward_stock = reward_stock + ? where reward_no = ?";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, amount);
+		ps.setInt(2, rewardNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
 	}
 	
 	
