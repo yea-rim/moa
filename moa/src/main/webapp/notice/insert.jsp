@@ -14,6 +14,16 @@ textarea[name=noticeContent] {
 }
 </style>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+  $(function(){
+	  $(".textarea").on("input",function(){
+		  var text = $(this).val();
+		  text = text.replace("\r\n","<br>");
+	  });
+  });
+</script>
+
 <jsp:include page="/template/header.jsp"></jsp:include>
 <hr style="border:solid 0.5px lightgray">
 	<div class="container w800 m50">

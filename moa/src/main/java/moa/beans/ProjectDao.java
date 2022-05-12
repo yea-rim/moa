@@ -39,21 +39,21 @@ public class ProjectDao {
 
 		return list;
 	}
-
+	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o)
 	public List<ProjectDto> ongoingSelectList(int p, int s, String sort) throws Exception {
 
 		String standard;
 		if (sort.equals("마감임박순")) {
-			standard = "PROJECT_FINISH_DATE ASC";
+			standard = "p.PROJECT_FINISH_DATE ASC";
 		} else if (sort.equals("펀딩액순")) {
-			standard = "PROJECT_PRESENT_MONEY DESC";
+			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		} else if (sort.equals("인기순")) {
-			standard = "PROJECT_READCOUNT DESC";
+			standard = "p.PROJECT_READCOUNT DESC";
 		} else {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		}
 
 		int end = p * s;
@@ -61,9 +61,12 @@ public class ProjectDao {
 
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate order by #2"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ("
+				+ "select p.*, total from project p left outer join project_list l on p.project_no = l.project_no "
+				+ "WHERE p.PROJECT_PERMISSION = 1 AND p.PROJECT_START_DATE < sysdate AND p.PROJECT_SEMI_FINISH > sysdate ORDER BY #2"
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
@@ -132,15 +135,15 @@ public class ProjectDao {
 
 		String standard;
 		if (sort.equals("마감임박순")) {
-			standard = "PROJECT_FINISH_DATE ASC";
+			standard = "p.PROJECT_FINISH_DATE ASC";
 		} else if (sort.equals("펀딩액순")) {
-			standard = "PROJECT_PRESENT_MONEY DESC";
+			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		} else if (sort.equals("인기순")) {
-			standard = "PROJECT_READCOUNT DESC";
+			standard = "p.PROJECT_READCOUNT DESC";
 		} else {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		}
 
 		int end = p * s;
@@ -148,9 +151,13 @@ public class ProjectDao {
 
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish > sysdate AND instr(#1,?) > 0 order by #2"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+		String sql = "select * from (" 
+				+ "select rownum rn, TMP.* from ("
+				+ "select p.*, total from project p left outer join project_list l on p.project_no = l.project_no "
+				+ "WHERE p.PROJECT_PERMISSION = 1 AND p.PROJECT_START_DATE < sysdate AND p.PROJECT_SEMI_FINISH > sysdate and instr(p.#1,?) > 0 "
+				+ "ORDER BY p.PROJECT_FINISH_DATE ASC"
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
 		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -258,13 +265,13 @@ public class ProjectDao {
 
 		String standard;
 		if (sort.equals("펀딩액순")) {
-			standard = "PROJECT_PRESENT_MONEY DESC";
+			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		} else if (sort.equals("인기순")) {
-			standard = "PROJECT_READCOUNT DESC";
+			standard = "p.PROJECT_READCOUNT DESC";
 		} else {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		}
 
 		int end = p * s;
@@ -273,8 +280,10 @@ public class ProjectDao {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate order by #2"
-				+ ")TMP" + ")where rn BETWEEN ? AND ?";
+				+ "select p.*, total from project p left outer join project_list l on p.project_no = l.project_no "
+				+ "WHERE p.PROJECT_PERMISSION = 1 AND p.PROJECT_START_DATE < sysdate AND p.PROJECT_SEMI_FINISH < sysdate ORDER BY #2"
+				+ ")TMP" 
+				+ ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#2", standard);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
@@ -300,13 +309,13 @@ public class ProjectDao {
 
 		String standard;
 		if (sort.equals("펀딩액순")) {
-			standard = "PROJECT_PRESENT_MONEY DESC";
+			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		} else if (sort.equals("인기순")) {
-			standard = "";
+			standard = "p.PROJECT_READCOUNT DESC";
 		} else {
-			standard = "PROJECT_NO DESC";
+			standard = "p.PROJECT_NO DESC";
 		}
 
 		int end = p * s;
@@ -315,7 +324,9 @@ public class ProjectDao {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from ("
-				+ "SELECT * FROM project WHERE project_permission = 1 AND project_start_date < sysdate AND project_semi_finish < sysdate AND instr(#1,?) > 0 order by #2"
+				+ "select p.*, total from project p left outer join project_list l on p.project_no = l.project_no "
+				+ "WHERE p.PROJECT_PERMISSION = 1 AND p.PROJECT_START_DATE < sysdate AND p.PROJECT_SEMI_FINISH < sysdate and instr(p.#1,?) > 0 "
+				+ "ORDER BY #2"
 				+ ")TMP" + ")where rn BETWEEN ? AND ?";
 		sql = sql.replace("#1", type);
 		sql = sql.replace("#2", standard);
@@ -577,8 +588,10 @@ public class ProjectDao {
 	public List<ProjectDto> selectTop() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "SELECT * FROM(" + "SELECT rownum rn, TMP.*from("
-				+ "SELECT * FROM project WHERE project_permission = 1 ORDER BY project_readcount DESC" + ")TMP"
+		String sql = "SELECT * FROM(" 
+				+ "SELECT rownum rn, TMP.*from("
+				+ "SELECT * FROM project WHERE project_permission = 1 ORDER BY project_readcount DESC" 
+				+ ")TMP"
 				+ ") WHERE rn <= 5";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
