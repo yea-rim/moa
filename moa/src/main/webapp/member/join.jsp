@@ -114,7 +114,7 @@
 			var that = this;
 
 			$.ajax({
-				url : "http://localhost:8080/moa/ajax/nick.do?memberNick=" +memberNick,
+				url : "http://localhost:8080/moa/ajax/nick.do",
 				type : "post",
 				data : {
 					memberNick : memberNick
@@ -148,13 +148,12 @@
 				span.text("사용 가능한 전화번호입니다.");
 				status.memberPhone = true;
 				$("button[name=submit]").attr("disabled", false);
-				return;
 			}
 			
 			// 휴대폰 중복 검사가 안 됩니다
 
 			$.ajax({
-				url : "http://localhost:8080/moa/ajax/phone.do?memberPhone=" + memberPhone,
+				url : "http://localhost:8080/moa/ajax/phone.do",
 				type : "post",
 				data : {
 					memberPhone : memberPhone
@@ -228,7 +227,7 @@
 		</div>
 
 		<div class="row m20">
-			<button type="submit" name="submit" class="btn btn-primary fill">회원가입</button>
+			<button type="submit" name="submit" class="btn btn-primary fill" disabled>회원가입</button>
 		</div>
 
 	</div>
