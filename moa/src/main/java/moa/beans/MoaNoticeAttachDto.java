@@ -4,6 +4,16 @@ public class MoaNoticeAttachDto {
 
 	private int noticeNo;
 	private int attachNo;
+	private String attachType;
+	
+
+	public String getAttachType() {
+		return attachType;
+	}
+
+	public void setAttachType(String attachType) {
+		this.attachType = attachType;
+	}
 
 	public MoaNoticeAttachDto() {
 		super();

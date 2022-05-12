@@ -78,14 +78,29 @@ public class CommunityReplyDao {
 
 	public boolean delete(int communityReplyNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "delete community_reply where community_reply_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, communityReplyNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	// 게시글 삭제시 해당 게시글 댓글 삭제
+	public boolean deleteCommunityReply(int communityNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "delete community_reply where community_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityNo);
 		int count = ps.executeUpdate();
 
 		con.close();
 
 		return count > 0;
 	}
+	
 }
