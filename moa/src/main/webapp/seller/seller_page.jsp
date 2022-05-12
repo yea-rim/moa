@@ -1,3 +1,4 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDao"%>
@@ -35,8 +36,7 @@
 	List<ProjectDto> list2 = projectDao.ongoingSelectList(sellerNo);
 	List<ProjectDto> list3 = projectDao.closingSelectList(sellerNo);
 	
-	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();	
 %>
 
 
@@ -99,13 +99,23 @@
 					int projectNo = projectDto.getProjectNo();
 					
 					projectDto = projectDao.selectOne(projectNo);
-					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());%> 
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
 					
 				<div class="list-card mlr30 m15">
 		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
@@ -187,7 +197,8 @@
 		        	<!-- 이미지 자리 -->
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
-		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
+		                     </a></div>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
@@ -211,6 +222,7 @@
  
 
              <%} %>
+             </div>
              </div>
 		
 <jsp:include page="/template/footer.jsp"></jsp:include>

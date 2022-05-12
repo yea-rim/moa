@@ -23,7 +23,7 @@ public class ProjectAttachDao {
 		con.close();
 	}
 	
-	// 해당 프로젝트 프로필중에 하나의 attachNo만 가져오는 메소드 
+	// 해당 프로젝트 프로필중에 하나의 attachNo만 가져오는 메소드
 	public int getAttachNo(int projectNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
@@ -113,6 +113,31 @@ public class ProjectAttachDao {
 			list.add(projectAttachDto);
 		}
 		return list;
+	}
+	
+	public ProjectAttachDto selectOne(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from project_attach where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ProjectAttachDto projectAttachDto;
+		if(rs.next()) {
+			projectAttachDto = new ProjectAttachDto();
+			
+			projectAttachDto.setProjectNo(rs.getInt("project_no"));
+			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			projectAttachDto.setAttachType(rs.getString("attach_type"));
+		} else {
+			projectAttachDto = null;
+		}
+		
+		con.close();
+		
+		return projectAttachDto; 
 	}
 	
 	
