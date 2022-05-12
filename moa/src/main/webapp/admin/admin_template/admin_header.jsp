@@ -41,6 +41,11 @@
                             <a href="<%=request.getContextPath()%>/admin/notice_list.jsp" class="link">
                            		공지사항 관리
                             </a>
+                        </li>
+                        <li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/question_list.jsp" class="link">
+                           		1:1 문의 관리
+                            </a>
                         </li>                 
                     </ul>
                 </div>

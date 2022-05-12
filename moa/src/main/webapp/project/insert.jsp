@@ -41,22 +41,13 @@
 			</div>
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill text-length" data-len="50" 
-				data-success-msg="" data-fail-msg="50자 이내로 입력해주세요.">
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/50</span>
-				</div>
-
+				<input type="text" name="projectName" class="form-input fill">
+				<div class="msg"></div>
 			</div>
 			<div class="row m20">
 				<label>프로젝트 요약글</label>
-				<textarea name="projectSummary" rows="5" class="form-input fill text-length" data-len="200"
-				data-success-msg="" data-fail-msg="200자 이내로 입력해주세요."></textarea>
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/200</span>
-				</div>
+				<textarea name="projectSummary" rows="5" class="form-input fill"></textarea>
+				<div class="msg"></div>
 			</div>
 			<div class="row m20">
 				<label>펀딩 목표 금액</label> 
@@ -181,22 +172,13 @@
 			</div>
 			<h3>* 리워드1</h3>
 			<div class="row m20">
-				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill text-length" data-len="30" 
-				data-success-msg="" data-fail-msg="30자 이내로 입력해주세요.">
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/30</span>
-				</div>
-
+				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill">
+				<div class="msg"></div>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill text-length" data-len="100"
-				data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."></textarea>
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span>
-				</div>
+				<textarea name="rewardContent" rows="5" class="form-input fill"></textarea>
+				<div class="msg"></div>
 			</div>
 			<div class="row m20">
 				<div class="">
