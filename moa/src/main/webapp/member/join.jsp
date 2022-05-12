@@ -35,7 +35,7 @@
                 var that = this;
 
                 $.ajax({
-                    url:"http://localhost:8080/study/ajax/id.do?memberEmail="+memberEmail,
+                    url:"http://localhost:8080/moa/ajax/id.do?memberEmail="+memberEmail,
                     type:"get",
                     success:function(resp) {
                         // resp는 "NNNNN" 또는 "NNNNY"
@@ -93,28 +93,32 @@
                 <h1>회원가입</h1>
             </div>
             
-            <div class="row">
-                <label>이메일</label>
+            <div class="row m20">
+                <label>* 이메일</label>
                 <input type="email" name="memberEmail" required class="form-input fill input-round" autocomplete="off">
+                <span></span>
             </div>
             
-            <div class="row">
-                <label>비밀번호</label>
+            <div class="row m20">
+                <label>* 비밀번호</label>
                 <input type="password" name="memberPw" required placeholder="영어, 숫자, 특수문자 8~16자" class="form-input fill input-round">
+                <span></span>
             </div>
-            
-            <div class="row">
-                <label>닉네임</label>
+                        
+            <div class="row m20">
+                <label>* 닉네임</label>
                     <input type="text" name="memberNick" required placeholder="한글, 숫자 10자 이내" autocomplete="off" class="form-input fill input-round">
+                <span></span>
             </div>
-            
-            <div class="row">
-                <label>전화번호</label>
+                          
+            <div class="row m20">
+                <label>* 전화번호</label>
                 <input type="tel" name="memberPhone" required placeholder="- 제외하고 입력" class="form-input fill input-round" autocomplete="off">
+                <span></span>
             </div>
-
-            <div class="row">
-                <label>가입 경로</label>
+              
+            <div class="row m20">
+                <label>* 가입 경로</label>
                 <select name="memberRoute" class="form-input input-round">
                     <option selected disabled>선택</option>                
                     <option value="친구 추천">친구 추천</option>
@@ -123,9 +127,10 @@
                     <option value="sns">sns</option>
                     <option value="기타">기타</option>
                 </select>
+                <span></span>
             </div>
-
-            <div class="row">
+              
+            <div class="row m20">
                 <button type="submit" class="btn btn-primary fill">회원가입</button>
             </div>
             
