@@ -12,6 +12,12 @@
 	
 	List<ProjectDto> list2 = projectDao.selectNew();
 %>
+
+<%
+	ProjectVo projectVo;
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto;
+%>
 <style>
 .flex-container1 {
 	display: flex;
@@ -100,9 +106,8 @@
 	    	                	</div>
 	    	                	
 	    	                	<%
-	    	                		/* ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); */ 
-	    	                		SellerDao sellerDao = new SellerDao();
-	    	                  		SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+	    	                		projectVo = projectDao.selectVo(projectDto.getProjectNo()); 
+	    	                  		sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 	    	                	%>
 	    	                	<div class="row seller"><%=sellerDto.getSellerNick() %></div>
 	    	                	<%-- <div class="row percent"><%=projectVo.getPercent() %> % </div> --%>
@@ -125,7 +130,7 @@
     	                <a href="<%=request.getContextPath() %>/notice/list.jsp" class="link">공지사항</a>
     	                 	                <hr style="border: solid lightgray 0.5px" />
     	                <% 
-    	                	int count = 0;
+    	                	count = 0;
     	                %>
     	                <div class="row flex-container2">
     	                <%for(ProjectDto projectDto : list1){ %>
@@ -144,8 +149,8 @@
 	    	                	
 	    	                	<%
 	    	                		/* ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); */ 
-	    	                		SellerDao sellerDao = new SellerDao();
-	    	                  		SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+	    	                		sellerDao = new SellerDao();
+	    	                  		sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 	    	                	%>
 	    	                	<div class="row seller"><%=sellerDto.getSellerNick() %></div>
 	    	                	<%-- <div class="row percent"><%=projectVo.getPercent() %> % </div> --%>

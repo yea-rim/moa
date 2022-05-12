@@ -129,7 +129,7 @@
     </script>
 
     <form action="funding.do" method="post">
-		<input name="projectNo" value="<%=projectNo%>">
+		<input name="projectNo" value="<%=projectNo%>" hidden>
         <div class="container w800 page" id="price-container">
 			
             <div class="center">
