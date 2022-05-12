@@ -6,7 +6,7 @@ $(function() {
 		var index = 0;
 		move(index);
 		//다음 버튼을 누르면 다음 페이지가 나오도록 구현
-		$(".btn-next").each(function(){
+		//$(".btn-next").each(function(){
 			
 			$(".btn-next").not(":last").click(function() {
 /*				if($('input[name=projectName]').val()==""){
@@ -24,7 +24,7 @@ $(function() {
 						
 				move(++index);
 			});
-		})
+		//})
 
 		//이전 버튼을 누르면 다음 페이지가 나오도록 구현
 		$(".btn-prev").not(":first").click(function() {
