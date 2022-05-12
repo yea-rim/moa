@@ -88,6 +88,41 @@ public class ProjectDao {
 		return list;
 	}
 	
+	// 진행중인 펀딩 목록(검색어 x, 정렬 x, 판매자 번호)
+			public List<ProjectDto> ongoingSelectList(int sellerNo) throws Exception {				
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select * from "
+						+ "(select rownum rn, tmp.* from "
+						+ "(select * from project p "
+						+ "left outer join seller s "
+						+ "on p.project_seller_no = s.seller_no "
+						+ "where project_permission = 1 and project_start_date < sysdate and p.project_semi_finish > sysdate and seller_no = ?)tmp)";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, sellerNo);
+				ResultSet rs = ps.executeQuery();
+				
+				List<ProjectDto> list = new ArrayList<>();
+				while (rs.next()) {
+					ProjectDto projectDto = new ProjectDto();
+					projectDto.setProjectNo(rs.getInt("project_no"));
+					projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+					projectDto.setProjectCategory(rs.getString("project_category"));
+					projectDto.setProjectName(rs.getString("project_name"));
+					projectDto.setProjectSummary(rs.getString("project_summary"));
+					projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+					projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+					projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+					projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+					projectDto.setProjectPermission(rs.getInt("project_permission"));
+					projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+					
+					list.add(projectDto);
+				}
+				
+				return list;
+			}
+	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o, 판매자 번호)
 		public List<ProjectDto> ongoingSelectList(int p, int s, int sellerNo) throws Exception {
 			
@@ -363,6 +398,41 @@ public class ProjectDao {
 
 		return count;
 	}
+	
+	// 마감된 펀딩 목록(검색어 x, 정렬 x, 판매자 번호)
+	public List<ProjectDto> closingSelectList(int sellerNo) throws Exception {				
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from "
+				+ "(select rownum rn, tmp.* from "
+				+ "(select * from project p "
+				+ "left outer join seller s "
+				+ "on p.project_seller_no = s.seller_no "
+				+ "where project_permission = 1 and project_start_date < sysdate and p.project_semi_finish < sysdate and seller_no = ?)tmp)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, sellerNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ProjectDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setProjectNo(rs.getInt("project_no"));
+			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
+			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectSummary(rs.getString("project_summary"));
+			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+			
+			list.add(projectDto);
+		}
+		
+		return list;
+	}
 
 	// 마감된 펀딩 페이지네이션(검색어 x)
 	public int closingCountByPaging(String type, String keyword) throws Exception {
@@ -526,6 +596,42 @@ public class ProjectDao {
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectName(rs.getString("project_name"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+
+			list.add(projectDto);
+		}
+
+		return list;
+	}
+	
+	// 예정된 펀딩 목록(검색어 x, 정렬 x) + 판매자 번호로 조회 
+	public List<ProjectDto> comingSelectList(int sellerNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from "
+				+ "(select rownum rn, tmp.* from "
+				+ "(select * from project p "
+				+ "left outer join seller s "
+				+ "on p.project_seller_no = s.seller_no "
+				+ "where project_permission = 1 and project_start_date > sysdate and seller_no = ?)tmp)";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, sellerNo);
+		ResultSet rs = ps.executeQuery();
+
+		List<ProjectDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setProjectNo(rs.getInt("project_no"));
+			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
+			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectSummary(rs.getString("project_summary"));
+			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+			projectDto.setProjectPermission(rs.getInt("project_permission"));
+			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
 
 			list.add(projectDto);
 		}
