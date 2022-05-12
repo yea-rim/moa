@@ -23,8 +23,7 @@ public class MemberNickCheckServlet extends HttpServlet{
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.findByNickname(memberNick);
 			
-			//출력 - 문자열
-			resp.setContentType("text/plain; charset=UTF-8");
+			//출력
 			if(memberDto != null) {//사용중
 				resp.getWriter().print("N");
 			}
