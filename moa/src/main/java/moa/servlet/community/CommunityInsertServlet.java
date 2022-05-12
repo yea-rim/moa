@@ -51,7 +51,9 @@ public class CommunityInsertServlet extends HttpServlet {
 			communityDto.setCommunityProjectNo(communityProjectNo);
 			communityDto.setCommunityMemberNo(communityMemberNo);
 			communityDto.setCommunityTitle(mRequest.getParameter("communityTitle"));
-			communityDto.setCommunityContent(mRequest.getParameter("communityContent"));
+			String communityContent = mRequest.getParameter("communityContent");
+			communityContent = communityContent.replace("\r\n", "<br>");
+			communityDto.setCommunityContent(communityContent);
 			
 			
 			// 작성

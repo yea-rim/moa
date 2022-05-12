@@ -13,7 +13,7 @@ import moa.beans.MemberDto;
 import moa.beans.SellerDao;
 import moa.beans.SellerDto;
 
-@WebServlet(urlPatterns = "/admin/refuse.do")
+@WebServlet(urlPatterns="/admin/refuse.do")
 public class SellerRefuseServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

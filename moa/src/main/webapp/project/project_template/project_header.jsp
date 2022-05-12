@@ -13,7 +13,6 @@
 
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
-	memberNo = 23; // 나중에 지우기
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
 	boolean isLogin = memberNo != null; 
 	
@@ -42,19 +41,11 @@
 	JoaDao joaDao = new JoaDao();//좋아요 Dao
 	
 %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css"> --%>
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/test.css"> --%>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectHeader.css">
-</head>
 
 <style>
     
@@ -73,8 +64,7 @@
 
 </script>
 
-<body>
-	<div class="container w1000 center">
+<div class="container w1000 center">
         <div class="row w700 margin-auto m-b10">
         	<h1>
             <%=projectDto.getProjectName() %>
@@ -86,17 +76,12 @@
 
             <div class="float-left left-container">
                 <!-- 프로필부분의 왼쪽 플로트-->
-                <div class="row layer-1">
-                    <div class="img block">
                         <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
-                    </div>
-					
-                </div>
             </div>
 
 
 
-            <div class="float-left left p80px-left right-container h100p">
+            <div class="float-left left p80px-left right-container h450px">
                 <!-- 프로필부분의 오른쪽 플로트 -->
 
                 <div class="row fill h40">
@@ -111,7 +96,7 @@
                 </div>
                 <div class="row fill h40 m20">
                     <h2>
-                        <%=projectDto.getProjectPresentMoney() %>원 달성
+                        <%=projectVo.getPresentMoney() %>원 달성
                     </h2>
                 </div>
                 <div class="row fill h40 m-b10">
@@ -119,7 +104,7 @@
                         후원자수
                     </h4>
                     <h3>
-                        <%=projectDto.getProjectSponsorNo() %>명
+                        <%=projectVo.getSponsor() %>명
                     </h3>
                 </div>
                 <hr>
@@ -139,13 +124,13 @@
                 <div class="row fill h40 m-t30">
                     <div class="float-container h40">
                         <div class="float-left left layer-3 h100p">
+                        <%if(isLogin && joaDao.isSearch(projectNo, memberNo)){ %>
+                            <button class="btn w90p wrap h100p" id="joa-btn" style="font-size: 12px;">
+                            <%}else{ %>
                             <button class="btn btn-reverse w90p wrap h100p" id="joa-btn" style="font-size: 12px;">
+                            <%} %>
                             	<span id="joa">
-                            		<%if(joaDao.isSearch(projectNo, memberNo)){ %>
-                            		좋아요취소
-                            		<%} else{ %>
                             		좋아요
-                            		<%} %>
                             	</span>
                             	<br>
                             	<span id="joa-count" style="font-size: 12px;">
@@ -154,30 +139,31 @@
                             </button>
                         </div>
                         <div class="float-left center layer-3 h100p" style="font-size: 14px;">
-                            <a href="./qna.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse w90p h100p">문의</button></a>
+                            <a href="<%=request.getContextPath() %>/project/detail/qna.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse w90p h100p">문의</button></a>
                         </div>
                         <div class="float-left right layer-3 h100p" style="font-size: 14px;">
+                        	<a href="<%=request.getContextPath() %>/community/insert.jsp?projectNo=<%=projectDto.getProjectNo() %>">
                             <button class="btn btn-reverse w90p h100p">홍보</button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
+        
 
-		
+
 <!-- 상세페이지 / 커뮤니티 메뉴바 -->
-		<hr>
-        <div class="row left h20 m10" id="start-anc">
-            <a href="./body.jsp?projectNo=<%=projectNo%>" class="link"><h2>펀딩소개</h2></a>
-            &ensp;&ensp;
-            <a href="./notice.jsp?projectNo=<%=projectNo%>" class="link"><h2>공지</h2></a>
+        <div class="row left h20 m10">
+            <a href="<%=request.getContextPath() %>/project/detail/body.jsp?projectNo=<%=projectNo%>" class="link"><h2>펀딩소개</h2></a>
+            <a href="<%=request.getContextPath() %>/project/detail/notice.jsp?projectNo=<%=projectNo%>" class="link"><h2>공지</h2></a>
             <!-- <a href="./detail/ask.jsp" class="link">문의</a> -->
         </div>
-        <hr>
+
 
         <div class="float-container center m30">
         
             <!-- 상세페이지 본문 부분-->
 
-            <div class="float-left left-container m-b10">
+            <div class="float-left left-container">

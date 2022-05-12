@@ -9,8 +9,6 @@ public class ProjectDto {
 	private String projectName;
 	private String projectSummary;
 	private int projectTargetMoney;
-	private int projectPresentMoney;
-	private int projectSponsorNo;
 	private Date projectStartDate;
 	private Date projectSemiFinish;
 	private Date projectFinishDate;
@@ -93,22 +91,6 @@ public class ProjectDto {
 
 	public void setProjectTargetMoney(int projectTargetMoney) {
 		this.projectTargetMoney = projectTargetMoney;
-	}
-
-	public int getProjectPresentMoney() {
-		return projectPresentMoney;
-	}
-
-	public void setProjectPresentMoney(int projectPresentMoney) {
-		this.projectPresentMoney = projectPresentMoney;
-	}
-
-	public int getProjectSponsorNo() {
-		return projectSponsorNo;
-	}
-
-	public void setProjectSponsorNo(int projectSponsorNo) {
-		this.projectSponsorNo = projectSponsorNo;
 	}
 
 	public Date getProjectStartDate() {

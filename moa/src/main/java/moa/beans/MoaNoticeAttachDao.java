@@ -1,5 +1,124 @@
 package moa.beans;
 
-public class MoaNoticeAttachDao {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
+public class MoaNoticeAttachDao {
+	
+	public void insert(MoaNoticeAttachDto moaNoticeAttachDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "insert into moa_notice_attach(attach_no,notice_no) values(?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, moaNoticeAttachDto.getAttachNo());
+		ps.setInt(2, moaNoticeAttachDto.getNoticeNo());
+		ps.execute();
+
+		con.close();
+	}
+	
+	public MoaNoticeAttachDto selectOne(int noticeNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, noticeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		MoaNoticeAttachDto moaNoticeAttachDto;
+		if(rs.next()) {
+			moaNoticeAttachDto = new MoaNoticeAttachDto();
+			moaNoticeAttachDto.setAttachNo(rs.getInt("attach_no"));
+			moaNoticeAttachDto.setNoticeNo(rs.getInt("notice_no"));
+		}
+		else {
+			moaNoticeAttachDto = null;
+		}
+		
+		con.close();
+		
+		return moaNoticeAttachDto;
+	}
+	
+	public MoaNoticeAttachDto selectProfile(int noticeNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "SELECT * FROM("
+				+ "SELECT rownum rn, TMP.*from("
+				+ "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? ORDER BY attach_no asc"
+				+ ")TMP"
+				+ ") WHERE rn = 1";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, noticeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		MoaNoticeAttachDto moaNoticeAttachDto;
+		if(rs.next()) {
+			moaNoticeAttachDto = new MoaNoticeAttachDto();
+			moaNoticeAttachDto.setAttachNo(rs.getInt("attach_no"));
+			moaNoticeAttachDto.setNoticeNo(rs.getInt("notice_no"));
+		}
+		else {
+			moaNoticeAttachDto = null;
+		}
+		
+		con.close();
+		
+		return moaNoticeAttachDto;
+	}
+	
+	public MoaNoticeAttachDto selectContent(int noticeNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "SELECT * FROM("
+				+ "SELECT rownum rn, TMP.*from("
+				+ "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? ORDER BY attach_no asc"
+				+ ")TMP"
+				+ ") WHERE rn = 2";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, noticeNo);
+		ResultSet rs = ps.executeQuery();
+		
+		MoaNoticeAttachDto moaNoticeAttachDto;
+		if(rs.next()) {
+			moaNoticeAttachDto = new MoaNoticeAttachDto();
+			moaNoticeAttachDto.setAttachNo(rs.getInt("attach_no"));
+			moaNoticeAttachDto.setNoticeNo(rs.getInt("notice_no"));
+		}
+		else {
+			moaNoticeAttachDto = null;
+		}
+
+		con.close();
+		
+		return moaNoticeAttachDto;
+	}
+	
+	public boolean delete(int noticeNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete moa_notice_attach where notice_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, noticeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
+	public boolean edit(MoaNoticeAttachDto moaNoticeAttachDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update moa_notice_attach set attach_no=? where community_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, moaNoticeAttachDto.getAttachNo());
+		ps.setInt(2, moaNoticeAttachDto.getNoticeNo());
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
 }

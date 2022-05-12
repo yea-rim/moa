@@ -1,3 +1,5 @@
+<%@page import="moa.beans.MoaNoticeAttachDto"%>
+<%@page import="moa.beans.MoaNoticeAttachDao"%>
 <%@page import="moa.beans.MoaNoticeDto"%>
 <%@page import="moa.beans.MoaNoticeDao"%>
 <%@page import="moa.beans.ProjectDto"%>
@@ -42,7 +44,9 @@ String keyword = request.getParameter("keyword");
  // 시작지점, 종료지점 계산
  int end = p*s;
  int begin = end - (s-1);
-
+ 
+ // 관리자 판단
+ boolean isAdmin = session.getAttribute("admin") != null;
 %>
 
 <%-- 처리 --%>
@@ -56,6 +60,7 @@ if (isSearch) {
 } else {
 	list = moaNoticeDao.selectList(p, s);
 }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -66,35 +71,34 @@ if (isSearch) {
 <style>
 .flex-container1 {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 }
 .flex-container2 {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: flex-start;
+	height: 120px;
+	padding: 20px;
 }
 .flex-items1 {
-	flex-basis:10%;
+	flex-basis:80%;
 }
 .flex-items2 {
-	flex-basis:50%;
+	flex-basis:20%;
 }
-.flex-items3 {
-	flex-basis:25%;
-}
-.flex-items4 {
-	flex-basis:15%;
-}
-button[type=submit]{
-	height: 42px;
-} 
-.community-name {
+
+/* .bottom{
+	align-self: flex-end;
+} */
+.notice-name {
     text-overflow: ellipsis;
     overflow: hidden;
-    height: 3em; 
+}
+.search{
+	justify-content: center;
 }
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -103,49 +107,63 @@ button[type=submit]{
 
 <%-- 검색결과 --%>
 <hr style="border:solid 0.5px lightgray">
+
 <div class="container w800 m30">
 	<div class="row center">
 		<a href="list.jsp?p=1&s=10" class="link">
 			<h1>공지사항</h1>
 		</a>
-		<hr style="border:solid 0.5px #B899CD">
 	</div>
 </div>
 
-<div class="container w800 m70">
-				
-			
-			<div class="row right m10">
-				<a href="insert.jsp" class="link btn">공지 작성하기</a>
-			</div>
-			<%-- 목록 --%>
-				<div class="row flex-container1">
-	                <div class="row">
-    	                <div class="row flex-container2">
+	<%-- <%if(isAdmin){ %> --%>
+	<div class="container w800 m10">
+		<div class="row left">
+			<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
+		</div>
+	</div>
+	<%-- <%} %> --%>
+	
+<%-- 목록 --%>
+<div class="container w800 m20 center">
+
     	                
-    	                <%for (MoaNoticeDto moaNoticeDto : list) {%>
-    	                <div class="container fill" style="border-bottom:0.5px solid black">
-    	               		<div class="row flex-container1">
-    	                	<div class="row flex-container2">
-	    	                	<div class="row">
-	    	                		<a href="<%=request.getContextPath() %>/detail.jsp?noticeNo = <%=moaNoticeDto.getNoticeNo() %>" class="link">
-	    	                			<%=moaNoticeDto.getNoticeTitle() %>
-	    	                		</a>
-	    	                	</div>
-	    	                	
-	    	                	<div class="row "><%=moaNoticeDto.getNoticeTitle() %> </div>
-	    	                </div>
-    	                		
-    	                		<div class="row">
-	    	                			<img src="https://dummyimage.com/100x100" width="100%">
-	    	                	</div>
-	    	                </div> 
-	    	               </div>
-    	                <%} %>
+    	    <%for (MoaNoticeDto moaNoticeDto : list) {%>
+    	        <% 
+	    	       	// 해당 게시글 사진 가져오기
+	                 MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
+	    	         MoaNoticeAttachDto moaNoticeAttachDto = moaNoticeAttachDao.selectProfile(moaNoticeDto.getNoticeNo());
+	
+					// 사진이 있는지 판정
+	    	        boolean isExistPhoto = moaNoticeAttachDto != null;
+				%>
+				<div class="row flex-container1 m10">
+					<div class="row flex-container2">
+					
+						<div class="row flex-items1 flex-container1">
+							<div class="row notice-name left m10">
+									<a href="detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+										<h2><%=moaNoticeDto.getNoticeTitle() %>(<%=moaNoticeDto.getNoticeReadcount() %>)</h2>
+									</a>
+							</div>
+							<div class="row left m10">
+								<h5>moa &nbsp;&nbsp;&nbsp; <%=moaNoticeDto.getNoticeTime() %></h5>
+							</div>
+						</div>
+	
+						<div class="flex-items2 right">
+							<%if(isExistPhoto){ %>
+							<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100px" height="100px">
+							<%}else{ %>
+							<span></span>
+							<%} %>
+						</div>
+					</div>
+					
+				</div>
+					<hr style="border:solid 0.5px lightgray">
+    	    <%} %>
     	                
-    	                </div>
-        	        </div>
-        	     </div>
 <!--  순자 페이지네이션 -->
 <%
 int count;
@@ -235,18 +253,25 @@ if(endBlock>lastPage)
 </div>
 
 </h3>
+
 <%-- 검색창 --%>
-	<div class="row center m30">
+
 		<form action="list.jsp" method="get">
-			<select name="type" required class="form-input">
-				<option value="notice_title">제목</option>
-				<option value="notice_content">내용</option>
-			</select> 
-		   	 <input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
-			 <button type="submit" class="btn-reverse">검색</button>
+			<div class="flex-container search">
+				<div>
+					<select name="type" required class="form-input">
+						<option value="notice_title">제목</option>
+						<option value="notice_content">내용</option>
+					</select> 
+				</div>
+				<div>
+			   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
+			   	 </div>
+			   	 <div>
+				 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
+				 </div>
+			</div>
 		</form>
-	</div>
 	
-<hr style="border:solid 1px #B899CD">
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

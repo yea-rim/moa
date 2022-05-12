@@ -49,6 +49,7 @@ public class FundingDao {
 		
 		String sql = "select * from funding where funding_no = ? and funding_member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		
 		ps.setInt(1, fundingNo);
 		ps.setInt(2, memberNo);		
 		ResultSet rs = ps.executeQuery();
