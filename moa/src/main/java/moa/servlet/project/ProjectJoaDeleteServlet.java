@@ -24,7 +24,7 @@ public class ProjectJoaDeleteServlet extends HttpServlet{
 			
 			// 처리 
 			JoaDao joaDao = new JoaDao();
-			joaDao.delete(memberNo, projectNo);
+			joaDao.delete(projectNo, memberNo);
 			
 			// 출력 
 			resp.sendRedirect(req.getContextPath()+"/member/joa_list.jsp");

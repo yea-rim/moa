@@ -112,7 +112,7 @@
 	                        
 	                        <!-- 후원자 명단 보기 -->
 					        <div class="float-right m70 mlr20">
-					          	<a href="my_sponsor.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
+					          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
 					        </div>
 	                        
 	                    </div>

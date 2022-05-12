@@ -108,7 +108,7 @@
 	                        
 	                        <!-- 상세보기 -->
 					        <div class="float-right m70 mlr20">
-					          	<a href="rejected_project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">상세보기</a>
+					          	<a href="rejected_project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center w100">상세보기</a>
 					        </div>
 	                        
 	                    </div>

@@ -155,7 +155,11 @@
                     <div class="container">
             			<div class="flex-container3">
             			
-            				<%for(JoaDto joaDto : list) {
+            				<%
+            				int limit = 0; 
+            				
+            				for(JoaDto joaDto : list) {
+            					
             					int projectNo = joaDto.getProjectNo();
             					
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
@@ -190,7 +194,14 @@
 					                        <p class="link-purple"><%=projectDto.getProjectCategory() %></p>
 					                    </div>
 					                </div>
-							<%} %>
+							<%
+								limit++;
+	            				
+								if(limit == 4) {
+									break;
+								}
+            				} %>
+							
 			                
      				  </div>
                     </div>
@@ -250,9 +261,6 @@
                        
                     </div>
                 </div>
-	
-			<div class="row center m20">
-				<a href = "logout.do" class="link link-gray">로그아웃</a>
-			</div>
+
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
