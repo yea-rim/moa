@@ -262,7 +262,7 @@ if (isSearch) {
               <div class="row center">
               	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 			       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%" --%>
-                	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="100%">
+                	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="372px"height="250px">
                 </a>
               </div>
               <div class="row project-name"><%=projectDto.getProjectName() %></div>

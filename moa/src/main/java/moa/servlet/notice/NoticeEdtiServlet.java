@@ -40,7 +40,10 @@ public class NoticeEdtiServlet extends HttpServlet {
 			MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 			moaNoticeDto.setNoticeNo(noticeNo);
 			moaNoticeDto.setNoticeTitle(mRequest.getParameter("noticeTitle"));
-			moaNoticeDto.setNoticeContent(mRequest.getParameter("noticeContent"));
+			
+			String noticeContent = mRequest.getParameter("noticeContent");
+			noticeContent = noticeContent.replace("\r\n", "<br>");
+			moaNoticeDto.setNoticeContent(noticeContent);
 			
 			// 수정
 			MoaNoticeDao moaNoticeDao = new MoaNoticeDao();

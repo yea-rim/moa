@@ -190,4 +190,7 @@
 		<% }%>
 		</div>
 	</div>
+	<div class="center" style="height:70px">
+				<a href="list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
+	</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
