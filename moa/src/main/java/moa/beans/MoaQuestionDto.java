@@ -3,16 +3,35 @@ package moa.beans;
 import java.sql.Date;
 
 public class MoaQuestionDto {
-
 	private int questionNo;
 	private int questionWriter;
 	private String questionTitle;
 	private String questionContent;
 	private Date questionTime;
-
+	private String questionType;
+	private int answerStatus;
+	
 	public MoaQuestionDto() {
 		super();
 	}
+	
+	public int getAnswerStatus() {
+		return answerStatus;
+	}
+
+
+	public void setAnswerStatus(int answerStatus) {
+		this.answerStatus = answerStatus;
+	}
+
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+
 	
 	public int getQuestionNo() {
 		return questionNo;

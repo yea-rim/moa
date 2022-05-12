@@ -393,17 +393,22 @@ textarea.form-input {
 
     display: inline-block;
     min-width: 2em; 
-    padding: 0.25em;
+    padding: 0.5em;
 
     text-align: center;
+    border: 1px solid rgb(130, 130, 130);
 }
 .pagination > a:hover {
-    color: black;
+    color: #B899CD;
+    border: 1px solid #B899CD;
 }
 /* 현재 페이지 (class로 설정) */
 .pagination > a.active {
     color: black;
+    border: 1px solid black;
 }
+
+
 
 
 
@@ -652,6 +657,18 @@ textarea.form-input {
  .table.table-hover > tbody > tr:hover{
             background-color: #d8c8e3;
         }
+
+
+.table.table-admin > thead > tr,
+.table.table-admin > thead > td,
+.table.table-admin > tbody > tr,
+.table.table-admin > tbody > td
+{
+    border-bottom: 0.8px solid #95a5a6;   
+  	margin: 10px;
+}
+
+
 
 /* 이미지 */
 /* 이미지 관련 commons */

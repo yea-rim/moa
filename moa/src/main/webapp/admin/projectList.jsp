@@ -41,13 +41,6 @@
 	DecimalFormat f = new DecimalFormat("#,###.#");
 %>
 
-<style>
-.table.table-a > thead > tr ,
-.table.table-a > tbody > tr
-{
-    border-bottom: 1px solid black;
-}
-</style>
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 <script type="text/javascript">
     $(function () {
@@ -74,7 +67,7 @@
 		</form>
 	</div>
 	<div class="row">
-		<table class="table table-a table-stripe table-hover">
+		<table class="table table-admin table-stripe table-hover">
 			<thead>
 				<tr>
 					<th width="17%">판매자</th>

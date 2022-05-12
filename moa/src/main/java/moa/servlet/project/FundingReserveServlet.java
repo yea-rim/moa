@@ -19,7 +19,7 @@ import moa.beans.RewardDto;
 import moa.beans.RewardSelectionDao;
 import moa.beans.RewardSelectionDto;
 
-@WebServlet(urlPatterns = "project/funding.do")
+@WebServlet(urlPatterns = "/project/funding.do")
 public class FundingReserveServlet extends HttpServlet{
 
 	@Override
