@@ -108,9 +108,7 @@ $(function() {
 		$("#end").on("change",fundingDays);
 		$("#start").on("change",fundingDays);
 
-		
-		//리워드 빼기 버튼 숨기기
-		$(".btn-delReward").hide();
+
 		
 		//리워드 추가 함수
 		function addReaward(rewardNum) {
@@ -139,10 +137,16 @@ $(function() {
 		//추가한 리워드 삭제
 		$(".btn-delReward").click(function(){
 			rewardNum--;
-			$("#add-reward").children(".reward"+rewardNum).remove();
-			console.log(rewardNum)
+			$("#add-reward").children(".reward"+rewardNum).remove();			
+		if(rewardNum==2){
+			$(".btn-delReward").hide();
+		}
 		});
-
+		
+		//리워드 빼기 버튼 숨기기
+		$(".btn-delReward").hide();
+		
+		
 
 		//개별 배송 여부 체크 시 
 		$("input[name=rewardEach]").on("input",function(){

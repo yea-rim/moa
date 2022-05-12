@@ -96,7 +96,7 @@
 						<%}else if(projectDto.getProjectPermission()==1){ %>
 							<span style="color: blue">승인완료</span>
  						<%}else{ %>
-							거절 
+							반려
 						<%} %>
 					</td>
 				</tr>

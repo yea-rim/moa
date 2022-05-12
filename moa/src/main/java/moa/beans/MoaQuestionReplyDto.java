@@ -2,24 +2,17 @@ package moa.beans;
 
 import java.sql.Date;
 
-public class MoaquestionReplyDto {
+public class MoaQuestionReplyDto {
 	private int questionReplyNo;
 	private int questionTargetNo;
-	private int questionReplyAdmin;
-	private int questionReplyMember;
 	private Date questionReplyTime;
 	private String questionReplyContent;
 	
-	public MoaquestionReplyDto() {
+	public MoaQuestionReplyDto() {
 		super();
 	}
 	
-	public int getQuestionReplyAdmin() {
-		return questionReplyAdmin;
-	}
-	public void setQuestionReplyAdmin(int questionReplyAdmin) {
-		this.questionReplyAdmin = questionReplyAdmin;
-	}
+
 	public int getQuestionReplyNo() {
 		return questionReplyNo;
 	}
@@ -27,9 +20,6 @@ public class MoaquestionReplyDto {
 		return questionTargetNo;
 	}
 	
-	public int getQuestionReplyMember() {
-		return questionReplyMember;
-	}
 	public Date getQuestionReplyTime() {
 		return questionReplyTime;
 	}
@@ -41,10 +31,6 @@ public class MoaquestionReplyDto {
 	}
 	public void setQuestionTargetNo(int questionTargetNo) {
 		this.questionTargetNo = questionTargetNo;
-	}
-	
-	public void setQuestionReplyMember(int questionReplyMember) {
-		this.questionReplyMember = questionReplyMember;
 	}
 	public void setQuestionReplyTime(Date questionReplyTime) {
 		this.questionReplyTime = questionReplyTime;
