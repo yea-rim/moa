@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.JoaDao;
 
-@WebServlet(urlPatterns = "/ajax/joa.do")
+@WebServlet(urlPatterns="/ajax/joa.do")
 public class joaAjaxServlet extends HttpServlet{
 	
 	@Override

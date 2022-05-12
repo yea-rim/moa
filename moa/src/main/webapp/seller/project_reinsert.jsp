@@ -1,3 +1,6 @@
+<%@page import="moa.beans.RewardDto"%>
+<%@page import="java.util.List"%>
+<%@page import="moa.beans.RewardDao"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="moa.beans.ProjectDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,7 +11,8 @@
 	
 	ProjectDao projectDao = new ProjectDao();
 	ProjectDto projectDto = projectDao.selectOne(projectNo);
-%>
+%>    
+    
 <style>
 	.insert-li{
 		padding: 0px 0px 35px 20px;
@@ -16,20 +20,35 @@
 		list-style-type: disc;
 	}
 </style>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_insert.js"></script>
 
+
+	<div class="flex-container mt40">
+		 <!-- 마이페이지 메인으로 이동 -->
+             <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
+             <a href="<%=request.getContextPath() %>/seller/my_page.jsp">
+                    <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
+             </a>
+             <a href="<%=request.getContextPath() %>/seller/permit_project_detail.jsp?projectNo=<%=projectNo %>" class="link mlr5">
+                     <h2>돌아가기</h2>
+              </a>
+	</div>
+
 		<div class="container w600 m30 ">
 		<div class="row center m50">
-			<h1>프로젝트 정보 수정</h1>
+			<h1>프로젝트 재신청</h1>
 		</div>
 		<hr>
 		<div class="row m20">
 			<h3>*프로젝트 기본 정보</h3>
 		</div>
-<form action="projectEdit.do" method="post" >
+		
+<form action="" method="post" >
 	<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>"> 
 		<div class="row m20">		     					
 			<label>카테고리</label> 
@@ -157,13 +176,25 @@
 		</div>
 		
 		<hr>
-	
-		<div class="row mt50">
-			<input type="submit" class="btn fill" value="수정하기"> 
+<!-- 		<div class="row m30">
+			<h3>*프로젝트 이미지</h3>
 		</div>
-		<div class="row m10 mb50">
-			<a href="project_detail.jsp?projectNo=<%=projectNo%>" class="link link-reverse fill center">돌아가기</a> 
+			<div class="row">
+			<h4 class="h20">대표 이미지</h4>
+			<input type="file" name="profileAttach1" accept="image/*" ><br>
+			<input type="file" name="profileAttach2" accept="image/*"><br>
+			<input type="file" name="profileAttach3" accept="image/*"><br>
+		</div>
+		<div class="row m20">
+			<h4 class="h20">프로젝트 상세이미지</h4>
+			<input type="file" class="filebox" name="detailAttach1" accept="image/*"><br>
+			<input type="file" class="filebox" name="detailAttach2" accept="image/*"><br>
+			<input type="file" class="filebox" name="detailAttach3" accept="image/*"><br>
+		</div> -->			
+		<div class="row m50">
+			<input type="submit" class="btn fill" value="재신청"> 
 		</div>
 </form>
 	</div>
-		<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+
+	<jsp:include page="/template/footer.jsp"></jsp:include>

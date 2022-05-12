@@ -114,7 +114,7 @@
                 <li>
                     <a href="<%=request.getContextPath()%>/community/list.jsp"><h3 class="m0">커뮤니티</h3></a>
                     <ul>
-                        <li><a href="#"><h3 class="m0">공지사항</h3></a></li>
+                        <li><a href="<%=request.getContextPath() %>/notice/list.jsp"><h3 class="m0">공지사항</h3></a></li>
                         <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0 ft">홍보하기</h3></a></li>
                     </ul> 
                 </li>

@@ -76,14 +76,14 @@
         </div> 
 
         <div class="float-container">
-           <!--  <div class="float-left layer-3 mt50 center p10">
-                <h2><a href="" class="link link-purple link-reverse fill">후원자 관리</a></h2>
-            </div> -->
             <div class="float-left layer-3 mt50 center p10">
-                <h2><a href="<%=request.getContextPath() %>/seller/my_project.jsp" class="link link-purple link-reverse fill">프로젝트 관리</a></h2>
+                <h2><a href="<%=request.getContextPath() %>/seller/my_ongoing_project.jsp" class="link link-purple link-reverse fill">프로젝트 관리</a></h2>
             </div>
             <div class="float-left layer-3 mt50 center p10">
                 <h2><a href="" class="link link-purple link-reverse fill">성공한 프로젝트</a></h2>
+            </div>
+            <div class="float-left layer-3 mt50 center p10">
+                <h2><a href="" class="link link-purple link-reverse fill">미달성한 프로젝트</a></h2>
             </div>
         </div>
     </div>

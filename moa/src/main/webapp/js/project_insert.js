@@ -1,13 +1,30 @@
 $(function() {	
-		fundingDays();
-		$(".btn-delReward").hide();
+		fundingDays();		
 	
+	
+		//멀티페이지 구현
 		var index = 0;
 		move(index);
 		//다음 버튼을 누르면 다음 페이지가 나오도록 구현
-		$(".btn-next").not(":last").click(function() {
-			move(++index);
-		});
+		$(".btn-next").each(function(){
+			
+			$(".btn-next").not(":last").click(function() {
+				if($('input[name=projectName]').val()==""){
+					$('input[name=projectName]').next(".length").children(".msg").text("프로젝트 이름을 입력해주세요.");
+				return false;
+				}
+						
+				if($('textarea[name=projectSummary]').val()==""){			
+					$('textarea[name=projectSummary]').next(".length").children(".msg").text("프로젝트 요약글을 입력해주세요.");
+				return false;
+				}
+				
+				/*var dddd = $("input[name=projectTargetMoney]");
+				return checkProjectTargetMoney.call(dddd);*/
+						
+				move(++index);
+			});
+		})
 
 		//이전 버튼을 누르면 다음 페이지가 나오도록 구현
 		$(".btn-prev").not(":first").click(function() {
@@ -20,6 +37,12 @@ $(function() {
 			var percent = (index + 1) * 100 / 2;
 			$(".percent").css("width", percent + "%");
 		}
+
+		$(".project_page").click()
+
+
+
+
 
 		//날짜 선택 (datepicker) 설정
 		var dateFormat = "yy-mm-dd", from = $("#start").datepicker(
@@ -86,12 +109,17 @@ $(function() {
 		$("#start").on("change",fundingDays);
 
 		
-		//리워드추가 함수
+		//리워드 빼기 버튼 숨기기
+		$(".btn-delReward").hide();
+		
+		//리워드 추가 함수
 		function addReaward(rewardNum) {
 			var div = $("<div>").attr('class', 'reward'+rewardNum+" row m30");
 			var h3 = $("<h3>* 리워드" + rewardNum + "</h3>");
-			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill"></div>\
-	                <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill"></textarea></div>\
+			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill text-length" data-len="30" data-success-msg="" data-fail-msg="30자 이내로 입력해주세요."></div>\
+	                <div class="flex-container length"><div class="left-wrapper msg f12 red"></div><div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/30</span></div>\
+	                <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill text-length" data-len="100" data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."></textarea></div>\
+	                <div class="flex-container length"><div class="left-wrapper msg f12 red"></div><div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span></div></div>\
 	                <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"></div>\
 	                <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>\
 	                <div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="rewardDelivery" class="form-input w80p">\
@@ -99,7 +127,7 @@ $(function() {
 	
 			div.append(h3).append(content);
 			$("#add-reward").append(div);
-			$(".btn-delReward").show();
+			$(".btn-delReward").show(); //리워드 추가시 빼기버튼 보여주기
 		}
 	
 		rewardNum = 2;
@@ -155,7 +183,9 @@ $(function() {
 		
 		
 		//펀딩 금액 체크 메세지
-		$("input[name=projectTargetMoney]").blur(function() {
+		$("input[name=projectTargetMoney]").blur(checkProjectTargetMoney);
+			
+			function checkProjectTargetMoney() {
 			var inVal = $(this).val();
 			var regexVal = /^[0-9]{6,20}$/;
 
@@ -168,10 +198,11 @@ $(function() {
 			} else {
 				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
 			}
-		});
+		}
 		
 			
 		//글자수 표시
+		$(document).on("input",".text-length",textLen);	
 		$(".text-length").on("input",textLen);
 		function textLen(){			
 			var size = $(this).val().length;
@@ -188,10 +219,12 @@ $(function() {
 					target.next().css("color","gray");
                 }
 		}	
-		
 
 		//글자수 체크 메세지
-		$(".text-length").blur(function(){
+		$(document).on("blur",".text-length",checkLen);	
+		$(".text-length").blur(checkLen);
+
+		function checkLen(){
 			var len = $(this).data("len");
 			var val = $(this).val().length;
 			var judge = val <= len;
@@ -202,9 +235,9 @@ $(function() {
 			else {
 				$(this).next(".length").children(".msg").text($(this).data("fail-msg"));
 			}
-        });
+        }
         
-        	//개별 배송여부 체크 시 value값 수정
+      //개별 배송여부 체크 시 value값 수정
 	$(".each-ckbox").on("input",function(){
 			if ($(this).is(":checked")) {
 			    $(this).next().attr("value","1");
@@ -217,9 +250,16 @@ $(function() {
 	$(document).on("input",".each-ckbox",function(){
 			if ($(this).is(":checked")) {
 			    $(this).next().attr("value","1");
-			} else {ㄴ
+			} else {
 			     $(this).next().attr("value","0");
 			}
 		});
+		
+	//전송 시 확인
+	$(".insert-form").submit(function(){
+		return true;
+	});
+		
+
 			
 	});

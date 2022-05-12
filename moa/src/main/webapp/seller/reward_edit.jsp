@@ -3,19 +3,36 @@
 <%@page import="moa.beans.RewardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 <%
-int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-
-RewardDao rewardDao = new RewardDao();
-List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리워드목록 리스트 불러오기 */
+	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+	
+	RewardDao rewardDao = new RewardDao();
+	List<RewardDto> rewardList = rewardDao.selectProject(projectNo);
 %>
+
+<jsp:include page="/template/header.jsp"></jsp:include>
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/add_reward.js"></script>
+
+
+	<div class="flex-container mt40">
+		 <!-- 마이페이지 메인으로 이동 -->
+             <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
+             <a href="<%=request.getContextPath() %>/seller/my_page.jsp">
+                    <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
+             </a>
+             <a href="<%=request.getContextPath() %>/seller/permit_project_detail.jsp?projectNo=<%=projectNo %>" class="link mlr5">
+                     <h2>돌아가기</h2>
+              </a>
+	</div>
+
+
 <div class="container w600">
 		<div class="row center m50">
 			<h1>리워드 수정</h1>
 		</div>
-<form action="rewardEdit.do" method="post">
+<form action="<%=request.getContextPath() %>/seller/reward_edit.do" method="post">
 		<input type="hidden" name="projectNo" value="<%=projectNo%>">
 		<%
 		int num =1;
@@ -62,13 +79,10 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 				<a class="btn-delReward"><img src="<%=request.getContextPath()%>/image/del-icon.png" width="20"></a>
 				<a class="btn-addReward"><img src="<%=request.getContextPath()%>/image/add-icon.png" width="20"></a>
 			</div>
-		<div class="row mt50">
+		<div class="row m50">
 			<button type="submit"  class="btn fill">수정하기</button>
-		</div>
-				<div class="row m10 mb50">
-			<a href="project_detail.jsp?projectNo=<%=projectNo%>" class="link link-reverse fill center">돌아가기</a> 
 		</div>
 </form>
 </div>
 
-<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>

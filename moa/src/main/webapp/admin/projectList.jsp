@@ -7,33 +7,38 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
-//페이징 관련 파라미터들을 수신
-String sort = request.getParameter("sort");
-if (sort == null) {
-	sort = "최신순";
-}
-int p;
-try { //정상적인 숫자가 들어온 경우 - 0이하인 경우 --> Plan A
-	p = Integer.parseInt(request.getParameter("p"));
-	if (p <= 0) {
-		throw new Exception();
+	//페이징 관련 파라미터들을 수신
+	String sort = request.getParameter("sort");
+	if (sort == null) {
+		sort = "최신순";
 	}
-} catch (Exception e) {//p가 없거나 숫자가 아닌 경우+0이하인 경우 --> plan B
-	p = 1;
-}
-int s;
-try {
-	s = Integer.parseInt(request.getParameter("s"));
-	if (s <= 0) {
-		throw new Exception();
+	int p;
+	try { //정상적인 숫자가 들어온 경우 - 0이하인 경우 --> Plan A
+		p = Integer.parseInt(request.getParameter("p"));
+		if (p <= 0) {
+			throw new Exception();
+		}
+	} catch (Exception e) {//p가 없거나 숫자가 아닌 경우+0이하인 경우 --> plan B
+		p = 1;
 	}
-} catch (Exception e) {
-	s = 20;
-}
-ProjectDao projectDao = new ProjectDao();
-List<ProjectDto> list = projectDao.allSelectList(p, s, sort);
-DecimalFormat f = new DecimalFormat("#,###.#");
+	int s;
+	try {
+		s = Integer.parseInt(request.getParameter("s"));
+		if (s <= 0) {
+			throw new Exception();
+		}
+	} catch (Exception e) {
+		s = 20;
+	}
+%>
+
+
+<%
+	ProjectDao projectDao = new ProjectDao();
+	List<ProjectDto> list = projectDao.allSelectList(p, s, sort);
+	DecimalFormat f = new DecimalFormat("#,###.#");
 %>
 
 <style>
@@ -59,27 +64,25 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 	</div>
 	<div class="row right m20">
 		<form action="projectList.jsp" method="get">
-		<select name="sort" class="sort">
-			<option>선택</option>
-			<option>승인여부</option>
-			<option>최신순</option>
-			<option>시작일임박순</option>
-			<option>펀딩액순</option>
-		</select> 
-		<!-- <input type="submit" value="정렬"> -->
-		<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
-	</form>
+			<select name="sort" class="sort">
+				<option>선택</option>
+				<option>승인여부</option>
+				<option>최신순</option>
+				<option>시작일임박순</option>
+				<option>펀딩액순</option>
+			</select> 
+		</form>
 	</div>
 	<div class="row">
 		<table class="table table-a table-stripe table-hover">
 			<thead>
 				<tr>
-					<th>판매자</th>
-					<th>카테고리</th>
+					<th width="17%">판매자</th>
+					<th width="10%">카테고리</th>
 					<th >프로젝트명</th>
 					<th>목표금액</th>
-					<th>시작일</th>
-					<th>승인여부</th>
+					<th width="11%">시작일</th>
+					<th width="9%">승인여부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -104,9 +107,7 @@ DecimalFormat f = new DecimalFormat("#,###.#");
 						<%} %>
 					</td>
 				</tr>
-				<%
-				}
-				%>
+				<%}%>
 			</tbody>
 		</table>
 	</div>
@@ -128,7 +129,6 @@ if (endBlock > lastPage) {
 %>
 
 <div class="pagination cente m40">
-	<h4>
 		<!-- 이전 버튼 영역 -->
 		<%if (p > 1) { // 첫페이지가 아니라면 %>
 		<a href="projectList.jsp?p=1&s=<%=s%>&sort=<%=sort%>">&laquo;</a>
@@ -161,7 +161,6 @@ if (endBlock > lastPage) {
 		%>
 		<a href="projectList.jsp?p=<%=lastPage%>&s=<%=s%>&sort=<%=sort%>">&raquo;</a>
 		<%}%>
-	</h4>
 </div>
 
 <jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include> 

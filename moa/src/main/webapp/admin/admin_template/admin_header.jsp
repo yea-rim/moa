@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <style>
 .menu-li{
-	padding: 0px 0px 35px 20px;
+	padding: 0px 0px 25px 10px;
 	list-style-type: square;
 }
 </style>
@@ -36,7 +36,12 @@
                             <a href="<%=request.getContextPath()%>/admin/seller_join_list.jsp" class="link">
                            		판매자 신청 목록
                             </a>
-                        </li>                       
+                        </li>      
+                         <li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/notice_list.jsp" class="link">
+                           		공지사항 관리
+                            </a>
+                        </li>                 
                     </ul>
                 </div>
                 <div class="content-wrapper mlr30 m50">

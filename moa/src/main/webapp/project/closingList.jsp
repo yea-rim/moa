@@ -278,9 +278,9 @@ if (isSearch) {
 
               <hr style="border: solid #B899CD 1px" />
 
-              <% ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %>
+<%--               <% ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %> --%>
               <div class="flex-container2">
-                <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div>
+                <%-- <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div> --%>
                 <div class="row right b">펀딩종료</div>
               </div>
             </div>

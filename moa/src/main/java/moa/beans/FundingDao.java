@@ -47,11 +47,11 @@ public class FundingDao {
 	public FundingDto selectOne(int fundingNo, int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from funding where funding_member_no = ? and funding_no = ?";
+		String sql = "select * from funding where funding_no = ? and funding_member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, memberNo);
-		ps.setInt(2, fundingNo);
 		
+		ps.setInt(1, fundingNo);
+		ps.setInt(2, memberNo);		
 		ResultSet rs = ps.executeQuery();
 		
 		FundingDto fundingDto;
