@@ -15,7 +15,7 @@
 				// 체크되었으면
 				$("input[name=memberPw]").prop("type", "text");
 			} else {
-				// 체크 해제되면 
+				// 체크 해제되면
 				$("input[name=memberPw]").prop("type", "password");
 			}
 		});
@@ -34,15 +34,21 @@
 						function() {
 
 							// 형식 검사
-							var regex = /[a-z][a-z0-9]{7,19}/;
+							var regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 							var memberEmail = $(this).val();
 
 							var judge = regex.test(memberEmail);
 							if (!judge) {
 								$(this).next("span").text(
-										"아이디를 형식에 맞게 작성해 주세요.");
+										"이메일을 형식에 맞게 작성해 주세요.");
+								$("button[name=submit]").attr("disabled", true);
 								status.memberEmail = false;
 								return;
+							} else {
+								$(this).next("span").text(
+								"사용 가능한 이메일입니다.");
+						$("button[name=submit]").attr("disabled", false);
+						status.memberEmail = false;
 							}
 
 							var that = this;
@@ -50,18 +56,19 @@
 							// 중복 검사
 							$
 									.ajax({
-										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="
-												+ memberEmail,
+										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="+ memberEmail,
 										type : "get",
 										success : function(resp) {
 											// resp는 "NNNNN" 또는 "NNNNY"
 											if (resp == "NNNNN") {
 												$(that).next("span").text(
 														"이미 사용 중인 이메일입니다.");
+												$("button[name=submit]").attr("disabled", true);
 												status.memberEmail = false;
 											} else if (resp == "NNNNY") {
 												$(that).next("span").text(
 														"사용 가능한 이메일입니다.");
+												$("button[name=submit]").attr("disabled", false);
 												status.memberEmail = true;
 											}
 										}
@@ -70,17 +77,21 @@
 
 		$("input[name=memberPw]").blur(function() {
 
-			var regex = /[a-z][a-z0-9]{7,19}/;
+			var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%#&])[A-Za-z\d$@$!%#&]{8,16}$/;
 			var memberPw = $(this).val();
 
 			var judge = regex.test(memberPw);
 			if (!judge) {
 				$(this).next("span").text("형식에 맞는 비밀번호를 작성해 주세요.");
 				status.password = false;
+				$("button[name=submit]").attr("disabled", true);
 				return;
+			} else {
+				$(this).next("span").text("사용 가능한 비밀번호입니다.");
+				status.password = false;
+				$("button[name=submit]").attr("disabled", false);
 			}
 
-			var that = this;
 		});
 
 		$("input[name=memberNick]").blur(function() {
@@ -92,11 +103,18 @@
 			if (!judge) {
 				span.text("형식에 맞는 닉네임을 사용하세요.");
 				status.memberNick = false;
+                $("button[name=submit]").prop("disabled");
 				return;
+			} else {
+				span.text("사용 가능한 닉네임입니다.");
+				status.memberNick = true;
+				$("button[name=submit]").attr("disabled", false);
 			}
 
+			var that = this;
+
 			$.ajax({
-				url : "http://localhost:8080/moa/member/join.do",
+				url : "http://localhost:8080/moa/ajax/nick.do?memberNick=" +memberNick,
 				type : "post",
 				data : {
 					memberNick : memberNick
@@ -104,10 +122,52 @@
 				success : function(resp) {
 					if (resp === "Y") {
 						span.text("사용 가능한 닉네임입니다.");
+						$("button[name=submit]").attr("disabled", false);
 						status.memberNick = true;
 					} else if (resp === "N") {
-						span.text("사용 불가능한 닉네임입니다.");
+						span.text("이미 사용 중인 닉네임입니다.");
 						status.memberNick = false;
+						$("button[name=submit]").attr("disabled", true);
+					}
+				}
+			});
+		});
+
+		$("input[name=memberPhone]").blur(function() {
+			var regex = /^010([1-9][0-9]{3})([0-9]{4})$/;
+			var memberPhone = $(this).val();
+			var span = $(this).next("span");
+
+			var judge = regex.test(memberPhone);
+			if (!judge) {
+				span.text("형식에 맞는 전화번호를 입력해 주세요.");
+				status.memberPhone = false;
+				$("button[name=submit]").attr("disabled", true);
+				return;
+			} else {
+				span.text("사용 가능한 전화번호입니다.");
+				status.memberPhone = true;
+				$("button[name=submit]").attr("disabled", false);
+				return;
+			}
+
+			var that = this;
+
+			$.ajax({
+				url : "http://localhost:8080/moa/ajax/phone.do?memberPhone=" + memberPhone,
+				type : "get",
+				data : {
+					memberPhone : memberPhone
+				},
+				success : function(resp) {
+					if (resp === "Yes") {
+						span.text("가입 가능한 전화번호입니다.");
+						status.memberPhone = true;
+						$("button[name=submit]").attr("disabled", false);
+					} else if (resp === "No") {
+						span.text("이미 가입된 전화번호입니다.");
+						status.memberPhone = false;
+						$("button[name=submit]").attr("disabled", true);
 					}
 				}
 			});
@@ -168,7 +228,7 @@
 		</div>
 
 		<div class="row m20">
-			<button type="submit" class="btn btn-primary fill">회원가입</button>
+			<button type="submit" name="submit" class="btn btn-primary fill">회원가입</button>
 		</div>
 
 	</div>
