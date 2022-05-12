@@ -1,4 +1,3 @@
-<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDao"%>
 <%@page import="java.util.List"%>
@@ -30,20 +29,8 @@
 	// 회원 프로필 존재 여부 확인 
 	boolean isExistProfile = memberProfileDto != null;
 	
-	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-	
-	// 예정된 프로젝트 조회
 	ProjectDao projectDao = new ProjectDao();
-	List<ProjectDto> list2 = projectDao.comingSelectList(sellerNo);
-	
-	// 진행 중인 프로젝트 조회
 	List<ProjectDto> list1 = projectDao.ongoingSelectList(sellerNo);
-	
-	// 마감된 프로젝트 조회
-// 	List<ProjectDto> list3 = projectDao.closingSelectList(sellerNo);
-
-	
-
 	
 %>
 
