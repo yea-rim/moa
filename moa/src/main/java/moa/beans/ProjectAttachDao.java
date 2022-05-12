@@ -37,7 +37,10 @@ public class ProjectAttachDao {
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 
-		int attachNo = rs.getInt("attach_no");
+		int attachNo = 0;
+		if(rs.next()) {
+			attachNo = rs.getInt("attach_no");
+		}
 		con.close();
 
 		return attachNo;

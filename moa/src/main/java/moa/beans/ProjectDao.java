@@ -1073,7 +1073,7 @@ public class ProjectDao {
 
 			return count;
 		}
-		
+				
 		//조회수 증가 메서드
 		public boolean readCountUp(int projectNo) throws Exception{
 			String sql = "update project set project_readcount = project_readcount + 1 where project_no = ?";

@@ -21,7 +21,6 @@
 	// 판매자 세션 가져오기
 	Integer seller = (Integer) session.getAttribute("seller");
 	boolean isSeller = seller !=null;
-
 %>
 
 <!DOCTYPE html>
@@ -78,18 +77,47 @@
 		                			</a>
 		                		</div>
                 		<%} else { // 일반 회원이라면 %>
-                				<div class="float-right layer-5 center m10">
-		                			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-purple">
-		                				<button class="btn-reverse">
-		                					<h3>판매자 신청</h3>
-		                				</button>
-		                			</a>
-		                		</div>
+                				<%
+                				// 판매자 신청 여부
+                				SellerDao sellerDao = new SellerDao();
+                				SellerDto sellerDto = sellerDao.selectOne(memberNo);
+                				
+                				boolean isRequestSeller = sellerDto != null && sellerDto.getSellerPermission() == 0;
+                				
+                				if(isRequestSeller) { // 판매자 신청을 한 회원이면 %>
+                					<div class="float-right layer-5 center m10">
+			                			<a href="<%=request.getContextPath() %>/seller/seller_wait.jsp" class="link link-purple">
+			                				<button class="btn-reverse">
+			                					<h3>판매자 신청</h3>
+			                				</button>
+			                			</a>
+		                			</div>
+                				<%} else { // 판매자 신청을 하지 않은 회원이면 %>
+	                				<div class="float-right layer-5 center m10">
+			                			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-purple">
+			                				<button class="btn-reverse">
+			                					<h3>판매자 신청</h3>
+			                				</button>
+			                			</a>
+			                		</div>
+                				<%} %>
                 		<%} %>
-                		<div class="float-right layer-5 center m10 mt20">
-                			<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
-                					<h3>마이페이지</h3>
-                			</a>
+                		<div class="float-right layer-5 center m10">
+                			<ul class="menu center">
+                				<li>
+                					<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
+                						<h3>마이페이지</h3>
+                					</a>
+                					
+                					<ul>
+                						<li>
+                							<a href="<%=request.getContextPath()%>/member/logout.do">
+                								<h3>로그아웃</h3>
+                							</a>
+                						</li>
+                					</ul>
+                				</li>
+                			</ul>
                 		</div>
                 <%}else { // 로그인 상태가 아니면 %>           
                 	<div class="float-right layer-5 center m10">

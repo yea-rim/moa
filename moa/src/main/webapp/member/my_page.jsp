@@ -1,3 +1,4 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.RewardSelectionDto"%>
 <%@page import="moa.beans.RewardSelectionDao"%>
 <%@page import="moa.beans.FundingDto"%>
@@ -155,21 +156,30 @@
                     <div class="container">
             			<div class="flex-container3">
             			
-            				<%for(JoaDto joaDto : list) {
+            				<%
+            				int limit = 0; 
+            				
+            				for(JoaDto joaDto : list) {
+            					
             					int projectNo = joaDto.getProjectNo();
             					
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
-								/* int profileNo = projectAttachDao.getAttachNo(projectNo); */
 								
-								// projectAttach로 대표 이미지 가져오기 실패 
+								int projectAttachNo = projectAttachDao.getAttachNo(projectNo);
+								
+								boolean isExistProjectAttach = projectAttachNo != 0; 
 								%> 
 								
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
 					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
-					                        	<img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<%if(isExistProjectAttach) { %>
+					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachNo%>" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<%} else {%>
+					                        		<img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<%} %>
 					                        </a>
 					                    </div>
 					                    
@@ -190,7 +200,14 @@
 					                        <p class="link-purple"><%=projectDto.getProjectCategory() %></p>
 					                    </div>
 					                </div>
-							<%} %>
+							<%
+								limit++;
+	            				
+								if(limit == 4) {
+									break;
+								}
+            				} %>
+							
 			                
      				  </div>
                     </div>
@@ -250,9 +267,6 @@
                        
                     </div>
                 </div>
-	
-			<div class="row center m20">
-				<a href = "logout.do" class="link link-gray">로그아웃</a>
-			</div>
+
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>

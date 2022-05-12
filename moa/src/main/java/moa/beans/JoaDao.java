@@ -50,7 +50,7 @@ public class JoaDao {
 		
 		String sql = "select * from joa J "
 				+ "inner join project P on P.project_no = J.project_no "
-				+ "where J.member_no = ?";
+				+ "where J.member_no = ? order by P.project_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, memberNo);
 		

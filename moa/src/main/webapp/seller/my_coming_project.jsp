@@ -110,7 +110,9 @@
 	                        <!-- 좋아요 수 -->
 	                        <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %>
 					        <div class="float-right m70 mlr20">
-					          	<p class="link link-reverse w100 center">좋아요 <br><%=projectVo.getJoacount() %></p>
+					          	<div class="row mt5">
+					          		<a href="" class="link link-reverse w100 center">배너 신청</a>
+					          	</div>
 					        </div>
 	                        
 	                    </div>
