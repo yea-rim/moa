@@ -123,6 +123,8 @@ public class RewardDao {
 		
 		return delivery;
 	}
+	
+	
 	//리워드 삭제
 	public boolean delete(int rewardNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
@@ -154,4 +156,17 @@ public class RewardDao {
 	}
 	
 	
+	// 특정 프로젝트 관련 리워드 전체 삭제 
+	public boolean deleteAll(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete reward where reward_project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }

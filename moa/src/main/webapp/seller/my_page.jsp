@@ -72,6 +72,12 @@
 					<h3>정보 수정</h3>
 				</a>
         	</div>
+        	
+        	<div class="float-right mt70 mlr20">
+        		<a href="<%=request.getContextPath() %>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link link-reverse h40">
+					<h3>판매자 페이지</h3>
+				</a>
+        	</div>
         
         </div> 
 

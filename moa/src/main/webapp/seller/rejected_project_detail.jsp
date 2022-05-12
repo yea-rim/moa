@@ -48,11 +48,8 @@
                         </div>
                     </div>
                     <div class="right-wrapper layer-3">
-                        <div class="row mlr30 right">
-                            <a href="" class="link link-reverse w150 center">프로젝트 재신청</a>
-                        </div>
-                        <div class="row mt5 mlr30 right">
-                            <a href="" class="link link-reverse w150 center">리워드 변경</a>
+                        <div class="row mt10 mlr30 right">
+                            <a href="project_reinsert.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">프로젝트 재신청</a>
                         </div>
                         <div class="row mt5 mlr30 right">
                             <a href="project_delete.do?projectNo=<%=projectNo %>" class="link link-btn w150 center pr-delete">프로젝트 삭제</a>

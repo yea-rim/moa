@@ -11,24 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MemberDao;
 import moa.beans.MemberDto;
 
-@WebServlet(urlPatterns="/ajax/nick.do")
-public class MemberNickCheckServlet extends HttpServlet{
+@WebServlet(urlPatterns="/ajax/phone.do")
+public class MemberPhoneCheckServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//준비
-			String memberNick = req.getParameter("memberNick");
+			String memberPhone = req.getParameter("memberPhone");
 			
 			//처리
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.findByNickname(memberNick);
+			MemberDto memberDto = memberDao.findByPhone(memberPhone);
 			
 			//출력
 			if(memberDto != null) {//사용중
-				resp.getWriter().print("N");
+				resp.getWriter().print("No");
 			}
 			else {//사용가능
-				resp.getWriter().print("Y");
+				resp.getWriter().print("Yes");
 			}
 		}
 		catch(Exception e) {

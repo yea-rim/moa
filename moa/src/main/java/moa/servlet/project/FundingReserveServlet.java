@@ -2,8 +2,6 @@ package moa.servlet.project;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
