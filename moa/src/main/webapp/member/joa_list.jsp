@@ -65,14 +65,14 @@
             	<!-- 프로젝트 제목 -->
                 <div class="row w300 txt-overflow2">
                     <h3>
-                        <a href="" class="link"><%=projectDto.getProjectName() %></a>
+                        <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>" class="link"><%=projectDto.getProjectName() %></a>
                     </h3>
                 </div>
                 
                 <!-- 프로젝트 요약 -->
                 <div class="row w300 txt-overflow3 mt30">
                     <p>
-                        <a href="" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
+                        <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
                     </p>
                 </div>
             </div>

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.AttachDao;
 import moa.beans.AttachDto;
 
-@WebServlet(urlPatterns = "/attach/download.do")
+@WebServlet(urlPatterns="/attach/download.do")
 public class AttachDownloadServlet extends HttpServlet{
 
 	@Override

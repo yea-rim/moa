@@ -1,5 +1,6 @@
 $(function(){
-
+	
+	
     function joa() {
         var projectNo = new URL(window.location.href).searchParams.get("projectNo");
         $.ajax({
@@ -7,17 +8,15 @@ $(function(){
             type: "get",
             success: function (resp) {
                 if (resp == "insert") {
-                    $("#joa").text("좋아요");
                     var count = parseInt($("#joa-count").text().trim());
                     $("#joa-count").text(count + 1);
                     $("#joa-btn").removeClass("btn-reverse");
-                    
+                    console.log(resp);
                 } else if (resp == "delete") {
-                    $("#joa").text("좋아요");
                     var count = parseInt($("#joa-count").text().trim());
                     $("#joa-count").text(count - 1);
                     $("#joa-btn").addClass("btn-reverse");
-                   
+                   	console.log(resp);
                 } else if (resp == "login") {
                     alert("로그인 해주세요");
                 }
