@@ -12,6 +12,12 @@
 	
 	List<ProjectDto> list2 = projectDao.selectNew();
 %>
+
+<%
+	ProjectVo projectVo;
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto;
+%>
 <style>
 .flex-container1 {
 	display: flex;
@@ -78,9 +84,8 @@
 	    	                	</div>
 	    	                	
 	    	                	<%
-	    	                		ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); 
-	    	                		SellerDao sellerDao = new SellerDao();
-	    	                  		SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+	    	                		projectVo = projectDao.selectVo(projectDto.getProjectNo()); 
+	    	                  		sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 	    	                	%>
 	    	                	<div class="row seller"><%=sellerDto.getSellerNick() %></div>
 	    	                	<div class="row percent"><%=projectVo.getPercent() %> % </div>

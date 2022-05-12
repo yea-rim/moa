@@ -6,6 +6,9 @@ public class ProjectVo {
 	private int daycount;
 	private int percent;
 	private int joacount;
+	private int presentMoney;
+	private int sponsor;
+	
 	
 	public int getProjectNo() {
 		return projectNo;
@@ -31,7 +34,18 @@ public class ProjectVo {
 	public void setJoacount(int joacount) {
 		this.joacount = joacount;
 	}
-
+	public int getPresentMoney() {
+		return presentMoney;
+	}
+	public int getSponsor() {
+		return sponsor;
+	}
+	public void setPresentMoney(int presentMoney) {
+		this.presentMoney = presentMoney;
+	}
+	public void setSponsor(int sponsor) {
+		this.sponsor = sponsor;
+	}
 	public ProjectVo() {
 	}
 	
