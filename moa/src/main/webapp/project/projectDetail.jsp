@@ -1,3 +1,7 @@
+<%@page import="moa.beans.SellerDao"%>
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.JoaDao"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
@@ -42,23 +46,34 @@
 	JoaDao joaDao = new JoaDao();
 	
 	int rewardCount = 1;
+	
+	/* 조회수 증가 메서드 */
+	projectDao.readCountUp(projectNo);
+%>
+<!-- 첨부파일 관련 -->
+<%
+
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+	
+	List<ProjectAttachDto> profileList = projectAttachDao.selectProfileList(projectNo);
+	List<ProjectAttachDto> detailList = projectAttachDao.selectDetailList(projectNo);
+	
+	boolean isProfile = profileList.size() > 0;
+	boolean isDetail = detailList.size() > 0;
+%>
+<!-- 판매자 정보조회 -->
+<%
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 %>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css"> --%>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectHeader.css">
     
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/test.css"> --%>
-</head>
 
 <!-- <style>
     .reward {
@@ -98,12 +113,14 @@
 
 </script>
 
-<body>
 	<div class="container w1000 center">
         <div class="row w700 margin-auto m-b10">
         	<h1>
             <%=projectDto.getProjectName() %>
         	</h1>
+        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link"><h3>
+        		<%=sellerDto.getSellerNick()%>
+        	</h3></a>
         </div>
 
         <div class="float-container center m30 h450px">
@@ -111,7 +128,13 @@
 
             <div class="float-left left-container">
                 <!-- 프로필부분의 왼쪽 플로트-->
-                        <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+                <%if(isProfile){ %>
+            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
+            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		<%} %>
+            	<%}else{ %>
+                    <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+                <%} %>
             </div>
 
 
@@ -131,7 +154,7 @@
                 </div>
                 <div class="row fill h40 m20">
                     <h2>
-                        <%=projectDto.getProjectPresentMoney() %>원 달성
+                        <%=projectVo.getPresentMoney() %>원 달성
                     </h2>
                 </div>
                 <div class="row fill h40 m-b10">
@@ -139,7 +162,7 @@
                         후원자수
                     </h4>
                     <h3>
-                        <%=projectDto.getProjectSponsorNo() %>명
+                        <%=projectVo.getSponsor() %>명
                     </h3>
                 </div>
                 <hr>
@@ -159,13 +182,13 @@
                 <div class="row fill h40 m-t30">
                     <div class="float-container h40">
                         <div class="float-left left layer-3 h100p">
+                        <%if(isLogin && joaDao.isSearch(projectNo, memberNo)){ %>
+                            <button class="btn w90p wrap h100p" id="joa-btn" style="font-size: 12px;">
+                            <%}else{ %>
                             <button class="btn btn-reverse w90p wrap h100p" id="joa-btn" style="font-size: 12px;">
+                            <%} %>
                             	<span id="joa">
-                            		<%if(isLogin && joaDao.isSearch(projectNo, memberNo)){ %>
-                            		좋아요취소
-                            		<%} else{ %>
                             		좋아요
-                            		<%} %>
                             	</span>
                             	<br>
                             	<span id="joa-count" style="font-size: 12px;">
@@ -174,7 +197,7 @@
                             </button>
                         </div>
                         <div class="float-left center layer-3 h100p" style="font-size: 14px;">
-                            <a href="detail/qna.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse w90p h100p">문의</button></a>
+                            <a href="<%=request.getContextPath() %>/project/detail/qna.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse w90p h100p">문의</button></a>
                         </div>
                         <div class="float-left right layer-3 h100p" style="font-size: 14px;">
                         	<a href="<%=request.getContextPath() %>/community/insert.jsp?projectNo=<%=projectDto.getProjectNo() %>">
@@ -191,8 +214,8 @@
 
 <!-- 상세페이지 / 커뮤니티 메뉴바 -->
         <div class="row left h20 m10">
-            <a href="detail/body.jsp?projectNo=<%=projectNo%>" class="link"><h2>펀딩소개</h2></a>
-            <a href="detail/notice.jsp?projectNo=<%=projectNo%>" class="link"><h2>공지</h2></a>
+            <a href="<%=request.getContextPath() %>/project/detail/body.jsp?projectNo=<%=projectNo%>" class="link"><h2>펀딩소개</h2></a>
+            <a href="<%=request.getContextPath() %>/project/detail/notice.jsp?projectNo=<%=projectNo%>" class="link"><h2>공지</h2></a>
             <!-- <a href="./detail/ask.jsp" class="link">문의</a> -->
         </div>
 
@@ -202,7 +225,13 @@
             <!-- 상세페이지 본문 부분-->
 
             <div class="float-left left-container">
-                <img src="https://via.placeholder.com/720x2000" width="100%">
+            	<%if(isDetail){ %>
+            		<%for(ProjectAttachDto projectAttachDto : detailList){ %>
+            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		<%} %>
+            	<%}else{ %>
+                	<img src="https://via.placeholder.com/720x2000" width="100%">
+                <%} %>
             </div>
             
             <!-- 본문 오른쪽 리워드 부분 -->
@@ -213,7 +242,7 @@
 			        </div>
                		<%for(RewardDto rewardDto : rewardList){ %>	
 	                	<div class="fill m-b10">
-                    		<a href="funding.jsp?projectNo=<%=projectNo%>&rewardCount=<%=rewardCount++ %>" class="link"><button class="btn btn-reverse fill reward" style="text-align: left;">
+                    		<a href="<%=request.getContextPath() %>/project/funding.jsp?projectNo=<%=projectNo%>&rewardCount=<%=rewardCount++ %>" class="link"><button class="btn btn-reverse fill reward" style="text-align: left;">
 		                        리워드 이름
 		                        <%=rewardDto.getRewardName() %>
 		                        <br>
@@ -233,6 +262,4 @@
         </div>
     </div>
 
-</body>
-</html>
 <jsp:include page="/template/footer.jsp"></jsp:include>

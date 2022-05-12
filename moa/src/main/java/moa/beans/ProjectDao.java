@@ -116,8 +116,6 @@ public class ProjectDao {
 				projectDto.setProjectName(rs.getString("project_name"));
 				projectDto.setProjectSummary(rs.getString("project_summary"));
 				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-				projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-				projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -481,8 +479,6 @@ public class ProjectDao {
 				projectDto.setProjectName(rs.getString("project_name"));
 				projectDto.setProjectSummary(rs.getString("project_summary"));
 				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-				projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-				projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -691,8 +687,6 @@ public class ProjectDao {
 			projectDto.setProjectName(rs.getString("project_name"));
 			projectDto.setProjectSummary(rs.getString("project_summary"));
 			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -708,18 +702,16 @@ public class ProjectDao {
 		return projectDto;
 
 	}
-
+	
+	
+	//프로젝트 번호넣으면 vo관련 남은일수 퍼센트 좋아요수 반환
 	public ProjectVo selectVo(int ProjectNo) throws Exception {
-		String sql = "select " + "project_no, " + "(project_semi_finish - trunc(sysdate) + 1) daycount, "
-				+ "trunc(project_present_money/project_target_money*100, 1) percent, "
-				+ "(select count(j.member_no) from project p left outer join joa j on p.project_no = j.project_no where p.project_no=?) joacount "
-				+ "from project where project_no = ?";
+		String sql = "select * from project_vo where project_no = ?";
 
 		Connection con = JdbcUtils.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, ProjectNo);
-		ps.setInt(2, ProjectNo);
 
 		ResultSet rs = ps.executeQuery();
 
@@ -730,6 +722,8 @@ public class ProjectDao {
 			projectVo.setDaycount(rs.getInt("daycount"));
 			projectVo.setPercent(rs.getInt("percent"));
 			projectVo.setJoacount(rs.getInt("joacount"));
+			projectVo.setPresentMoney(rs.getInt("presentmoney"));
+			projectVo.setSponsor(rs.getInt("sponsor"));
 		} else {
 			projectVo = null;
 		}
@@ -775,8 +769,6 @@ public class ProjectDao {
 			projectDto.setProjectName(rs.getString("project_name"));
 			projectDto.setProjectSummary(rs.getString("project_summary"));
 			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -813,8 +805,6 @@ public class ProjectDao {
 			projectDto.setProjectName(rs.getString("project_name"));
 			projectDto.setProjectSummary(rs.getString("project_summary"));
 			projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-			projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-			projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 			projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 			projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -852,8 +842,6 @@ public class ProjectDao {
 				projectDto.setProjectName(rs.getString("project_name"));
 				projectDto.setProjectSummary(rs.getString("project_summary"));
 				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-				projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-				projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -977,24 +965,6 @@ public class ProjectDao {
 		return paymentDate;
 	}
 	
-	//프로젝트 후원자수+1 현재모금액 업데이트
-	public boolean fundingUpdate(int totalPrice) throws Exception {
-		String sql = "update project set project_present_money = project_present_money + ?";
-		
-		
-		Connection con = JdbcUtils.getConnection();
-		PreparedStatement ps = con.prepareStatement(sql);
-		
-		ps.setInt(1, totalPrice);
-		
-		int count = ps.executeUpdate();
-		
-		con.close();
-		return count > 0;
-	}
-	
-
-	
 	// 진행중인 펀딩 목록(검색어 x, 정렬 o)
 		public List<ProjectDto> ongoingSelectList(int p, int s, String sort, int sellerNo) throws Exception {
 			
@@ -1037,8 +1007,6 @@ public class ProjectDao {
 				projectDto.setProjectName(rs.getString("project_name"));
 				projectDto.setProjectSummary(rs.getString("project_summary"));
 				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-				projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-				projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -1077,8 +1045,6 @@ public class ProjectDao {
 				projectDto.setProjectName(rs.getString("project_name"));
 				projectDto.setProjectSummary(rs.getString("project_summary"));
 				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
-				projectDto.setProjectPresentMoney(rs.getInt("project_present_money"));
-				projectDto.setProjectSponsorNo(rs.getInt("project_sponsor_no"));
 				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
 				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
 				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
@@ -1093,18 +1059,35 @@ public class ProjectDao {
 		}
 
 		// 거절된 프로젝트 페이지네이션(검색어 x)
-				public int rejectedCountByPaging(int sellerNo) throws Exception {
-					Connection con = JdbcUtils.getConnection();
+		public int rejectedCountByPaging(int sellerNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
 
-					String sql = "select count(*) from project where project_permission = 2 and project_seller_no = ?";
-					PreparedStatement ps = con.prepareStatement(sql);
-					ps.setInt(1, sellerNo);
-					ResultSet rs = ps.executeQuery();
-					rs.next();
-					int count = rs.getInt("count(*)");
+			String sql = "select count(*) from project where project_permission = 2 and project_seller_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt("count(*)");
 
-					con.close();
+			con.close();
 
-					return count;
-				}
+			return count;
+		}
+		
+		//조회수 증가 메서드
+		public boolean readCountUp(int projectNo) throws Exception{
+			String sql = "update project set project_readcount = project_readcount + 1 where project_no = ?";
+			
+			Connection con = JdbcUtils.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, projectNo);
+			
+			int count = ps.executeUpdate();
+			
+			con.close();
+			
+			return count > 0;
+		}
+		
 }

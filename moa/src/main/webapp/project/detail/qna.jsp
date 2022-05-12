@@ -44,14 +44,15 @@
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
-	memberNo = 23;//나중에지우기**********************************************
 	boolean isLogin = memberNo != null;
 
 
 	PjQnaDao pjQnaDao = new PjQnaDao();
 	List<PjQnaDto> list = new ArrayList<>();
-	if(hideSecret){
+	if(isLogin && hideSecret){
 		list = pjQnaDao.selectOpen(projectNo, p, s, memberNo);
+	}else if(!isLogin && hideSecret){
+		list = pjQnaDao.selectOpen(projectNo, p, s)	;
 	}else{
 		list = pjQnaDao.select(projectNo, p, s);
 	}
@@ -69,15 +70,17 @@
 <% 
 
 	int count;
-	if(hideSecret){
+	if(isLogin && hideSecret){
 		count = pjQnaDao.countByPagingOpen(projectNo, memberNo);
+	}else if(!isLogin && hideSecret){
+		count = pjQnaDao.countByPagingOpen(projectNo);	
 	}else{
 		count = pjQnaDao.countByPaging(projectNo);
 		
 	}
 
 	// 블록크기
-	int blockSize = 2;
+	int blockSize = 3;
 	
 	// 마지막 페이지 번호
 	int lastPage = (count + s - 1) / s;
@@ -155,7 +158,7 @@
                         </div>
                         <div class=" right m10">
                             <input type="submit" class="btn" value="작성">
-                            <button class="hide-qna link link-btn btn btn-reverse">취소</button>
+                            <button type="button" class="hide-qna btn btn-reverse">취소</button>
                         </div>
                         <hr>
                     </form>
@@ -188,7 +191,7 @@
                                     <%if(pjQnaDto.getQnaLock() == 1){ %>
                                     <span>[비밀글]</span>
                                     <%} %>
-                                    <%if(pjQnaDto.getQnaLock() == 0 || pjQnaDto.getQnaMemberNo() == memberNo){ %>
+                                    <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                     <span hidden class="secret" value="1"></span>
                                     <%} %>
                                 </td>
@@ -210,7 +213,7 @@
                                         <div class="row right m10">
                                             <a class="link btn link-btn btn-answer">답글</a>
                                             <!-- 자기가 쓴 글만 삭제버튼 구현 (관리자도 추후 구현) -->
-                                            <%if(pjQnaDto.getQnaMemberNo() == memberNo){ %>
+                                            <%if(isLogin && pjQnaDto.getQnaMemberNo() == memberNo){ %>
                                             <button class="btn delete-btn btn-reverse">삭제</button>
                                             <%}else{ %>
                                             <button class="btn no-auth btn-reverse">삭제</button>
@@ -218,7 +221,7 @@
                                         </div>
                                         
                                         <!-- 답글 -->
-                                        <div class="answer">
+                                        <div class="answer" style="padding-left: 10px">
                                             <form action="qna_write.do" method="post">
                                             	<input name="memberNo" type="hidden" value="<%=memberNo%>">
                     							<input name="projectNo" type="hidden" value="<%=projectNo%>">
@@ -250,13 +253,13 @@
                                                 </div>
                                                 <div class=" right m10">
                                                     <input type="submit" class="link btn link-btn" value="작성">
-                                                    <button class="btn btn-reverse hide-answer">취소</button>
+                                                    <button type="button" class="btn btn-reverse hide-answer">취소</button>
                                                 </div>
                                                 <hr>
                                             </form>
                                         </div>
                                         <!-- 삭제 확인 -->
-                                        <%if(pjQnaDto.getQnaMemberNo() == memberNo){ %>
+                                        <%if(isLogin && pjQnaDto.getQnaMemberNo() == memberNo){ %>
                                         <div class="row delete-confirm right">
 											<span>삭제하시겠습니까?</span>
 											<a href="qna_delete.do?qnaNo=<%=pjQnaDto.getQnaNo() %>" class="confirm-btn link btn link-btn">삭제</a>       

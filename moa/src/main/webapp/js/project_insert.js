@@ -6,10 +6,10 @@ $(function() {
 		var index = 0;
 		move(index);
 		//다음 버튼을 누르면 다음 페이지가 나오도록 구현
-		$(".btn-next").each(function(){
+		//$(".btn-next").each(function(){
 			
 			$(".btn-next").not(":last").click(function() {
-				if($('input[name=projectName]').val()==""){
+/*				if($('input[name=projectName]').val()==""){
 					$('input[name=projectName]').next(".length").children(".msg").text("프로젝트 이름을 입력해주세요.");
 				return false;
 				}
@@ -17,14 +17,14 @@ $(function() {
 				if($('textarea[name=projectSummary]').val()==""){			
 					$('textarea[name=projectSummary]').next(".length").children(".msg").text("프로젝트 요약글을 입력해주세요.");
 				return false;
-				}
+				}*/
 				
 				/*var dddd = $("input[name=projectTargetMoney]");
 				return checkProjectTargetMoney.call(dddd);*/
 						
 				move(++index);
 			});
-		})
+		//})
 
 		//이전 버튼을 누르면 다음 페이지가 나오도록 구현
 		$(".btn-prev").not(":first").click(function() {
@@ -116,13 +116,11 @@ $(function() {
 		function addReaward(rewardNum) {
 			var div = $("<div>").attr('class', 'reward'+rewardNum+" row m30");
 			var h3 = $("<h3>* 리워드" + rewardNum + "</h3>");
-			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill text-length" data-len="30" data-success-msg="" data-fail-msg="30자 이내로 입력해주세요."></div>\
-	                <div class="flex-container length"><div class="left-wrapper msg f12 red"></div><div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/30</span></div>\
-	                <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill text-length" data-len="100" data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."></textarea></div>\
-	                <div class="flex-container length"><div class="left-wrapper msg f12 red"></div><div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span></div></div>\
-	                <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"></div>\
-	                <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>\
-	                <div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="rewardDelivery" class="form-input w80p">\
+			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill"></div>\
+                    <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill"></textarea></div>\
+                    <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"></div>\
+                    <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>\
+					<div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="rewardDelivery" class="form-input w80p">\
 					<input type="checkbox" class="form-input each-ckbox"><input type="hidden" name="rewardEach" value="0"><label class="f12 gray">개별 배송 여부</label></div>');
 	
 			div.append(h3).append(content);
@@ -201,42 +199,42 @@ $(function() {
 		}
 		
 			
-		//글자수 표시
-		$(document).on("input",".text-length",textLen);	
-		$(".text-length").on("input",textLen);
-		function textLen(){			
-			var size = $(this).val().length;
-			var target=$(this).next(".length").children(".count")
-			target.text(size);
-
-			var len = $(this).data("len");
-			if(size>len){
-					target.css("color","red");
-					target.next().css("color","red");
-                }
-                else{
-                    target.css("color","gray");
-					target.next().css("color","gray");
-                }
-		}	
-
-		//글자수 체크 메세지
-		$(document).on("blur",".text-length",checkLen);	
-		$(".text-length").blur(checkLen);
-
-		function checkLen(){
-			var len = $(this).data("len");
-			var val = $(this).val().length;
-			var judge = val <= len;
-
-			if(judge){
-				$(this).next(".length").children(".msg").text($(this).data("success-msg"));
+			
+	//프로젝트명 글자수 자르기
+	$('input[name=projectName]').on("input",
+	function(){
+		var count = $(this).val().length; 
+			if(count>50){
+				$(this).val($(this).val().substring(0,50));
 			}
-			else {
-				$(this).next(".length").children(".msg").text($(this).data("fail-msg"));
+	});
+
+	//프로젝트 요약글 글자수 자르기
+	$('textarea[name=projectSummary]').on("input",
+	function(){
+		var count = $(this).val().length; 
+			if(count>200){
+				$(this).val($(this).val().substring(0,200));
 			}
-        }
-        
+	});
+	
+	//리워드 이름 글자수 자르기
+	$('input[name=rewardName]').on("input",
+	function(){
+		var count = $(this).val().length; 
+			if(count>30){
+				$(this).val($(this).val().substring(0,30));
+			}
+	});
+
+	//리워드 내용 글자수 자르기
+	$('textarea[name=rewardContent]').on("input",
+	function(){
+		var count = $(this).val().length; 
+			if(count>100){
+				$(this).val($(this).val().substring(0,100));
+			}
+	});
       //개별 배송여부 체크 시 value값 수정
 	$(".each-ckbox").on("input",function(){
 			if ($(this).is(":checked")) {

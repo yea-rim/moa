@@ -41,8 +41,10 @@ public class FundingReserveServlet extends HttpServlet{
 			String fundingBasicAddress = req.getParameter("fundingBasicAddress");
 			String fundingDetailAddress = req.getParameter("fundingDetailAddress");
 			String fundingPhone = req.getParameter("fundingPhone");
-			String fundingPostMessage = req.getParameter("fundingPostMessage");
-			
+			String fundingPostMessage = null;
+			if(req.getParameter("fundingPostMessage") != null) {
+				fundingPostMessage = req.getParameter("fundingPostMessage");
+			}
 			
 			
 			//필요한 그 외 정보
@@ -90,15 +92,18 @@ public class FundingReserveServlet extends HttpServlet{
 			RewardSelectionDao rewardSelectionDao = new RewardSelectionDao();
 			for(int i = 0; i < rewardNo.length; i++) {
 				RewardSelectionDto rewardSelectionDto = new RewardSelectionDto();
-				rewardSelectionDto.setSelectionFundingNo(fundingNo);
+				rewardSelectionDto.setSelectionFundingNo(fundingDto.getFundingNo());
 				rewardSelectionDto.setSelectionRewardNo(Integer.parseInt(rewardNo[i]));
 				rewardSelectionDto.setSelectionRewardAmount(Integer.parseInt(selectionRewardAmount[i]));
 				if(selectionOption.length > 0) {
 				rewardSelectionDto.setSelectionOption(selectionOption[i]);
 				}
 				rewardSelectionDao.insert(rewardSelectionDto);
+				rewardDao.stockCount(Integer.parseInt(rewardNo[i]), -(Integer.parseInt(selectionRewardAmount[i])));
 			}
 			
+			
+			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp");
 			
 			
 		} catch (Exception e) {

@@ -103,7 +103,7 @@
 	                            <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
 	                            <div class="row w800 mt40">
 	                            	<p class="link-gray m5">목표 금액 : <%=projectDto.getProjectTargetMoney() %>원</p>
-	                            	<p class="link-gray m5">모인 금액 : <%=projectDto.getProjectPresentMoney() %>원</p>
+	                            	<p class="link-gray m5">모인 금액 : <%=projectVo.getPresentMoney() %>원</p>
 	                                <p class="link-gray m5">달성율 : <%=projectVo.getPercent() %>%</p>
 	                                <p class="link-gray m5">펀딩 마감일 : <%=projectDto.getProjectSemiFinish() %></p>
 	                            </div>

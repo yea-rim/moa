@@ -129,7 +129,7 @@
     </script>
 
     <form action="funding.do" method="post">
-		<input name="projectNo" value="<%=projectNo%>">
+		<input name="projectNo" value="<%=projectNo%>" hidden>
         <div class="container w800 page" id="price-container">
 			
             <div class="center">
@@ -165,10 +165,12 @@
 	                            <button type="button" class="plus-btn">+</button>
                             </div>
                         </div>
+                        <%if(rewardDto.getRewardIsoption() > 0){%>
                         <div class="detail-option">
                             <label for="">상세옵션 : </label>
                             <input type="text" name="selectionOption" class="form-input">
                         </div>
+                        <%} %>
                         <!-- <div class="detail-option"></div> -->
                     </div>
                 </div>
