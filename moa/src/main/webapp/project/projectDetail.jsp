@@ -1,3 +1,7 @@
+<%@page import="moa.beans.SellerDao"%>
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.JoaDao"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
@@ -42,6 +46,25 @@
 	JoaDao joaDao = new JoaDao();
 	
 	int rewardCount = 1;
+	
+	/* 조회수 증가 메서드 */
+	projectDao.readCountUp(projectNo);
+%>
+<!-- 첨부파일 관련 -->
+<%
+
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+	
+	List<ProjectAttachDto> profileList = projectAttachDao.selectProfileList(projectNo);
+	List<ProjectAttachDto> detailList = projectAttachDao.selectDetailList(projectNo);
+	
+	boolean isProfile = profileList.size() > 0;
+	boolean isDetail = detailList.size() > 0;
+%>
+<!-- 판매자 정보조회 -->
+<%
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 %>
 
 
@@ -95,6 +118,9 @@
         	<h1>
             <%=projectDto.getProjectName() %>
         	</h1>
+        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link"><h3>
+        		<%=sellerDto.getSellerNick()%>
+        	</h3></a>
         </div>
 
         <div class="float-container center m30 h450px">
@@ -102,7 +128,13 @@
 
             <div class="float-left left-container">
                 <!-- 프로필부분의 왼쪽 플로트-->
-                        <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+                <%if(isProfile){ %>
+            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
+            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		<%} %>
+            	<%}else{ %>
+                    <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+                <%} %>
             </div>
 
 
@@ -193,7 +225,13 @@
             <!-- 상세페이지 본문 부분-->
 
             <div class="float-left left-container">
-                <img src="https://via.placeholder.com/720x2000" width="100%">
+            	<%if(isDetail){ %>
+            		<%for(ProjectAttachDto projectAttachDto : detailList){ %>
+            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		<%} %>
+            	<%}else{ %>
+                	<img src="https://via.placeholder.com/720x2000" width="100%">
+                <%} %>
             </div>
             
             <!-- 본문 오른쪽 리워드 부분 -->

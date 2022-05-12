@@ -23,7 +23,7 @@
 	
 	// 회원 프로필 사진 조회
 	MemberProfileDao memberProfileDao = new MemberProfileDao();
-	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
+	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(sellerNo);
 		
 	// 회원 프로필 존재 여부 확인 
 	boolean isExistProfile = memberProfileDto != null;
