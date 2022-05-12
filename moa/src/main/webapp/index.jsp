@@ -110,7 +110,7 @@
 	    	                  		sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 	    	                	%>
 	    	                	<div class="row seller"><%=sellerDto.getSellerNick() %></div>
-	    	                	<%-- <div class="row percent"><%=projectVo.getPercent() %> % </div> --%>
+	    	                	<div class="row percent"><%=projectVo.getPercent() %> % </div>
 	    	                </div>
     	                		
     	                		<div class="row flex-items-c m10">
@@ -148,12 +148,12 @@
 	    	                	</div>
 	    	                	
 	    	                	<%
-	    	                		/* ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); */ 
+	    	                		projectVo = projectDao.selectVo(projectDto.getProjectNo()); 
 	    	                		sellerDao = new SellerDao();
 	    	                  		sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 	    	                	%>
 	    	                	<div class="row seller"><%=sellerDto.getSellerNick() %></div>
-	    	                	<%-- <div class="row percent"><%=projectVo.getPercent() %> % </div> --%>
+	    	                	<div class="row percent"><%=projectVo.getPercent() %> % </div>
 	    	                </div>
     	                		
     	                		<div class="row flex-items-c m10">

@@ -9,12 +9,20 @@ public class RewardDto {
 	private int rewardStock;
 	private int rewardDelivery;
 	private int rewardEach;
+	private int rewardIsoption;
 	
 	public RewardDto() {
 		super();
 	}
 	
-	
+	public int getRewardIsoption() {
+		return rewardIsoption;
+	}
+
+	public void setRewardIsoption(int rewardIsoption) {
+		this.rewardIsoption = rewardIsoption;
+	}
+
 	public int getRewardDelivery() {
 		return rewardDelivery;
 	}

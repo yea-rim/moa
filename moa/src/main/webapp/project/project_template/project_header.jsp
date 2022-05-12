@@ -1,3 +1,7 @@
+<%@page import="moa.beans.SellerDto"%>
+<%@page import="moa.beans.SellerDao"%>
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.JoaDao"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
@@ -42,6 +46,20 @@
 	
 %>
 
+<!-- 첨부파일 관련 -->
+<%
+
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+	
+	List<ProjectAttachDto> profileList = projectAttachDao.selectProfileList(projectNo);
+	
+	boolean isProfile = profileList.size() > 0;
+%>
+<!-- 판매자 정보조회 -->
+<%
+	SellerDao sellerDao = new SellerDao();
+	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+%>
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css"> --%>
     <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/test.css"> --%>
@@ -69,14 +87,23 @@
         	<h1>
             <%=projectDto.getProjectName() %>
         	</h1>
+        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link"><h3>
+        		<%=sellerDto.getSellerNick()%>
+        	</h3></a>
         </div>
 
         <div class="float-container center m30 h450px">
             <!-- 상세페이지 프로필 부분 -->
 
             <div class="float-left left-container">
-                <!-- 프로필부분의 왼쪽 플로트-->
-                        <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+            	<!-- 프로필부분의 왼쪽 플로트-->
+                <%if(isProfile){ %>
+            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
+            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		<%} %>
+            	<%}else{ %>
+                    <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
+                <%} %>
             </div>
 
 
