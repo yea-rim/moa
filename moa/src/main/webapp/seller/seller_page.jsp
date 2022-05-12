@@ -150,13 +150,23 @@
 					int projectNo = projectDto.getProjectNo();
 					
 					projectDto = projectDao.selectOne(projectNo);
-					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());%> 
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
 					
 				<div class="list-card mlr30 m15">
 		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
@@ -191,14 +201,23 @@
 					int projectNo = projectDto.getProjectNo();
 					
 					projectDto = projectDao.selectOne(projectNo);
-					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());%> 
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
 					
 				<div class="list-card mlr30 m15">
 		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
-		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
-		                     </a></div>
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
