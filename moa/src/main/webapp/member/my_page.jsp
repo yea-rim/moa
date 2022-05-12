@@ -52,7 +52,6 @@
 	// 프로젝트 Attach Dao 준비 
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	
-	
 	// 펀딩한 프로젝트 조회 
 /* 	FundingDao fundingDao = new FundingDao();
 	List<FundingDto> fundingList = fundingDao.selectList(memberNo);
