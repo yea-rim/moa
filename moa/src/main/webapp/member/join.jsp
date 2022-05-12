@@ -150,12 +150,12 @@
 				$("button[name=submit]").attr("disabled", false);
 				return;
 			}
-
-			var that = this;
+			
+			// 휴대폰 중복 검사가 안 됩니다
 
 			$.ajax({
 				url : "http://localhost:8080/moa/ajax/phone.do?memberPhone=" + memberPhone,
-				type : "get",
+				type : "post",
 				data : {
 					memberPhone : memberPhone
 				},
