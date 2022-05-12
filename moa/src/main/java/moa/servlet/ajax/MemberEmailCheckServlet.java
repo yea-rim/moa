@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MemberDao;
 import moa.beans.MemberDto;
 
-@WebServlet(urlPatterns = "/ajax/id.do")
+@WebServlet(urlPatterns="/ajax/id.do")
 public class MemberEmailCheckServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

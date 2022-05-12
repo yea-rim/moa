@@ -41,7 +41,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			moaNoticeDto.setNoticeTitle(mRequest.getParameter("noticeTitle"));
 			String noticeContent = mRequest.getParameter("noticeContent");
 			// textarea 줄바꿈 처리
-			noticeContent = noticeContent.replace("\r\n", "<br>");
+//			noticeContent = noticeContent.replace("\r\n", "<br>");
 			moaNoticeDto.setNoticeContent(noticeContent);
 			
 			int adminNo = (Integer) req.getSession().getAttribute("login");

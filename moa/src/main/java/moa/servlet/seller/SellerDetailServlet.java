@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.SellerDao;
 import moa.beans.SellerDto;
 
-@WebServlet(urlPatterns = "/seller/detail.do")
+@WebServlet(urlPatterns="/seller/detail.do")
 public class SellerDetailServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

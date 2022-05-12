@@ -121,7 +121,7 @@ if (isSearch) {
       $(".sort").change(function () {
     	  this.form.submit();
     	  
-    	  this.prop("selected",true);
+    	  this.prop("selected", true);
       });
 });
 </script>
@@ -225,11 +225,11 @@ if (isSearch) {
 				<input type="hidden" name="type" value="<%=type%>"> 
 				<input type="hidden" name="keyword" value="<%=keyword%>"> 
 				<select name="sort" class="sort">
-					<option>최신순</option>
-					<option>마감임박순</option>
-					<option>좋아요순</option>
-					<option>인기순</option>
-					<option>펀딩액순</option>
+					<option value="최신순">최신순</option>
+					<option value="마감임박순">마감임박순</option>
+					<option value="좋아요순">좋아요순</option>
+					<option value="인기순">인기순</option>
+					<option value="펀딩액순">펀딩액순</option>
 				</select> 
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
@@ -237,11 +237,11 @@ if (isSearch) {
 			<%} else {%>
 			<form action="ongoingList.jsp#mainList" method="get">
 				<select name="sort" class="sort">
-					<option>최신순</option>
-					<option>마감임박순</option>
-					<option>좋아요순</option>
-					<option>인기순</option>
-					<option>펀딩액순</option>
+					<option value="최신순">최신순</option>
+					<option value="마감임박순">마감임박순</option>
+					<option value="좋아요순">좋아요순</option>
+					<option value="인기순">인기순</option>
+					<option value="펀딩액순">펀딩액순</option>
 				</select> 
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
@@ -288,10 +288,10 @@ if (isSearch) {
 
               <hr style="border: solid #B899CD 2px" />
 				
-				<%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
+				<%-- <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%> --%>
               <div class="flex-container2">
-                <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div>
-                <div class="row right b"><%=projectVo.getDaycount() %>일 남음</div>
+                <%-- <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div> --%>
+                <%-- <div class="row right b"><%=projectVo.getDaycount() %>일 남음</div> --%>
               </div>
             </div>
           <%} %>

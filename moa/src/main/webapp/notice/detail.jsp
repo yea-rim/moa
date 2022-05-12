@@ -29,59 +29,15 @@
 	// 사진이 있는지 판정
 	boolean isExistPhoto = moaNoticeAttachDto != null;
 %>
-<style>
-.community-title {
-	font-size: 20px;
-}
-.flex-container1 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-.flex-container2 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-.flex-items1 {
-	flex-basis:10%;
-}
-.flex-items2 {
-	flex-basis:65%;
-}
-.flex-items3 {
-	flex-basis:15%;
-}
-
-.reply-btn {
-	height: 40px;
-}
-
-.flex-item-a {
-	flex-basis:10%;
-}
-.flex-item-b {
-	flex-basis:90%;
-}
-</style>
-
 <jsp:include page="/template/header.jsp"></jsp:include>    
-<div class="container w800">
+<div class="container w800 mainContent">
 <div class="container w800 m30">
-	<div class="row m10" class="community-title">
+	<div class="row m10">
 			<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 	</div>
-	<div class="row flex-container">
-		<div class="row left flex-item-a">
-			<br>
-			<%-- <h5>조회수: <%=to.getCommunityReadcount() %></h5> --%>
-		</div>
-		<div class="row right flex-item-b">
+		<div class="row">
 			<h5><%=moaNoticeDto.getNoticeTime() %></h5>
 		</div>
-	</div>
 	<hr style="border:solid 0.5px #B899CD">
 	<div class="row m20">
  		<%if(isExistPhoto){ %>
@@ -97,11 +53,14 @@
 </div>
 
 	 <%-- <%if(isAdmin){ %> --%>
-		<div class="row right">
+		<div class="right" style="height:70px">
 			<a href="edit.jsp?noticeNo=<%=noticeNo %>" class="btn-reverse link">수정</a>
 			<a href="delete.do?noticeNo=<%=noticeNo %>" class="btn-reverse link">삭제</a>
 		</div>
 	<%-- <%} %> --%> 
+		<div class="center" style="height:70px">
+				<a href="list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
+		</div>
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -14,7 +14,7 @@ import moa.beans.ProjectAttachDao;
 import moa.beans.ProjectAttachDto;
 import moa.beans.ProjectDao;
 
-@WebServlet(urlPatterns = "/seller/project_delete.do")
+@WebServlet(urlPatterns="/seller/project_delete.do")
 public class SellerProjectDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
