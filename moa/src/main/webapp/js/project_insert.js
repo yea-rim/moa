@@ -9,7 +9,7 @@ $(function() {
 		$(".btn-next").each(function(){
 			
 			$(".btn-next").not(":last").click(function() {
-				if($('input[name=projectName]').val()==""){
+/*				if($('input[name=projectName]').val()==""){
 					$('input[name=projectName]').next(".length").children(".msg").text("프로젝트 이름을 입력해주세요.");
 				return false;
 				}
@@ -17,7 +17,7 @@ $(function() {
 				if($('textarea[name=projectSummary]').val()==""){			
 					$('textarea[name=projectSummary]').next(".length").children(".msg").text("프로젝트 요약글을 입력해주세요.");
 				return false;
-				}
+				}*/
 				
 				/*var dddd = $("input[name=projectTargetMoney]");
 				return checkProjectTargetMoney.call(dddd);*/
