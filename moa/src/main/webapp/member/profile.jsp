@@ -147,33 +147,13 @@
                                 <!-- 개인 정보 수정 -->
                                 <div class="container w400">
                                     <!-- 닉네임 입력 -->
-                                    <div class="row">
+                                    <div class="row mt100">
                                         닉네임 
                                     </div>
                                     <div class="row m5">
                                         <input type="text" name="memberNick" value="<%=memberDto.getMemberNick() %>" autocomplete="off" class="form-input fill">
                                     </div>
         
-                                    <!-- 전화번호 입력 -->
-                                    <div class="row">
-                                        전화번호  
-                                    </div>
-                                    <div class="row m5">
-                                        <input type="text" name="memberPhone" value="<%=memberDto.getMemberPhone() %>" autocomplete="off" class="form-input fill">
-                                    </div>
-        
-                                    <!-- 주소 입력 -->
-                                    <div class="row">
-                                        주소
-                                    </div>
-                                    <div class="row m5">
-                                        <div>
-                                            <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
-                                            <button type="button" class="address-find-btn btn">검색</button>
-                                        </div>
-                                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
-                                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill"> </div>
-                                    </div>
                                     <!-- 변경 버튼 -->
                                     <div class="row m30">
                                         <input type="submit" value="프로필 변경" class="link link-btn fill">

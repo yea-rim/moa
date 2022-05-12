@@ -229,18 +229,32 @@ public class MemberDao {
 		return count > 0;
 	}
 
+	public boolean changeNick(int memberNo, String memberNick) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update member set member_nick = ? where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, memberNick);
+		ps.setInt(2, memberNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
+	
 	// 개인정보 변경
 	public boolean changeInformation(MemberDto memberDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update member set member_nick = ?, member_phone = ?, member_post = ?, member_basic_address= ?, member_detail_address = ? where member_no = ?";
+		String sql = "update member set member_phone = ?, member_post = ?, member_basic_address= ?, member_detail_address = ? where member_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, memberDto.getMemberNick());
-		ps.setString(2, memberDto.getMemberPhone());
-		ps.setString(3, memberDto.getMemberPost());
-		ps.setString(4, memberDto.getMemberBasicAddress());
-		ps.setString(5, memberDto.getMemberDetailAddress());
-		ps.setInt(6, memberDto.getMemberNo());
+		ps.setString(1, memberDto.getMemberPhone());
+		ps.setString(2, memberDto.getMemberPost());
+		ps.setString(3, memberDto.getMemberBasicAddress());
+		ps.setString(4, memberDto.getMemberDetailAddress());
+		ps.setInt(5, memberDto.getMemberNo());
 
 		int count = ps.executeUpdate();
 

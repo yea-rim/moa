@@ -22,6 +22,12 @@ public class EditInformationServlet extends HttpServlet{
 			
 			Integer memberNo = (Integer) req.getSession().getAttribute("login");
 			
+			MemberDto changeDto = new MemberDto();
+			changeDto.setMemberPhone(req.getParameter("memberPhone"));
+			changeDto.setMemberPost(req.getParameter("memberPost"));
+			changeDto.setMemberBasicAddress(req.getParameter("memberBasicAddress"));
+			changeDto.setMemberDetailAddress(req.getParameter("memberDetailAddress"));
+			
 			// 처리 
 			// 1. 기존 비밀번호와 새로운 비밀번호가 일치하는지 검사 
 			boolean isSamePassword =  currentPw.equals(changePw); // 변경하면 안되는 상황 
@@ -40,6 +46,7 @@ public class EditInformationServlet extends HttpServlet{
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.selectOne(memberNo);
 			
+			memberDao.changeInformation(changeDto);
 			memberDao.changePassword(memberDto.getMemberEmail(), changePw);
 			
 			
