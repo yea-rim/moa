@@ -87,9 +87,19 @@
 		                		</div>
                 		<%} %>
                 		<div class="float-right layer-5 center m10 mt20">
-                			<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
-                					<h3>마이페이지</h3>
-                			</a>
+                			<ul class="menu">
+                				<li>
+                					<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
+                						<h3>마이페이지</h3>
+                					</a>
+                					
+                					<ul>
+                						<li>
+                							<a href="<%=request.getContextPath()%>/member/logout.do"></a>
+                						</li>
+                					</ul>
+                				</li>
+                			</ul>
                 		</div>
                 <%}else { // 로그인 상태가 아니면 %>           
                 	<div class="float-right layer-5 center m10">

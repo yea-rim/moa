@@ -13,6 +13,7 @@ import moa.beans.AttachDao;
 import moa.beans.ProjectAttachDao;
 import moa.beans.ProjectAttachDto;
 import moa.beans.ProjectDao;
+import moa.beans.RewardDao;
 
 @WebServlet(urlPatterns = "/seller/project_delete.do")
 public class SellerProjectDeleteServlet extends HttpServlet{
@@ -36,6 +37,10 @@ public class SellerProjectDeleteServlet extends HttpServlet{
 					resp.sendError(404);
 				}
 			}
+			
+			// 해당 프로젝트 관련 리워드 삭제 
+			RewardDao rewardDao = new RewardDao();
+			rewardDao.deleteAll(projectNo);
 							
 			if(delProject) {
 				resp.sendRedirect(req.getContextPath()+"/seller/my_ongoing_project.jsp");
