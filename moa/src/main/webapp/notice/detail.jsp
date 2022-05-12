@@ -12,8 +12,6 @@
 <%-- 준비 --%>
 <% 
 	int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-	
-	boolean isAdmin = session.getAttribute("admin") != null; 
 %>
 <%-- 처리 --%>
 <% 
@@ -28,6 +26,9 @@
 	
 	// 사진이 있는지 판정
 	boolean isExistPhoto = moaNoticeAttachDto != null;
+	
+	// 관리자 여부
+	boolean isAdmin = session.getAttribute("admin") != null; 
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>    
 <div class="container w800 mainContent">
@@ -51,12 +52,12 @@
 	<hr style="border:solid 0.5px #B899CD">
 </div>
 
-	 <%-- <%if(isAdmin){ %> --%>
+	 <%-- <%if(isAdmin){ %>  --%>
 		<div class="right" style="height:70px">
 			<a href="edit.jsp?noticeNo=<%=noticeNo %>" class="btn-reverse link">수정</a>
 			<a href="delete.do?noticeNo=<%=noticeNo %>" class="btn-reverse link">삭제</a>
 		</div>
-	<%-- <%} %> --%> 
+	<%-- <%} %>  --%>
 		<div class="center" style="height:70px">
 				<a href="list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
 		</div>

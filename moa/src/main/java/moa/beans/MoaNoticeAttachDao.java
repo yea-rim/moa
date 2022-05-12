@@ -9,10 +9,11 @@ public class MoaNoticeAttachDao {
 	public void insert(MoaNoticeAttachDto moaNoticeAttachDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into moa_notice_attach(attach_no,notice_no) values(?,?)";
+		String sql = "insert into moa_notice_attach(attach_no,notice_no, attach_type) values(?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, moaNoticeAttachDto.getAttachNo());
 		ps.setInt(2, moaNoticeAttachDto.getNoticeNo());
+		ps.setString(3, moaNoticeAttachDto.getAttachType());
 		ps.execute();
 
 		con.close();
@@ -44,11 +45,7 @@ public class MoaNoticeAttachDao {
 	public MoaNoticeAttachDto selectProfile(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "SELECT * FROM("
-				+ "SELECT rownum rn, TMP.*from("
-				+ "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? ORDER BY attach_no asc"
-				+ ")TMP"
-				+ ") WHERE rn = 1";
+		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '프로필' ORDER BY attach_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
 		ResultSet rs = ps.executeQuery();
@@ -71,11 +68,8 @@ public class MoaNoticeAttachDao {
 	public MoaNoticeAttachDto selectContent(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "SELECT * FROM("
-				+ "SELECT rownum rn, TMP.*from("
-				+ "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? ORDER BY attach_no asc"
-				+ ")TMP"
-				+ ") WHERE rn = 2";
+		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '본문' ORDER BY attach_no asc";
+		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
 		ResultSet rs = ps.executeQuery();
