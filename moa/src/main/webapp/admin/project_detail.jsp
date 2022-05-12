@@ -116,16 +116,16 @@ Date now = new Date();
 					</div>
 					<div class="float-left center layer-2 h40 f14">
 						<a href="#" class="btn-refuse">
-							<button class="btn w90p h100p">거절</button>
+							<button class="btn w90p h100p">반려</button>
 						</a>
 					</div>
 				</div>
 				<div class="row m20 refuse-msg">
 					<form action="projectRefuse.do" method="post">
-						<label>거절 메세지 입력</label> <input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
+						<label>반려 메세지 입력</label> <input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
 						<textarea name="projectRefuseMsg" rows="5" class="float-right fill form-input mt5" placeholder="내용입력" autocomplete="off"></textarea>
 						<div class="row center">
-							<button class="btn btn-reverse fill">거절하기</button>
+							<button class="btn btn-reverse fill">반려하기</button>
 						</div>
 					</form>
 				</div>

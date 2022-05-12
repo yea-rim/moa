@@ -1,3 +1,7 @@
+<%@page import="moa.beans.MoaQuestionReplyDto"%>
+<%@page import="moa.beans.MoaQuestionReplyDao"%>
+<%@page import="moa.beans.MemberDto"%>
+<%@page import="moa.beans.MemberDao"%>
 <%@page import="moa.beans.MoaQuestionDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.MoaQuestionDao"%>
@@ -30,15 +34,40 @@
 	List<MoaQuestionDto> list = moaQuestionDao.selectList(p, s);
 %>    
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
-<div class="container w800"> 
+<script type="text/javascript">
+	$(function() {
+		$(".btn-detail").each(function(){
+			$(this).click(function() {
+				$(this).next().toggle();
+			});
+		});
+		
+		$(".btn-replyDelete").each(function(){
+			$(this).click(function() {
+				return confirm("정말 삭제 하시겠습니까?");
+			});
+		});
+		
+		//$(".btn-replyEdit").each(function() {
+		//	$(this).click(function(){
+		//		$(this).prevAll('.replyEdit').hide();
+		//
+		//	});
+		//});
+
+		
+	});
+</script>
+<div class="container w900"> 
 	<div class="row mt30">
 		<h2>1:1 문의</h2>
 	</div>
 	<hr>
 	<div class="row mt20">
-		<table class="table table-admin table-stripe table-hover">
+		<table class="table table-admin table-stripe">
 			<thead>
 				<tr>
+					<th>작성자</th>
 					<th>문의유형</th>
 					<th>제목</th>
 					<th>작성일</th>
@@ -48,10 +77,17 @@
 			<tbody>
 				<%
 				for (MoaQuestionDto questionDto : list) {
+					MemberDao memberDao = new MemberDao();
+					MemberDto memberDto = memberDao.selectOne(questionDto.getQuestionWriter());
+					
+					MoaQuestionReplyDao moaQuestionReplyDao = new MoaQuestionReplyDao();
+					MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo());
+					
 				%>
-				<tr onclick="location.href='<%=request.getContextPath()%>/admin/question_detail.jsp?questionNo=<%=questionDto.getQuestionNo() %>';" style="width:100%;cursor:pointer;">
+				<tr style="width:100%;cursor:pointer;" class="btn-detail">
+					<td><%=memberDto.getMemberNick()%></td>
 					<td><%=questionDto.getQuestionType() %></td>
-					<td><%=questionDto.getQuestionTitle()%></td>
+					<td class="left"><%=questionDto.getQuestionTitle()%></td>
 					<td><%=questionDto.getQuestionTime() %></td>
 					<td>
 						<%if(questionDto.getAnswerStatus() ==0){ %>
@@ -59,6 +95,39 @@
 						<%}else{ %>
 							<span style="color: blue">답변완료</span>
 						<%} %>
+					</td>
+				</tr>
+				<tr style="display: none;" class="show-detail">
+				<th style="vertical-align: top;">문의내용</th>
+				<td colspan="2" class="left" style="vertical-align: top;">
+				 	<%=questionDto.getQuestionContent() %>				
+				</td>
+				<td colspan="2" class="w200 left">
+				<%if(questionDto.getAnswerStatus() ==0){ %>
+					<form action="questionReplyInsert.do" method="post">
+						<input type="hidden" name="questionTargetNo" value="<%=questionDto.getQuestionNo() %>">
+						<textarea name="questionReplyContent" rows="5" class="fill form-input mt5" placeholder="답변내용입력" autocomplete="off"></textarea>
+						<div class="row center">
+							<button class="btn btn-reverse fill">답변하기</button>
+						</div>
+					</form>
+					<%}else{ %>
+						<span>답변내용</span>
+						<form action="questionReplyEdit.do" method="post">
+						<input type="hidden" name="questionTargetNo" value="<%=questionDto.getQuestionNo() %>">
+						<textarea rows="5" class="fill form-input mt5 replyEdit" name="questionReplyContent" placeholder="<%=questionReplyDto.getQuestionReplyContent() %>" autocomplete="off"></textarea>
+            		<div class="flex-container m5">
+		                <div class="left-wrapper">
+		                    <button type="submit" class="link link-btn btn-replyEdit fill">수정</button>
+		                </div>
+		                </form>
+		                <div class="right-wrapper">
+		                    <a href="<%=request.getContextPath()%>/admin/questionReplyDelete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="btn-replyDelete">
+		                    	<input type="button" value="삭제" class="link link-reverse fill">
+		                    </a>
+		                 </div>
+             		</div> 
+					<%}%>
 					</td>
 				</tr>
 				<%}%>
