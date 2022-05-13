@@ -50,11 +50,11 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 					sellerNick : sellerNick
 				},
 				success : function(resp) {
-					if (resp === "Y") {
+					if (resp === "YY") {
 						span.text("사용 가능한 판매자 닉네임입니다.");
 						$("button[name=submit]").attr("disabled", false);
 						status.sellerNick = true;
-					} else if (resp === "N") {
+					} else if (resp === "NN") {
 						span.text("이미 사용 중인 판매자 닉네임입니다.");
 						status.sellerNick = false;
 						$("button[name=submit]").attr("disabled", true);
@@ -80,6 +80,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 		<div class="row m30">
 			<label class="m10">(*) 판매자 닉네임</label> <input type="text" name="sellerNick" required
 				class="form-input fill input-round" autocomplete="off">
+				<span></span>
 		</div>
 
 		<div class="row m30">

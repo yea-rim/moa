@@ -20,7 +20,16 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 
 SellerDao sellerDao = new SellerDao();
 SellerDto sellerDto = sellerDao.selectOne(memberNo);
-boolean isSeller = sellerDto.getSellerPermission() == 1;
+
+boolean isSeller = false;
+boolean isPermission = false;
+
+if(sellerDto != null){
+isSeller = true;
+	if(sellerDto.getSellerPermission() == 1){
+		isPermission = true;
+	}
+}
 
 // 회원 프로필 사진 조회
 MemberProfileDao memberProfileDao = new MemberProfileDao();
@@ -29,8 +38,6 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 
 SellerAttachDao sellerAttachDao = new SellerAttachDao();
 SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
-
-// 인증 첨부파일 꺼내와야 함
 %>
 
 <div class="row center">
@@ -129,7 +136,7 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=sellerAttachDto.getAttachNo()%>"
 		width="75%" onerror="javascript:this.src='https://dummyimage.com/300x300'"> <%} %>
 		
-		<%if (isSeller) { %>
+		<%if (isPermission) { %>
 		<div class="float-container center">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
 				<a
