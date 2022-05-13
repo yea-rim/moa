@@ -106,7 +106,7 @@ AttachDao attachDao = new AttachDao();
 	</div>
 	<!-- 대표 이미지 수정 -->
 	<div class="row m20 mlr30">
-		<h2>* 본문 이미지</h2>
+		<h2>* 본문 이미지 </h2>
 	</div>
 	<div class="row m20">
 		<div class="container">

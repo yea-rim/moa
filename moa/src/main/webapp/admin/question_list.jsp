@@ -98,11 +98,11 @@
 					</td>
 				</tr>
 				<tr style="display: none;" class="show-detail">
-				<th style="vertical-align: top;">문의내용</th>
-				<td colspan="2" class="left" style="vertical-align: top;">
+				<th style="vertical-align: top;" class="b-left">문의내용</th>
+				<td colspan="2" class="left b-right" style="vertical-align: top;">
 				 	<%=questionDto.getQuestionContent() %>				
 				</td>
-				<td colspan="2" class="w200 left">
+				<td colspan="2" class="w200 left b-right">
 				<%if(questionDto.getAnswerStatus() ==0){ %>
 					<form action="questionReplyInsert.do" method="post">
 						<input type="hidden" name="questionTargetNo" value="<%=questionDto.getQuestionNo() %>">

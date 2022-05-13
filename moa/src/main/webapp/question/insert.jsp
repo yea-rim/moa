@@ -10,40 +10,7 @@
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
  <style>
-     .filebox-a input[type="file"] {
-         position: absolute;
-         width: 0;
-         height: 0;
-         padding: 0;
-         overflow: hidden;
-         border: 0;
-     }
 
-     /* 인풋 스타일 변경 */
-     .filebox-a .upload-name {
-         display: inline-block;
-         height: 35px;
-         padding: 0 10px;
-         vertical-align: middle;
-         border: 1px solid #B6B6B6;
-         border-radius: 0.3em;
-         width: 50%;
-         color: #999999;
-     }
-
-     /* label 스타일 변경 */
-     .filebox-a label {
-         display: inline-block;
-         padding: 10px 10px;
-         color: white;
-         vertical-align: middle;
-         background-color: #dddddd;
-         border-radius: 0.3em;
-         cursor: pointer;
-         height: 35px;
-         margin-left: 5px;
-         font-size: 13px;
-     }
 
 
      .table.table-a>tbody>tr>th,

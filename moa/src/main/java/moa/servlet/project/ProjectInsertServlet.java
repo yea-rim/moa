@@ -48,7 +48,8 @@ public class ProjectInsertServlet extends HttpServlet {
 			int projectNo = projectDao.getSequence();
 			
 			//판매자 번호
-			int sellerNo = (int)req.getSession().getAttribute("login");
+			int sellerNo = 23;
+					//(int)req.getSession().getAttribute("login");
 
 
 			// 프로젝트 신청 처리
@@ -110,6 +111,7 @@ public class ProjectInsertServlet extends HttpServlet {
 			String[] rewardStock = mRequest.getParameterValues("rewardStock");
 			String[] rewardDelivery = mRequest.getParameterValues("rewardDelivery");
 			String[] rewardEach = mRequest.getParameterValues("rewardEach");
+			String[] rewardIsOption = mRequest.getParameterValues("rewardIsOption");			
 
 			RewardDao rewardDao = new RewardDao();
 			for (int i = 0; i < rewardName.length; i++) {
@@ -122,6 +124,7 @@ public class ProjectInsertServlet extends HttpServlet {
 				rewardDto.setRewardStock(Integer.parseInt(rewardStock[i]));
 				rewardDto.setRewardDelivery(Integer.parseInt(rewardDelivery[i]));
 				rewardDto.setRewardEach(Integer.parseInt(rewardEach[i]));
+				rewardDto.setRewardIsoption(Integer.parseInt(rewardIsOption[i]));
 
 				rewardDao.insert(rewardDto);
 			}

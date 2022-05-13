@@ -41,17 +41,17 @@
 			</div>
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill">
-				<div class="msg"></div>
+				<input type="text" name="projectName" class="form-input fill" placeholder="제목을 입력해주세요">
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>프로젝트 요약글</label>
-				<textarea name="projectSummary" rows="5" class="form-input fill"></textarea>
-				<div class="msg"></div>
+				<textarea name="projectSummary" rows="5" class="form-input fill" placeholder="후원자 분들이 프로젝트를 빠르게 이해할 수 있도록 명확하고 간략하게 소개해주세요."></textarea>
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>펀딩 목표 금액</label> 
-				<input type="number" name="projectTargetMoney" class="form-input fill"> 
+				<input type="number" name="projectTargetMoney" class="form-input fill" placeholder="50만원 이상의 금액을 입력해주세요"> 
 				<span class="font-on f12 red"></span><br>
 				<span class="f12 gray" > 
 					※목표 금액 설정 시 꼭알아두세요!<br> 
@@ -122,6 +122,7 @@
 													<div class="row">펀딩 시작일</div>
 													<div class="row m5">
 														<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
+														<span class="f12 red"></span>
 														<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
 													</div>
 												</li>
@@ -135,6 +136,7 @@
 													<div class="row">펀딩 마감일</div>
 													<div class="row m5">
 														<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
+														<span class="f12 red"></span>
 													</div>
 												</li>
 												<li class="insert-li">
@@ -173,29 +175,38 @@
 			<h3>* 리워드1</h3>
 			<div class="row m20">
 				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill">
-				<div class="msg"></div>
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
 				<textarea name="rewardContent" rows="5" class="form-input fill"></textarea>
-				<div class="msg"></div>
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<div class="">
-				<label>리워드 가격</label> <input type="number" name="rewardPrice"
-					class="form-input fill">
+				<label>리워드 가격</label> 
+				<input type="number" name="rewardPrice"class="form-input fill">
+				<span class="f12 red"></span>
 				</div>	
 			</div>
 			<div class="row m20">
-				<label>리워드 재고</label> <input type="number" name="rewardStock"
-					class="form-input fill">
+				<div class="row"><label>리워드 재고</label></div>
+				<input type="number" name="rewardStock" class="form-input w80p">
+				<span class="f12 red"></span>
+				<input type="checkbox" class="form-input ckbox" id="optionck">
+				<input type="hidden" name="rewardIsOption" value="0">
+				<label class="f12 gray" for="optionck">상세 옵션 여부</label>
 			</div>
 			<div class="row m20">
 				<div class="row"><label>배송비</label></div>
 				<input type="number" name="rewardDelivery" class="form-input w80p" value="0">
-				<input type="checkbox" class="form-input each-ckbox">
+				<span class="f12 red"></span>
+				<input type="checkbox" class="form-input ckbox" id="eachck">
 				<input type="hidden" name="rewardEach" value="0">
-				<label class="f12 gray">개별 배송 여부</label>
+				<label class="f12 gray" for="eachck">개별 배송 여부</label>
+			</div>
+			<div class="row m20">
+				<label></label>
 			</div>
 			<h3 class="reward-num"></h3>
 			<div id="add-reward"></div>

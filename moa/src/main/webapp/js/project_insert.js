@@ -38,10 +38,46 @@ $(function() {
 			$(".percent").css("width", percent + "%");
 		}
 
-		$(".project_page").click()
+		
+		$("input[name=projectName]").blur(checkValue);
+		$("textarea[name=projectSummary]").blur(checkValue);
+		$("input[name=projectStartDate]").blur(checkValue);
+		$("input[name=projectSemiFinish]").blur(checkValue);
+		$("input[name=rewardName]").blur(checkValue);
+		$("textarea[name=rewardContent]").blur(checkValue);
+		$("input[name=rewardPrice]").blur(checkValue);
+		$("input[name=rewardStock]").blur(checkValue);
+		$("input[name=rewardDelivery]").blur(checkValue);
+		$("input[name=projectTargetMoney]").blur(checkProjectTargetMoney);
+			
+		//입력한 값이 있는지
+		function checkValue(){
+			if($(this).val()==""){
+				$(this).next('span').text("필수 입력 사항입니다.");
+			}else{
+				$(this).next('span').text("");				
+			}				
+		}
+		
 
 
+		
+		//펀딩 금액 체크 		
+		function checkProjectTargetMoney() {
+			var inVal = $(this).val();
+			var regexVal = /^[0-9]{6,20}$/;
 
+			if (regexVal.test(inVal)) {
+				if (inVal >= 500000) {
+					$(".font-on").text("");
+				} else {
+					$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+				}
+			} else {
+				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
+			}
+		}
+	
 
 
 		//날짜 선택 (datepicker) 설정
@@ -114,12 +150,13 @@ $(function() {
 		function addReaward(rewardNum) {
 			var div = $("<div>").attr('class', 'reward'+rewardNum+" row m30");
 			var h3 = $("<h3>* 리워드" + rewardNum + "</h3>");
-			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill"></div>\
-                    <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill"></textarea></div>\
-                    <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"></div>\
-                    <div class="row m20"><label>리워드 재고</label> <input type="number" name="rewardStock" class="form-input fill"></div>\
+	var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill"><span class="f12 red"></span></div>\
+                    <div class="row m20"><label>리워드 내용</label> <textarea name="rewardContent" rows="5" class="form-input fill"></textarea><span class="f12 red"></span></div>\
+                    <div class="row m20"><label>리워드 가격</label> <input type="number" name="rewardPrice" class="form-input fill"><span class="f12 red"></span></div>\
+                    <div class="row m20"><label><div class="row"><label>리워드 재고</label></div></label> <input type="number" name="rewardStock" class="form-input w80p"><span class="f12 red"></span>\
+					<input type="checkbox" class="form-input ckbox" id="optionck"><input type="hidden" name="rewardIsOption" value="0"><label class="f12 gray" for="optionck">상세 옵션 여부</label></div>\
 					<div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="rewardDelivery" class="form-input w80p">\
-					<input type="checkbox" class="form-input each-ckbox"><input type="hidden" name="rewardEach" value="0"><label class="f12 gray">개별 배송 여부</label></div>');
+					<input type="checkbox" class="form-input ckbox"><input type="hidden" name="rewardEach" value="0"><label class="f12 gray">개별 배송 여부</label></div>');
 	
 			div.append(h3).append(content);
 			$("#add-reward").append(div);
@@ -183,24 +220,7 @@ $(function() {
 			});
 		});
 		
-		
-		//펀딩 금액 체크 메세지
-		$("input[name=projectTargetMoney]").blur(checkProjectTargetMoney);
-			
-			function checkProjectTargetMoney() {
-			var inVal = $(this).val();
-			var regexVal = /^[0-9]{6,20}$/;
 
-			if (regexVal.test(inVal)) {
-				if (inVal >= 500000) {
-					$(".font-on").text("");
-				} else {
-					$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
-				}
-			} else {
-				$(".font-on").text("50만원 이상의 금액을 입력해주세요.");
-			}
-		}
 		
 			
 			
@@ -239,18 +259,11 @@ $(function() {
 				$(this).val($(this).val().substring(0,100));
 			}
 	});
-      //개별 배송여부 체크 시 value값 수정
-	$(".each-ckbox").on("input",function(){
-			if ($(this).is(":checked")) {
-			    $(this).next().attr("value","1");
-			} else {
-			     $(this).next().attr("value","0");
-			}
-	});
 	
-	//추가한 리워드 체크박스 값 설정
-	$(document).on("input",".each-ckbox",function(){
+	//체크박스 체크 시  값 설정
+	$(document).on("input",".ckbox",function(){
 			if ($(this).is(":checked")) {
+				console.log(1);
 			    $(this).next().attr("value","1");
 			} else {
 			     $(this).next().attr("value","0");
@@ -262,6 +275,5 @@ $(function() {
 		return true;
 	});
 		
-
 			
 	});
