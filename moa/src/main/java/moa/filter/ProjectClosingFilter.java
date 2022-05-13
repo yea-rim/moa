@@ -30,8 +30,8 @@ public class ProjectClosingFilter implements Filter {
 			
 			if(check == 1){
 				resp.sendRedirect(req.getContextPath()+"/project/project_detail.jsp?projectNo="+projectNo);
-			}else if(check == 2){
-				resp.sendRedirect(req.getContextPath()+"/project/project_cloing.jsp?projectNo="+projectNo);
+			}else if(check == 0){
+				resp.sendRedirect(req.getContextPath()+"/project/project_coming.jsp?projectNo="+projectNo);
 			}else {
 				chain.doFilter(request, response);
 			} 

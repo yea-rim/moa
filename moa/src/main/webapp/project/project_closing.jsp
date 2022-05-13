@@ -191,10 +191,10 @@ $(function(){
                 
                 <div class="row fill mb20">
                 <span class="big">
-                        <%=projectVo.getDaycount() %>
+                        마감
                 </span>
                 <span class="small">
-                        일
+                        
                 </span>
                     
                 </div>

@@ -31,7 +31,7 @@ public class ProjectComingFilter implements Filter {
 			if(check == 1){
 				resp.sendRedirect(req.getContextPath()+"/project/project_detail.jsp?projectNo="+projectNo);
 			}else if(check == 2){
-				resp.sendRedirect(req.getContextPath()+"/project/project_cloing.jsp?projectNo="+projectNo);
+				resp.sendRedirect(req.getContextPath()+"/project/project_closing.jsp?projectNo="+projectNo);
 			}else {
 				chain.doFilter(request, response);
 			} 

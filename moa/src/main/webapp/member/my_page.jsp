@@ -173,7 +173,7 @@
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-					                    	<a href="<%=request.getContextPath() %>/project/project-detail.jsp?projectNo=<%=projectNo%>">
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 					                        	<%if(isExistProjectAttach) { %>
 					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachNo%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
