@@ -13,7 +13,7 @@
       white-space: pre-wrap;
       overflow: hidden;
       word-break: break-all;
-      height: 250px;
+      height: 100px;
       text-align: left;
   }
   
@@ -26,9 +26,12 @@
   .font12{
       font-size: 12px;
   }
+  .font14{
+      font-size: 14px;
+  }
 
   .table {
-    border: 1px solid black;
+    border: 1px solid rgb(231, 231, 231);
 }
 
 .table>thead>tr>td,
@@ -37,22 +40,34 @@
 .table>tbody>tr>th,
 .table>tfoot>tr>td,
 .table>tfoot>tr>th {
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(231, 231, 231);
     font-size: 17px;
     padding: 0.3em;
 }
 
 .table>thead {
     background-color: #e3d9eb;
+    
+}
+
+.table>tbody>.body{
+    transition: 0.2s ease-in-out;
 }
 
 .table>tbody>.body:hover {
     background-color: #e3d9eb;
 }
 
+.btn,
+.btn-reverse {
+	transition: 0.3s ease-in-out;
+}
+
 .table-title {
     text-align: left;
     padding-left: 1em !important;
+    
+   
 }
 
 .table-title:hover {
@@ -130,3 +145,66 @@ label[for=hide-secret]:hover {
 h2{
 	display:inline;
 }
+
+.shadow {
+		box-shadow: 2px 2px 3px 0px rgb(231, 231, 231);
+	}
+	.swiper{
+	   	width: 600px;
+  		height: 450px;
+  		resize: hori;
+    }
+    
+    .swiper-pagination,
+    .swiper-button-prev,
+    .swiper-button-next {
+    	color: black;
+    }
+    
+    .swiper-pagination-bullet-active{
+    	background-color: black;
+    }
+    
+    .summary-box {
+    	border: 1px solid #e5e0e9; 
+    	border-radius: 0.2em; 
+    	padding: 1em; 
+    	margin-bottom : 20px;
+    }
+    
+    .reward {
+    	border: 1px solid #e5e0e9;
+    	color: gray;
+    	font-weight: lighter;
+    	font-size: 15px;
+    	transition: 0.3s ease-in-out;
+    	border-radius: 0.3em;
+    	cursor: pointer;
+    	background-color : white;
+    	padding: 1em;
+    	
+    }
+    
+    .reward:hover {
+    	background-color : white;
+    	border: 1px solid #b899cd;
+    }
+    
+    .small {
+    	font-size: 12px;
+    }
+    .big {
+    	font-size: 23px;
+    }
+    
+	.project-title {
+		font-size: 30px;
+	}
+	
+	.project-seller * {
+		vertical-align: middle;
+		align: center;
+	}
+	.project-seller {
+		font-size: 18px;
+	}

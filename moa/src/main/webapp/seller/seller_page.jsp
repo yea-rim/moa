@@ -137,10 +137,10 @@
 				<%for(ProjectDto projectDto : list2){ %>
 					<div class="row flex-items1 m10">
 						<div class="row">
-							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="100%"></a>
+							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="100%"></a>
 						</div>
 						<div class="row left m10">
-							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
 								<span><%=projectDto.getProjectName() %></span>
 							</a>
 						</div>

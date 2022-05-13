@@ -118,4 +118,19 @@ public class FundingDao {
 		con.close();
 	}
 	
+	//결제 실행 메서드
+	public boolean paymentCheck() throws Exception {
+		
+		String sql = "update (select * from funding where funding_cancel_date is null and funding_payment_date <= sysdate) set funding_ispayment = 1";
+		
+		Connection con = JdbcUtils.getConnection();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
 }

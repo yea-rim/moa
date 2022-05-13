@@ -257,7 +257,7 @@ if (isSearch) {
 		 	%> --%> 
             <div class="flex-items">
               <div class="row center">
-              	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 		       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%"> --%>
                 	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="100%">
                 </a>

@@ -265,13 +265,13 @@ if (isSearch) {
 		 	%>  --%>
             <div class="flex-items">
               <div class="row center m10">
-              	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 			       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%"> --%>
                 	<img src="https://dummyimage.com/1305x250" width="372px" height="250px">
                 </a>
               </div>
               <div class="row project-name">
-              	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
               		<%=projectDto.getProjectName() %>
               	</a>
               </div>

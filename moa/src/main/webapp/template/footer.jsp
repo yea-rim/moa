@@ -10,7 +10,7 @@
 		flex-basis:75%;
 	}
 	.b {
-		flex-basis:25%;
+		flex-basis:20%;
 	}
 </style>
 </article>

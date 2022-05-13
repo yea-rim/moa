@@ -100,7 +100,7 @@
     	               		</div>
     	                	<div class="row flex-container2 flex-items-b">
 	    	                	<div class="row project-name m10">
-	    	                		<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+	    	                		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
 	    	                			<%=projectDto.getProjectName() %>
 	    	                		</a>
 	    	                	</div>
@@ -114,7 +114,7 @@
 	    	                </div>
     	                		
     	                		<div class="row flex-items-c m10">
-    	                			<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+    	                			<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 	    	                			<img src="https://dummyimage.com/500x400" width="110px" height="110px">
 	    	                		</a>
 	    	                	</div>
@@ -142,7 +142,7 @@
     	               		</div>
     	                	<div class="row flex-container2 flex-items-b">
 	    	                	<div class="row project-name m10">
-	    	                		<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+	    	                		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
 	    	                			<%=projectDto.getProjectName() %>
 	    	                		</a>
 	    	                	</div>
@@ -157,7 +157,7 @@
 	    	                </div>
     	                		
     	                		<div class="row flex-items-c m10">
-    	                			<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+    	                			<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
 	    	                			<img src="https://dummyimage.com/500x400" width="110px" height="110px">
 	    	                		</a>
 	    	                	</div>
@@ -179,10 +179,10 @@
 				<%for(ProjectDto projectDto : list2){ %>
 					<div class="row flex-items1 m10">
 						<div class="row">
-							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="240px" height="240px"></a>
+							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="240px" height="240px"></a>
 						</div>
 						<div class="row left m10 new-name">
-							<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
+							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
 								<span><%=projectDto.getProjectName() %></span>
 							</a>
 						</div>

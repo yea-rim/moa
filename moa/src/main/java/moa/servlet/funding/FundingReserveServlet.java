@@ -1,4 +1,4 @@
-package moa.servlet.project;
+package moa.servlet.funding;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -34,7 +34,6 @@ public class FundingReserveServlet extends HttpServlet{
 			String[] rewardNo = req.getParameterValues("rewardNo");
 			String[] selectionRewardAmount = req.getParameterValues("selectionRewardAmount");
 			String[] selectionOption = req.getParameterValues("selectionOption");
-			
 			//펀딩 수령인 정보 파라미터
 			String fundingGetter = req.getParameter("fundingGetter");
 			String fundingPost = req.getParameter("fundingPost");
@@ -47,13 +46,12 @@ public class FundingReserveServlet extends HttpServlet{
 			}
 			
 			
-			//필요한 그 외 정보
+			//필요한 그 외 정보 준비
 			ProjectDao projectDao = new ProjectDao();
 			int totalPrice = 0;
 			int totalDelivery = 0;
 			int deliveryCount = 1;
 			Date paymentDate = projectDao.paymentDate(projectNo);
-			
 			RewardDao rewardDao = new RewardDao();
 			//리워드선택에 들어갈 각각의 리워드가격에 수량을 곱한 중간합계 가격 계산
 			for(int i = 0; i < rewardNo.length; i++) {
@@ -75,7 +73,7 @@ public class FundingReserveServlet extends HttpServlet{
 			FundingDao fundingDao = new FundingDao();
 			int fundingNo = fundingDao.getFundingSequence();
 			fundingDto.setFundingNo(fundingNo);
-			fundingDto.setFundingMemberNo(fundingNo);
+			fundingDto.setFundingMemberNo(memberNo);
 			fundingDto.setFundingGetter(fundingGetter);
 			fundingDto.setFundingPost(fundingPost);
 			fundingDto.setFundingBasicAddress(fundingBasicAddress);
@@ -95,7 +93,7 @@ public class FundingReserveServlet extends HttpServlet{
 				rewardSelectionDto.setSelectionFundingNo(fundingDto.getFundingNo());
 				rewardSelectionDto.setSelectionRewardNo(Integer.parseInt(rewardNo[i]));
 				rewardSelectionDto.setSelectionRewardAmount(Integer.parseInt(selectionRewardAmount[i]));
-				if(selectionOption.length > 0) {
+				if(selectionOption != null) {
 				rewardSelectionDto.setSelectionOption(selectionOption[i]);
 				}
 				rewardSelectionDao.insert(rewardSelectionDto);
@@ -103,7 +101,7 @@ public class FundingReserveServlet extends HttpServlet{
 			}
 			
 			
-			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp");
+			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp?fundingNo="+fundingNo);
 			
 			
 		} catch (Exception e) {

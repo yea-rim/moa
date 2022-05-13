@@ -35,9 +35,13 @@ public class ProjectAttachDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
+		
+		int attachNo = 0;
+		
+		if(rs.next()) {
+			attachNo = rs.getInt("attach_no");			
+		}
 
-		int attachNo = rs.getInt("attach_no");
 		con.close();
 
 		return attachNo;
