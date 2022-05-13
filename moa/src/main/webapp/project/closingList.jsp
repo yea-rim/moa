@@ -266,7 +266,7 @@ if (isSearch) {
 		 	%> 
             <div class="flex-items">
               <div class="row center">
-              	<a href="project-detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
               	<%if(isExistPhoto){ %>
 			       	<img src="download.kh?attachNo=<%=projectAttachDto.getAttachNo() %>" width="372px" height="250px">
 			    <%}else{ %>
