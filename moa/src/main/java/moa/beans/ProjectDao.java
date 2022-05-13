@@ -1240,4 +1240,33 @@ public class ProjectDao {
 			return count > 0;
 		}
 		
+		
+		// 진행예정 진행중 마감된 프로젝트 구분위한 메서드 시작날짜 - 현재날짜, 마감날짜 - 현재날짜를 각각 구해서 계산 후 반환 0:오픈예정 1:진행중 2:마감된
+		public int checkProjectSchedule(int projectNo) throws Exception{
+			
+			String sql = "select project_start_date - trunc(sysdate), project_semi_finish - trunc(sysdate) from project where project_no = ? and project_permission = 1";
+			
+			Connection con = JdbcUtils.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, projectNo);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			
+			int first = rs.getInt(1);
+			int second = rs.getInt(2);
+			
+			con.close();
+			
+			int check = 1;
+			if(first >= 0 && second > 0) {
+				return check = 0;
+			}else if(first < 0 && second < 0) {
+				return check = 2;
+			}
+			
+			return check;
+			
+		}
 }

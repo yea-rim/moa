@@ -148,7 +148,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 					//사진이 있는지 판정
 					boolean isExistPhoto = projectAttachDto != null;	
 				%> 
-					<a href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
+					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 					<%if(isExistPhoto){ %>
 						<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="200px" height="200px">
 					<%} else{ %>
@@ -159,7 +159,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		
 				<div class="row left m10 new-name">
 					<a
-						href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
+						href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
 						class="link"> <span><%=projectDto.getProjectName()%></span>
 					</a>
 				</div>
@@ -187,7 +187,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 					<div class="row flex-container2 flex-items-b">
 						<div class="row project-name m10">
 							<a
-								href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
+								href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
 								class="link"> <%=projectDto.getProjectName()%>
 							</a>
 						</div>
@@ -207,7 +207,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 				 		//사진이 있는지 판정
 				 		boolean isExistPhoto = projectAttachDto != null;	
 				 	%> 
-						<a href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
+						<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 						<%if(isExistPhoto){ %>
 							<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="110px" height="110px">
 						<%} else { %>
@@ -251,7 +251,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			//사진이 있는지 판정
 			boolean isExistPhoto = projectAttachDto != null;	
 		%> 
-			<a href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
+			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 			<%if(isExistPhoto){ %>
 				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="240px">
 			<%} else{ %>
@@ -262,7 +262,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
 		<div class="row left m10 new-name">
 			<a
-				href="<%=request.getContextPath()%>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
+				href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
 				class="link"> <span><%=projectDto.getProjectName()%></span>
 			</a>
 		</div>

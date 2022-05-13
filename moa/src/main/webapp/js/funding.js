@@ -1,4 +1,24 @@
 $(function () {
+	var index = 0;
+    move(index);
+        
+	function move(index){
+         $(".page").hide();
+         $(".page").eq(index).show();
+     };
+	
+	$(".number").each(function(){
+		$(this).text(withCommas(parseInt(($(this).text()))));
+	})
+	
+	function withCommas(num) {
+	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+
+	function withoutCommas(num) {
+	return num.toString().replace(",", '');
+	}
+	
     $(".detail").hide();
     $(".reward-select").find("input[type=text]").attr("disabled", true);
 	
@@ -46,13 +66,14 @@ $(function () {
         };
 
 
-    //다음단계버튼 클릭 시 체크된 항목 리스트에 나타내기 총배송비 최종결제금액 계산해서 나타내기
+    //다음단계버튼 클릭 시 체크된 항목 리스트에 나타내기 총배송비 최종결제금액 계산해서 나타내기 체크안됐을때 못넘어가게 막음
 
     $("#nextstep").click(function () {
 
         var deliveryTotal = 0;
         var fundingTotal = 0;
         var count = 0;
+        var checkCount = 0;
         $(".reward-checkbox").each(function () {
             if ($(this).is(":checked")) {
                 var rewardNo = $(this).val();
@@ -68,34 +89,40 @@ $(function () {
                 var content = $(this).parent("div").parent("div").find(".reward-content").html();
                 var amount = $(this).parent("div").parent("div").find("input[name=selectionRewardAmount]").val();
                 var price = $(this).parent("div").parent("div").find(".reward-price").html();
-                var semiTotal = amount * price;
+                var semiTotal = amount * parseInt(withoutCommas(price));
                 fundingTotal += semiTotal;
 
                 $(div).find(".reward-checklist-name").html("<br>" + title);
                 $(div).find(".reward-checklist-content").html("<br>" + content + "<br>");
-                $(div).find(".reward-checklist-pirce").html("수량 : " + amount + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가격 : " + semiTotal + "<hr>");
+                $(div).find(".reward-checklist-pirce").html("수량 : " + amount + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가격 : " + withCommas(semiTotal) + "<hr>");
                 $(div).find(".reward-checklist-pirce").children("hr").css("background-color", "rgb(214, 202, 202)");
                 $(div).find(".reward-checklist-pirce").children("hr").css("border", "none");
                 $(div).find(".reward-checklist-pirce").children("hr").css("height", "0.5px");
                 // console.log(div);
 
                 var delivery = $(this).parent("div").parent("div").find(".delivery");
-                console.log(delivery)
-                console.log(delivery.data("value"));
+                /*console.log(delivery)
+                console.log(delivery.data("value"));*/
+                checkCount++;
                 if (delivery.data("value") == 1) {
-                    deliveryTotal += parseInt(delivery.text()) * amount;
+                    deliveryTotal += parseInt(withoutCommas(delivery.text())) * amount;
                 } else if (delivery.data("value") == 0 && count < 1) {
-                    deliveryTotal += parseInt(delivery.text());
+                    deliveryTotal += parseInt(withoutCommas(delivery.text()));
                     count++;
                 }
             }
         });
-        $("#funding-total").text(fundingTotal + "원");
-        $("#delivery-total").text(deliveryTotal + "원");
+        if(checkCount == 0){
+			alert("최소 한개 이상을 후원하여야 진행할 수 있습니다.");
+		}else{        
+        $("#funding-total").text(withCommas(fundingTotal) + "원");
+        $("#delivery-total").text(withCommas(deliveryTotal) + "원");
 
-        $("#final").text(deliveryTotal + fundingTotal + "원");
+        $("#final").text(withCommas(deliveryTotal + fundingTotal) + "원");
 
+        move(++index);
         $('html').scrollTop(0);
+		}
     });
 
     //이전단계 버튼 누르면 넘어왔던 리워드 리스트 초기화
@@ -103,6 +130,7 @@ $(function () {
         $("#reward-checklist").children("div").each(function () {
             $(this).empty();
         });
+        move(--index);
         $('html').scrollTop(0);
     });
 
@@ -136,18 +164,128 @@ $(function () {
         var total = 0;
         $(".reward-checkbox").each(function () {
 
-            var price = $(this).parent(".check-reward").parent(".reward-select").find(".reward-price").text();
-            // console.log(price);
+            var price = withoutCommas($(this).parent(".check-reward").parent(".reward-select").find(".reward-price").text());
+             console.log(price);
             var amount = $(this).parent(".check-reward").parent(".reward-select").find("input[name=selectionRewardAmount]").val();
-            // console.log(amount);
+             console.log(amount);
 
             if ($(this).is(":checked")) {
                 total += parseInt(price) * parseInt(amount);
-                // console.log(total);
+                console.log(total);
             }
         });
-        $("#total-price").text(total);
+        
+        $("#total-price").text(withCommas(total));
     }
+    
+    //입력될 정보가 모두 입력됐는지 체크
+	/*$(".check").each(checkInfo);*/
+	/*function checkInfo2(){
+		$(this).blur(function(){
+			if($(this).val()==""){
+				$(this).parent("div").prev("div").children(".check-empty").show();
+				return false;
+			}else{
+				$(this).parent("div").prev("div").children(".check-empty").hide();
+				return true;
+			}
+		});
+	};*/
+	
+	
+	// 상태관리용 객체
+	var status = {
+                getter : false,
+                phone : false,
+                address : false,
+                checkBox : false
+            }
+	
+	//주소 입력 체크
+	$(".check-address").each(checkAddress);
+	function checkAddress(){
+		$(this).blur(function(){
+			var count = 0;
+				$(".check-address").each(function(){
+					if($(this).val()==""){
+						count++;
+					}
+				});
+			if(count > 0){
+				$(this).parent("div").parent("div").prev("div").children(".check-empty").show();
+				status.address = false;
+			}else{
+				$(this).parent("div").parent("div").prev("div").children(".check-empty").hide();
+				status.address = true;
+			}
+		});		
+	};
+	
+	
+	
+	//수령인 이름 정규식 검사
+	$("input[name=fundingGetter]").blur(checkGetter);
+	
+	function checkGetter(){
+		var regex = /^[가-힣a-zA-z]{2,10}$/;
+		var text = $(this).val();
+		
+		var judge = regex.test(text);
+		
+		if(!judge){
+			$(this).parent("div").prev("div").children(".check-regex").show();
+			status.getter = false;
+		}else{
+			$(this).parent("div").prev("div").children(".check-regex").hide();
+			status.getter = true;
+		}
+	};
+    
+    //전화번호 정규식 검사
+    $("input[name=fundingPhone]").blur(checkPhone);
+    function checkPhone(){
+		var regex = /^010[0-1][0-9]{3}[0-9]{4}$/;
+		var text = $(this).val();
+		
+		var judge = regex.test(text);
+		
+		if(!judge){
+			$(this).parent("div").prev("div").children(".check-regex").show();
+			status.phone = false;
+		}else{
+			$(this).parent("div").prev("div").children(".check-regex").hide();
+			status.phone = true;
+		}
+	};
+	
+	
+	function checkInfo(){
+		var count = 0;
+			if($(this).is(":checked")){
+				count++;
+			}
+		return count;
+	};
+    
+    
+    // 들어와야할 정보가 전부 입력됐는지 최종 검사
+   	$(".reserve-btn").click(function(){
+		var count = 0;
+		$(".reward-checkbox").each(function(){
+			count += checkInfo.call(this);
+		});
+		var judge = count > 0;
+		console.log(status.getter);
+		console.log(status.phone);
+		console.log(status.address);
+		console.log(judge);
+		if(judge && status.getter && status.phone && status.address){
+			return true;
+		}else{
+			return false;
+		}
+	
+	});
 
 
 });

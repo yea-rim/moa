@@ -111,7 +111,7 @@
 			<h2><%=communityDto.getCommunityTitle() %></h2>
 	</div>
 	<div class="row">
-		<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=communityDto.getCommunityProjectNo() %>" class="link" style="color:gray">
+		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=communityDto.getCommunityProjectNo() %>" class="link" style="color:gray">
 		<h4>/ <%=projectDto.getProjectName() %></h4>
 		</a>
 	</div>
@@ -127,7 +127,7 @@
 	</div>
 	<hr style="border:solid 0.5px gray">
 	<div class="row m10 right">
-		<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=communityDto.getCommunityProjectNo() %>" class="link" style="color:#B899CD">해당프로젝트 보러가기</a>
+		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=communityDto.getCommunityProjectNo() %>" class="link" style="color:#B899CD">해당프로젝트 보러가기</a>
 	</div>
 	<div class="row m20">
 		<%if(isExistPhoto){ %>

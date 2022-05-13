@@ -141,7 +141,7 @@
 					<!-- 이미지 자리 -->
 					<div class="row center">
 						<a
-							href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+							href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 							<img src="https://dummyimage.com/150x112" alt=""
 							class="card-image-wrapper" width="150px" height="112px">
 						</a>
@@ -150,7 +150,7 @@
 					<!-- 제목 -->
 					<div class="row flex-title m10 mlr10 txt-overflow">
 						<a
-							href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>"
+							href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"
 							class="link">
 							<h2><%=projectDto.getProjectName() %></h2>
 						</a>

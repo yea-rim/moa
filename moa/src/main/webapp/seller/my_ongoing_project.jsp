@@ -95,7 +95,7 @@
 	                            <!-- 프로젝트 제목 -->
 	                            <div class="row w800">
 	                                <h3>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
+	                                    <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
 	                                </h3>
 	                            </div>
 	                            

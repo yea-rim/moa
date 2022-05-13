@@ -93,12 +93,14 @@ public class RewardDao {
 		
 		ResultSet rs = ps.executeQuery();
 		
-		RewardDto rewardDto = null;
+		RewardDto rewardDto = new RewardDto();
 		if(rs.next()) {
 			rewardDto.setRewardPrice(rs.getInt(1));
 			rewardDto.setRewardStock(rs.getInt(2));
 			rewardDto.setRewardDelivery(rs.getInt(3));
 			rewardDto.setRewardEach(rs.getInt(4));
+		}else {
+			rewardDto = null;
 		}
 		con.close();
 		return rewardDto;

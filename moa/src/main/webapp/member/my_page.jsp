@@ -69,7 +69,7 @@
                         <div class="float-left m20 mlr20">
                         <!-- 프로필 사진 출력 -->
                         	<%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150"  height="150px" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150px"  height="150px" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
                                     <%-- <%=memberProfileDto.getAttachNo() %> --%>
                              <%} else { // 존재하지 않는다면 %>
                                     <img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="150px" height="150px" class="img img-circle">
@@ -165,15 +165,15 @@
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
-								int projectAttachNo = projectAttachDao.getAttachNo(projectNo);
+								ProjectAttachDto projectAttachNo = projectAttachDao.getAttachNo(projectNo);
 								
-								boolean isExistProjectAttach = projectAttachNo != 0; 
+								boolean isExistProjectAttach = projectAttachNo != null; 
 								%> 
 								
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+					                    	<a href="<%=request.getContextPath() %>/project/project-detail.jsp?projectNo=<%=projectNo%>">
 					                        	<%if(isExistProjectAttach) { %>
 					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachNo%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
@@ -184,7 +184,7 @@
 					                    
 					                    <!-- 제목 -->
 					                    <div class="row flex-title m10 mlr10 txt-overflow">
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>"class="link">
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
 					                     		<h2><%=projectDto.getProjectName() %></h2>
 					                     	</a>
 					                    </div>
@@ -237,14 +237,14 @@
 									<div class="list-card mlr40 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 					                        	<img src="https://dummyimage.com/200x200" alt="" class="card-image-wrapper">
 					                        </a>
 					                    </div>
 					                    
 					                    <!-- 제목 -->
 					                    <div class="row flex-title m10 mlr10 txt-overflow">
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>" class="link">
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>" class="link">
 					                     		<h2><%=projectDto.getProjectName() %></h2>
 					                     	</a>
 					                    </div>
