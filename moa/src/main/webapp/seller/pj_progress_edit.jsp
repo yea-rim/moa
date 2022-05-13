@@ -1,10 +1,19 @@
+<%@page import="moa.beans.PjProgressDto"%>
+<%@page import="moa.beans.PjProgressDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- 준비 --%>
-<% int projectNo = Integer.parseInt(request.getParameter("projectNo"));%>
-<title>moa 홍보게시글 작성</title>
+<% 
+	int progressNo = Integer.parseInt(request.getParameter("progressNo"));
+%>
+<%-- 처리 --%>
+<% 
+	PjProgressDao pjProgressDao = new PjProgressDao();
+	PjProgressDto pjProgressDto = pjProgressDao.selectOne(progressNo);
+%>
+<title>프로젝트 공지 수정</title>
 <style>
-textarea[name=communityContent] {
+textarea[name=progressContent] {
 	height: 400px;
 }
 
@@ -56,7 +65,7 @@ textarea[name=communityContent] {
     	
       	// 작성중 페이지 이탈 방지
 	    var checkUnload = true;
-	    $(".community-submit").on("click", function () {
+	    $(".progress-submit").on("click", function () {
 	      checkUnload = false;
 	    });
 	    
@@ -68,7 +77,7 @@ textarea[name=communityContent] {
 	    
         // null검사
 	    $(".form-all").on("submit", function () {
-	          if (vali($(".community-title").val())) {
+	          if (vali($(".progress-title").val())) {
 	            alert("제목을 입력해주세요");
 	            return false;
 	          } 
@@ -78,7 +87,7 @@ textarea[name=communityContent] {
 	        });
 
         $(".form-all").on("submit", function () {
-            if (vali($(".community-content").val())) {
+            if (vali($(".progress-content").val())) {
               alert("내용을 입력해주세요");
               return false;
             } 
@@ -96,7 +105,7 @@ textarea[name=communityContent] {
            }
         
       // 글자수 제한
-      $(".community-title").on("input", function(){
+      $(".progress-title").on("input", function(){
     	  var content = $(this).val();
     	  var length = content.length;
     	  
@@ -106,7 +115,7 @@ textarea[name=communityContent] {
     	  }
       });
       
-      $(".community-content").on("input", function(){
+      $(".progress-content").on("input", function(){
     	  var content = $(this).val();
     	  var length = content.length;
     	  
@@ -129,13 +138,13 @@ textarea[name=communityContent] {
 
 
 
-<form action="insert.do" method="post" enctype="multipart/form-data" class="form-all">
-<input type="hidden" name="projectNo" value="<%=projectNo %>">
+<form action="progress_edit.do" method="post" enctype="multipart/form-data" class="form-all">
+<input type="hidden" name="progressNo" value="<%=progressNo %>">
 	<div class="container w700">
 		<div class="row mt50 m10">
 			<div class="flex-container">
 				<div class="left-wrapper mlr10">
-					<h3>프로젝트 홍보하기</h3>
+					<h3>프로젝트 공지 작성</h3>
 				</div>
 			</div>
 		</div>
@@ -146,13 +155,13 @@ textarea[name=communityContent] {
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" class="form-input fill community-title" name="communityTitle" placeholder="제목을 입력해주세요" autocomplete="off">
+							<input type="text" class="form-input fill progress-title" name="progressTitle" value="<%=pjProgressDto.getProgressTitle() %>" autocomplete="off">
 						</td>
 					</tr>
 					<tr>
 						<th style="vertical-align: middle">공지내용</th>
 						<td>
-							<textarea rows="5" class="form-input fill community-content" name="communityContent" placeholder="내용을 입력해주세요"></textarea>
+							<textarea rows="5" class="form-input fill progress-content" name="progressContent"><%=pjProgressDto.getProgressContent() %></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -171,7 +180,7 @@ textarea[name=communityContent] {
 		<div class="row m50">
 			<div class="flex-container">
 				<div class="left-wrapper right mlr10">
-					<input type="submit" value="작성하기" class="link link-btn w150 community-submit">
+					<input type="submit" value="작성하기" class="link link-btn w150 progress-submit">
 				</div>
 				<div class="right-wrapper">
 					<a href="list.jsp"> <input type="button" value="취소" class="link link-reverse w150">

@@ -96,6 +96,7 @@ if (isSearch) {
 .notice-name {
     text-overflow: ellipsis;
     overflow: hidden;
+    padding:0.5em;
 }
 .search{
 	justify-content: center;
@@ -146,7 +147,7 @@ if (isSearch) {
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
-							<div class="row left m10">
+							<div class="row left notice-name">
 								<h5>moa &nbsp;&nbsp;&nbsp; <%=moaNoticeDto.getNoticeTime() %>(<%=moaNoticeDto.getNoticeReadcount() %>)</h5>
 							</div>
 						</div>
