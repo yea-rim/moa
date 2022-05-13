@@ -5,7 +5,7 @@
 <title>moa FAQ 작성</title>
 
 <style>
-textarea[name=communityContent] {
+textarea[name=faqContent] {
 	width: 100%;
 	height: 500px;
 	resize: none;
@@ -38,7 +38,7 @@ textarea[name=communityContent] {
 });
 </script>
 
-<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 <hr style="border:solid 0.5px lightgray">
 	<div class="container w800 m50">
@@ -49,16 +49,22 @@ textarea[name=communityContent] {
 		
 		<form action="insert.do" method="post" enctype="multipart/form-data">
 					
-			<div class="row fill m10">
+			<div class="row fill m10">			
+			<select name="faqCategory" required class="form-input fill">
+				<option  selected disabled>선택</option>
+				<option value="회원정보">회원정보</option>
+				<option value="운영정책">운영정책</option>
+				<option value="이용문의">이용문의</option>
+				<option value="기타">기타</option>
+			</select>
+			</div>
+
+		<div class="row fill m10">
 				<input type="text" name="faqTitle" required placeholder="FAQ 제목을 입력해 주세요."  class="form-input fill" autocomplete="off" class="faq-title">
 			</div>
 			
-			<div class="row fill m10">
-				<input type="file" name="attach">
-			</div>
-			
 			<div class="row fill center m10">
-				<textarea name="faqContent" required placeholder="FAQ 본문을 입력해 주세요." class="faq-content"></textarea>
+				<textarea name="faqContent" required placeholder="FAQ 본문을 입력해 주세요." class="faq-content" autocomplete="off" ></textarea>
 			</div>
 			
 			<div class="row center fill">
@@ -69,4 +75,4 @@ textarea[name=communityContent] {
 	</div>
 
 
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include> 

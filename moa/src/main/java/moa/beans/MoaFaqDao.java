@@ -54,7 +54,7 @@ public class MoaFaqDao {
 			moaFaqDto.setFaqNo(rs.getInt("faq_no"));
 			moaFaqDto.setFaqTitle(rs.getString("faq_title"));
 			moaFaqDto.setFaqContent(rs.getString("faq_content"));
-			moaFaqDto.setFaqContent(rs.getString("faq_category"));
+			moaFaqDto.setFaqCategory(rs.getString("faq_category"));
 		} else {
 			moaFaqDto = null;
 		}
@@ -118,7 +118,7 @@ public class MoaFaqDao {
 			moaFaqDto.setFaqNo(rs.getInt("faq_no"));
 			moaFaqDto.setFaqTitle(rs.getString("faq_title"));
 			moaFaqDto.setFaqContent(rs.getString("faq_content"));
-			moaFaqDto.setFaqContent(rs.getString("faq_category"));
+			moaFaqDto.setFaqCategory(rs.getString("faq_category"));
 
 			list.add(moaFaqDto);
 		}

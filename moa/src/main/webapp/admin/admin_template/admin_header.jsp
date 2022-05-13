@@ -46,7 +46,13 @@
                             <a href="<%=request.getContextPath()%>/admin/question_list.jsp" class="link">
                            		1:1 문의 관리
                             </a>
-                        </li>                 
+                        </li>
+					<li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/faq_insert.jsp" class="link">
+                           		FAQ 작성
+                            </a>
+                        </li>   
+                                         
                     </ul>
                 </div>
                 <div class="content-wrapper mlr30 m50">
