@@ -1,3 +1,6 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
+<%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDao"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.ProjectDto"%>
@@ -29,51 +32,12 @@
 	boolean isExistProfile = memberProfileDto != null;
 	
 	ProjectDao projectDao = new ProjectDao();
-	List<ProjectDto> list2 = projectDao.selectNew();
+	List<ProjectDto> list1 = projectDao.comingSelectList(sellerNo);
+	List<ProjectDto> list2 = projectDao.ongoingSelectList(sellerNo);
+	List<ProjectDto> list3 = projectDao.closingSelectList(sellerNo);
+	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();	
 %>
-
-<style>
-.flex-container1 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-.flex-container2 {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-.flex-items1 {
-	flex-basis: 20%;
-	padding: 10px;
-}
-
-.flex-items2 {
-	flex-basis: 50%;
-	padding: 10px;
-}
-
-.flex-items-a{
-	flex-basis: 80%;
-}
-.flex-items-b{
-	flex-basis: 20%;
-}
-.project-name {
-	font-size: 25px;
-	padding: 10px;
-}
-.percent{
-	color: #B899CD;
-	font-size: 15px;
-	padding: 10px;
-}
-.seller{
-	font-size: 15px;
-	padding: 0px 10px;
-}
-</style>
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -120,59 +84,165 @@
                         </div>
                     </div>
 
-                    <!-- 개인정보 설정 -->
-                    <div class="row m20">
-                        <h3 class="right">
-                            <a href="" class="link">✉️ 판매자 1:1 문의</a>
-                        </h3>
-                    </div>
-
-                    <div class="row m20">
-				 <hr style="border: solid lightgray 0.5px" />
-                <div class="row left big-text mt50 mlr10">
-                    <a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">예정된 프로젝트</a>
+                <div class="row m20">
+<!-- 예정된 프로젝트 -->                        
+				<hr style="border: solid lightgray 0.5px"/>
+                <div class="row left mt50 mlr10">
+                    <h2><a href="<%=request.getContextPath()%>/project/comingList.jsp" class="link">예정된 프로젝트</a></h2>
+                <hr>
                 </div>
                 
-				<div class="row flex-container1">
-				<%for(ProjectDto projectDto : list2){ %>
-					<div class="row flex-items1 m10">
-						<div class="row">
-							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>"><img src="https://dummyimage.com/200x200" width="100%"></a>
-						</div>
-						<div class="row left m10">
-							<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link">
-								<span><%=projectDto.getProjectName() %></span>
-							</a>
-						</div>
-					</div>
+
+                <div class="container">
+            		<div class="flex-container3">
+                
+                <%for (ProjectDto projectDto : list1) {
+					int projectNo = projectDto.getProjectNo();
+					
+					projectDto = projectDao.selectOne(projectNo);
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
+					
+				<div class="list-card mlr30 m15">
+		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
+		                    
+		             <!-- 제목 -->
+		             <div class="row flex-title m10 mlr10 txt-overflow">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
+		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
+		
+		             <!-- 판매자 -->
+		             <div class="row m10 mlr10">
+		                  <p><%=sellerDto.getSellerNick() %></p></div>
+		
+		             <!-- 카테고리 -->
+		             <div class="row m30 mlr10">
+		                  <p class="link-purple"><%=projectDto.getProjectCategory() %></p></div>
+		             </div>
 				<%} %>
-				</div>
-                        <hr>
-                    </div>
-                    <div class="row m20">
-                        내용
-                    </div>
+ 					</div>
+			   </div>
+<!-- 여기까지 예정된 프로젝트 -->
 
-                    <div class="row m20">
-                        <h2>
-                            <a href="" class="link">펀딩 중인 프로젝트</a>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="row m20">
-                        내용
-                    </div>
 
-                    <div class="row m20">
-                        <h2>
-                            <a href="" class="link">마감된 프로젝트</a>
-                        </h2>
-                        <hr>
-                    </div>
-                    <div class="row m20">
-                        내용
-                    </div>
+<!-- 예정된 프로젝트 -->                        
+				<hr style="border: solid lightgray 0.5px"/>
+                <div class="row left mt50 mlr10">
+                    <h2><a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">진행 중인 프로젝트</a></h2>
+                <hr>
                 </div>
+                
+                <div class="container">
+            		<div class="flex-container3">
+                
+                <%for (ProjectDto projectDto : list2) {
+					int projectNo = projectDto.getProjectNo();
+					
+					projectDto = projectDao.selectOne(projectNo);
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
+					
+				<div class="list-card mlr30 m15">
+		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
+		                    
+		             <!-- 제목 -->
+		             <div class="row flex-title m10 mlr10 txt-overflow">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
+		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
+		
+		             <!-- 판매자 -->
+		             <div class="row m10 mlr10">
+		                  <p><%=sellerDto.getSellerNick() %></p></div>
+		
+		             <!-- 카테고리 -->
+		             <div class="row m30 mlr10">
+		                  <p class="link-purple"><%=projectDto.getProjectCategory() %></p></div>
+		             </div>
+				<%} %>
+ 					</div>
+			   </div>
+<!-- 여기까지 진행 중인 프로젝트 -->
+
+
+<!-- 마감된 프로젝트 -->                        
+				<hr style="border: solid lightgray 0.5px"/>
+                <div class="row left mt50 mlr10">
+                    <h2><a href="<%=request.getContextPath()%>/project/closingList.jsp" class="link">마감된 프로젝트</a></h2>
+                <hr>
+                </div>
+                
+                <div class="container">
+            		<div class="flex-container3">
+                
+                <%for (ProjectDto projectDto : list3) {
+					int projectNo = projectDto.getProjectNo();
+					
+					projectDto = projectDao.selectOne(projectNo);
+					sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+					
+					ProjectAttachDto projectAttachDto = projectAttachDao.selectOne(projectNo);
+					boolean isExistFile = projectAttachDto != null;
+					%> 
+					
+				<div class="list-card mlr30 m15">
+		        	<!-- 이미지 자리 -->
+		        	<%if(isExistFile) {%>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} else { %>
+		            <div class="row center">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
+		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <%} %>
+		                    
+		             <!-- 제목 -->
+		             <div class="row flex-title m10 mlr10 txt-overflow">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
+		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
+		
+		             <!-- 판매자 -->
+		             <div class="row m10 mlr10">
+		                  <p><%=sellerDto.getSellerNick() %></p></div>
+		
+		             <!-- 카테고리 -->
+		             <div class="row m30 mlr10">
+		                  <p class="link-purple"><%=projectDto.getProjectCategory() %></p></div>
+		             </div>
+				<%} %>
+ 					</div>
+			   </div>
+<!-- 여기까지 마감된 프로젝트 -->
+				
+      
+ 
+
              <%} %>
+             </div>
+             </div>
 		
 <jsp:include page="/template/footer.jsp"></jsp:include>

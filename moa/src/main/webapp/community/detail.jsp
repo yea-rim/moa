@@ -41,10 +41,9 @@
 	CommunityReplyDao communityReplyDao = new CommunityReplyDao();
 	List<CommunityReplyDto> list = communityReplyDao.selectAll(communityNo);
 	
-	// 작성자인지 판단
+	// 본문 작성자인지 판단
 	Integer memberNo = (Integer) session.getAttribute("login"); 
 	boolean isWriter = memberNo != null && memberNo.equals(memberDto.getMemberNo());
-	
 %>
 <style>
 .community-title {
@@ -89,9 +88,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
 		$(".btn-edit").click(function () {
 	         $(this).parent(".flex-container1").next(".flex-container2").toggle();
 	    });
+		
+		$(".community-reply").on("input", function(){
+	    	  var content = $(this).val();
+	    	  var length = content.length;
+	    	  console.log(content);
+	    	  while(length > 200){
+	    		  $(this).val($(this).val().substring(0, length - 1));
+	    		  length--;
+	    	  }
+	      });
 	});
 </script>
 
@@ -145,7 +155,7 @@
 			<form action="reply_insert.do" method="post">
 				<input type="hidden" name="communityNo" value="<%=communityNo %>">
 				<div class="row">
-					<input type="text" name="community_reply_content" autocomplete="off" class="form-input w700" placeholder="댓글을 입력해주세요">
+					<input type="text" name="community_reply_content" autocomplete="off" class="form-input w700 community-reply" placeholder="댓글을 입력해주세요">
 					<input type="submit" value="작성" class="btn reply-btn">
 				</div>
 			</form>
@@ -155,12 +165,13 @@
 		<div class="container m30" id="reply">
 		<%for(CommunityReplyDto communityReplyDto : list) { %>
 				<% 
-					MemberDto memberDto2 = memberDao.selectOne(communityReplyDto.getCommunityMemberNo());
+					memberDto = memberDao.selectOne(communityReplyDto.getCommunityMemberNo());
+					boolean isReplyWriter =  memberNo != null && memberNo.equals(communityReplyDto.getCommunityMemberNo());
 				%>
 				<div class="container">
 				<div class="row flex-container1 m10">
 					<div class="row flex-items1">
-						<%=memberDto2.getMemberNick() %> |
+						<%=memberDto.getMemberNick() %> |
 					</div>
 					<div class="row flex-items2">
 						<%=communityReplyDto.getCommunityReplyContent() %>
@@ -169,7 +180,7 @@
 						<%=communityReplyDto.getCommunityReplyTime() %>
 					</div>
 					
-					<%if(isWriter){ %>
+					<%if(isReplyWriter){ %>
 						<a href="detail.jsp?communityNo=<%=communityNo %>#reply" class="link btn-edit">수정 |</a>
 						<a href="reply_delete.do?communityReplyNo=<%=communityReplyDto.getCommunityReplyNo() %>&communityNo=<%=communityNo %>" class="link">삭제</a>
 					<%}%>
@@ -180,7 +191,7 @@
 							<form action="reply_edit.do" method="post" class="row right">
 								<input type="hidden" name="communityNo" value="<%=communityNo %>">
 								<input type="hidden" name="communityReplyNo" value="<%=communityReplyDto.getCommunityReplyNo() %>">
-								<input type="text" name="communityReplyContent" value="<%=communityReplyDto.getCommunityReplyContent() %>" class="form-input w700">
+								<input type="text" name="communityReplyContent" value="<%=communityReplyDto.getCommunityReplyContent() %>" class="form-input w700 community-reply">
 								<input type="submit" value="수정" class="btn-reverse reply-btn">
 							</form>
 					</div>
@@ -189,5 +200,8 @@
 				</div>
 		<% }%>
 		</div>
+	</div>
+	<div class="center" style="height:70px">
+				<a href="list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
 	</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

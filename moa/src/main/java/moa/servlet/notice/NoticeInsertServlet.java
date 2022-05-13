@@ -40,8 +40,9 @@ public class NoticeInsertServlet extends HttpServlet {
 			MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 			moaNoticeDto.setNoticeTitle(mRequest.getParameter("noticeTitle"));
 			String noticeContent = mRequest.getParameter("noticeContent");
+			
 			// textarea 줄바꿈 처리
-//			noticeContent = noticeContent.replace("\r\n", "<br>");
+			noticeContent = noticeContent.replace("\r\n", "<br>");
 			moaNoticeDto.setNoticeContent(noticeContent);
 			
 			int adminNo = (Integer) req.getSession().getAttribute("login");
@@ -84,9 +85,11 @@ public class NoticeInsertServlet extends HttpServlet {
 				else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("프로필");
 				}
 				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 				moaNoticeAttachDto.setNoticeNo(noticeNo);
+				moaNoticeAttachDto.setAttachType("프로필");
 				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
 	 		}
@@ -121,9 +124,11 @@ public class NoticeInsertServlet extends HttpServlet {
 				else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("본문");
 				}
 				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 				moaNoticeAttachDto.setNoticeNo(noticeNo);
+				moaNoticeAttachDto.setAttachType("본문");
 				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
 	 		}

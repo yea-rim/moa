@@ -1,3 +1,7 @@
+<%@page import="moa.beans.AttachDto"%>
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.MoaNoticeAttachDao"%>
+<%@page import="moa.beans.MoaNoticeAttachDto"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectVo"%>
@@ -64,6 +68,9 @@ if (isSearch) {
 } else {
 	list = projectDao.ongoingSelectList(p, s, sort);
 }
+
+
+SellerDao sellerDao = new SellerDao();
 %>
 <title>moa 펀딩진행중</title>
 	
@@ -112,6 +119,7 @@ if (isSearch) {
     overflow: hidden;
     height: 3em; 
     font-size: 20px;
+    padding-top:10px;
 }
 </style>
 
@@ -256,18 +264,24 @@ if (isSearch) {
 		<div class="container">
 		 <div class="row flex-container2" id="mainList">
 		 <%for(ProjectDto projectDto : list) { %>
-	 <%-- 	 	<% 
-		 		int projectNo = projectDto.getProjectNo();
-				ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-			
+	 		<% 	
+		 		ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+		 		ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+		 		
 				// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
-				int attachNo = projectAttachDao.getAttachNo(projectNo);
-		 	%>  --%>
+				projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
+				
+		 		//사진이 있는지 판정
+		 		boolean isExistPhoto = projectAttachDto != null;	
+		 	%> 
             <div class="flex-items">
               <div class="row center m10">
-              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
-			       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%"> --%>
+              	<a href="project-detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+              	<%if(isExistPhoto){ %>
+			       	<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="372px" height="250px">
+			    <%}else{ %>
                 	<img src="https://dummyimage.com/1305x250" width="372px" height="250px">
+              	<%} %>
                 </a>
               </div>
               <div class="row project-name">
@@ -277,7 +291,6 @@ if (isSearch) {
               </div>
               
               <% 
-              	SellerDao sellerDao = new SellerDao();
               	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
               %>
               <div class="row" style="color:gray">
@@ -288,10 +301,10 @@ if (isSearch) {
 
               <hr style="border: solid #B899CD 2px" />
 				
-				<%-- <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%> --%>
+				<%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
               <div class="flex-container2">
-                <%-- <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div> --%>
-                <%-- <div class="row right b"><%=projectVo.getDaycount() %>일 남음</div> --%>
+                <div style="color:#B899CD " class="row left a"><%=projectVo.getPercent() %>%</div>
+                <div class="row right b"><%=projectVo.getDaycount() %>일 남음</div>
               </div>
             </div>
           <%} %>

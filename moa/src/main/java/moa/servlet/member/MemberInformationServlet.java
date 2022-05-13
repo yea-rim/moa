@@ -42,20 +42,15 @@ public class MemberInformationServlet extends HttpServlet{
 			
 			
 			// 변경할 데이터 받아오기 (parameter)
-			MemberDto memberDto = new MemberDto();
-		
-			memberDto.setMemberNo(Integer.parseInt(mRequest.getParameter("memberNo")));
-			memberDto.setMemberNick(mRequest.getParameter("memberNick"));
-			memberDto.setMemberPhone(mRequest.getParameter("memberPhone"));
-			memberDto.setMemberPost(mRequest.getParameter("memberPost"));
-			memberDto.setMemberBasicAddress(mRequest.getParameter("memberBasicAddress"));
-			memberDto.setMemberDetailAddress(mRequest.getParameter("memberDetailAddress"));
+			int memberNo = Integer.parseInt(mRequest.getParameter("memberNo"));
+			String memberNick = mRequest.getParameter("memberNick");
 			
 			MemberDao memberDao = new MemberDao();
+			MemberDto memberDto = memberDao.selectOne(memberNo); 
 			
 			
 			// 변경 처리 
-			memberDao.changeInformation(memberDto);
+			memberDao.changeNick(memberNo, memberNick);
 			
 			
 			// 업로드된 파일의 정보를 분석하는 코드

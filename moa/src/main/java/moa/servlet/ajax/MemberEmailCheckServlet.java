@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MemberDao;
 import moa.beans.MemberDto;
 
-@WebServlet(urlPatterns="/ajax/id.do")
+@WebServlet(urlPatterns="/ajax/email.do")
 public class MemberEmailCheckServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,7 +24,6 @@ public class MemberEmailCheckServlet extends HttpServlet{
 			MemberDto memberDto = memberDao.selectOne(memberEmail);
 			
 			//출력
-			resp.setContentType("text/plain; charset=UTF-8");
 			if(memberDto != null) {//아이디가 있으면 -> 사용 불가
 				resp.getWriter().print("NNNNN");
 			}

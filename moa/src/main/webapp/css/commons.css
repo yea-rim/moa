@@ -81,13 +81,6 @@
 .mlr45{margin-left: 45px; margin-right: 45px;}
 .mlr50{margin-left: 50px; margin-right: 50px;}
 
-.mt10{margin-top: 10px;}
-.mt20{margin-top: 20px;}
-.mt30{margin-top: 30px;}
-.mt40{margin-top: 40px;}
-.mt50{margin-top: 50px;}
-.mt100{margin-top: 100px;}
-.mt150{margin-top: 100px;}
 
 .mb10{margin-bottom: 10px;}
 .mb20{margin-bottom: 20px;}
@@ -114,7 +107,7 @@
 .mt100{margin-top: 100px;}
 .mt130{margin-top: 130px;}
 
-
+.mr5{margin-right: 5px}
 
 /* 기본 link 스타일 */
 .link {

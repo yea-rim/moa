@@ -37,7 +37,10 @@ textarea[name=noticeContent] {
 			</div>
 			
 			<div class="row fill m10">
-				<input type="file" name="attach">
+				<input type="file" name="attachProfile">
+			</div>
+			<div class="row fill m10">
+				<input type="file" name="attachContent">
 			</div>
 			
 			<div class="row fill center m10">
@@ -45,7 +48,7 @@ textarea[name=noticeContent] {
 			</div>
 			
 			<div class="row center fill">
-				<button type="submit" class="btn fill">작성</button>
+				<button type="submit" class="btn fill">수정</button>
 			</div>
 		</form>
 		

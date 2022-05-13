@@ -20,6 +20,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 
 SellerDao sellerDao = new SellerDao();
 SellerDto sellerDto = sellerDao.selectOne(memberNo);
+boolean isSeller = sellerDto.getSellerPermission() == 1;
 
 // 회원 프로필 사진 조회
 MemberProfileDao memberProfileDao = new MemberProfileDao();
@@ -118,7 +119,7 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 <%if (sellerDto != null) { %>
 <div class="float-container center m30">
 	<!-- 본문 부분-->
-	<div class="float-left w60p">
+	<div class="float-left w60p center">
 
 		<h3 class="left m10">판매자 관련 상세 정보</h3>
 		<h4 class="left m10">판매자 인증 첨부파일</h4>
@@ -127,7 +128,18 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<%} else { %>
 		<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=sellerAttachDto.getAttachNo()%>"
 		width="75%" onerror="javascript:this.src='https://dummyimage.com/300x300'"> <%} %>
-		<div class="float-container ">
+		
+		<%if (isSeller) { %>
+		<div class="float-container center">
+			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
+				<a
+					href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>">
+					<button class="btn w90p h100p">판매자 페이지</button>
+				</a>
+			</div>
+		</div>
+		<%} else { %>
+		<div class="float-container center">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
 				<a
 					href="<%=request.getContextPath()%>/admin/approve.do?sellerNo=<%=sellerDto.getSellerNo()%>">
@@ -140,6 +152,7 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 				</a>
 			</div>
 		</div>
+		<%} %>
 		<div class="row m20 refuse-msg">
 			<form action="#" method="post">
 				<label>거절 메세지 입력</label> <input type="hidden" name="sellerNo"

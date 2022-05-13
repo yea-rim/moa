@@ -1,6 +1,7 @@
 package moa.servlet.community;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import moa.beans.AttachDto;
 import moa.beans.CommunityDao;
 import moa.beans.CommunityPhotoDao;
 import moa.beans.CommunityPhotoDto;
+import moa.beans.CommunityReplyDao;
+import moa.beans.CommunityReplyDto;
 
 @WebServlet(urlPatterns="/community/delete.do")
 public class CommunityDeleteServlet extends HttpServlet {
@@ -40,6 +43,14 @@ public class CommunityDeleteServlet extends HttpServlet {
 			
 			// 처리
 			CommunityDao communityDao = new CommunityDao();
+			
+			// 해당 게시글 댓글 삭제
+			CommunityReplyDao communityReplyDao = new CommunityReplyDao();
+			List<CommunityReplyDto> list = communityReplyDao.selectAll(communityNo);
+			if(!list.isEmpty()) {
+				communityReplyDao.delete(communityNo);
+			}
+			
 			
 			if(communityPhotoDto != null && attachDto != null) {
 				communityPhotoDao.delete(communityNo);
