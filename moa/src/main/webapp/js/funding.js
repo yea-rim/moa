@@ -282,6 +282,7 @@ $(function () {
 		if(judge && status.getter && status.phone && status.address){
 			return true;
 		}else{
+			alert("정보를 올바르게 입력해주시기 바랍니다.");
 			return false;
 		}
 	
