@@ -164,10 +164,10 @@ public class SellerDao {
 	public boolean refuse(int sellerNo, String sellerRefuseMsg) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update seller set seller_regist_date = sysdate, seller_permission = 2 seller_refuse_msg = ? where seller_no = ?";
+		String sql = "update seller set seller_regist_date = sysdate, seller_permission = 2, seller_refuse_msg = ? where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setLong(1, sellerNo);
-		ps.setString(2, sellerRefuseMsg);
+		ps.setString(1, sellerRefuseMsg);
+		ps.setInt(2, sellerNo);
 		int count = ps.executeUpdate();
 
 		con.close();
