@@ -169,4 +169,37 @@ public class RewardDao {
 		
 		return count > 0; 
 	}
+	
+	
+	// 특정 리워드의 세부 구성 내용 조회 (리워드 번호)
+	public RewardDto selectReward(int rewardNo, int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from reward where reward_no = ? and reward_project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, rewardNo);
+		ps.setInt(2, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		RewardDto rewardDto;
+		if(rs.next()) {
+			rewardDto = new RewardDto();
+			
+			rewardDto.setRewardNo(rs.getInt("reward_no"));
+			rewardDto.setRewardProjectNo(rs.getInt("reward_project_no"));
+			rewardDto.setRewardName(rs.getString("reward_name"));
+			rewardDto.setRewardContent(rs.getString("reward_content"));
+			rewardDto.setRewardPrice(rs.getInt("reward_price"));
+			rewardDto.setRewardStock(rs.getInt("reward_stock"));
+			rewardDto.setRewardDelivery(rs.getInt("reward_delivery"));
+			rewardDto.setRewardEach(rs.getInt("reward_each"));
+			rewardDto.setRewardIsoption(rs.getInt("reward_isoption"));
+		} else {
+			rewardDto = null; 
+		}
+		
+		con.close();
+		
+		return rewardDto;
+	}
 }

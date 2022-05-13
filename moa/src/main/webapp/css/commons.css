@@ -80,6 +80,7 @@
 .mlr40{margin-left: 40px; margin-right: 40px;}
 .mlr45{margin-left: 45px; margin-right: 45px;}
 .mlr50{margin-left: 50px; margin-right: 50px;}
+.mlr60{margin-left: 60px; margin-right: 60px;}
 
 .mt10{margin-top: 10px;}
 .mt20{margin-top: 20px;}
@@ -504,6 +505,9 @@ textarea.form-input {
 
 
 /* border(purple color) */
+.b-gray{
+    border: 1px solid #d3d3d3;
+}
 .b-purple{
     border: 1px solid #B899CD;
 }

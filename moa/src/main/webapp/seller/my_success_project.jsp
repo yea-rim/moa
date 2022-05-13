@@ -1,14 +1,12 @@
-<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
-<%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.ProjectDao"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
 
 	//회원번호 가져오기 
@@ -20,7 +18,6 @@
 	int sellerNo = sellerDto.getSellerNo();
 	
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-	
 	
 	int p;
 	try {
@@ -43,9 +40,8 @@
 	}
 	
 	ProjectDao projectDao = new ProjectDao();
-	List<ProjectDto> list = projectDao.ongoingSelectList(p, s, sellerNo);
 	
-	List<ProjectDto> permitList = projectDao.permitSelectList(p, s, sellerNo);
+	List<ProjectDto> list = projectDao.getSuccessList(p, s, sellerNo);
 %>
 
 <jsp:include page = "/template/header.jsp"></jsp:include>
@@ -57,48 +53,30 @@
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link mlr5">
-                     <h2>진행 중인 프로젝트</h2>
+                     <h2>성공한 프로젝트</h2>
               </a>
 	</div>
 	
 	<div class="row m30"><hr></div>
-
-			<div class="container mt30">
-
-                    <div class="float-container">
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_ongoing_project.jsp" class="link link-btn fill center">진행 중</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_permit_project.jsp" class="link link-reverse fill center">심사 중</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_coming_project.jsp" class="link link-reverse fill center">공개 예정</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_rejected_project.jsp" class="link link-reverse fill center">반려됨</a>
-                        </div>
-                    </div>
-
-                </div>
                 
                 
-                <%for(ProjectDto projectDto : list) { // 기본으로 들어오는 페이지 
-	                	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+					<%for(ProjectDto projectDto : list) { 
+						
+						ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
 						
 						boolean isExistProjectAttach = projectAttachDto != null;
-                %>
+					%>
 						<div class="container mt20 p10">
 	
 	                    <div class="float-container b-purple">
 	            
 	                        <!-- 프로젝트 대표 이미지 -->
 	                        <div class="float-left m20 mlr20">
-	                            <%if(isExistProjectAttach) { // 사진이 존재하면 %>
+	                        	<%if(isExistProjectAttach) { // 사진이 존재하면 %>
 										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
 								<%} else { // 사진이 없으면 %>
 										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
-								<%} %>
+								<%} %>	                        
 	                        </div>
 	            
 	                        <div class="float-left m20 mlr20 h150">
@@ -106,39 +84,34 @@
 	                            <!-- 프로젝트 제목 -->
 	                            <div class="row w800">
 	                                <h3>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
+	                                    <%=projectDto.getProjectName() %>
 	                                </h3>
 	                            </div>
 	                            
 	                            <!-- 프로젝트 요약 -->
-	                            <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
-	                            <div class="row w800 mt20">
-	                            	<p class="link-gray m5">목표 금액 : <%=projectDto.getProjectTargetMoney() %>원</p>
-	                            	<p class="link-gray m5">모인 금액 : <%=projectVo.getPresentMoney() %>원</p>
-	                            	<%if(projectVo.getPercent() >= 100) { %>
-	                                	<p class="p-red m5">달성율 : <%=projectVo.getPercent() %>%</p>
-									<%} else {%>
-										<p class="link-gray m5">달성율 : <%=projectVo.getPercent() %>%</p>
-									<%} %>	                                
-	                                <p class="link-gray m5">펀딩 마감일 : <%=projectDto.getProjectSemiFinish() %></p>
+	                            <div class="row w800 mt30">
+	                                <p class="link-gray">
+	                                    <%=projectDto.getProjectSummary() %>
+	                                </p>
 	                            </div>
 	                            
 	                        </div>
 	                        
-	                        <!-- 후원자 명단 보기 -->
+	                        <!-- 상세보기 -->
 					        <div class="float-right m70 mlr20">
-					          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
+					          	<div class="row mt5">
+					          		<a href="success_project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">상세보기</a>
+					          	</div>
 					        </div>
 	                        
 	                    </div>
 	                </div>
-					<%} %>
-
+				<%} %>
                 
 	<div class="container">
 		<!-- 페이지네이션 -->
 		<%
-		int count = projectDao.ongoingCountByPaging(sellerNo);
+		int count = projectDao.countSuccessByPaging(sellerNo);
 
 		// 마지막 페이지 번호 계산
 		int lastPage = (count + s - 1) / s;
@@ -161,41 +134,38 @@
 				<%
 				if (p > 1) { // 첫페이지가 아니라면
 				%>
-					<a href="my_ongoing_project.jsp?p=1&s=<%=s%>">&laquo;</a>
+					<a href="my_success_project.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%}%>
 
 				<%
 				if (startBlock > 1) { // 이전 블록이 있으면
 				%>
-					<a href="my_ongoing_project.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
+					<a href="my_success_project.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
 				<%}%>
 
 
 				<!-- 숫자 링크 영역 -->
 				<%for (int i = startBlock; i <= endBlock; i++) {%>
 					<%if (i == p) {%>
-						<a class="active" href="my_ongoing_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a class="active" href="my_success_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} else {%>
-						<a href="my_ongoing_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a href="my_success_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} %>
 				<%}%>
 
 				<!-- 다음 버튼 영역 -->
 				<%if (endBlock < lastPage) {%>
-					<a href="my_ongoing_project.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
+					<a href="my_success_project.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
 				<%}%>
 
 				<%
 				if (p < lastPage) { // 마지막 페이지가 아니라면
 				%>
-					<a href="my_ongoing_project.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+					<a href="my_success_project.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 				<%}%>
 			</div>
 			
 		</h4>
 	</div>
- 
-                    
-                    
-
+	
 <jsp:include page = "/template/footer.jsp"></jsp:include>

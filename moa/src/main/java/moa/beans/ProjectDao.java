@@ -693,6 +693,7 @@ public class ProjectDao {
 			projectDto.setProjectPermission(rs.getInt("project_permission"));
 			projectDto.setProjectCategory(rs.getString("project_category"));
 			projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+			projectDto.setProjectRefuseMsg(rs.getString("project_refuse_msg"));
 		} else {
 			projectDto = null;
 		}
@@ -1090,4 +1091,181 @@ public class ProjectDao {
 			return count > 0;
 		}
 		
+		
+		// 프로젝트 재신청 메소드
+		public boolean reapply(int projectNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "update project set project_permission = 0 where project_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, projectNo);
+			
+			int count = ps.executeUpdate();
+			
+			con.close();
+			
+			return count > 0; 
+		}
+		
+		
+		// 성공한 프로젝트 조회 구문
+		public List<ProjectDto> getSuccessList(int p, int s, int sellerNo) throws Exception {
+			
+			int end = p * s;
+			int begin = end - (s - 1);
+			
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select * from ("
+					+ " select rownum rn, TMP.* from ("
+					+ " select * from project P"
+					+ " inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent >= 100 and v.daycount < 0"
+					+ " order by P.project_no desc"
+					+ ") TMP"
+					+ ") where rn between ? and ?";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			ResultSet rs = ps.executeQuery();
+			
+			List<ProjectDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ProjectDto projectDto = new ProjectDto();
+				
+				projectDto.setProjectNo(rs.getInt("project_no"));
+				projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+				projectDto.setProjectCategory(rs.getString("project_category"));
+				projectDto.setProjectName(rs.getString("project_name"));
+				projectDto.setProjectSummary(rs.getString("project_summary"));
+				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+				projectDto.setProjectPermission(rs.getInt("project_permission"));
+				projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+				projectDto.setProjectRefuseMsg(rs.getString("project_refuse_msg"));
+				
+				list.add(projectDto);
+			}
+			
+			con.close();
+			
+			return list; 
+		}
+		
+		// 성공한 프로젝트 카운팅 
+		public int countSuccessByPaging (int sellerNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select count(*) from project P"
+					+ " inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent >= 100 and v.daycount < 0";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ResultSet rs = ps.executeQuery();
+			
+			int count;
+			if(rs.next()) {
+				count = rs.getInt(1);
+			} else {
+				count = 0;
+			}
+			
+			con.close();
+			
+			return count;
+		}
+		
+		
+		// 미달성한 프로젝트 조회 구문
+		public List<ProjectDto> getFailList(int p, int s, int sellerNo) throws Exception {
+
+			int end = p * s;
+			int begin = end - (s - 1);
+			
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select * from ("
+					+ "    select rownum rn, TMP.* from ("
+					+ "        select * from project P"
+					+ "            inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent < 100 and v.daycount < 0"
+					+ "    ) TMP"
+					+ ") where rn between ? and ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			ResultSet rs = ps.executeQuery();
+			
+			List<ProjectDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ProjectDto projectDto = new ProjectDto();
+				
+				projectDto.setProjectNo(rs.getInt("project_no"));
+				projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+				projectDto.setProjectCategory(rs.getString("project_category"));
+				projectDto.setProjectName(rs.getString("project_name"));
+				projectDto.setProjectSummary(rs.getString("project_summary"));
+				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+				projectDto.setProjectPermission(rs.getInt("project_permission"));
+				projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+				projectDto.setProjectRefuseMsg(rs.getString("project_refuse_msg"));
+				
+				list.add(projectDto);
+			}
+			
+			con.close();
+			
+			return list; 
+		}
+		
+		// 미달성한 프로젝트 카운팅 
+		public int countFailByPaging (int sellerNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select count(*) from project P"
+					+ "    inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent < 100 and v.daycount < 0";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, sellerNo);
+			ResultSet rs = ps.executeQuery();
+			
+			int count;
+			if(rs.next()) {
+				count = rs.getInt(1);
+			} else {
+				count = 0;
+			}
+			
+			con.close();
+			
+			return count;
+		}
+		
+		
+		// 특정 회원이 펀딩한 프로젝트 번호 리스트 조회
+				public List<ProjectDto> selectFundingProjectList (int memberNo) throws Exception {
+					Connection con = JdbcUtils.getConnection();
+					
+					String sql = "select distinct project_no from member_funding_info where funding_member_no = ?";
+					PreparedStatement ps = con.prepareStatement(sql);
+					ps.setInt(1, memberNo);
+					ResultSet rs = ps.executeQuery();
+					
+					List<ProjectDto> list = new ArrayList<>();
+					while(rs.next()) {
+						ProjectDto projectDto = new ProjectDto();
+						
+						projectDto.setProjectNo(rs.getInt("project_no"));
+						
+						list.add(projectDto);
+					}
+					
+					con.close();
+					
+					return list;
+				}		
 }
