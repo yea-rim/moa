@@ -28,9 +28,25 @@
 	            var fileName = fileFullName.substring(12,fileFullName.length);
 	            $(".upload-name").val(fileName);
 	        });
+	        
+	        $(".insert-form").submit(function(){
+	        	if($("select[name=questionType").val()==""){
+	        		alert("문의 유형을 선택해 주세요.");
+	        		return false;
+	        	}else if($("input[name=questionTitle").val()==""){
+	        		alert("제목을 입력해 주세요.");
+	        		return false;
+	        	}else if($("textarea[name=questionContent").val()==""){
+	        		alert("문의 내용을 입력해 주세요.");
+	        		return false;
+	        	}else{
+	        		return true;
+	        	}
+	        });
+	        
         });
 </script>
-<form action="insert.do" method="post" enctype="multipart/form-data">
+<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
     <div class="container w700">
         <div class="row mt50 m10">
            <div class="flex-container">

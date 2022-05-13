@@ -48,8 +48,7 @@ public class ProjectInsertServlet extends HttpServlet {
 			int projectNo = projectDao.getSequence();
 			
 			//판매자 번호
-			int sellerNo = 23;
-					//(int)req.getSession().getAttribute("login");
+			int sellerNo = (int)req.getSession().getAttribute("login");
 
 
 			// 프로젝트 신청 처리

@@ -9,7 +9,7 @@ public class MoaQuestionReplyDao {
 	public void insert(int questionNo, String questionContent) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into moa_question_reply(question_reply_no,question_target_no,question_reply_content) values(question_reply_seq.nextval,?,?)";
+		String sql = "insert into moa_question_reply(question_target_no,question_reply_content) values(?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, questionNo);
 		ps.setString(2,questionContent);
@@ -31,7 +31,6 @@ public class MoaQuestionReplyDao {
 		MoaQuestionReplyDto moaquestionReplyDto;
 		if (rs.next()) {
 			moaquestionReplyDto = new MoaQuestionReplyDto();
-			moaquestionReplyDto.setQuestionReplyNo(rs.getInt("question_reply_no"));
 			moaquestionReplyDto.setQuestionTargetNo(rs.getInt("question_target_no"));
 			moaquestionReplyDto.setQuestionReplyTime(rs.getDate("question_reply_time"));
 			moaquestionReplyDto.setQuestionReplyContent(rs.getString("question_reply_content"));

@@ -1,3 +1,4 @@
+<%@page import="moa.beans.MoaQuestionAttachDao"%>
 <%@page import="moa.beans.MoaQuestionReplyDto"%>
 <%@page import="moa.beans.MoaQuestionReplyDao"%>
 <%@page import="moa.beans.MemberDto"%>
@@ -9,8 +10,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-	int memberNo = 23;
-	//(int)session.getAttribute("login");
+	int memberNo = (int)session.getAttribute("login");
 
 	MoaQuestionDao moaQuestionDao = new MoaQuestionDao();
 	List<MoaQuestionDto> list = moaQuestionDao.selecMyQuestion(memberNo);
@@ -19,9 +19,10 @@
 <style>
   textarea {
     width: 100%;
-    height: 6.25em;
+    min-height: 3em;
     border: none;
     resize: none;
+    font-size: 15px;
   }
 </style>
 <script type="text/javascript">
@@ -65,10 +66,14 @@
 					</tr>
 				<% }%>
 				<%
-				for (MoaQuestionDto questionDto : list) {					
+				for (MoaQuestionDto questionDto : list) {	
+					//문의 답변 불러오기
 					MoaQuestionReplyDao moaQuestionReplyDao = new MoaQuestionReplyDao();
 					MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo());
 					
+					//문의 첨부파일 불러오기
+					MoaQuestionAttachDao moaQuestionAttachDao = new MoaQuestionAttachDao();
+					int questionAttachNo = moaQuestionAttachDao.selectOne(questionDto.getQuestionNo());
 				%>
 				<tr style="width:100%;cursor:pointer;" class="btn-detail">
 					<td><%=questionDto.getQuestionType() %></td>
@@ -84,8 +89,11 @@
 				</tr>
 					<%if(questionDto.getAnswerStatus() == 0){ %>
 				<tr style="display: none;" class="show-detail">
-				<th style="vertical-align: top; font-weight: bold; text-overflow: ellipsis;">문의내용 : </th>
-					<td colspan="2" class="left" style="vertical-align: top;">
+					<td colspan="3" class="left" style="vertical-align: top;">
+						<%if(questionAttachNo != 0) {%>
+						<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=questionAttachNo%>" width="400"  height="400" class="img" onerror="javascript:this.src='https://dummyimage.com/400x400'"><br>
+						<%} %>
+						<span style="font-weight: bold;">문의내용</span><br>
 					 	<%=questionDto.getQuestionContent() %>				
 					</td>
 					<td>
@@ -94,12 +102,14 @@
 				</tr>
 					<%}else{%>
 					<tr style="display: none;" class="show-detail b-purple">
-					<td colspan="2" class=" b-right" style="vertical-align: top;">
+					<td colspan="2" class=" b-right left" style="vertical-align: top;">
 					 	<span style="font-weight: bold;">문의내용</span><br>
+					 	<%if(questionAttachNo != 0) {%>
+					 	<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=questionAttachNo%>" width="400"  height="400" class="img" onerror="javascript:this.src='https://dummyimage.com/400x400'"><br>
+					 	<%} %>
 					 	<textarea disabled><%=questionDto.getQuestionContent() %></textarea>
-					 		
 					</td>
-					<td colspan="2" style="vertical-align: top;">
+					<td colspan="2" style="vertical-align: top;" class="left">
 						<span style="font-weight: bold;">답변</span><br>
 						<textarea disabled><%=questionReplyDto.getQuestionReplyContent() %></textarea>			
 					</td>
