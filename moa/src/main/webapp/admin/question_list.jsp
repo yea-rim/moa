@@ -1,3 +1,4 @@
+<%@page import="moa.beans.MoaQuestionAttachDao"%>
 <%@page import="moa.beans.MoaQuestionReplyDto"%>
 <%@page import="moa.beans.MoaQuestionReplyDao"%>
 <%@page import="moa.beans.MemberDto"%>
@@ -34,6 +35,14 @@
 	List<MoaQuestionDto> list = moaQuestionDao.selectList(p, s);
 %>    
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
+<style>
+		textarea {
+		    width: 100%;
+		    height: 6.25em;
+		    border: none;
+		    resize: none;
+	  }
+</style>
 <script type="text/javascript">
 	$(function() {
 		$(".btn-detail").each(function(){
@@ -72,16 +81,24 @@
 					<th>제목</th>
 					<th>작성일</th>
 					<th>처리상태</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
 				<%
 				for (MoaQuestionDto questionDto : list) {
+					//회원 닉네임
 					MemberDao memberDao = new MemberDao();
 					MemberDto memberDto = memberDao.selectOne(questionDto.getQuestionWriter());
 					
+					//문의 댓글
 					MoaQuestionReplyDao moaQuestionReplyDao = new MoaQuestionReplyDao();
 					MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo());
+					
+					//문의 첨부파일
+					MoaQuestionAttachDao moaQuestionAttachDao = new MoaQuestionAttachDao();
+					int questionAttachNo = moaQuestionAttachDao.selectOne(questionDto.getQuestionNo());
+					
 					
 				%>
 				<tr style="width:100%;cursor:pointer;" class="btn-detail">
@@ -96,13 +113,21 @@
 							<span style="color: blue">답변완료</span>
 						<%} %>
 					</td>
+					<td>
+						<a href="<%=request.getContextPath()%>/admin/questionDelete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="btn-replyDelete">
+						<img src="<%=request.getContextPath()%>/image/delete.png" width="20">
+						</a>
+					</td>
 				</tr>
 				<tr style="display: none;" class="show-detail">
-				<th style="vertical-align: top;">문의내용</th>
-				<td colspan="2" class="left" style="vertical-align: top;">
-				 	<%=questionDto.getQuestionContent() %>				
+<!-- 				<th style="vertical-align: top;" class="b-left">문의내용</th> -->
+				<td colspan="3" class="left b-right b-left" style="vertical-align: top; text-overflow: ellipsis;">
+					<%if(questionAttachNo != 0) {%>
+					<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=questionAttachNo%>" width="400"  height="300px" class="img" onerror="javascript:this.src='https://dummyimage.com/400x400'"><br>
+					<%} %>
+					<span style="font-weight: bold;">문의 내용</span> <textarea disabled><%=questionDto.getQuestionContent() %></textarea>		
 				</td>
-				<td colspan="2" class="w200 left">
+				<td colspan="3" class="w200 left b-right">
 				<%if(questionDto.getAnswerStatus() ==0){ %>
 					<form action="questionReplyInsert.do" method="post">
 						<input type="hidden" name="questionTargetNo" value="<%=questionDto.getQuestionNo() %>">

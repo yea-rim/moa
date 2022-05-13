@@ -12,8 +12,8 @@ public class RewardDao {
 	public void insert(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock,reward_delivery,reward_each)"
-				+ " values(reward_seq.nextval,?,?,?,?,?,?,?)";
+		String sql = "insert into reward(reward_no,reward_project_no,reward_name,reward_content,reward_price,reward_stock,reward_delivery,reward_each,reward_isoption)"
+				+ " values(reward_seq.nextval,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, rewardDto.getRewardProjectNo());
@@ -23,8 +23,8 @@ public class RewardDao {
 		ps.setInt(5, rewardDto.getRewardStock());
 		ps.setInt(6, rewardDto.getRewardDelivery());
 		ps.setInt(7, rewardDto.getRewardEach());
+		ps.setInt(8, rewardDto.getRewardIsoption());
 		
-	
 		ps.execute();
 		
 		con.close();
@@ -66,7 +66,7 @@ public class RewardDao {
 	public boolean edit(RewardDto rewardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update reward set reward_name=?,reward_content=?,reward_price=?,reward_stock=?,reward_delivery=?,reward_each=? where reward_no =?";
+		String sql = "update reward set reward_name=?,reward_content=?,reward_price=?,reward_stock=?,reward_delivery=?,reward_each=?,reward_isoption=? where reward_no =?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, rewardDto.getRewardName());
 		ps.setString(2, rewardDto.getRewardContent());	
@@ -74,7 +74,8 @@ public class RewardDao {
 		ps.setInt(4, rewardDto.getRewardStock());
 		ps.setInt(5, rewardDto.getRewardDelivery());
 		ps.setInt(6, rewardDto.getRewardEach());
-		ps.setInt(7, rewardDto.getRewardNo());
+		ps.setInt(7, rewardDto.getRewardIsoption());
+		ps.setInt(8, rewardDto.getRewardNo());
 		int count = ps.executeUpdate();
 				
 		con.close();
@@ -93,12 +94,14 @@ public class RewardDao {
 		
 		ResultSet rs = ps.executeQuery();
 		
-		RewardDto rewardDto = null;
+		RewardDto rewardDto = new RewardDto();
 		if(rs.next()) {
 			rewardDto.setRewardPrice(rs.getInt(1));
 			rewardDto.setRewardStock(rs.getInt(2));
 			rewardDto.setRewardDelivery(rs.getInt(3));
 			rewardDto.setRewardEach(rs.getInt(4));
+		}else {
+			rewardDto = null;
 		}
 		con.close();
 		return rewardDto;
@@ -168,5 +171,38 @@ public class RewardDao {
 		con.close();
 		
 		return count > 0; 
+	}
+	
+	
+	// 특정 리워드의 세부 구성 내용 조회 (리워드 번호)
+	public RewardDto selectReward(int rewardNo, int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from reward where reward_no = ? and reward_project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, rewardNo);
+		ps.setInt(2, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		RewardDto rewardDto;
+		if(rs.next()) {
+			rewardDto = new RewardDto();
+			
+			rewardDto.setRewardNo(rs.getInt("reward_no"));
+			rewardDto.setRewardProjectNo(rs.getInt("reward_project_no"));
+			rewardDto.setRewardName(rs.getString("reward_name"));
+			rewardDto.setRewardContent(rs.getString("reward_content"));
+			rewardDto.setRewardPrice(rs.getInt("reward_price"));
+			rewardDto.setRewardStock(rs.getInt("reward_stock"));
+			rewardDto.setRewardDelivery(rs.getInt("reward_delivery"));
+			rewardDto.setRewardEach(rs.getInt("reward_each"));
+			rewardDto.setRewardIsoption(rs.getInt("reward_isoption"));
+		} else {
+			rewardDto = null; 
+		}
+		
+		con.close();
+		
+		return rewardDto;
 	}
 }
