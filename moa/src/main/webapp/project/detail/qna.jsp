@@ -6,6 +6,23 @@
 <%@page import="moa.beans.PjQnaDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+
+	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
+	Integer memberNo = (Integer) session.getAttribute("login"); 
+	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
+	boolean isLogin = memberNo != null;
+	
+	// 세션에서 admin 정보 꺼내기
+	Integer admin = (Integer) session.getAttribute("admin");
+	// adminId 데이터 여부 판단 -> 관리자 권한 판단
+	boolean isAdmin = admin !=null;
+	
+	// 판매자 세션 가져오기
+	Integer seller = (Integer) session.getAttribute("seller");
+	boolean isSeller = seller !=null;
+
+%>
 <%
 	Integer secretNo;
 	try{
@@ -36,20 +53,17 @@
 		if(s <= 0) throw new Exception();
 	}
 	catch(Exception e){
-		s = 5;
+		s = 10;
 	}
 %>  
 <%
 
-	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
-	Integer memberNo = (Integer) session.getAttribute("login"); 
-	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
-	boolean isLogin = memberNo != null;
-
 
 	PjQnaDao pjQnaDao = new PjQnaDao();
 	List<PjQnaDto> list = new ArrayList<>();
-	if(isLogin && hideSecret){
+	if(isAdmin){
+		list = pjQnaDao.select(projectNo, p, s);
+	}else if(isLogin && hideSecret){
 		list = pjQnaDao.selectOpen(projectNo, p, s, memberNo);
 	}else if(!isLogin && hideSecret){
 		list = pjQnaDao.selectOpen(projectNo, p, s)	;
@@ -70,7 +84,9 @@
 <% 
 
 	int count;
-	if(isLogin && hideSecret){
+	if(isAdmin){
+		count = pjQnaDao.countByPaging(projectNo);
+	}else if(isLogin && hideSecret){
 		count = pjQnaDao.countByPagingOpen(projectNo, memberNo);
 	}else if(!isLogin && hideSecret){
 		count = pjQnaDao.countByPagingOpen(projectNo);	
@@ -146,10 +162,14 @@
 
             <div class="float-left left-container mt30">
             
-<div class="right m10">
-                    <a class="link btn link-btn btn-qna">문의하기</a>
+			<div class="right m10">
+			<%if(isLogin) {%>
+                    <button class="link btn link-btn btn-qna">문의하기</button>
+                    <%}else{ %>
+                    <button class="btn no-auth ">문의하기</button>
+                    <%} %>
                 </div>
-
+				<%if(isLogin) {%>
                 <div class="qna">
                     <form action="qna_write.do" method="post">
                     <input name="memberNo" type="hidden" value="<%=memberNo%>">
@@ -185,6 +205,7 @@
                         <hr>
                     </form>
                 </div>
+                <%} %>
 
                 <!-- 상세페이지 문의 리스트 -->
                 <div class="ask-list fill">
@@ -215,7 +236,7 @@
                                     <%if(pjQnaDto.getQnaLock() == 1){ %>
                                     <span class="font12">[비밀글]</span>
                                     <%} %>
-                                    <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
+                                    <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin){ %>
                                     <span hidden class="secret" value="1"></span>
                                     <%} %>
                                 </td>
@@ -230,14 +251,19 @@
                             <!-- 문의 내용 -->
                             <tr class="qna-content" hidden>
                                 <div>
+                                	<%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin){ %>
                                     <td colspan="4">
                                         <div>
                                             <pre class="font14"><%=pjQnaDto.getQnaContent() %></pre>
                                         </div>
                                         <div class="row right m10">
-                                            <a class="link btn link-btn btn-answer">답글</a>
+                                        	<%if((isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isSeller || isAdmin){ %>
+                                            <button class="btn btn-answer">답글</button>
+                                            <%}else{ %>
+                                            <button class="btn no-auth ">답글</button>
+                                            <%} %>
                                             <!-- 자기가 쓴 글만 삭제버튼 구현 (관리자도 추후 구현) -->
-                                            <%if(isLogin && pjQnaDto.getQnaMemberNo() == memberNo){ %>
+                                            <%if(isAdmin || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                             <button class="btn delete-btn btn-reverse">삭제</button>
                                             <%}else{ %>
                                             <button class="btn no-auth btn-reverse">삭제</button>
@@ -245,6 +271,7 @@
                                         </div>
                                         
                                         <!-- 답글 -->
+                                        <%if(isLogin){ %>
                                         <div class="answer" style="padding-left: 10px">
                                             <form action="qna_write.do" method="post">
                                             	<input name="memberNo" type="hidden" value="<%=memberNo%>">
@@ -282,8 +309,9 @@
                                                 <hr>
                                             </form>
                                         </div>
+                                        <%} %>
                                         <!-- 삭제 확인 -->
-                                        <%if(isLogin && pjQnaDto.getQnaMemberNo() == memberNo){ %>
+                                        <%if(isAdmin || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                         <div class="row delete-confirm right">
 											<span class="font14">삭제하시겠습니까?</span>
 											<a href="qna_delete.do?qnaNo=<%=pjQnaDto.getQnaNo() %>" class="confirm-btn link btn link-btn">삭제</a>       
@@ -291,6 +319,7 @@
                                         </div>
                                         <%} %>
                                     </td>
+                                    <%} %>
                                 </div>
                             </tr>
 
