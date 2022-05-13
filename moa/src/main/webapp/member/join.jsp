@@ -177,7 +177,7 @@
 
 <form action="join.do" method="post">
 
-	<div class="container w450 m30">
+	<div class="container w450 m20">
 
 		<div class="row center">
 			<h1>회원가입</h1>
@@ -202,7 +202,7 @@
 		</div>
 		<br>
 
-		<div class="row m20">
+		<div class="row">
 			<label>* 닉네임</label> <input type="text" name="memberNick" required
 				placeholder="한글, 숫자 10자 이내" autocomplete="off"
 				class="form-input fill input-round"> <span></span>
