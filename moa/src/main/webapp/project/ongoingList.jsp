@@ -119,7 +119,6 @@ SellerDao sellerDao = new SellerDao();
     overflow: hidden;
     height: 3em; 
     font-size: 20px;
-    padding-top:10px;
 }
 </style>
 
@@ -278,9 +277,9 @@ SellerDao sellerDao = new SellerDao();
               <div class="row center m10">
               	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
               	<%if(isExistPhoto){ %>
-			       	<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="372px" height="250px">
+			       	<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="372px" height="280px">
 			    <%}else{ %>
-                	<img src="https://dummyimage.com/1305x250" width="372px" height="250px">
+                	<img src="https://dummyimage.com/1305x250" width="372px" height="280px">
               	<%} %>
                 </a>
               </div>

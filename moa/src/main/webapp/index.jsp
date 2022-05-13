@@ -49,7 +49,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
 .flex-items1 {
 	flex-basis: 60%;
-	padding: 10px;
+	padding: 20px;
 }
 
 .flex-items2 {
@@ -59,7 +59,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
 .flex-items3 {
 	flex-basis: 35%;
-	padding: 10px;
+	padding: 15px;
 }
 
 .flex-items-a {
@@ -81,7 +81,6 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
 .project-name {
 	font-size: 15px;
-	padding: 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: wrap;
@@ -93,7 +92,6 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 }
 .new-name {
 	font-size: 20px;
-	padding: 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: wrap;
@@ -102,34 +100,40 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 .percent {
 	color: #B899CD;
 	font-size: 15px;
-	padding: 10px;
 }
 
 .seller {
 	font-size: 10px;
-	padding: 0px 10px;
 }
 
 .notice-date {
 	font-size: 15px;
 	padding: 10px;
 }
+.category{
+	color: gray;
+	font-size: 10px;
+}
+.modu{
+	 border-top:1px solid gray;
+	 padding-top: 50px;
+}
 </style>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 
-<div class="row flex-container1 flex-items2">
+<div class="row flex-container1 flex-items2 modu">
 	
 	<div class="flex-items1 flex-container2">
 	
 	<div class="row fill">
-		<img src="https://dummyimage.com/500x400" alt="" width="700" height="400">
+		<img src="https://dummyimage.com/500x400" alt="" width="660" height="400">
 	</div>
 	
 	<%-- 신규프로젝트 목록 --%>
 
 	<div class="row flex-items1">
-		<div class="row left big-text mt50 mlr10">
+		<div class="row left big-text mt30 mlr10">
 			<a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">
 				신규 프로젝트
 			</a>
@@ -150,36 +154,51 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 				%> 
 					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 					<%if(isExistPhoto){ %>
-						<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="200px" height="200px">
+						<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="200px" height="170px">
 					<%} else{ %>
-						<img src="https://dummyimage.com/200x200" width="200px" height="200px">
+						<img src="https://dummyimage.com/200x200" width="200px" height="170px">
 					<%} %>
 					</a>
 				</div>
-		
-				<div class="row left m10 new-name">
-					<a
-						href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
-						class="link"> <span><%=projectDto.getProjectName()%></span>
-					</a>
+			
+			<% 
+				projectVo = projectDao.selectVo(projectDto.getProjectNo());
+				sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
+			%>
+			<div class="flex-container2">
+				<div class="category left">
+					<span><%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %></span>
 				</div>
 		
+				<div class="row left m10 new-name">
+					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
+					<span><%=projectDto.getProjectName()%></span>
+					</a>
+				</div>
+				<div class="left percent">
+					<span><%=projectVo.getPercent() %> %</span>
+				</div>
+			</div>
+			
+			
 			</div>
 			<%}%>
 		</div>
-	<hr style="border: solid lightgray 0.5px" />
+		<div class="center mt30">
+			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="btn-reverse link" style="padding:5px 30px">전체 보러가기</a>
+		</div>
 	</div>
 </div>
 	
 	<%-- 인기프로젝트 목록 --%>
 	<div class="row left big-text flex-items3">
-		<a href="<%=request.getContextPath()%>/project/ongoingList.jsp?sort=인기순" class="link">인기 프로젝트</a>
+		<a href="<%=request.getContextPath()%>/project/ongoingList.jsp?sort=인기순" class="link">실시간 랭킹</a>
 		<hr style="border: solid lightgray 0.5px" />
 		<%int count = 0;%>
 		<div class="row flex-container2 mt10">
 			<%for (ProjectDto projectDto : list1) {%>
 			<%count++;%>
-			<div class="container fill" style="border-bottom: 0.5px solid black">
+			<div class="container fill" style="border-bottom: 0.5px solid #f1f2f6">
 				<div class="row flex-container1">
 					<div class="row flex-items-a">
 						<span style="color: #B899CD"><%=count%></span>
@@ -197,6 +216,9 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 						sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 						%>
 							<div class="row seller"><%=sellerDto.getSellerNick()%></div>
+							<div class="left percent">
+								<span><%=projectVo.getPercent() %>%</span>
+							</div>
 					</div>
 
 					<div class="row flex-items-c m10 right">
@@ -209,9 +231,9 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 				 	%> 
 						<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 						<%if(isExistPhoto){ %>
-							<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="110px" height="110px">
+							<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="130px" height="110px">
 						<%} else { %>
-							<img src="https://dummyimage.com/500x400" width="110px" height="110px">
+							<img src="https://dummyimage.com/500x400" width="130px" height="110px">
 						<%} %>
 						</a>
 					</div>
@@ -225,6 +247,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	<%-- 공개예정 프로젝트 목록 --%>
 
 	<div class="row flex-items1">
+	<hr style="border: solid #f1f2f6 0.5px" />
 		<div class="row left big-text mt50 mlr10">
 			<div class="flex-container1">
 				<div>
@@ -236,7 +259,6 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 						더 보러가기
 					</a>
 			</div>
-			<hr style="border: solid lightgray 0.5px" />
 		</div>
 
 <div class="row flex-container3">
@@ -253,20 +275,24 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		%> 
 			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 			<%if(isExistPhoto){ %>
-				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="240px">
+				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="200px">
 			<%} else{ %>
-				<img src="https://dummyimage.com/200x200" width="240px" height="240px">
+				<img src="https://dummyimage.com/200x200" width="240px" height="200px">
 			<%} %>
 			</a>
 		</div>
+		
+		<div class="flex-container2">
+			<div class="left mt10" style="color:#B899CD">
+				<span><%=projectDto.getProjectStartDate() %> 오픈예정</span>
+			</div>
+			</div>
 
 		<div class="row left m10 new-name">
-			<a
-				href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
-				class="link"> <span><%=projectDto.getProjectName()%></span>
+			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
+				<span><%=projectDto.getProjectName()%></span>
 			</a>
 		</div>
-
 	</div>
 	<%}%>
 </div>

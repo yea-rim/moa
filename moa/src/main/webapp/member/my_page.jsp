@@ -166,8 +166,8 @@
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
 								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
-								
-								boolean isExistProjectAttach = projectAttachDto != null; 
+
+								boolean isExistProjectAttach = projectAttachDto != null;
 								%> 
 								
 									<div class="list-card mlr30 m15">

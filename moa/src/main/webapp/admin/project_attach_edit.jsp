@@ -12,6 +12,9 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 List<ProjectAttachDto> profileList = projectAttachDao.selectProfileList(projectNo);
 List<ProjectAttachDto> detailList = projectAttachDao.selectDetailList(projectNo);
 
+int profileListSize = profileList.size();
+int detailListSize = detailList.size();
+
 AttachDao attachDao = new AttachDao();
 %>
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
@@ -52,7 +55,7 @@ AttachDao attachDao = new AttachDao();
     <script type="text/javascript">
         $(function(){
 	        // 파일명 input에 출력하는 JS
-	        $('input[name="attach"]').each(function(){
+	        $(".attach").each(function(){
 		        $(this).on('change',function(){
 		            var fileFullName = $(this).val();
 		            
@@ -92,8 +95,31 @@ AttachDao attachDao = new AttachDao();
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
-								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach">
+								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-edit f12">수정</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<%
+				}
+				%>
+				<%
+					for (int i=0; i<3-profileListSize; i++) {
+				%>
+				<div class="list-card2 mlr20 m15 center">
+					<div class="row center">
+						<img
+							src="<%=request.getContextPath() %>/image/no_image.png"
+							class="card-image-wrapper" width="150px" height="112px">
+					</div>
+					<div class="row mt15 mlr10">
+						<div class="filebox-a center w200">
+							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="projectNo" value="<%=projectNo%>">
+								<input class="upload-name" placeholder="파일첨부"> 
+								<label for="file1<%=i%>">선택</label> <input type="file" id="file1<%=i%>" name="profileAttach" class="attach">
+								<button type="submit" class="link link-small btn-edit f12">추가</button>
 							</form>
 						</div>
 					</div>
@@ -106,7 +132,7 @@ AttachDao attachDao = new AttachDao();
 	</div>
 	<!-- 대표 이미지 수정 -->
 	<div class="row m20 mlr30">
-		<h2>* 본문 이미지</h2>
+		<h2>* 본문 이미지 </h2>
 	</div>
 	<div class="row m20">
 		<div class="container">
@@ -128,13 +154,36 @@ AttachDao attachDao = new AttachDao();
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
-								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach">
+								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-edit f12">수정</button>
 							</form>
 						</div>
 					</div>
 				</div>
 				<%}%>
+				<%
+					for (int i=0; i<3-detailListSize; i++) {
+				%>
+				<div class="list-card2 mlr20 m15 center">
+					<div class="row center">
+						<img
+							src="<%=request.getContextPath() %>/image/no_image.png"
+							class="card-image-wrapper" width="150px" height="112px">
+					</div>
+					<div class="row mt15 mlr10">
+						<div class="filebox-a center w200">
+							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="projectNo" value="<%=projectNo%>">
+								<input class="upload-name" placeholder="파일첨부"> 
+								<label for="file3<%=i%>">선택</label> <input type="file" id="file3<%=i %>" name="detailAttach" class="attach">
+								<button type="submit" class="link link-small btn-edit f12">추가</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<%
+				}
+				%>
 			</div>
 		</div>
 	</div>

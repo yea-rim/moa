@@ -30,6 +30,16 @@
 	// 관리자 여부
 	boolean isAdmin = session.getAttribute("admin") != null; 
 %>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$(".notice-delete").click(function(){
+			return confirm("삭제하시겠습니까?");
+		});
+		
+	});
+</script>
 <jsp:include page="/template/header.jsp"></jsp:include>    
 <div class="container w800 mainContent">
 <div class="container w800 m30">
@@ -55,7 +65,7 @@
 	 <%-- <%if(isAdmin){ %>  --%>
 		<div class="right" style="height:70px">
 			<a href="edit.jsp?noticeNo=<%=noticeNo %>" class="btn-reverse link">수정</a>
-			<a href="delete.do?noticeNo=<%=noticeNo %>" class="btn-reverse link">삭제</a>
+			<a href="delete.do?noticeNo=<%=noticeNo %>" class="btn link notice-delete">삭제</a>
 		</div>
 	<%-- <%} %>  --%>
 		<div class="center" style="height:70px">

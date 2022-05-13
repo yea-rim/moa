@@ -265,9 +265,9 @@ if (isSearch) {
               <div class="row center">
               	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
               	<%if(isExistPhoto){ %>
-		       		<img src="download.kh?attachNo=<%=projectAttachDto.getAttachNo() %>" width="370px" height="250px">
+		       		<img src="download.kh?attachNo=<%=projectAttachDto.getAttachNo() %>" width="370px" height="280px">
 		       	<%}else{ %>
-                	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="370px" height="250px">
+                	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="370px" height="280px">
               	<%} %>
                 </a>
               </div>

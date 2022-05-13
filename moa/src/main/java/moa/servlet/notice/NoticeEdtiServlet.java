@@ -48,7 +48,7 @@ public class NoticeEdtiServlet extends HttpServlet {
 			// 수정
 			MoaNoticeDao moaNoticeDao = new MoaNoticeDao();
 			moaNoticeDao.edit(moaNoticeDto);
-
+			
 			// 프로필 파일 처리
 			String uploadName1 = mRequest.getOriginalFileName("attachProfile");
 			String saveName1 = mRequest.getFilesystemName("attachProfile");
@@ -58,77 +58,80 @@ public class NoticeEdtiServlet extends HttpServlet {
 			if (target1 != null) {
 				fileSize = target1.length();
 			}
-
-			// 본문 파일 처리
-			String uploadName = mRequest.getOriginalFileName("attachContent");
-			String saveName = mRequest.getFilesystemName("attachContent");
-			String contentType = mRequest.getContentType("attachContent");
-			File target = mRequest.getFile("attachContent");
-			if (target != null) {
-				fileSize = target.length();
-			}
-			
 			
 			if (uploadName1 != null) {
 				MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
 				MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
-
+				
 				AttachDao attachDao = new AttachDao();
 				AttachDto attachDto = new AttachDto();
-
-				if (moaNoticeAttachDao.selectOne(noticeNo) != null) {
+				
+				if (moaNoticeAttachDao.selectProfile(noticeNo) != null) {
 					attachDao.delete(moaNoticeAttachDto.getAttachNo());
-					moaNoticeAttachDao.delete(noticeNo);
-
+					moaNoticeAttachDao.deleteProfile(noticeNo);
+					
 					int attachNo = attachDao.getSequence();
-
+					
 					attachDto.setAttachNo(attachNo);
 					attachDto.setAttachUploadname(uploadName1);
 					attachDto.setAttachSavename(saveName1);
 					attachDto.setAttachType(contentType1);
 					attachDto.setAttachSize(fileSize);
-
+					
 					attachDao.insert(attachDto);
-
+					
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
 					moaNoticeAttachDto.setAttachType("프로필");
 				} else {
 					int attachNo = attachDao.getSequence();
-
+					
 					attachDto.setAttachNo(attachNo);
 					attachDto.setAttachUploadname(uploadName1);
 					attachDto.setAttachSavename(saveName1);
 					attachDto.setAttachType(contentType1);
 					attachDto.setAttachSize(fileSize);
-
+					
 					attachDao.insert(attachDto);
-
+					
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
 					moaNoticeAttachDto.setAttachType("프로필");
 				}
-
+				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
 			}
+			
+			// 프로필이 있는 상태에서 프로필만 변경하면 본문파일이 삭제만 된다. 
+			
+			// 본문 파일 처리
+			String uploadName2 = mRequest.getOriginalFileName("attachContent");
+			String saveName2 = mRequest.getFilesystemName("attachContent");
+			String contentType2 = mRequest.getContentType("attachContent");
+			File target2 = mRequest.getFile("attachContent");
+			if (target2 != null) {
+				fileSize = target2.length();
+			}
 
-			if (uploadName != null) {
+			if (uploadName2 != null) {
 				MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
 				MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
 
 				AttachDao attachDao = new AttachDao();
 				AttachDto attachDto = new AttachDto();
 
-				if (moaNoticeAttachDao.selectOne(noticeNo) != null) {
+				if (moaNoticeAttachDao.selectContent(noticeNo) != null) {
 					attachDao.delete(moaNoticeAttachDto.getAttachNo());
-					moaNoticeAttachDao.delete(noticeNo);
+					moaNoticeAttachDao.deleteContent(noticeNo);
 
 					int attachNo = attachDao.getSequence();
+					
+					System.out.println(uploadName2);
 
 					attachDto.setAttachNo(attachNo);
-					attachDto.setAttachUploadname(uploadName);
-					attachDto.setAttachSavename(saveName);
-					attachDto.setAttachType(contentType);
+					attachDto.setAttachUploadname(uploadName2);
+					attachDto.setAttachSavename(saveName2);
+					attachDto.setAttachType(contentType2);
 					attachDto.setAttachSize(fileSize);
 
 					attachDao.insert(attachDto);
@@ -140,9 +143,9 @@ public class NoticeEdtiServlet extends HttpServlet {
 					int attachNo = attachDao.getSequence();
 
 					attachDto.setAttachNo(attachNo);
-					attachDto.setAttachUploadname(uploadName);
-					attachDto.setAttachSavename(saveName);
-					attachDto.setAttachType(contentType);
+					attachDto.setAttachUploadname(uploadName2);
+					attachDto.setAttachSavename(saveName2);
+					attachDto.setAttachType(contentType2);
 					attachDto.setAttachSize(fileSize);
 
 					attachDao.insert(attachDto);

@@ -40,11 +40,11 @@ public class NoticeInsertServlet extends HttpServlet {
 			MoaNoticeDto moaNoticeDto = new MoaNoticeDto();
 			moaNoticeDto.setNoticeTitle(mRequest.getParameter("noticeTitle"));
 			String noticeContent = mRequest.getParameter("noticeContent");
-			
+
 			// textarea 줄바꿈 처리
 			noticeContent = noticeContent.replace("\r\n", "<br>");
 			moaNoticeDto.setNoticeContent(noticeContent);
-			
+
 			int adminNo = (Integer) req.getSession().getAttribute("login");
 			moaNoticeDto.setNoticeAdminNo(adminNo);
 
@@ -54,90 +54,86 @@ public class NoticeInsertServlet extends HttpServlet {
 			moaNoticeDto.setNoticeNo(noticeNo);
 
 			moaNoticeDao.insert(moaNoticeDto);
-			
+
 			// 파일처리(프로필)
 			String uploadName1 = mRequest.getOriginalFileName("attachProfile");
-	 		String saveName1 = mRequest.getFilesystemName("attachProfile");
-	 		String contentType1 = mRequest.getContentType("attachProfile");
-	 		File target1 = mRequest.getFile("attachProfile"); 
-	 		long fileSize = 0L;
-	 		if(target1 != null){
-	 			fileSize = target1.length();
-	 		}
-	 		
-	 		if(uploadName1 != null) {
-	 			MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
-	 			MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
-		 		AttachDto attachDto = new AttachDto();
-		 		AttachDao attachDao = new AttachDao();
-		 		
+			String saveName1 = mRequest.getFilesystemName("attachProfile");
+			String contentType1 = mRequest.getContentType("attachProfile");
+			File target1 = mRequest.getFile("attachProfile");
+			long fileSize = 0L;
+			if (target1 != null) {
+				fileSize = target1.length();
+			}
+
+			if (uploadName1 != null) {
+				MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
+				MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
+				AttachDto attachDto = new AttachDto();
+				AttachDao attachDao = new AttachDao();
+
 				attachDto.setAttachNo(attachDao.getSequence());
 				attachDto.setAttachUploadname(uploadName1);
 				attachDto.setAttachSavename(saveName1);
 				attachDto.setAttachType(contentType1);
 				attachDto.setAttachSize(fileSize);
-				
+
 				attachDao.insert(attachDto);
-				
-				if(moaNoticeAttachDao.selectOne(noticeNo) != null) {
+
+				if (moaNoticeAttachDao.selectProfile(noticeNo) != null) {
 					moaNoticeAttachDao.delete(noticeNo);
-				}
-				else {
+
+					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
+					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("프로필");
+				} else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
 					moaNoticeAttachDto.setAttachType("프로필");
 				}
-				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
-				moaNoticeAttachDto.setNoticeNo(noticeNo);
-				moaNoticeAttachDto.setAttachType("프로필");
-				
+
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
-	 		}
-	 		
-	 		
-	 		// 파일처리(프로필)
+			}
+
+			// 파일처리(본문)
 			String uploadName2 = mRequest.getOriginalFileName("attachContent");
-	 		String saveName2 = mRequest.getFilesystemName("attachContent");
-	 		String contentType2 = mRequest.getContentType("attachContent");
-	 		File target2 = mRequest.getFile("attachContent"); 
-	 		if(target2 != null){
-	 			fileSize = target2.length();
-	 		}
-	 		
-	 		if(uploadName2 != null) {
-	 			MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
-	 			MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
-		 		AttachDto attachDto = new AttachDto();
-		 		AttachDao attachDao = new AttachDao();
-		 		
+			String saveName2 = mRequest.getFilesystemName("attachContent");
+			String contentType2 = mRequest.getContentType("attachContent");
+			File target2 = mRequest.getFile("attachContent");
+			if (target2 != null) {
+				fileSize = target2.length();
+			}
+
+			if (uploadName2 != null) {
+				MoaNoticeAttachDao moaNoticeAttachDao = new MoaNoticeAttachDao();
+				MoaNoticeAttachDto moaNoticeAttachDto = new MoaNoticeAttachDto();
+				AttachDto attachDto = new AttachDto();
+				AttachDao attachDao = new AttachDao();
+
 				attachDto.setAttachNo(attachDao.getSequence());
 				attachDto.setAttachUploadname(uploadName2);
 				attachDto.setAttachSavename(saveName2);
 				attachDto.setAttachType(contentType2);
 				attachDto.setAttachSize(fileSize);
-				
+
 				attachDao.insert(attachDto);
-				
-				if(moaNoticeAttachDao.selectOne(noticeNo) != null) {
+
+				if (moaNoticeAttachDao.selectContent(noticeNo) != null) {
 					moaNoticeAttachDao.delete(noticeNo);
-				}
-				else {
+
+					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
+					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("본문");
+				} else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
 					moaNoticeAttachDto.setAttachType("본문");
 				}
-				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
-				moaNoticeAttachDto.setNoticeNo(noticeNo);
-				moaNoticeAttachDto.setAttachType("본문");
-				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
-	 		}
-	 		
+			}
 
 			// 출력
 			resp.sendRedirect("detail.jsp?noticeNo=" + noticeNo);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MoaQuestionDao;
 
 
-@WebServlet(urlPatterns = "/member/questionDelete.do")
-public class QuestionDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/questionDelete.do")
+public class QuestionAdminDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int questionNo = Integer.parseInt(req.getParameter("questionNo"));

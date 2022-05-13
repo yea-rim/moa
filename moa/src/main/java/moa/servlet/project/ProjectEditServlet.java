@@ -17,9 +17,7 @@ public class ProjectEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
-			System.out.println(Integer.parseInt(req.getParameter("projectNo")));
-			System.out.println(req.getParameter("projectCategory"));
+
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(Integer.parseInt(req.getParameter("projectNo")));
 			projectDto.setProjectCategory(req.getParameter("projectCategory"));

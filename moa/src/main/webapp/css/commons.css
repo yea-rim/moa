@@ -160,6 +160,16 @@
 
     display: inline-block;
 }
+.link-purple-small {
+    border: 1px solid white;
+    background-color: #B899CD;
+    color: white;
+
+    padding: 0.5em; 
+    border-radius: 0.2em;
+
+    display: inline-block;
+}
 
 
 /* 버튼 스타일 */
@@ -715,6 +725,12 @@ textarea.form-input {
 .b-purple{
     border: 1px solid #B899CD;
 }
+.b-left{
+    border-left: 1px solid #B899CD;
+}
+.b-right{
+    border-right: 1px solid #B899CD;
+}
 
 
 
@@ -763,8 +779,41 @@ textarea.form-input {
     margin-left: 10px;
 }
 
+/*insert페이지*/
+.filebox-a input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
 
+/* 인풋 스타일 변경 */
+.filebox-a .upload-name {
+    display: inline-block;
+    height: 35px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #B6B6B6;
+    border-radius: 0.3em;
+    width: 50%;
+    color: #999999;
+}
 
+/* label 스타일 변경 */
+.filebox-a label {
+    display: inline-block;
+    padding: 10px 10px;
+    color: white;
+    vertical-align: middle;
+    background-color: #dddddd;
+    border-radius: 0.3em;
+    cursor: pointer;
+    height: 35px;
+    margin-left: 5px;
+    font-size: 13px;
+}
 
 /* text-overflow */
 .txt-overflow {

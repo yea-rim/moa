@@ -10,40 +10,7 @@
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
  <style>
-     .filebox-a input[type="file"] {
-         position: absolute;
-         width: 0;
-         height: 0;
-         padding: 0;
-         overflow: hidden;
-         border: 0;
-     }
 
-     /* 인풋 스타일 변경 */
-     .filebox-a .upload-name {
-         display: inline-block;
-         height: 35px;
-         padding: 0 10px;
-         vertical-align: middle;
-         border: 1px solid #B6B6B6;
-         border-radius: 0.3em;
-         width: 50%;
-         color: #999999;
-     }
-
-     /* label 스타일 변경 */
-     .filebox-a label {
-         display: inline-block;
-         padding: 10px 10px;
-         color: white;
-         vertical-align: middle;
-         background-color: #dddddd;
-         border-radius: 0.3em;
-         cursor: pointer;
-         height: 35px;
-         margin-left: 5px;
-         font-size: 13px;
-     }
 
 
      .table.table-a>tbody>tr>th,
@@ -61,9 +28,25 @@
 	            var fileName = fileFullName.substring(12,fileFullName.length);
 	            $(".upload-name").val(fileName);
 	        });
+	        
+	        $(".insert-form").submit(function(){
+	        	if($("select[name=questionType").val()==""){
+	        		alert("문의 유형을 선택해 주세요.");
+	        		return false;
+	        	}else if($("input[name=questionTitle").val()==""){
+	        		alert("제목을 입력해 주세요.");
+	        		return false;
+	        	}else if($("textarea[name=questionContent").val()==""){
+	        		alert("문의 내용을 입력해 주세요.");
+	        		return false;
+	        	}else{
+	        		return true;
+	        	}
+	        });
+	        
         });
 </script>
-<form action="insert.do" method="post" enctype="multipart/form-data">
+<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
     <div class="container w700">
         <div class="row mt50 m10">
            <div class="flex-container">
