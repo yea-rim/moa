@@ -20,7 +20,16 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 
 SellerDao sellerDao = new SellerDao();
 SellerDto sellerDto = sellerDao.selectOne(memberNo);
-boolean isSeller = sellerDto.getSellerPermission() == 1;
+
+boolean isSeller = false;
+boolean isPermission = false;
+
+if(sellerDto != null){
+isSeller = true;
+	if(sellerDto.getSellerPermission() == 1){
+		isPermission = true;
+	}
+}
 
 // 회원 프로필 사진 조회
 MemberProfileDao memberProfileDao = new MemberProfileDao();
@@ -30,7 +39,7 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 SellerAttachDao sellerAttachDao = new SellerAttachDao();
 SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 
-// 인증 첨부파일 꺼내와야 함
+
 %>
 
 <div class="row center">
@@ -98,25 +107,41 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		</div>
 		<div class="row fill m20">
 			<h4>[우편번호]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberPost()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
 		<div class="row fill m20">
 			<h4>[주소]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberBasicAddress()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
 		<div class="row fill m20">
 			<h4>[상세주소]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberDetailAddress()%>
+			<%} else { %> <div class="m20"></div> <%} %>
+			
 		</div>
 		<div class="row fill m20">
 			<h4>[가입 경로]</h4>
+			<%if(memberDto.getMemberRoute() != null) { %>
 			<%=memberDto.getMemberRoute()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
+		
+		<%if (sellerDto != null && sellerDto.getSellerPermission() == 2) { %>
+		<div class="row fill m20">
+			<h4>[판매자 신청 여부]</h4>
+			<span>거절 상태</span>
+		</div>
+		<%} %>
 
 	</div>
 </div>
 
-<%if (sellerDto != null) { %>
+<%if (sellerDto != null && sellerDto.getSellerPermission() != 2) { %>
 <div class="float-container center m30">
 	<!-- 본문 부분-->
 	<div class="float-left w60p center">
@@ -129,7 +154,7 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=sellerAttachDto.getAttachNo()%>"
 		width="75%" onerror="javascript:this.src='https://dummyimage.com/300x300'"> <%} %>
 		
-		<%if (isSeller) { %>
+		<%if (isPermission) { %>
 		<div class="float-container center">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
 				<a
@@ -154,11 +179,10 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		</div>
 		<%} %>
 		<div class="row m20 refuse-msg">
-			<form action="#" method="post">
-				<label>거절 메세지 입력</label> <input type="hidden" name="sellerNo"
-					value="<%=sellerDto.getSellerNo()%>">
-				<textarea name="sellerRefuseMsg" rows="5"
-					class="float-right fill form-input mt5" placeholder="내용입력"
+			<form action="refuse.do" method="post">
+				<label>거절 메세지 입력</label>
+				<input type="hidden" name="sellerNo" value="<%=sellerDto.getSellerNo()%>">
+				<textarea name="sellerRefuseMsg" rows="5" class="float-right fill form-input mt5" placeholder="거절 메시지 입력"
 					autocomplete="off"></textarea>
 				<div class="row center">
 					<button class="btn btn-reverse fill">거절하기</button>
@@ -192,9 +216,9 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<div class="row fill m20">
 			<h4>[판매자 여부]</h4>
 					<%if(sellerDto.getSellerPermission()==0){ %>
-							<span style="color: red">승인필요</span>
+							<span style="color: red">승인 필요</span>
 						<%}else if(sellerDto.getSellerPermission()==1){%>
-							<span style="color: blue">승인완료</span>
+							<span style="color: blue">승인 완료</span>
  						<%}else { %>
 							거절 
 						<%} %>
