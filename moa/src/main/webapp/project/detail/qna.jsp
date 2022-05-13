@@ -123,7 +123,29 @@
 	}) */
 </script>
 
+<script type="text/javascript">
+	//시작하면 바로 이동
+	$(function(){
+    	var offset = $("#start-anc").offset(); //해당 위치 반환
+    	$("html, body").animate({scrollTop: offset.top},0);
+	});
 
+</script>
+
+<!-- 상세페이지 / 커뮤니티 메뉴바 -->
+        <div class="row left h20 mt40" id="start-anc">
+            <a href="<%=request.getContextPath() %>/project/detail/body.jsp?projectNo=<%=projectNo%>" class="link"><span>펀딩소개</span></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<%=request.getContextPath() %>/project/detail/notice.jsp?projectNo=<%=projectNo%>" class="link"><span>공지</span></a>
+        </div>
+		<hr>
+
+        <div class="float-container center">
+        
+            <!-- 상세페이지 본문 부분-->
+
+            <div class="float-left left-container mt30">
+            
 <div class="right m10">
                     <a class="link btn link-btn btn-qna">문의하기</a>
                 </div>
@@ -179,8 +201,9 @@
                 <%for(PjQnaDto pjQnaDto : list){ %>
                         <tbody>
                             <tr class="body center">
-                                <td><%=pjQnaDto.getQnaNo() %></td>
-                                <td class="table-title left">
+                                <td><span class="font14"><%=pjQnaDto.getQnaNo() %></span></td>
+                                <td class="table-title left font14">
+                                <span class="font14">
                                 <%if(pjQnaDto.getDepth() > 0){
                                 	for(int i = 0; i < pjQnaDto.getDepth(); i++){%>
                                 		&nbsp;
@@ -188,27 +211,28 @@
                                 	ㄴ>
                                 <%} %>
                                     <%=pjQnaDto.getQnaTitle() %>
+                                    </span>
                                     <%if(pjQnaDto.getQnaLock() == 1){ %>
-                                    <span>[비밀글]</span>
+                                    <span class="font12">[비밀글]</span>
                                     <%} %>
                                     <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                     <span hidden class="secret" value="1"></span>
                                     <%} %>
                                 </td>
                                 <td>
-                                    <span class="writer">
+                                    <span class="writer font14">
                                     <%memberDto = memberDao.selectOne(pjQnaDto.getQnaMemberNo());%>
                                     <%=memberDto.getMemberEmail()%>
                                     </span>
                                 </td>
-                                <td><%=pjQnaDto.getQnaTime() %></td>
+                                <td><span class="font14"><%=pjQnaDto.getQnaTime() %></span></td>
                             </tr>
                             <!-- 문의 내용 -->
                             <tr class="qna-content" hidden>
                                 <div>
                                     <td colspan="4">
                                         <div>
-                                            <pre><%=pjQnaDto.getQnaContent() %></pre>
+                                            <pre class="font14"><%=pjQnaDto.getQnaContent() %></pre>
                                         </div>
                                         <div class="row right m10">
                                             <a class="link btn link-btn btn-answer">답글</a>
@@ -261,7 +285,7 @@
                                         <!-- 삭제 확인 -->
                                         <%if(isLogin && pjQnaDto.getQnaMemberNo() == memberNo){ %>
                                         <div class="row delete-confirm right">
-											<span>삭제하시겠습니까?</span>
+											<span class="font14">삭제하시겠습니까?</span>
 											<a href="qna_delete.do?qnaNo=<%=pjQnaDto.getQnaNo() %>" class="confirm-btn link btn link-btn">삭제</a>       
 											<button class="cancel-delete btn btn-reverse">취소</button>                          
                                         </div>
@@ -276,13 +300,13 @@
                             <tr>
                                 <td colspan="4">
                                     <div class="float-container">
-                                        <span class="float-left">
+                                        <span class="float-left mt10 mlr10">
 	                                        <%if(hideSecret){ %>
 	                                            <input type="checkbox" id="hide-secret" checked>
 	                                        <%}else{ %>
 	                                            <input type="checkbox" id="hide-secret">
 	                                        <%} %>
-                                            <label for="hide-secret">비밀글 숨김</label>
+                                            <label for="hide-secret" style="font-size: 15px;">비밀글 숨김</label>
                                         </span>
                                         <span class="pagination float-right">
 	                                        <%if(startBlock > 1){ %>

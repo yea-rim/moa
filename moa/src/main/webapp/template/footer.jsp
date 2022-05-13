@@ -10,7 +10,7 @@
 		flex-basis:75%;
 	}
 	.b {
-		flex-basis:25%;
+		flex-basis:20%;
 	}
 </style>
 </article>
@@ -33,7 +33,7 @@ Copyright © 1998-2022 KH Information Educational Institute All Right Reserved
 </div>
 					
 <div class="row right b m10">
-<a href="#" class="btn link">
+<a href="<%=request.getContextPath()%>/question/insert.jsp" class="btn link">
 MOA에 1:1 문의하기
 </a>
 </div>

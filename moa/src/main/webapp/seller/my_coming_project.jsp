@@ -105,14 +105,14 @@
 	                            <!-- 프로젝트 제목 -->
 	                            <div class="row w800">
 	                                <h3>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
+	                                    <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
 	                                </h3>
 	                            </div>
 	                            
 	                            <!-- 프로젝트 요약 -->
 	                            <div class="row w800 mt30">
 	                                <p>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
+	                                    <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
 	                                </p>
 	                            </div>
 	                            

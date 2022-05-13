@@ -23,33 +23,34 @@ public class ProjectAttachDao {
 		con.close();
 	}
 	
-	// 해당 프로젝트 프로핖 중 하나의 attachNo만 가져오는 메소드
-	public ProjectAttachDto getAttachNo(int projectNo) throws Exception {
-		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "select * from("
-				+ " select rownum rn, TMP.*from("
-				+ " select attach_no from project_attach where project_no = ? and attach_type = '프로필' order by attach_no asc"
-				+ ") TMP"
-				+ ")where rn = 1";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, projectNo);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		ProjectAttachDto projectAttachDto;
-		if(rs.next()) {
-			projectAttachDto = new ProjectAttachDto();
-			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
-		} else {
-			projectAttachDto = null; 
+	
+	// 해당 프로젝트 프로필중에 하나의 attachNo만 가져오는 메소드 
+		public ProjectAttachDto getAttachNo(int projectNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "SELECT * FROM("
+					+ "SELECT rownum rn, TMP.*from("
+					+ "SELECT attach_no FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
+					+ ")TMP"
+					+ ")WHERE rn = 1";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, projectNo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			ProjectAttachDto projectAttachDto;
+			if(rs.next()) {
+				projectAttachDto = new ProjectAttachDto();
+				projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			}
+			else {
+				projectAttachDto = null;
+			}
+			
+			con.close();
+			return projectAttachDto;
 		}
 		
-		con.close();
-		
-		return projectAttachDto;
-	}
 	
 	
 
@@ -123,6 +124,31 @@ public class ProjectAttachDao {
 			list.add(projectAttachDto);
 		}
 		return list;
+	}
+	
+	public ProjectAttachDto selectOne(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from project_attach where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ProjectAttachDto projectAttachDto;
+		if(rs.next()) {
+			projectAttachDto = new ProjectAttachDto();
+			
+			projectAttachDto.setProjectNo(rs.getInt("project_no"));
+			projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+			projectAttachDto.setAttachType(rs.getString("attach_type"));
+		} else {
+			projectAttachDto = null;
+		}
+		
+		con.close();
+		
+		return projectAttachDto; 
 	}
 	
 	

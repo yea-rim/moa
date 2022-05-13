@@ -134,9 +134,7 @@ AttachDao attachDao = new AttachDao();
 						</div>
 					</div>
 				</div>
-				<%
-				}
-				%>
+				<%}%>
 			</div>
 		</div>
 	</div>

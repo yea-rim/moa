@@ -1,3 +1,4 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectVo"%>
@@ -112,6 +113,7 @@ if (isSearch) {
     overflow: hidden;
     height: 3em; 
     font-size: 20px;
+    padding-top:10px;
 }
 </style>
 
@@ -244,6 +246,7 @@ if (isSearch) {
 			</form>
 			<%}%>
 			</div>
+			<hr style="border: 0.5px solid lightgray">
 		
 			
 	
@@ -251,18 +254,24 @@ if (isSearch) {
 		<div class="container">
 		 <div class="row flex-container2" id="mainList">
 		 <%for(ProjectDto projectDto : list) { %>
-	 	 	<%-- <% 
-		 		int projectNo = projectDto.getProjectNo();
-				ProjectAttachDao projectAttachDao = new ProjectAttachDao();
-			
+	 		 <% 	
+		 		ProjectAttachDto projectAttachDto = new ProjectAttachDto();
+		 		ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+		 		
 				// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
-				int attachNo = projectAttachDao.getAttachNo(projectNo);
-		 	%> --%>
+				projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
+				
+		 		//사진이 있는지 판정
+		 		boolean isExistPhoto = projectAttachDto != null;	
+		 	%> 
             <div class="flex-items">
               <div class="row center">
-              	<a href="projectDetail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
-			       	<%-- <img src="download.kh?attachNo=<%=attachNo %>" width="100%" --%>
+              	<a href="project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>">
+              	<%if(isExistPhoto){ %>
+			       	<img src="download.kh?attachNo=<%=projectAttachDto.getAttachNo() %>" width="372px" height="250px">
+			    <%}else{ %>
                 	<img src="<%=request.getContextPath()%>/project/image/기타-카테고리.jpeg" width="372px"height="250px">
+                <%} %>
                 </a>
               </div>
               <div class="row project-name"><%=projectDto.getProjectName() %></div>

@@ -85,9 +85,11 @@ public class NoticeInsertServlet extends HttpServlet {
 				else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("프로필");
 				}
 				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 				moaNoticeAttachDto.setNoticeNo(noticeNo);
+				moaNoticeAttachDto.setAttachType("프로필");
 				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
 	 		}
@@ -122,9 +124,11 @@ public class NoticeInsertServlet extends HttpServlet {
 				else {
 					moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 					moaNoticeAttachDto.setNoticeNo(noticeNo);
+					moaNoticeAttachDto.setAttachType("본문");
 				}
 				moaNoticeAttachDto.setAttachNo(attachDto.getAttachNo());
 				moaNoticeAttachDto.setNoticeNo(noticeNo);
+				moaNoticeAttachDto.setAttachType("본문");
 				
 				moaNoticeAttachDao.insert(moaNoticeAttachDto);
 	 		}
