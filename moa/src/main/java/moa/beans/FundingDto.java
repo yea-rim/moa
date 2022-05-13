@@ -16,6 +16,7 @@ public class FundingDto {
 	private int fundingTotalprice;
 	private int fundingTotaldelivery;
 	private String fundingGetter;
+	private String fundingIspayment;
 	
 	
 	
@@ -103,6 +104,14 @@ public class FundingDto {
 
 	public void setFundingGetter(String fundingGetter) {
 		this.fundingGetter = fundingGetter;
+	}
+
+	public String getFundingIspayment() {
+		return fundingIspayment;
+	}
+
+	public void setFundingIspayment(String fundingIspayment) {
+		this.fundingIspayment = fundingIspayment;
 	}
 	
 	

@@ -45,7 +45,7 @@
 
 <!-- 멀티페이징 -->
 <script type="text/javascript">
-    $(function(){
+    /* $(function(){
         var index = 0;
         move(index);
      
@@ -63,8 +63,7 @@
          $(".page").eq(index).show();
      };
 
-
-    });
+    }); */
  </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -145,7 +144,7 @@
                 </div>
                 
                 <div class="reward m30 w70p">
-                    <h3><span class="reward-price"><%=rewardDto.getRewardPrice() %></span>원 후원하기</h3>
+                    <h3><span class="reward-price number"><%=rewardDto.getRewardPrice() %></span>원 후원하기</h3>
                     <br>
                     <h3 class="reward-title" style="font-size: 16px;"><%=rewardDto.getRewardName() %></h3>
                     <br>
@@ -153,7 +152,7 @@
                         <pre><%=rewardDto.getRewardContent() %></pre>
                         </span>
                     <br>
-                    <span style="font-size: 13px;">배송비 : <span class="delivery" data-value="<%=rewardDto.getRewardEach() %>"><%=rewardDto.getRewardDelivery() %></span></span>
+                    <span style="font-size: 13px;">배송비 : <span class="delivery number" data-value="<%=rewardDto.getRewardEach() %>"><%=rewardDto.getRewardDelivery() %></span></span>
                     <br>
                     <span style="font-size: 13px;">재고 : <%=rewardDto.getRewardStock() %>개     ||     결제 예정일 : <%=projectDao.paymentDate(projectNo) %></span>
                     <div class="flex-container m20 detail">
@@ -254,17 +253,22 @@
                         <div>
                             <div class="row">
                                 수령인
+                                <span class="check-empty" style="color: red; font-size: 13px; display:none;">&nbsp;&nbsp;&nbsp;필수 정보를 입력해주세요.</span>
+                                <span class="check-regex" style="color: red; font-size: 13px; display:none;">&nbsp;&nbsp;&nbsp;올바른 형식으로 입력해주세요.</span>
                             </div>
+                            
                             <div class="row m5">
-                                <input type="text" name="fundingGetter" value="" autocomplete="off" class="form-input fill">
+                                <input type="text" name="fundingGetter" value="" autocomplete="off" class="form-input fill check">
                             </div>
                         </div>
                         <div>
                             <div class="row">
                                 전화번호
+                                <span class="check-empty" style="color: red; font-size: 13px; display:none;">&nbsp;&nbsp;&nbsp;필수 정보를 입력해주세요.</span>
+                                <span class="check-regex" style="color: red; font-size: 13px; display:none;">&nbsp;&nbsp;&nbsp;올바른 형식으로 입력해주세요.</span>
                             </div>
                             <div class="row m5">
-                                <input type="text" name="fundingPhone" value="" autocomplete="off" class="form-input fill">
+                                <input type="text" name="fundingPhone" value="" autocomplete="off" class="form-input fill check">
                             </div>
                         </div>
                         
@@ -272,14 +276,15 @@
                         <div>
                             <div class="row">
                                 주소
+                                <span class="check-empty" style="color: red; font-size: 13px; display: none;">&nbsp;&nbsp;&nbsp;필수 주소 정보를 모두 입력해주세요.</span>
                             </div>
                             <div class="row m5">
                                 <div>
-                                    <input type="text" name="fundingPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
+                                    <input type="text" name="fundingPost" id="memberPost" placeholder="우편번호" class="form-input check-address" readonly> 
                                     <button type="button" class="address-find-btn btn">검색</button>
                                 </div>
-                                <div><input type="text" name="fundingBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
-                                <div><input type="text" name="fundingDetailAddress" placeholder="상세주소" class="form-input fill"> </div>
+                                <div><input type="text" name="fundingBasicAddress" placeholder="기본주소" class="form-input fill m5 check-address" readonly> </div>
+                                <div><input type="text" name="fundingDetailAddress" placeholder="상세주소" class="form-input fill check-address"> </div>
                             </div>
                         </div>
                         <div>
