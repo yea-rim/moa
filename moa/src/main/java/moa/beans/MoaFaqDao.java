@@ -12,7 +12,7 @@ public class MoaFaqDao {
 	public int getFaqNo() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select moafaq_seq.nextval from dual";
+		String sql = "select moa_faq_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();

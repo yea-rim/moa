@@ -66,7 +66,7 @@ List<MoaFaqDto> list = moaFaqDao.allSelectList(p, s, sort);
 	flex-basis:10%;
 }
 .flex-items3 {
-	flex-basis:60%;
+	flex-basis:70%;
 }
 .flex-items4 {
 	flex-basis:10%;
