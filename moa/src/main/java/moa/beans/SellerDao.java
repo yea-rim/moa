@@ -299,4 +299,32 @@ public class SellerDao {
 
 		return count > 0;
 	}
+	
+	// 판매자 검색 (닉네임)
+	public SellerDto findByNickname(String sellerNick) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select * from seller where seller_nick = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, sellerNick);
+		ResultSet rs = ps.executeQuery();
+
+		SellerDto sellerDto;
+		if (rs.next()) {
+			sellerDto = new SellerDto();
+
+			sellerDto.setSellerNo(rs.getInt("seller_no"));
+			sellerDto.setSellerRegistDate(rs.getDate("seller_regist_date"));
+			sellerDto.setSellerAccountBank(rs.getString("seller_account_bank"));
+			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
+			sellerDto.setSellerNick(rs.getString("seller_nick"));
+			sellerDto.setSellerType(rs.getString("seller_type"));
+		} else {
+			sellerDto = null;
+		}
+
+		con.close();
+
+		return sellerDto;
+	}
 }
