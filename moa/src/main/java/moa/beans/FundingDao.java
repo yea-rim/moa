@@ -260,6 +260,42 @@ public class FundingDao {
 			return list;
 		}
 		
+		//회원번호를 넣으면 펀딩 목록을 반환 결제가 된것
+		public List<FundingDto> selectSuccessList(int memberNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select * from funding where funding_member_no = ? and funding_ispayment = 1 and funding_cancel_date is null order by funding_no desc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, memberNo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			List<FundingDto> list = new ArrayList<>();
+			while(rs.next()) {
+				FundingDto fundingDto = new FundingDto();
+				
+				fundingDto.setFundingNo(rs.getInt("funding_no"));
+				fundingDto.setFundingMemberNo(rs.getInt("funding_member_no"));
+				fundingDto.setFundingDate(rs.getDate("funding_date"));
+				fundingDto.setFundingPost(rs.getString("funding_post"));
+				fundingDto.setFundingBasicAddress(rs.getString("funding_basic_address"));
+				fundingDto.setFundingDetailAddress(rs.getString("funding_detail_address"));
+				fundingDto.setFundingPostMessage(rs.getString("funding_post_message"));
+				fundingDto.setFundingPhone(rs.getString("funding_phone"));
+				fundingDto.setFundingCancelDate(rs.getDate("funding_cancel_date"));
+				fundingDto.setFundingPaymentDate(rs.getDate("funding_payment_date"));
+				fundingDto.setFundingTotalprice(rs.getInt("funding_totalprice"));
+				fundingDto.setFundingTotaldelivery(rs.getInt("funding_totaldelivery"));
+				fundingDto.setFundingGetter(rs.getString("funding_getter"));
+				fundingDto.setFundingIspayment(rs.getString("funding_ispayment"));
+				
+				list.add(fundingDto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
 	
 
 	//결제 실행 메서드

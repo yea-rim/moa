@@ -167,7 +167,7 @@
 								
 								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
 								
-								boolean isExistProjectAttach = projectDto != null; 
+								boolean isExistProjectAttach = projectAttachDto != null; 
 								%> 
 								
 									<div class="list-card mlr30 m15">
