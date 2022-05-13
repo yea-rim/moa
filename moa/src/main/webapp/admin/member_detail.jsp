@@ -38,6 +38,8 @@ boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 �
 
 SellerAttachDao sellerAttachDao = new SellerAttachDao();
 SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
+
+
 %>
 
 <div class="row center">
@@ -105,21 +107,31 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		</div>
 		<div class="row fill m20">
 			<h4>[우편번호]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberPost()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
 		<div class="row fill m20">
 			<h4>[주소]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberBasicAddress()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
 		<div class="row fill m20">
 			<h4>[상세주소]</h4>
+			<%if(memberDto.getMemberPost() != null) { %>
 			<%=memberDto.getMemberDetailAddress()%>
+			<%} else { %> <div class="m20"></div> <%} %>
+			
 		</div>
 		<div class="row fill m20">
 			<h4>[가입 경로]</h4>
+			<%if(memberDto.getMemberRoute() != null) { %>
 			<%=memberDto.getMemberRoute()%>
+			<%} else { %> <div class="m20"></div> <%} %>
 		</div>
-		<%if (sellerDto.getSellerPermission() == 2) { %>
+		
+		<%if (sellerDto != null && sellerDto.getSellerPermission() == 2) { %>
 		<div class="row fill m20">
 			<h4>[판매자 신청 여부]</h4>
 			<span>거절 상태</span>
@@ -204,9 +216,9 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<div class="row fill m20">
 			<h4>[판매자 여부]</h4>
 					<%if(sellerDto.getSellerPermission()==0){ %>
-							<span style="color: red">승인필요</span>
+							<span style="color: red">승인 필요</span>
 						<%}else if(sellerDto.getSellerPermission()==1){%>
-							<span style="color: blue">승인완료</span>
+							<span style="color: blue">승인 완료</span>
  						<%}else { %>
 							거절 
 						<%} %>
