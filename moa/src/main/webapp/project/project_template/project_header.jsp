@@ -1,3 +1,5 @@
+<%@page import="moa.beans.MemberProfileDto"%>
+<%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
@@ -18,16 +20,16 @@
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
 	Integer memberNo = (Integer) session.getAttribute("login"); 
 	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
-	boolean isLogin = memberNo != null; 
+	boolean isLogin = memberNo != null;
 	
 	// 세션에서 admin 정보 꺼내기
-	String adminId = (String) session.getAttribute("admin");
+	Integer admin = (Integer) session.getAttribute("admin");
 	// adminId 데이터 여부 판단 -> 관리자 권한 판단
-	boolean isAdmin = adminId != null;
+	boolean isAdmin = admin !=null;
 	
-	Integer sellerNo = (Integer) session.getAttribute("sellerNo");
-	Integer sellerRegistDate = (Integer) session.getAttribute("sellerRegistDate");
-	boolean isApprove = sellerRegistDate != null;
+	// 판매자 세션 가져오기
+	Integer seller = (Integer) session.getAttribute("seller");
+	boolean isSeller = seller !=null;
 
 %>
 <%
@@ -60,92 +62,194 @@
 	SellerDao sellerDao = new SellerDao();
 	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 %>
-    <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/commons.css"> --%>
-    <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/test.css"> --%>
+<%
+	//회원 프로필 사진 조회
+	MemberProfileDao memberProfileDao = new MemberProfileDao();
+	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(projectDto.getProjectSellerNo());
+		
+	// 회원 프로필 존재 여부 확인 
+	boolean isExistProfile = memberProfileDto != null; // true면 프로필 사진 존재
+%>
+    <!-- 스와이퍼 -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectHeader.css">
 
 <style>
-    
+
+
 </style>
+
+<!-- 스와이퍼 -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/joa.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/swiper.js"></script>
 
 <script type="text/javascript">
-	//시작하면 바로 이동
-	$(function(){
-    	var offset = $("#start-anc").offset(); //해당 위치 반환
-    	$("html, body").animate({scrollTop: offset.top},0);
-	});
+/* 숫자 콤마 찍기 */
+$(function(){
+	
+	$(".number").each(function(){
+		$(this).text(withCommas(parseInt(($(this).text()))));
+	})
+	
+	function withCommas(num) {
+	    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		  
+	}
 
+	function withoutCommas(num) {
+	return num.toString().replace(",", '');
+	}
+	
+});
 </script>
 
-<div class="container w1000 center">
-        <div class="row w700 margin-auto m-b10">
-        	<h1>
+	<div class="container w1000 center mt50">
+        <div class="row w700 margin-auto m40">
+        	<div class="project-title">
             <%=projectDto.getProjectName() %>
-        	</h1>
-        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link"><h3>
+        	</div>
+        	<div class="m50 project-seller center">
+	        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link">
+        		<%if(isExistProfile) { // 프로필 사진 존재한다면 %>
+                         <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="30px"  height="30px" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+                <%} else { // 존재하지 않는다면 %>
+                         <img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="30px" height="30px" class="img img-circle">
+                <%} %>
         		<%=sellerDto.getSellerNick()%>
-        	</h3></a>
+	        	</a>
+        	</div>
         </div>
 
         <div class="float-container center m30 h450px">
             <!-- 상세페이지 프로필 부분 -->
 
             <div class="float-left left-container">
-            	<!-- 프로필부분의 왼쪽 플로트-->
-                <%if(isProfile){ %>
+                <!-- 프로필부분의 왼쪽 플로트-->
+						<div class="swiper">
+							<div class="swiper-wrapper">
+								  <%if(isProfile){ %>
+				            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
+					            		<div class="swiper-slide">
+					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
+					            		</div>
+				            		<%} %>
+				            		<%}else{ %>
+				            			<div class="swiper-slide">
+				                    		<img src="https://via.placeholder.com/500x300" width="100%" height="100%">
+				            			</div>
+				            			<div class="swiper-slide">
+				                    		<img src="https://via.placeholder.com/500x300" width="100%" height="100%">
+				            			</div>
+				            			<div class="swiper-slide">
+				                    		<img src="https://via.placeholder.com/500x300" width="100%" height="100%">
+				            			</div>
+				                	<%} %>
+							</div>
+							<div class="swiper-pagination"></div>
+							
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						
+						</div>
+						
+                <%-- <%if(isProfile){ %>
             		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
+            		<div class="swiper-slide">
             			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+            		</div>
             		<%} %>
             	<%}else{ %>
                     <img src="https://via.placeholder.com/500x300" width="600px" height="450px">
-                <%} %>
+                <%} %> --%>
             </div>
 
 
 
             <div class="float-left left p80px-left right-container h450px">
                 <!-- 프로필부분의 오른쪽 플로트 -->
-
-                <div class="row fill h40">
-                    <h2>
-                        <%=projectVo.getDaycount() %>일 남음
-                    </h2>
+ 				<div class="row fill mb10">
+                	<span class="small">
+                	남은 기간
+                	</span>
                 </div>
-                <div class="row fill h40 m20">
-                    <h2>
-                        <%=projectVo.getPercent() %> % 달성
-                    </h2>
+                
+                <div class="row fill mb20">
+                <span class="big">
+                        <%=projectVo.getDaycount() %>
+                </span>
+                <span class="small">
+                        일
+                </span>
+                    
                 </div>
-                <div class="row fill h40 m20">
-                    <h2>
-                        <%=projectVo.getPresentMoney() %>원 달성
-                    </h2>
+                
+                <div class="row fill mb10">
+                	<span class="small">
+                	모인금액
+                	</span>
                 </div>
-                <div class="row fill h40 m-b10">
-                    <h4 class="m10">
-                        후원자수
-                    </h4>
-                    <h3>
-                        <%=projectVo.getSponsor() %>명
-                    </h3>
+                
+                <div class="row fill mb20">
+                    <span class="big number">
+                        <%=projectVo.getPresentMoney() %>
+	                </span>
+                    <span class="small">
+                        원
+    	            </span>
+    	            <span class="small" style="color: #b899cd; font-size: 13px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<%=projectVo.getPercent() %>%
+    	            </span>
+                    <span class="small">
+                        달성
+    	            </span>
                 </div>
+                
+                <div class="row fill mb10">
+                	<span class="small">
+                        후원자
+                	</span>
+                </div>
+                
+                <div class="row fill m-b10">
+                    <span class="big">
+                        <%=projectVo.getSponsor() %>
+               		 </span>
+               		 <span class="small">명</span>
+                </div>
+                
                 <hr>
                 <div class="row fill h20">
-                    <h5>
-                        펀딩기간 <%=projectDto.getProjectStartDate() %> ~ <%=projectDto.getProjectSemiFinish() %>
-                    </h5>
+                    <span class="small">
+                    	펀딩기간&nbsp;&nbsp;
+                	</span>
+	                 <span class="small">
+                     	 <%=projectDto.getProjectStartDate() %> ~ <%=projectDto.getProjectSemiFinish() %>
+	                </span>
                 </div>
-                <div class="row fill h20 m-b10">
-                    <h5>
-                        목표금액 <%=projectDto.getProjectTargetMoney() %>
-                    </h5>
+                
+                <div class="row fill h20">
+  		            <span class="small">
+        	            목표금액&nbsp;&nbsp;
+            	    </span>
+                    <span class="small number">
+            	        <%=projectDto.getProjectTargetMoney() %>
+	                </span>
                 </div>
-                <div class="row fill h60 m10 m-t40">
+                
+                <div class="row fill h30 mb20">
+  		            <span class="small">
+        	            결제날짜&nbsp;&nbsp;
+            	    </span>
+                    <span class="small">
+            	        <%=projectDao.paymentDate(projectNo) %>
+	                </span>
+                </div>
+        
+                <div class="row fill h60 mb30 m-t40">
                     <a href="<%=request.getContextPath()%>/project/funding.jsp?projectNo=<%=projectNo%>"><button class="btn btn-reverse fill h40">후원하기</button></a>
                 </div>
                 <div class="row fill h40 m-t30">
@@ -181,16 +285,3 @@
         
 
 
-<!-- 상세페이지 / 커뮤니티 메뉴바 -->
-        <div class="row left h20 m10">
-            <a href="<%=request.getContextPath() %>/project/detail/body.jsp?projectNo=<%=projectNo%>" class="link"><h2>펀딩소개</h2></a>
-            <a href="<%=request.getContextPath() %>/project/detail/notice.jsp?projectNo=<%=projectNo%>" class="link"><h2>공지</h2></a>
-            <!-- <a href="./detail/ask.jsp" class="link">문의</a> -->
-        </div>
-
-
-        <div class="float-container center m30">
-        
-            <!-- 상세페이지 본문 부분-->
-
-            <div class="float-left left-container">

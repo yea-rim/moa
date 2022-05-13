@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.RewardDao"%>
@@ -13,6 +15,12 @@
 	
 	RewardDao rewardDao = new RewardDao();
 	List<RewardDto> rewardList = rewardDao.selectProject(projectNo);
+	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+	
+	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+	
+	boolean isExistProjectAttach = projectAttachDto != null;
 %>    
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
@@ -27,7 +35,7 @@
 	<div class="flex-container mt40">
 		 <!-- 마이페이지 메인으로 이동 -->
              <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
-             <a href="<%=request.getContextPath() %>/seller/my_page.jsp">
+             <a href="<%=request.getContextPath() %>/seller/my_rejected_project.jsp">
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="my_rejected_project.jsp" class="link mlr5">
@@ -37,7 +45,11 @@
 
                 <div class="flex-container m50">
                     <div class="left-wrapper layer-5">
-                        <img src="https://dummyimage.com/150x112" alt="" class="img img-round">
+                   				<%if(isExistProjectAttach) { // 사진이 존재하면 %>
+										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
+								<%} else { // 사진이 없으면 %>
+										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
+								<%} %>	    
                     </div>
                     <div class="left-wrapper layer-3">
                         <div class="row">
@@ -48,8 +60,8 @@
                         </div>
                     </div>
                     <div class="right-wrapper layer-3">
-                        <div class="row mt10 mlr30 right">
-                            <a href="project_reinsert.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">프로젝트 재신청</a>
+                        <div class="row mt20 mlr30 right">
+                            <a href="project_reapply.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">프로젝트 재신청</a>
                         </div>
                         <div class="row mt5 mlr30 right">
                             <a href="project_delete.do?projectNo=<%=projectNo %>" class="link link-btn w150 center pr-delete">프로젝트 삭제</a>

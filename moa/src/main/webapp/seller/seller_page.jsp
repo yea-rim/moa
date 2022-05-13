@@ -92,6 +92,7 @@
                 <hr>
                 </div>
                 
+
                 <div class="container">
             		<div class="flex-container3">
                 
@@ -109,17 +110,17 @@
 		        	<!-- 이미지 자리 -->
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} else { %>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
-		                 <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>"class="link">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
 		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
 		
 		             <!-- 판매자 -->
@@ -160,17 +161,17 @@
 		        	<!-- 이미지 자리 -->
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} else { %>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
-		                 <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>"class="link">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
 		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
 		
 		             <!-- 판매자 -->
@@ -211,17 +212,17 @@
 		        	<!-- 이미지 자리 -->
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} else { %>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
 		            <%} %>
 		                    
 		             <!-- 제목 -->
 		             <div class="row flex-title m10 mlr10 txt-overflow">
-		                 <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>"class="link">
+		                 <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>"class="link">
 		                     <h2><%=projectDto.getProjectName() %></h2></a></div>
 		
 		             <!-- 판매자 -->

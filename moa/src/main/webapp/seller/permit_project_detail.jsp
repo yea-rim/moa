@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.RewardDao"%>
@@ -14,6 +16,11 @@
 	
 	RewardDao rewardDao = new RewardDao();
 	List<RewardDto> rewardList = rewardDao.selectProject(projectNo);
+	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo); 
+	
+	boolean isExistProjectAttach = projectAttachDto != null; 
 %>    
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
@@ -38,7 +45,11 @@
 
                 <div class="flex-container m50">
                     <div class="left-wrapper layer-5">
-                        <img src="https://dummyimage.com/150x112" alt="" class="img img-round">
+	                     <%if(isExistProjectAttach) { // 사진이 존재하면 %>
+									<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="112px">
+						<%} else { // 사진이 없으면 %>
+									<img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="112px">
+						<%} %>
                     </div>
                     <div class="left-wrapper layer-3">
                         <div class="row">
@@ -51,6 +62,9 @@
                     <div class="right-wrapper layer-3">
                         <div class="row mlr30 right">
                             <a href="project_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">프로젝트 수정</a>
+                        </div>
+                        <div class="row mt5 mlr30 right">
+                            <a href="attach_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">이미지 수정</a>
                         </div>
                         <div class="row mt5 mlr30 right">
                             <a href="reward_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">리워드 수정</a>

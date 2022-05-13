@@ -2,6 +2,9 @@ package moa.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RewardSelectionDao {
 	
@@ -30,4 +33,30 @@ public class RewardSelectionDao {
 		con.close();
 	}
 	
+	// 리워드 번호 리스트 조회 (펀딩 번호)
+	public List<RewardSelectionDto> getRewardNo(int fundingNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();	
+		
+		String sql = "select * from reward_selection where selection_funding_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, fundingNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<RewardSelectionDto> list = new ArrayList<>(); 
+		
+		while(rs.next()) {
+			RewardSelectionDto rewardSelectionDto = new RewardSelectionDto();
+			
+			rewardSelectionDto.setSelectionFundingNo(rs.getInt("selection_funding_no"));
+			rewardSelectionDto.setSelectionOption(rs.getString("selection_option"));
+			rewardSelectionDto.setSelectionRewardAmount(rs.getInt("selection_reward_amount"));
+			rewardSelectionDto.setSelectionRewardNo(rs.getInt("selection_reward_no"));
+			
+			list.add(rewardSelectionDto);
+		}
+		
+		con.close();
+		
+		return list; 
+	}
 }

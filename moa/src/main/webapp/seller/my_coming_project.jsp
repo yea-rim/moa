@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
@@ -17,7 +19,7 @@
 	
 	int sellerNo = sellerDto.getSellerNo();
 	
-	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	
 	int p;
 	try {
@@ -53,7 +55,7 @@
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link mlr5">
-                     <h2>진행 중인 프로젝트</h2>
+                     <h2>공개 예정인 프로젝트</h2>
               </a>
 	</div>
 	
@@ -79,14 +81,23 @@
                 </div>
                 
                 
-					<%for(ProjectDto projectDto : list) { %>
+					<%for(ProjectDto projectDto : list) { 
+						
+						ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+						
+						boolean isExistProjectAttach = projectAttachDto != null;
+					%>
 						<div class="container mt20 p10">
 	
 	                    <div class="float-container b-purple">
 	            
 	                        <!-- 프로젝트 대표 이미지 -->
 	                        <div class="float-left m20 mlr20">
-	                            <img src="https://dummyimage.com/150x112" alt="" width="200px" height="150px">
+	                        	<%if(isExistProjectAttach) { // 사진이 존재하면 %>
+										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
+								<%} else { // 사진이 없으면 %>
+										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
+								<%} %>	                        
 	                        </div>
 	            
 	                        <div class="float-left m20 mlr20 h150">
@@ -94,14 +105,14 @@
 	                            <!-- 프로젝트 제목 -->
 	                            <div class="row w800">
 	                                <h3>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
+	                                    <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"><%=projectDto.getProjectName() %></a>
 	                                </h3>
 	                            </div>
 	                            
 	                            <!-- 프로젝트 요약 -->
 	                            <div class="row w800 mt30">
 	                                <p>
-	                                    <a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
+	                                    <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-gray"><%=projectDto.getProjectSummary() %></a>
 	                                </p>
 	                            </div>
 	                            
@@ -111,7 +122,9 @@
 	                        <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %>
 					        <div class="float-right m70 mlr20">
 					          	<div class="row mt5">
-					          		<a href="" class="link link-reverse w100 center">배너 신청</a>
+					          	<%-- 공지작성 임의 추가 추후 수정 예정 --%>
+<!-- 					          		<a href="" class="link link-reverse w100 center">배너 신청</a> -->
+					          		<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">공지 작성</a>
 					          	</div>
 					        </div>
 	                        

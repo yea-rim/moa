@@ -37,7 +37,7 @@ public class MoaNoticeDao {
 		return list;
 	}
 
-	// 전체목록 조회(검색어 x)
+	// 메인용 
 	public List<MoaNoticeDto> selectMain() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
