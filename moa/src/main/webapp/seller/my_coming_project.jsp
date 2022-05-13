@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectAttachDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
@@ -17,7 +19,7 @@
 	
 	int sellerNo = sellerDto.getSellerNo();
 	
-	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	
 	int p;
 	try {
@@ -53,7 +55,7 @@
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link mlr5">
-                     <h2>진행 중인 프로젝트</h2>
+                     <h2>공개 예정인 프로젝트</h2>
               </a>
 	</div>
 	
@@ -79,14 +81,23 @@
                 </div>
                 
                 
-					<%for(ProjectDto projectDto : list) { %>
+					<%for(ProjectDto projectDto : list) { 
+						
+						ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+						
+						boolean isExistProjectAttach = projectAttachDto != null;
+					%>
 						<div class="container mt20 p10">
 	
 	                    <div class="float-container b-purple">
 	            
 	                        <!-- 프로젝트 대표 이미지 -->
 	                        <div class="float-left m20 mlr20">
-	                            <img src="https://dummyimage.com/150x112" alt="" width="200px" height="150px">
+	                        	<%if(isExistProjectAttach) { // 사진이 존재하면 %>
+										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
+								<%} else { // 사진이 없으면 %>
+										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
+								<%} %>	                        
 	                        </div>
 	            
 	                        <div class="float-left m20 mlr20 h150">

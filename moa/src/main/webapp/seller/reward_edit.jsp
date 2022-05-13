@@ -19,7 +19,7 @@
 	<div class="flex-container mt40">
 		 <!-- 마이페이지 메인으로 이동 -->
              <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
-             <a href="<%=request.getContextPath() %>/seller/my_page.jsp">
+             <a href="<%=request.getContextPath() %>/seller/permit_project_detail.jsp?projectNo=<%=projectNo %>">
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="<%=request.getContextPath() %>/seller/permit_project_detail.jsp?projectNo=<%=projectNo %>" class="link mlr5">

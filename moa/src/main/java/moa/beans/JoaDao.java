@@ -43,16 +43,51 @@ public class JoaDao {
 		con.close();
 	}
 	
-
-	// 목록 조회 
+	
+	// 기본 좋아요 목록 
 	public List<JoaDto> selectList(int memberNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from joa J "
-				+ "inner join project P on P.project_no = J.project_no "
-				+ "where J.member_no = ? order by P.project_no desc";
+		String sql = "select * from joa where member_no = ? order by joa_date desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, memberNo);
+		ResultSet rs = ps.executeQuery();
+		
+		List<JoaDto> list = new ArrayList<>();
+		
+		while(rs.next()) {
+			JoaDto joaDto = new JoaDto();
+			
+			joaDto.setProjectNo(rs.getInt("project_no"));
+			joaDto.setMemberNo(rs.getInt("member_no"));
+			joaDto.setJoaDate(rs.getDate("joa_date"));
+			
+			list.add(joaDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
+	
+	// 좋아요 목록 + 페이징
+	public List<JoaDto> selectList(int p, int s, int memberNo) throws Exception {
+		
+		int end = p * s;
+		int begin = end - (s - 1);
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from joa where member_no = ? order by joa_date desc"
+				+ ")TMP"
+				+ ")where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
 		
 		ResultSet rs = ps.executeQuery();
 		
@@ -63,6 +98,7 @@ public class JoaDao {
 			
 			joaDto.setProjectNo(rs.getInt("project_no"));
 			joaDto.setMemberNo(rs.getInt("member_no"));
+			joaDto.setJoaDate(rs.getDate("joa_date"));
 			
 			list.add(joaDto);
 		}
@@ -71,6 +107,23 @@ public class JoaDao {
 		
 		return list; 
 	}
+	
+	// 좋아요 페이징 카운트 
+	public int JoaCountByPaging(int memberNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "select count(*) from joa where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, memberNo);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt("count(*)");
+
+		con.close();
+
+		return count;
+	}
+	
 	
 	
 	// 좋아요 취소

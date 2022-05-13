@@ -54,11 +54,11 @@
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	
 	// 펀딩한 프로젝트 조회 
-/* 	FundingDao fundingDao = new FundingDao();
-	List<FundingDto> fundingList = fundingDao.selectList(memberNo);
+	FundingDao fundingDao = new FundingDao();
+	List<ProjectDto> fundingProjectList = projectDao.selectFundingProjectList(memberNo);
 	
 	// 리워드 셀렉션 Dao 준비
-	RewardSelectionDao rewardSelectionDao = new RewardSelectionDao(); */
+	RewardSelectionDao rewardSelectionDao = new RewardSelectionDao();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -165,9 +165,9 @@
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
-								ProjectAttachDto projectAttachNo = projectAttachDao.getAttachNo(projectNo);
+								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
 								
-								boolean isExistProjectAttach = projectAttachNo != null; 
+								boolean isExistProjectAttach = projectDto != null; 
 								%> 
 								
 									<div class="list-card mlr30 m15">
@@ -175,9 +175,9 @@
 					                    <div class="row center">
 					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 					                        	<%if(isExistProjectAttach) { %>
-					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachNo%>" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
-					                        		<img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        		<img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} %>
 					                        </a>
 					                    </div>
@@ -216,7 +216,7 @@
                     <!-- 후원한 프로젝트 -->
                     <div class="row m50">
                         <h2>
-                            <a href="" class="link">후원 프로젝트</a>
+                            <a href="funding_wait_list.jsp" class="link">후원 프로젝트</a>
                         </h2>
                         <hr>
                     </div>
@@ -225,20 +225,33 @@
                        	<div class="container">
             				<div class="flex-container3">
             			
-            				<%-- <%for(FundingDto fundingDto : fundingList) {
-            					int fundingNo = fundingDto.getFundingNo();
+            				<%-- <%
+            					int limit2 = 0;
+            				
+            					for(ProjectDto projectDto : fundingProjectList) {
             					
-            					RewardSelectionDto rewardSelectionDto = rewardSelectionDao.;
-								int projectNo = rewardSelectionDto.getSelectionProjectNo();
 								
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo());
+								
+								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo); 
+								
+								boolean isExistProjectAttach = projectAttachDto != null;
 								%>
-									<div class="list-card mlr40 m15">
+									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
+<<<<<<< HEAD
+					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+					                        	<%if(isExistProjectAttach) { %>
+					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<%} else {%>
+					                        		<img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="card-image-wrapper" width="150px" height="112px">
+					                        	<%} %>
+=======
 					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 					                        	<img src="https://dummyimage.com/200x200" alt="" class="card-image-wrapper">
+>>>>>>> refs/remotes/origin/main
 					                        </a>
 					                    </div>
 					                    
@@ -259,7 +272,12 @@
 					                        <p class="link-purple"><%=projectDto.getProjectCategory() %></p>
 					                    </div>
 					                </div>
-							<%} %> --%>
+							<% /* limit2++;
+	            				
+									if(limit2 == 4) {
+										break;
+									} */
+								}%>  --%>
 			                
      				  		</div>
                     	</div>

@@ -1,13 +1,12 @@
-<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.ProjectDao"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
 
 	//회원번호 가져오기 
@@ -42,7 +41,7 @@
 	
 	ProjectDao projectDao = new ProjectDao();
 	
-	List<ProjectDto> list = projectDao.rejectedSelectList(p, s, sellerNo);
+	List<ProjectDto> list = projectDao.getSuccessList(p, s, sellerNo);
 %>
 
 <jsp:include page = "/template/header.jsp"></jsp:include>
@@ -54,38 +53,18 @@
                     <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
              </a>
              <a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link mlr5">
-                     <h2>반려된 프로젝트</h2>
+                     <h2>성공한 프로젝트</h2>
               </a>
 	</div>
 	
 	<div class="row m30"><hr></div>
-
-			<div class="container mt30">
-
-                    <div class="float-container">
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_ongoing_project.jsp" class="link link-reverse fill center">진행 중</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_permit_project.jsp" class="link link-reverse fill center">심사 중</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_coming_project.jsp" class="link link-reverse fill center">공개 예정</a>
-                        </div>
-                        <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/seller/my_rejected_project.jsp" class="link link-btn fill center">반려됨</a>
-                        </div>
-                    </div>
-
-                </div>
                 
                 
 					<%for(ProjectDto projectDto : list) { 
-							
+						
 						ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
 						
 						boolean isExistProjectAttach = projectAttachDto != null;
-					
 					%>
 						<div class="container mt20 p10">
 	
@@ -93,7 +72,7 @@
 	            
 	                        <!-- 프로젝트 대표 이미지 -->
 	                        <div class="float-left m20 mlr20">
-	                            <%if(isExistProjectAttach) { // 사진이 존재하면 %>
+	                        	<%if(isExistProjectAttach) { // 사진이 존재하면 %>
 										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
 								<%} else { // 사진이 없으면 %>
 										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
@@ -109,10 +88,10 @@
 	                                </h3>
 	                            </div>
 	                            
-	                            <!-- 거절 메세지 -->
+	                            <!-- 프로젝트 요약 -->
 	                            <div class="row w800 mt30">
 	                                <p class="link-gray">
-	                                    반려 사유 : <%=projectDto.getProjectRefuseMsg() %>
+	                                    <%=projectDto.getProjectSummary() %>
 	                                </p>
 	                            </div>
 	                            
@@ -120,7 +99,9 @@
 	                        
 	                        <!-- 상세보기 -->
 					        <div class="float-right m70 mlr20">
-					          	<a href="rejected_project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center w100">상세보기</a>
+					          	<div class="row mt5">
+					          		<a href="success_project_detail.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">상세보기</a>
+					          	</div>
 					        </div>
 	                        
 	                    </div>
@@ -130,7 +111,7 @@
 	<div class="container">
 		<!-- 페이지네이션 -->
 		<%
-		int count = projectDao.rejectedCountByPaging(sellerNo);
+		int count = projectDao.countSuccessByPaging(sellerNo);
 
 		// 마지막 페이지 번호 계산
 		int lastPage = (count + s - 1) / s;
@@ -153,41 +134,38 @@
 				<%
 				if (p > 1) { // 첫페이지가 아니라면
 				%>
-					<a href="my_rejected_project.jsp?p=1&s=<%=s%>">&laquo;</a>
+					<a href="my_success_project.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%}%>
 
 				<%
 				if (startBlock > 1) { // 이전 블록이 있으면
 				%>
-					<a href="my_rejected_project.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
+					<a href="my_success_project.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
 				<%}%>
 
 
 				<!-- 숫자 링크 영역 -->
 				<%for (int i = startBlock; i <= endBlock; i++) {%>
 					<%if (i == p) {%>
-						<a class="active" href="my_rejected_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a class="active" href="my_success_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} else {%>
-						<a href="my_rejected_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a href="my_success_project.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} %>
 				<%}%>
 
 				<!-- 다음 버튼 영역 -->
 				<%if (endBlock < lastPage) {%>
-					<a href="my_rejected_project.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
+					<a href="my_success_project.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
 				<%}%>
 
 				<%
 				if (p < lastPage) { // 마지막 페이지가 아니라면
 				%>
-					<a href="my_rejected_project.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+					<a href="my_success_project.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 				<%}%>
 			</div>
 			
 		</h4>
 	</div>
- 
-                    
-                    
-
+	
 <jsp:include page = "/template/footer.jsp"></jsp:include>

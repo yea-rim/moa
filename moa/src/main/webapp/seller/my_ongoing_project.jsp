@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectAttachDao"%>
+<%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectVo"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
@@ -17,6 +19,7 @@
 	
 	int sellerNo = sellerDto.getSellerNo();
 	
+	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	
 	
 	int p;
@@ -80,14 +83,22 @@
                 </div>
                 
                 
-                <%for(ProjectDto projectDto : list) { // 기본으로 들어오는 페이지 %>
+                <%for(ProjectDto projectDto : list) { // 기본으로 들어오는 페이지 
+	                	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+						
+						boolean isExistProjectAttach = projectAttachDto != null;
+                %>
 						<div class="container mt20 p10">
 	
 	                    <div class="float-container b-purple">
 	            
 	                        <!-- 프로젝트 대표 이미지 -->
 	                        <div class="float-left m20 mlr20">
-	                            <img src="https://dummyimage.com/150x112" alt="" width="200px" height="150px">
+	                            <%if(isExistProjectAttach) { // 사진이 존재하면 %>
+										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
+								<%} else { // 사진이 없으면 %>
+										 <img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="img img-round" width="150px" height="130px">
+								<%} %>
 	                        </div>
 	            
 	                        <div class="float-left m20 mlr20 h150">
@@ -101,10 +112,14 @@
 	                            
 	                            <!-- 프로젝트 요약 -->
 	                            <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
-	                            <div class="row w800 mt40">
+	                            <div class="row w800 mt20">
 	                            	<p class="link-gray m5">목표 금액 : <%=projectDto.getProjectTargetMoney() %>원</p>
 	                            	<p class="link-gray m5">모인 금액 : <%=projectVo.getPresentMoney() %>원</p>
-	                                <p class="link-gray m5">달성율 : <%=projectVo.getPercent() %>%</p>
+	                            	<%if(projectVo.getPercent() >= 100) { %>
+	                                	<p class="p-red m5">달성율 : <%=projectVo.getPercent() %>%</p>
+									<%} else {%>
+										<p class="link-gray m5">달성율 : <%=projectVo.getPercent() %>%</p>
+									<%} %>	                                
 	                                <p class="link-gray m5">펀딩 마감일 : <%=projectDto.getProjectSemiFinish() %></p>
 	                            </div>
 	                            
