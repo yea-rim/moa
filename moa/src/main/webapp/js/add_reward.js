@@ -1,4 +1,7 @@
 $(function() {	
+	//리워드 추가버튼 숨기기
+	$(".btn-delReward").hide();
+	
 	//거절 메세지 숨기기
 	$(".refuse-msg").hide();
 	
@@ -18,12 +21,12 @@ $(function() {
 	function addReaward(rewardNum) {
 		var div = $("<div>").attr('class', 'reward'+rewardNum+" row m30");
 		var h3 = $("<h3>* 리워드 추가</h3>");
-			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="addRewardName" class="form-input fill"><span class="f12 red"></span></div>\
-	                <div class="row m20"><label>리워드 내용</label> <textarea name="addRewardContent" rows="5" class="form-input fill"></textarea><span class="f12 red"></span></div>\
-	                <div class="row m20"><label>리워드 가격</label> <input type="number" name="addRewardPrice" class="form-input fill"><span class="f12 red"></span></div>\
-	                <div class="row m20"><div class="row"><label>리워드 재고</label></div><input type="number" name="addRewardStock" class="form-input w80p"><span class="f12 red"></span>\
+			var content = $('<div class="row m20"><label>리워드 이름</label> <input type="text" name="addRewardName" class="form-input fill checkValue"><span class="f12 red"></span></div>\
+	                <div class="row m20"><label>리워드 내용</label> <textarea name="addRewardContent" rows="5" class="form-input fill checkValue"></textarea><span class="f12 red"></span></div>\
+	                <div class="row m20"><label>리워드 가격</label> <input type="number" name="addRewardPrice" class="form-input fill checkValue"><span class="f12 red"></span></div>\
+	                <div class="row m20"><div class="row"><label>리워드 재고</label></div><input type="number" name="addRewardStock" class="form-input w80p checkValue"><span class="f12 red"></span>\
 					<input type="checkbox" class="form-input ckbox" value="0"><input type="hidden" name="addRewardIsOption" value="0"><label class="f12 gray">상세 옵션 여부</label></div>\
-					<div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="addRewardDelivery" class="form-input w80p" value="0"><span class="f12 red"></span>\
+					<div class="row m20"><div class="row"><label>배송비</label></div><input type="number" name="addRewardDelivery" class="form-input w80p checkValue" value="0"><span class="f12 red"></span>\
 	                <input type="checkbox" class="form-input ckbox" value="0"><input type="hidden" name="addRewardEach" value="0"><label class="f12 gray">개별 배송 여부</label></div>');
 					
 		div.append(h3).append(content);
@@ -31,7 +34,7 @@ $(function() {
 		$(".btn-delReward").show();
 	}
 
-	rewardNum = 2;
+	rewardNum = 1;
 	//리워드 추가버튼 클릭 시 내용 추가
 	$(".btn-addReward").click(function() {
 		addReaward(rewardNum);
@@ -89,16 +92,20 @@ $(function() {
 		}				
 	}
 	//필수 입력사항 메세지
-	$("input[name=rewardName]").blur(checkValue);
-	$("textarea[name=rewardContent]").blur(checkValue);
-	$("input[name=rewardPrice]").blur(checkValue);
-	$("input[name=rewardStock]").blur(checkValue);
-	$("input[name=rewardDelivery").blur(checkValue);
-	
-	$(document).on("blur","input[name=addRewardName]",checkValue);
-	$(document).on("blur","textarea[name=addRewardContent]",checkValue);
-	$(document).on("blur","input[name=addRewardPrice]",checkValue);
-	$(document).on("blur","input[name=addRewardStock]",checkValue);
-	$(document).on("blur","input[name=addRewardDelivery]",checkValue);
+	$(document).on("blur",".checkValue",checkValue);
+
+	//submit 빈칸 검사
+	$(".edit-form").submit(function(){
+		var count = 0;
+		 $(".checkValue").each(function() {
+			if($(this).val()==""){
+				count++;
+			}
+		});
+			if(count>0){
+				alert("필수 사항을 모두 입력해주세요");
+				return false;			
+		}
+	});
 
 });

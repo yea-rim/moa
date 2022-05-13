@@ -84,7 +84,7 @@
 				</tr>
 					<%if(questionDto.getAnswerStatus() == 0){ %>
 				<tr style="display: none;" class="show-detail">
-				<th style="vertical-align: top; font-weight: bold;">문의내용 : </th>
+				<th style="vertical-align: top; font-weight: bold; text-overflow: ellipsis;">문의내용 : </th>
 					<td colspan="2" class="left" style="vertical-align: top;">
 					 	<%=questionDto.getQuestionContent() %>				
 					</td>

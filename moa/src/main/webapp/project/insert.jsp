@@ -7,6 +7,8 @@
 			border-left: 1px solid #dcdcdc;
 			list-style-type: disc;
 		}
+
+
 </style>	
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -15,13 +17,10 @@
 
 	<!--프로젝트 입력 페이지-->
 	<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
+	
 		<div class="container w600 m30 page">
-			<div class="row center">
-				<img src="<%=request.getContextPath()%>/image/pj_insert1_ck.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert2.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert3.png" width="80">
+			<div class="row center m20">
+				<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="400">
 			</div>
 			<div class="row center m60">
 				<h1>프로젝트 정보 입력</h1>
@@ -29,7 +28,7 @@
 			<div class="row m30"><h3>* 프로젝트 기본 정보</h3></div>
 			<div class="row m20">
 				<label>카테고리</label> 
-				<select name="projectCategory" class="form-input fill">
+				<select name="projectCategory" class="form-input fill checkValue">
 					<option value="">선택</option>
 					<option>패션/잡화</option>
 					<option>뷰티</option>
@@ -41,17 +40,17 @@
 			</div>
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill" placeholder="제목을 입력해주세요">
+				<input type="text" name="projectName" class="form-input fill checkValue" placeholder="제목을 입력해주세요">
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>프로젝트 요약글</label>
-				<textarea name="projectSummary" rows="5" class="form-input fill" placeholder="후원자 분들이 프로젝트를 빠르게 이해할 수 있도록 명확하고 간략하게 소개해주세요."></textarea>
+				<textarea name="projectSummary" rows="5" class="form-input fill checkValue" placeholder="후원자 분들이 프로젝트를 빠르게 이해할 수 있도록 명확하고 간략하게 소개해주세요."></textarea>
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>펀딩 목표 금액</label> 
-				<input type="number" name="projectTargetMoney" class="form-input fill" placeholder="50만원 이상의 금액을 입력해주세요"> 
+				<input type="number" name="projectTargetMoney" class="form-input fill checkValue" placeholder="50만원 이상의 금액을 입력해주세요"> 
 				<span class="font-on f12 red"></span><br>
 				<span class="f12 gray" > 
 					※목표 금액 설정 시 꼭알아두세요!<br> 
@@ -70,7 +69,7 @@
 					<h4>대표이미지</h4>
 				</div>
 				<div class="row m5">
-					<input type="file" name="profileAttach1" accept="image/*">
+					<input type="file" name="profileAttach1" accept="image/*" class="checkValue">
 					<button type="button" class="btn-add">+</button><br>
 					<div class="profileAttach2">
 						<input type="file" name="profileAttach2" accept="image/*" disabled>
@@ -86,7 +85,7 @@
 					<h4 class="m5">상세이미지</h4>
 				</div>
 				<div class="row">
-					<input type="file" name="detailAttach1" accept="image/*">
+					<input type="file" name="detailAttach1" accept="image/*" class="checkValue">
 					<button type="button" class="btn-add">+</button><br>
 					<div class="row detailAttach2">
 						<input type="file" name="detailAttach2" accept="image/*" disabled>
@@ -99,19 +98,14 @@
 				</div>
 			<br><br><hr>
 			<div class="row center m30">
-				<button type="button" class="btn btn-prev">이전 단계</button>
-				<button type="button" class="btn btn-next">다음 단계</button>
+				<button type="button" class="btn btn-next w200">다음 단계 ＞</button>
 			</div>
 		</div>
 
 		<!--펀딩 일정 선택-->
 								<div class="container w500 m30 page">
-									<div class="row center">
-										<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="80">
-										<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-										<img src="<%=request.getContextPath()%>/image/pj_insert2_ck.png" width="80">
-										<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-										<img src="<%=request.getContextPath()%>/image/pj_insert3.png" width="80">
+									<div class="row center m20">
+										<img src="<%=request.getContextPath()%>/image/pj_insert2.png" width="400">
 									</div>
 									<div class="row center m60">
 										<h1>펀딩 일정 선택</h1>
@@ -121,8 +115,7 @@
 												<li class="insert-li">
 													<div class="row">펀딩 시작일</div>
 													<div class="row m5">
-														<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
-														<span class="f12 red"></span>
+														<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
 														<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
 													</div>
 												</li>
@@ -135,8 +128,7 @@
 												<li class="insert-li">
 													<div class="row">펀딩 마감일</div>
 													<div class="row m5">
-														<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p">
-														<span class="f12 red"></span>
+														<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
 													</div>
 												</li>
 												<li class="insert-li">
@@ -155,43 +147,39 @@
 											</ul>
 								</div>
 									<div class="row center m50">
-										<button type="button" class="btn btn-prev">이전 단계</button>
-										<button type="button" class="btn btn-next">다음 단계</button>
+										<button type="button" class="btn btn-prev"> ＜ 이전 단계</button>
+										<button type="button" class="btn btn-next">다음 단계 ＞</button>
 									</div>
 						</div>
 
 		<!--리워드 추가 페이지-->
 		<div class="container w500 m30 page">
-			<div class="row center">
-				<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert2.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/arrow3.png" width="80">
-				<img src="<%=request.getContextPath()%>/image/pj_insert3_ck.png" width="80">
+			<div class="row center m20">
+				<img src="<%=request.getContextPath()%>/image/pj_insert3.png" width="400">
 			</div>
 			<div class="row center m50">
 				<h1>리워드 추가</h1>
 			</div>
 			<h3>* 리워드1</h3>
 			<div class="row m20">
-				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill">
+				<label>리워드 이름</label> <input type="text" name="rewardName" class="form-input fill checkValue">
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill"></textarea>
+				<textarea name="rewardContent" rows="5" class="form-input fill checkValue"></textarea>
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<div class="">
 				<label>리워드 가격</label> 
-				<input type="number" name="rewardPrice"class="form-input fill">
+				<input type="number" name="rewardPrice"class="form-input fill checkValue">
 				<span class="f12 red"></span>
 				</div>	
 			</div>
 			<div class="row m20">
 				<div class="row"><label>리워드 재고</label></div>
-				<input type="number" name="rewardStock" class="form-input w80p">
+				<input type="number" name="rewardStock" class="form-input w80p checkValue">
 				<span class="f12 red"></span>
 				<input type="checkbox" class="form-input ckbox" id="optionck">
 				<input type="hidden" name="rewardIsOption" value="0">
@@ -199,14 +187,14 @@
 			</div>
 			<div class="row m20">
 				<div class="row"><label>배송비</label></div>
-				<input type="number" name="rewardDelivery" class="form-input w80p" value="0">
+				<input type="number" name="rewardDelivery" class="form-input w80p checkValue" value="0">
 				<span class="f12 red"></span>
 				<input type="checkbox" class="form-input ckbox" id="eachck">
 				<input type="hidden" name="rewardEach" value="0">
 				<label class="f12 gray" for="eachck">개별 배송 여부</label>
 			</div>
 			<div class="row m20">
-				<label></label>
+				<label></label> 
 			</div>
 			<h3 class="reward-num"></h3>
 			<div id="add-reward"></div>
@@ -215,8 +203,7 @@
 				<a class="btn-addReward"><img src="<%=request.getContextPath()%>/image/add-icon.png" width="20"></a>
 			</div>
 			<div class="row center m20">
-				<button type="button" class="btn btn-prev">이전 단계</button>
-				<button type="button" class="btn btn-next">다음 단계</button>
+				<button type="button" class="btn btn-prev w200">＜ 이전 단계</button>
 			</div>
 			<hr>
 			<div class="row">
