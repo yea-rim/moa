@@ -1,4 +1,4 @@
-package moa.servlet.community;
+package moa.servlet.seller;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,13 +14,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import moa.beans.AttachDao;
 import moa.beans.AttachDto;
-import moa.beans.CommunityDao;
-import moa.beans.CommunityDto;
-import moa.beans.CommunityPhotoDao;
-import moa.beans.CommunityPhotoDto;
+import moa.beans.PjProgressDao;
+import moa.beans.PjProgressDto;
+import moa.beans.ProgressAttachDao;
+import moa.beans.ProgressAttachDto;
 
-@WebServlet(urlPatterns="/community/edit.do")
-public class CommunityEditServlet extends HttpServlet {
+@WebServlet(urlPatterns="/seller/progress_edit.do")
+public class PjProgressEditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -35,21 +35,22 @@ public class CommunityEditServlet extends HttpServlet {
 			
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 			MultipartRequest mRequest = new MultipartRequest(req, path, max, encoding, policy);
-			int communityNo = Integer.parseInt(mRequest.getParameter("communityNo"));
+			
+			int progressNo = Integer.parseInt(mRequest.getParameter("progressNo"));
 			
 			
-			CommunityDto communityDto = new CommunityDto();
-			communityDto.setCommunityNo(communityNo);
-			communityDto.setCommunityTitle(mRequest.getParameter("communityTitle"));
+			PjProgressDto pjProgressDto = new PjProgressDto();
+			pjProgressDto.setProgressNo(progressNo);
+			pjProgressDto.setProgressTitle(mRequest.getParameter("progressTitle"));
 			
-			String communityContent = mRequest.getParameter("communityContent");
-			communityContent = communityContent.replace("\r\n", "<br>");
-			communityDto.setCommunityContent(communityContent);
+			String progressContent = mRequest.getParameter("progressContent");
+			progressContent = progressContent.replace("\r\n", "<br>");
+			pjProgressDto.setProgressContent(progressContent);
 			
 			
 			// 수정
-			CommunityDao communityDao = new CommunityDao();
-			communityDao.edit(communityDto);
+			PjProgressDao pjProgressDao = new PjProgressDao();
+			pjProgressDao.edit(pjProgressDto);
 			
 			
 			// 파일 처리
@@ -63,15 +64,15 @@ public class CommunityEditServlet extends HttpServlet {
 	 		}
 	 		
 	 		if(uploadName != null) {
-		 		CommunityPhotoDao communityPhotoDao = new CommunityPhotoDao();
-		 		CommunityPhotoDto communityPhotoDto = new CommunityPhotoDto(); 
+		 		ProgressAttachDao progressAttachDao = new ProgressAttachDao();
+		 		ProgressAttachDto progressAttachDto = new ProgressAttachDto(); 
 		 		
 		 		AttachDao attachDao = new AttachDao();
 	 			AttachDto attachDto = new AttachDto();
 	 			
-		 		if(communityPhotoDao.selectOne(communityNo) != null) {
-		 			attachDao.delete(communityPhotoDto.getAttachNo());
-		 			communityPhotoDao.delete(communityNo);
+		 		if(progressAttachDao.selectOne(progressNo) != null) {
+		 			attachDao.delete(progressAttachDto.getAttachNo());
+		 			progressAttachDao.delete(progressNo);
 		 			
 		 			int attachNo = attachDao.getSequence();
 		 			
@@ -83,8 +84,8 @@ public class CommunityEditServlet extends HttpServlet {
 					
 					attachDao.insert(attachDto);
 					
-					communityPhotoDto.setAttachNo(attachDto.getAttachNo());
-				 	communityPhotoDto.setCommunityNo(communityNo);
+					progressAttachDto.setAttachNo(attachDto.getAttachNo());
+				 	progressAttachDto.setProgressNo(progressNo);
 		 		}
 		 		else {
 		 			int attachNo = attachDao.getSequence();
@@ -97,15 +98,15 @@ public class CommunityEditServlet extends HttpServlet {
 					
 					attachDao.insert(attachDto);
 					
-					communityPhotoDto.setAttachNo(attachDto.getAttachNo());
-				 	communityPhotoDto.setCommunityNo(communityNo);
+					progressAttachDto.setAttachNo(attachDto.getAttachNo());
+				 	progressAttachDto.setProgressNo(progressNo);
 		 		}
 		 		
-		 		communityPhotoDao.insert(communityPhotoDto);
+		 		progressAttachDao.insert(progressAttachDto);
 	 		}
 	 		
 			// 출력
-			resp.sendRedirect("detail.jsp?communityNo="+communityDto.getCommunityNo());
+			resp.sendRedirect("my_page.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

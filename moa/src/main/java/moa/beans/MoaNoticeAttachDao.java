@@ -3,6 +3,8 @@ package moa.beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MoaNoticeAttachDao {
 	
@@ -36,7 +38,6 @@ public class MoaNoticeAttachDao {
 		else {
 			moaNoticeAttachDto = null;
 		}
-		
 		con.close();
 		
 		return moaNoticeAttachDto;
@@ -45,7 +46,7 @@ public class MoaNoticeAttachDao {
 	public MoaNoticeAttachDto selectProfile(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '프로필' ORDER BY attach_no asc";
+		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '프로필'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
 		ResultSet rs = ps.executeQuery();
@@ -68,7 +69,7 @@ public class MoaNoticeAttachDao {
 	public MoaNoticeAttachDto selectContent(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '본문' ORDER BY attach_no asc";
+		String sql = "SELECT * FROM MOA_NOTICE_ATTACH WHERE notice_no = ? and attach_type = '본문'";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
@@ -102,17 +103,30 @@ public class MoaNoticeAttachDao {
 		return count > 0;
 	}
 	
-	public boolean edit(MoaNoticeAttachDto moaNoticeAttachDto) throws Exception {
+	public boolean deleteProfile(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "update moa_notice_attach set attach_no=? where community_no = ?";
+		String sql = "delete moa_notice_attach where notice_no = ? and attach_type = '프로필'";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, moaNoticeAttachDto.getAttachNo());
-		ps.setInt(2, moaNoticeAttachDto.getNoticeNo());
+		ps.setInt(1, noticeNo);
 		int count = ps.executeUpdate();
 		
 		con.close();
 		
 		return count > 0;
 	}
+	
+	public boolean deleteContent(int noticeNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete moa_notice_attach where notice_no = ? attach_type = '본문'";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, noticeNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0;
+	}
+	
 }

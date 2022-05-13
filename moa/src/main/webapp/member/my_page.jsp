@@ -165,7 +165,9 @@
 								ProjectDto projectDto = projectDao.selectOne(projectNo);
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
-								int projectAttachNo = projectAttachDao.getAttachNo(projectNo);
+								// projectAttachDao 메소드 변경으로 인한 수정
+								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
+								int projectAttachNo = projectAttachDto.getAttachNo();
 								
 								boolean isExistProjectAttach = projectAttachNo != 0; 
 								%> 

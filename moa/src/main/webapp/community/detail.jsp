@@ -1,3 +1,5 @@
+<%@page import="moa.beans.AttachDto"%>
+<%@page import="moa.beans.AttachDao"%>
 <%@page import="moa.beans.CommunityReplyDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.CommunityReplyDao"%>
@@ -49,48 +51,63 @@
 .community-title {
 	font-size: 20px;
 }
+.community-content{
+	overflow-wrap:anywhere;
+}
 .flex-container1 {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-.flex-container2 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	display: none;
-	position: relative;
-}
 .flex-items1 {
 	flex-basis:10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .flex-items2 {
-	flex-basis:65%;
+	flex-basis:60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .flex-items3 {
-	flex-basis:15%;
+	flex-basis:14%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-
-.reply-btn {
-	height: 40px;
+.flex-items4 {
+	flex-basis:90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-
 .flex-item-a {
 	flex-basis:10%;
 }
 .flex-item-b {
 	flex-basis:90%;
 }
+
+.reply-btn {
+	height: 40px;
+}
+.reply-container {
+	display: none;
+	position: relative;
+	height: 40px;
+}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
 		
-		$(".btn-edit").click(function () {
-	         $(this).parent(".flex-container1").next(".flex-container2").toggle();
+		$(".reply-btn").click(function () {
+	         $(this).parent(".flex-container1").next(".reply-container").toggle();
 	    });
 		
 		$(".community-reply").on("input", function(){
@@ -102,6 +119,15 @@
 	    		  length--;
 	    	  }
 	      });
+		
+		$(".reply-delete").click(function(){
+			return confirm("삭제하시겠습니까?");
+		});
+		
+		$(".community-delete").click(function(){
+			return confirm("삭제하시겠습니까?");
+		});
+		
 	});
 </script>
 
@@ -136,30 +162,32 @@
 		<span></span>
 		<%} %>
 	</div>
-	<div class="row m50">
+	<div class="row m50 community-content">
 		<%=communityDto.getCommunityContent() %>
 	</div>
 	<%if(isWriter){ %>
 	<div class="row right ">
 		<a href="edit.jsp?communityNo=<%=communityNo %>" class="btn-reverse link">수정</a>
-		<a href="delete.do?communityNo=<%=communityNo %>" class="btn-reverse link">삭제</a>
+		<a href="delete.do?communityNo=<%=communityNo %>" class="btn link community-delete">삭제</a>
 	</div>
 	<%} %>
 </div>
 
 	<%-- 댓글 입력창 --%>
 	<div class="container w800 m20">
-		<div class="row">
 		<h4>댓글</h4>
 		<hr>
-			<form action="reply_insert.do" method="post">
-				<input type="hidden" name="communityNo" value="<%=communityNo %>">
-				<div class="row">
-					<input type="text" name="community_reply_content" autocomplete="off" class="form-input w700 community-reply" placeholder="댓글을 입력해주세요">
-					<input type="submit" value="작성" class="btn reply-btn">
-				</div>
-			</form>
-		</div>
+				<form action="reply_insert.do" method="post">
+					<input type="hidden" name="communityNo" value="<%=communityNo %>">
+					<div class="flex-container1" style="height:40px">
+						<div class="flex-items4">
+							<input type="text" name="community_reply_content" autocomplete="off" class="form-input community-reply" placeholder="댓글을 입력해주세요" style="height:100%">
+						</div>
+						<div class="flex-items-a">
+							<input type="submit" value="작성" class="btn reply-btn" style="height:100%">
+						</div>
+					</div>
+				</form>
 		
 		<%-- 댓글 목록 --%>
 		<div class="container m30" id="reply">
@@ -181,18 +209,18 @@
 					</div>
 					
 					<%if(isReplyWriter){ %>
-						<a href="detail.jsp?communityNo=<%=communityNo %>#reply" class="link btn-edit">수정 |</a>
-						<a href="reply_delete.do?communityReplyNo=<%=communityReplyDto.getCommunityReplyNo() %>&communityNo=<%=communityNo %>" class="link">삭제</a>
+						<input type="submit" class="reply-btn btn-reverse" value="수정">
+						<a href="reply_delete.do?communityReplyNo=<%=communityReplyDto.getCommunityReplyNo() %>&communityNo=<%=communityNo %>" class="link btn reply-delete">삭제</a>
 					<%}%>
 					
 				</div>
 					<%-- 댓글 수정창 --%>
-					<div class="row flex-container2">
-							<form action="reply_edit.do" method="post" class="row right">
+					<div class="reply-container">
+							<form action="reply_edit.do" method="post" class="row center">
 								<input type="hidden" name="communityNo" value="<%=communityNo %>">
 								<input type="hidden" name="communityReplyNo" value="<%=communityReplyDto.getCommunityReplyNo() %>">
-								<input type="text" name="communityReplyContent" value="<%=communityReplyDto.getCommunityReplyContent() %>" class="form-input w700 community-reply">
-								<input type="submit" value="수정" class="btn-reverse reply-btn">
+								<input type="text" name="communityReplyContent" value="<%=communityReplyDto.getCommunityReplyContent() %>" class="form-input w600 community-reply" style="height:100%">
+								<input type="submit" value="수정" class="btn-reverse reply-btn" style="height:100%">
 							</form>
 					</div>
 				<hr style="border:solid 0.5px lightgray">
