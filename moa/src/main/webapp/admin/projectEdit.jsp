@@ -29,7 +29,7 @@
 		<div class="row m20">
 			<h3>*프로젝트 기본 정보</h3>
 		</div>
-<form action="projectEdit.do" method="post" >
+<form action="projectEdit.do" method="post" class="insert-form">
 	<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>"> 
 		<div class="row m20">		     					
 			<label>카테고리</label> 
@@ -85,35 +85,30 @@
 			<%} %>
 		</select>
 		</div>
-		<div class="row m20">
-			<label>프로젝트명</label> 
-			<input type="text" name="projectName" class="form-input fill text-length" value="<%=projectDto.getProjectName()%>" 
-			data-len="30" data-success-msg="" data-fail-msg="30자 이내로 입력해주세요." required>
-			<div class="flex-container length">
-				<div class="left-wrapper msg f12 red"></div>
-				<div class="right-wrapper right count f12 gray"></div><span class="f12 gray">/30</span>
+		
+		
+		
+			<div class="row m20">
+				<label>프로젝트명</label> 
+				<input type="text" name="projectName" class="form-input fill checkValue" value="<%=projectDto.getProjectName()%>">
+				<span class="f12 red"></span>
 			</div>
-		</div>
-		<div class="row m20">
-			<label>프로젝트 요약글</label>
-			<textarea name="projectSummary" rows="10" class="form-input fill text-length" data-len="100"
-				data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."><%=projectDto.getProjectSummary()%></textarea>
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span>
-				</div>
-		</div>
-		<div class="row m20">
-			<label>펀딩 목표 금액</label> 
-			<input type="number" name="projectTargetMoney" class="form-input fill" value="<%=projectDto.getProjectTargetMoney()%>"> 
-			<span class="font-on" style="color: red; font-size: 12px"></span><br>
-			<span style="color: gray; font-size: 12px"> 
-				※목표 금액 설정 시 꼭알아두세요!<br> 
-				종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.<br> 
-				종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.<br> 
-				제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.<br>
-			</span>
-		</div>
+			<div class="row m20">
+				<label>프로젝트 요약글</label>
+				<textarea name="projectSummary" rows="5" class="form-input fill checkValue"><%=projectDto.getProjectSummary()%></textarea>
+				<span class="f12 red"></span>
+			</div>
+			<div class="row m30">
+				<label>펀딩 목표 금액</label> 
+				<input type="number" name="projectTargetMoney" class="form-input fill checkValue"  value="<%=projectDto.getProjectTargetMoney()%>"> 
+				<span class="font-on f12 red"></span><br>
+				<span class="f12 gray" > 
+					※목표 금액 설정 시 꼭알아두세요!<br> 
+					종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.<br> 
+					종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.<br> 
+					제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.<br>
+				</span>
+			</div>
 		<hr>
 		<div class="row m30">
 			<h3>*펀딩 일정</h3>
@@ -123,7 +118,7 @@
 				<li class="insert-li">
 					<div class="row">펀딩 시작일</div>
 					<div class="row m5">
-						<input type="text" name="projectStartDate" id="start" autocomplete="off" class="form-date" value="<%=projectDto.getProjectStartDate()%>">
+						<input type="text" name="projectStartDate" id="start" autocomplete="off" class="form-date checkValue" value="<%=projectDto.getProjectStartDate()%>">
 					</div>
 				</li>
 				<li class="insert-li">
@@ -135,7 +130,7 @@
 				<li class="insert-li">
 					<div class="row">펀딩 마감일</div>
 					<div class="row m5">
-						<input type="text" name="projectSemiFinish" id="end" autocomplete="off" class="form-date" value="<%=projectDto.getProjectSemiFinish()%>">
+						<input type="text" name="projectSemiFinish" id="end" autocomplete="off" class="form-date checkValue" value="<%=projectDto.getProjectSemiFinish()%>">
 					</div>
 				</li>
 				<li class="insert-li">
