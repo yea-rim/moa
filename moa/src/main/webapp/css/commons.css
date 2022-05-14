@@ -431,7 +431,7 @@ textarea.form-input {
 .display-center {
     display: flex;
     justify-content: center;/*display가 flex인 경우 가로 정렬 옵션 */
-   align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
+   	align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
 }
 
 .left-wrapper {

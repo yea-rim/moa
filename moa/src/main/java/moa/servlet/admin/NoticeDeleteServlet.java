@@ -1,4 +1,4 @@
-package moa.servlet.notice;
+package moa.servlet.admin;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import moa.beans.MoaNoticeAttachDao;
 import moa.beans.MoaNoticeAttachDto;
 import moa.beans.MoaNoticeDao;
 
-@WebServlet(urlPatterns="/notice/delete.do")
+@WebServlet(urlPatterns="/admin/notice_delete.do")
 public class NoticeDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 			}
 			
 			// 출력
-			resp.sendRedirect("list.jsp");
+			resp.sendRedirect("notice_list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

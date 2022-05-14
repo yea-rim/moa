@@ -143,8 +143,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		<div class="row flex-container1">
 			<%for (ProjectDto projectDto : list2) {%>
 			<div class="row flex-items2 m10">
-		
-				<div class="row">
+			<div class="flex-container2">
 				<% 	
 					// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
 					projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
@@ -159,24 +158,23 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 						<img src="https://dummyimage.com/200x200" width="200px" height="170px">
 					<%} %>
 					</a>
-				</div>
 			
 			<% 
 				projectVo = projectDao.selectVo(projectDto.getProjectNo());
 				sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 			%>
-			<div class="flex-container2">
-				<div class="category left">
-					<span><%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %></span>
+			
+				<div class="row category left mt10">
+					<%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %>
 				</div>
 		
-				<div class="row left m10 new-name">
+				<div class="row left new-name m10">
 					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
-					<span><%=projectDto.getProjectName()%></span>
+						<%=projectDto.getProjectName()%>
 					</a>
 				</div>
-				<div class="left percent">
-					<span><%=projectVo.getPercent() %> %</span>
+				<div class="row left percent">
+					<%=projectVo.getPercent() %> %
 				</div>
 			</div>
 			
@@ -275,9 +273,9 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		%> 
 			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 			<%if(isExistPhoto){ %>
-				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="200px">
+				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="200px" style="border-radius: 10%;">
 			<%} else{ %>
-				<img src="https://dummyimage.com/200x200" width="240px" height="200px">
+				<img src="https://dummyimage.com/200x200" width="240px" height="200px" style="border-radius: 10%;">
 			<%} %>
 			</a>
 		</div>
@@ -288,7 +286,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			</div>
 			</div>
 
-		<div class="row left m10 new-name">
+		<div class="row m10 left new-name">
 			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
 				<span><%=projectDto.getProjectName()%></span>
 			</a>

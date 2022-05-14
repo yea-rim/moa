@@ -1,11 +1,18 @@
 <%@page import="moa.beans.MoaNoticeAttachDto"%>
 <%@page import="moa.beans.MoaNoticeAttachDao"%>
 <%@page import="moa.beans.MoaNoticeDto"%>
-<%@page import="java.util.List"%>
 <%@page import="moa.beans.MoaNoticeDao"%>
+<%@page import="moa.beans.ProjectDto"%>
+<%@page import="moa.beans.ProjectDao"%>
+<%@page import="moa.beans.MemberDao"%>
+<%@page import="moa.beans.MemberDto"%>
+<%@page import="moa.beans.CommunityDto"%>
+<%@page import="moa.beans.CommunityDao"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
+	pageEncoding="UTF-8"%>
+	
+<%-- 준비 --%>
 <%
 request.setCharacterEncoding("UTF-8");
 
@@ -55,6 +62,11 @@ if (isSearch) {
 }
 
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>moa 공지사항</title>
 	
 <style>
 .flex-container1 {
@@ -84,20 +96,22 @@ if (isSearch) {
 .notice-name {
     text-overflow: ellipsis;
     overflow: hidden;
+    padding:0.5em;
 }
 .search{
 	justify-content: center;
 }
 </style>
-
+<jsp:include page="/template/header.jsp"></jsp:include>
 
 
 
 <%-- 검색결과 --%>
+<hr style="border:solid 0.5px lightgray">
 
-<div class="container w600 m30">
+<div class="container w800 m30">
 	<div class="row center">
-		<a href="list.jsp?p=1&s=10" class="link">
+		<a href="notice_list.jsp?p=1&s=10" class="link">
 			<h1>공지사항</h1>
 		</a>
 	</div>
@@ -106,7 +120,7 @@ if (isSearch) {
 	<%-- <%if(isAdmin){ %> --%>
 	<div class="container w800 m10">
 		<div class="row left">
-			<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
+			<a href="notice_insert.jsp" class="link btn-reverse">공지 작성하기</a>
 		</div>
 	</div>
 	<%-- <%} %> --%>
@@ -129,11 +143,11 @@ if (isSearch) {
 					
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
-									<a href="detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+									<a href="notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
-							<div class="row left m10">
+							<div class="row left notice-name">
 								<h5>moa &nbsp;&nbsp;&nbsp; <%=moaNoticeDto.getNoticeTime() %>(<%=moaNoticeDto.getNoticeReadcount() %>)</h5>
 							</div>
 						</div>
@@ -186,17 +200,17 @@ if(endBlock>lastPage)
 <div class="pagination center m50">
 <%if(p>1){ // 첫페이지가 아니라면 %>
 	<%if (isSearch) {%>
-	<a href="list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
+	<a href="notice_list.jsp?p=1&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&laquo;</a>
 	<%} else {%>
-	<a href="list.jsp?p=1&s=<%=s%>">&laquo;</a>
+	<a href="notice_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 	<%}%>
 	<%}%>
 
 <%if(startBlock>1){ // 이전 블록이 있으면%>
 	<%if (isSearch) {%>
-	<a href="list.jsp?p=<%=startBlock - 1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+	<a href="notice_list.jsp?p=<%=startBlock - 1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
 	<%} else {%>
-	<a href="list.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
+	<a href="notice_list.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
 	<%}%>
 <%}%>
 
@@ -206,16 +220,16 @@ if(endBlock>lastPage)
 	<%if (isSearch) {%>
 	
 	<%if(i==p){ %>
-	<a class="active" href="list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
+	<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
 	<%} else{ %>
-	<a href="list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
+	<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>"><%=i%></a>
 	<%} %>
 	
 	<%} else {%>
 	<%if(i==p){ %>
-	<a class="active" href="list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+	<a class="active" href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 	<%} else{ %>
-	<a href="list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+	<a href="notice_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 	<%} %>
 	
 	<%}%>
@@ -224,17 +238,17 @@ if(endBlock>lastPage)
 <!-- 다음 버튼 영역 -->
 <%if(endBlock<lastPage) {%>
 	<%if (isSearch) { // 다음 블록이 있으면 %>
-	<a href="list.jsp?p=<%=endBlock + 1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+	<a href="notice_list.jsp?p=<%=endBlock + 1%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
 	<%} else {%>
-	<a href="list.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
+	<a href="notice_list.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
 	<%}%>
 <%}%>
 
 <%if(p<lastPage) { // 마지막 페이지가 아니라면%>
 	<%if (isSearch) {%>
-	<a href="list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
+	<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>&type=<%=type%>&keyword=<%=keyword%>">&raquo;</a>
 	<%} else {%>
-	<a href="list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+	<a href="notice_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 	<%}%>
 <%}%>
 </div>
@@ -243,7 +257,7 @@ if(endBlock>lastPage)
 
 <%-- 검색창 --%>
 
-		<form action="list.jsp" method="get">
+		<form action="notice_list.jsp" method="get">
 			<div class="flex-container search">
 				<div>
 					<select name="type" required class="form-input">
@@ -261,5 +275,4 @@ if(endBlock>lastPage)
 		</form>
 	
 </div>
-
-<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>
