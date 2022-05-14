@@ -1,4 +1,4 @@
-package moa.servlet.project;
+package moa.servlet.seller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.AttachDao;
 
-@WebServlet("/admin/attach_delete.do")
-public class ProjectAttachDeleteServlet extends HttpServlet{
+@WebServlet("/seller/attach_delete.do")
+public class SellerProjectAttachDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -21,7 +21,7 @@ public class ProjectAttachDeleteServlet extends HttpServlet{
 			boolean success = attachDao.delete(attachNo);
 			
 			if(success) {
-				resp.sendRedirect("project_attach_edit.jsp?projectNo="+projectNo);
+				resp.sendRedirect("attach_edit.jsp?projectNo="+projectNo);
 			}else {
 				resp.sendError(404);
 			}

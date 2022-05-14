@@ -62,8 +62,36 @@ AttachDao attachDao = new AttachDao();
 		            $(this).prev().prev().val(fileName);
 		        });
 	        });
+	        
+	      //추가,수정 시 파일 첨부 검사  
+	     $(".btn-file").each(function(){
+				$(this).click(function(){
+			    	 var file = $(this).prev('input').val();
+			    	 if(file==""){
+			    		 alert("파일을 첨부해주세요");
+			    		 return false;
+			    	 }
+				});
+	     });   
+	      
+	 	//삭제 기본 이벤트 차단
+	 	$(".btn-del").click(function() {
+	 		return confirm("정말 삭제 하시겠습니까?");
+	 	});
+	        
         });
     </script>
+    
+     <div class="flex-container mt40">
+		 <!-- 마이페이지 메인으로 이동 -->
+             <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="왼쪽 아이콘">왼쪽 아이콘  제작자: Catalin Fertu - Flaticon</a> -->
+             <a href="<%=request.getContextPath() %>/admin/project_project_detail.jsp?projectNo=<%=projectNo %>">
+                    <img src="<%=request.getContextPath() %>/image/arrow.png" alt="왼쪽 화살표" width="25">
+             </a>
+             <a href="<%=request.getContextPath() %>/admin/project_detail.jsp?projectNo=<%=projectNo %>" class="link mlr5">
+                     <h2>돌아가기</h2>
+              </a>
+	</div>   
 <div class="container w900">
 	<div class="row center mb40">
 		<h1 class="m5">프로젝트 이미지 수정</h1>
@@ -90,16 +118,18 @@ AttachDao attachDao = new AttachDao();
 					</div>
 					<div class="row mt15">
 						<div class="filebox-a center w220">
-							<form action="attachEdit.do" method="post" enctype="multipart/form-data">
+							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
 								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
-								<button type="submit" class="link link-small btn-edit f12">수정</button>
-								<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
-									<button type="button" class="link link-small btn-edit f12">삭제</button>
-								</a>
+								<button type="submit" class="link link-small btn-file f12">수정</button>
 							</form>
+							<%if(count > 2){ %>
+								<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
+									<button type="button" class="link link-small btn-del f12">삭제</button>
+								</a>
+							<%} %>	
 						</div>
 					</div>
 				</div>
@@ -117,11 +147,11 @@ AttachDao attachDao = new AttachDao();
 					</div>
 					<div class="row mt15 mlr10">
 						<div class="filebox-a center w220">
-							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
+							<form action="attach_insert.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input class="upload-name" placeholder="파일첨부"> 
 								<label for="file1<%=i%>">선택</label> <input type="file" id="file1<%=i%>" name="profileAttach" class="attach">
-								<button type="submit" class="link link-small btn-edit f12">추가</button>
+								<button type="submit" class="link link-small btn-file f12">추가</button>
 							</form>
 						</div>
 					</div>
@@ -152,16 +182,18 @@ AttachDao attachDao = new AttachDao();
 					</div>
 					<div class="row mt15 mlr10">
 						<div class="filebox-a center w220">
-							<form action="attachEdit.do" method="post" enctype="multipart/form-data">
+							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
 								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach" class="attach">
-								<button type="submit" class="link link-small btn-edit f12">수정</button>
+								<button type="submit" class="link link-small btn-file f12">수정</button>
 							</form>
+							<%if(count2>2){ %>
 									<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>">
-									<button type="button" class="link link-small btn-edit f12">삭제</button>
+									<button type="button" class="link link-small btn-del f12">삭제</button>
 								</a>
+							<%} %>
 						</div>
 					</div>
 				</div>
@@ -177,11 +209,11 @@ AttachDao attachDao = new AttachDao();
 					</div>
 					<div class="row mt15 mlr10">
 						<div class="filebox-a center w220">
-							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
+							<form action="attach_insert.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input class="upload-name" placeholder="파일첨부"> 
 								<label for="file3<%=i%>">선택</label> <input type="file" id="file3<%=i %>" name="detailAttach" class="attach">
-								<button type="submit" class="link link-small btn-edit f12">추가</button>
+								<button type="submit" class="link link-small btn-file f12">추가</button>
 							</form>
 						</div>
 					</div>

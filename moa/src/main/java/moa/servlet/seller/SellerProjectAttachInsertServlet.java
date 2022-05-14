@@ -17,7 +17,7 @@ import moa.beans.AttachDto;
 import moa.beans.ProjectAttachDao;
 import moa.beans.ProjectAttachDto;
 
-@WebServlet(urlPatterns = "/admin/attachInsert.do")
+@WebServlet(urlPatterns = "/seller/attach_insert.do")
 public class SellerProjectAttachInsertServlet extends HttpServlet{
 	 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -90,7 +90,7 @@ public class SellerProjectAttachInsertServlet extends HttpServlet{
 	 		}
 	 		
 	 		//페이지 이동
-	 		resp.sendRedirect("project_attach_edit.jsp?projectNo="+projectNo);
+	 		resp.sendRedirect("attach_edit.jsp?projectNo="+projectNo);
 	 		
 		} catch (Exception e) {
 			e.printStackTrace();
