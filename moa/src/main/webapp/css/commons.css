@@ -702,6 +702,14 @@ textarea.form-input {
     /* opacity는 불투명도이며 0부터 1사이로 설정한다. (0 투명, 1 불투명) */
     opacity: 0.4;
 }
+.img-hover{
+        transform: scale(1);
+
+        transition: transform 0.1s ease-in-out;
+}
+.img-hover:hover{
+        transform: scale(1.02);
+}
 
 
 /* margin(left-right) */

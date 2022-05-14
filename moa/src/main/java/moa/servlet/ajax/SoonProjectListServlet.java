@@ -14,22 +14,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
-@WebServlet(urlPatterns="/ajax/ongoingList.do")
-public class OngoingProjectListServlet extends HttpServlet {
+@WebServlet(urlPatterns="/ajax/soonList.do")
+public class SoonProjectListServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 준비 
 			int p = Integer.parseInt(req.getParameter("p")); // 페이지 번호
 			int s = Integer.parseInt(req.getParameter("s")); // 페이지 번호
-			String sort = req.getParameter("sort");
+			
 			
 			// 처리 
 			ProjectDao projectDao = new ProjectDao();
-			List<ProjectDto> list = projectDao.ongoingSelectList(p, s, sort);
+			List<ProjectDto> list = projectDao.selectSoon(p, s);
 			
 			// 출력 
-//			resp.getWriter().print(list); // 자바스크립트에서 알아들을 수 없는 형태 
+			resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); 
+			// 아래 설정하지 않으면 일반 글자만 주고 받을 수 있기 때문에 
+			// 아래 코드를 통해서 제한을 풀어야한다.
+			resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
 			
 			// Jacson-databind 라는 라이브러리를 이용하여 list를 JSON 형태로 변환 후 출력할 예정 
 			// [1] ObjectMapper라는 클래스의 객체를 생성한다. 
@@ -39,6 +42,7 @@ public class OngoingProjectListServlet extends HttpServlet {
 			// [3] client에게 변환된 데이터를 전송 
 			resp.setContentType("application/json; charset=UTF-8");
 			resp.getWriter().print(jsonString);
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();

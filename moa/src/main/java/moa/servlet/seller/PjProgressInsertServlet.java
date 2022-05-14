@@ -97,8 +97,7 @@ public class PjProgressInsertServlet extends HttpServlet {
 				progressAttachDao.insert(progressAttachDto);
 	 		}
 			// 출력
-	 		// 임시 주소 / 해당 프로젝트 디테일페이지로 갈 예정
-			resp.sendRedirect("my_page.jsp");
+	 		resp.sendRedirect(req.getContextPath()+"/project/detail/notice.jsp?projectNo="+progressProjectNo+"&progressNo="+progressNo);
 			
 		}
 		catch(Exception e) {

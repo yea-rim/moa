@@ -122,7 +122,7 @@
 	                        <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %>
 					        <div class="float-right m70 mlr20">
 					          	<div class="row mt5">
- 					          		<a href="" class="link link-reverse w100 center">배너 신청</a>
+ 					          		<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">배너 신청</a>
 					          	</div>
 					        </div>
 	                        

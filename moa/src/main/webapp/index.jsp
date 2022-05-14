@@ -90,6 +90,9 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	color: gray;
 	text-decoration: none;
 }
+.more-btn:hover{
+	color: black;
+}
 .new-name {
 	font-size: 20px;
 	overflow: hidden;
@@ -183,7 +186,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			<%}%>
 		</div>
 		<div class="center mt30">
-			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="btn-reverse link" style="padding:5px 30px">전체 보러가기</a>
+			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="more-btn">전체 보러가기</a>
 		</div>
 	</div>
 </div>
@@ -203,9 +206,8 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 					</div>
 					<div class="row flex-container2 flex-items-b">
 						<div class="row project-name m10">
-							<a
-								href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
-								class="link"> <%=projectDto.getProjectName()%>
+							<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
+								<%=projectDto.getProjectName()%>
 							</a>
 						</div>
 
@@ -219,7 +221,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 							</div>
 					</div>
 
-					<div class="row flex-items-c m10 right">
+					<div class="row flex-items-c m10 right img-hover">
 					<% 	
 						// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
 						projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
@@ -249,11 +251,11 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		<div class="row left big-text mt50 mlr10">
 			<div class="flex-container1">
 				<div>
-					<a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">
+					<a href="<%=request.getContextPath()%>/project/comingList.jsp" class="link">
 						공개예정 프로젝트
 					</a>
 				</div>
-					<a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="more-btn" >
+					<a href="<%=request.getContextPath()%>/project/comingList.jsp" class="more-btn" >
 						더 보러가기
 					</a>
 			</div>
@@ -263,7 +265,6 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	<%for (ProjectDto projectDto : list3) {%>
 	<div class="row flex-items2 m10">
 
-		<div class="row">
 		<% 	
 			// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
 			projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
@@ -271,11 +272,12 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			//사진이 있는지 판정
 			boolean isExistPhoto = projectAttachDto != null;	
 		%> 
+		<div class="img-hover">
 			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 			<%if(isExistPhoto){ %>
-				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="200px" style="border-radius: 10%;">
+				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="230px" height="200px" style="border-radius: 10%;">
 			<%} else{ %>
-				<img src="https://dummyimage.com/200x200" width="240px" height="200px" style="border-radius: 10%;">
+				<img src="https://dummyimage.com/200x200" width="230px" height="200px" style="border-radius: 10%;">
 			<%} %>
 			</a>
 		</div>
