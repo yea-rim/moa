@@ -1,3 +1,5 @@
+<%@page import="moa.beans.MemberProfileDto"%>
+<%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.MemberDao"%>
 <%@page import="java.util.Date"%>
@@ -35,7 +37,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,13 +104,17 @@
 			                		</div>
                 				<%} %>
                 		<%} %>
+                		<%
+                			MemberProfileDao memberProfileDao = new MemberProfileDao();
+                			MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
+                		%>
+						
                 		<div class="float-right layer-5 center m10">
                 			<ul class="menu center">
                 				<li>
-                					<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">
-                						<h3>마이페이지</h3>
+                					<a href="<%=request.getContextPath() %>/member/my_page.jsp" class="link">       
+                						<h3>마이페이지</h3>               					
                 					</a>
-                					
                 					<ul>
                 						<li>
                 							<a href="<%=request.getContextPath()%>/member/logout.do">
@@ -119,6 +125,13 @@
                 				</li>
                 			</ul>
                 		</div>
+						<div class="float-right layer-5 right mt10 mlr5">
+              		               <%if(memberProfileDto != null){ %>             			  		
+              							<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="40"  height="40"- class="img img-circle">               				
+              						<%}else{ %>
+              							<img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="40" height="40" class="img img-circle">      			
+              						<% }%>
+						</div>
                 <%}else { // 로그인 상태가 아니면 %>           
                 	<div class="float-right layer-5 center m10">
                 		<a href="<%=request.getContextPath() %>/member/join.jsp" class="link">

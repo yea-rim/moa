@@ -15,7 +15,7 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 		<div class="row center m50">
 			<h1>리워드 수정</h1>
 		</div>
-<form action="rewardEdit.do" method="post">
+<form action="rewardEdit.do" method="post" class="edit-form">
 		<input type="hidden" name="projectNo" value="<%=projectNo%>">
 		<%
 		int num =1;
@@ -26,32 +26,42 @@ List<RewardDto> rewardList = rewardDao.selectProject(projectNo); /* 해당 리�
 				<div class="left-wrapper">
 					<h3>리워드 <%=num %></h3>
 				</div>
+				<%if(num!=1){ %>
 				<div class="right-wrapper right">
 					<a href="rewardDelete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
 				</div>
+				<%} %>
 			</div>
 		</div>
 			<input type="hidden" name="rewardNo" value="<%=rewardDto.getRewardNo()%>">
 			<div class="row m20">
-				<label>리워드 이름</label> <input type="text" name="rewardName"
-					class="form-input fill" value="<%=rewardDto.getRewardName()%>">
+				<label>리워드 이름</label> 
+				<input type="text" name="rewardName" class="form-input fill checkValue" value="<%=rewardDto.getRewardName()%>">
+					<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill"><%=rewardDto.getRewardContent()%></textarea>
+				<textarea name="rewardContent" rows="5" class="form-input fill checkValue"><%=rewardDto.getRewardContent()%></textarea>
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
-				<label>리워드 가격</label> <input type="number" name="rewardPrice" 
-				class="form-input fill"  value="<%=rewardDto.getRewardPrice()%>">
+				<label>리워드 가격</label> 
+				<input type="number" name="rewardPrice" class="form-input fill checkValue"  value="<%=rewardDto.getRewardPrice()%>">
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
-				<label>리워드 재고</label> <input type="number" name="rewardStock"
-					class="form-input fill"  value="<%=rewardDto.getRewardStock()%>">
+				<div class="row"><label>리워드 재고</label></div>
+				<input type="number" name="rewardStock" class="form-input w80p checkValue"  value="<%=rewardDto.getRewardStock()%>">
+				<span class="f12 red"></span>
+				<input type="checkbox" class="form-input ckbox" value="<%=rewardDto.getRewardIsoption()%>">
+				<input type="hidden" name="rewardIsOption" value="<%=rewardDto.getRewardIsoption()%>">
+				<label class="f12 gray">상세 옵션 여부</label>
 			</div>
 			<div class="row m20">
 				<div class="row"><label>배송비</label></div>
-				<input type="number" name="rewardDelivery" class="form-input w80p" value="<%=rewardDto.getRewardDelivery()%>">
-				<input type="checkbox"  class="form-input rewardEach-cb" value="<%=rewardDto.getRewardEach()%>">
+				<input type="number" name="rewardDelivery" class="form-input w80p checkValue" value="<%=rewardDto.getRewardDelivery()%>">
+				<span class="f12 red"></span>
+				<input type="checkbox"  class="form-input ckbox" value="<%=rewardDto.getRewardEach()%>">
 				<input type="hidden" name="rewardEach" value="<%=rewardDto.getRewardEach()%>">
 				<label class="f12 gray">개별 배송 여부</label>
 			</div>

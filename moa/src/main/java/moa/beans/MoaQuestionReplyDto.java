@@ -3,7 +3,6 @@ package moa.beans;
 import java.sql.Date;
 
 public class MoaQuestionReplyDto {
-	private int questionReplyNo;
 	private int questionTargetNo;
 	private Date questionReplyTime;
 	private String questionReplyContent;
@@ -11,11 +10,7 @@ public class MoaQuestionReplyDto {
 	public MoaQuestionReplyDto() {
 		super();
 	}
-	
 
-	public int getQuestionReplyNo() {
-		return questionReplyNo;
-	}
 	public int getQuestionTargetNo() {
 		return questionTargetNo;
 	}
@@ -26,9 +21,7 @@ public class MoaQuestionReplyDto {
 	public String getQuestionReplyContent() {
 		return questionReplyContent;
 	}
-	public void setQuestionReplyNo(int questionReplyNo) {
-		this.questionReplyNo = questionReplyNo;
-	}
+
 	public void setQuestionTargetNo(int questionTargetNo) {
 		this.questionTargetNo = questionTargetNo;
 	}

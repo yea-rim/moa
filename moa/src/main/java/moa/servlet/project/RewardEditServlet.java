@@ -27,6 +27,7 @@ public class RewardEditServlet extends HttpServlet{
 				String [] rewardStock = req.getParameterValues("rewardStock"); 	
 				String [] rewardDelivery = req.getParameterValues("rewardDelivery"); 
 				String [] rewardEach = req.getParameterValues("rewardEach"); 	
+				String [] rewardIsOption = req.getParameterValues("rewardIsOption"); 	
 				 
 				RewardDao rewardDao = new RewardDao();
 				for(int i=0; i<rewardNo.length; i++) {
@@ -39,6 +40,7 @@ public class RewardEditServlet extends HttpServlet{
 					rewardDto.setRewardStock(Integer.parseInt(rewardStock[i]));
 					rewardDto.setRewardDelivery(Integer.parseInt(rewardDelivery[i]));
 					rewardDto.setRewardEach(Integer.parseInt(rewardEach[i]));
+					rewardDto.setRewardIsoption(Integer.parseInt(rewardIsOption[i]));
 					
 					boolean success = rewardDao.edit(rewardDto);
 					if(!success) {
@@ -55,6 +57,7 @@ public class RewardEditServlet extends HttpServlet{
 				String [] addRewardStock = req.getParameterValues("addRewardStock"); 
 				String [] addRewardDelivery = req.getParameterValues("addRewardDelivery"); 
 				String [] addRewardEach = req.getParameterValues("addRewardEach"); 
+				String [] addRewardIsOption = req.getParameterValues("addRewardIsOption"); 
 				
 				 RewardDao addRewardDao = new RewardDao();
 					for(int i=0; i<addRewardName.length; i++) {
@@ -67,6 +70,7 @@ public class RewardEditServlet extends HttpServlet{
 						rewardDto.setRewardStock(Integer.parseInt(addRewardStock[i]));
 						rewardDto.setRewardDelivery(Integer.parseInt(addRewardDelivery[i]));
 						rewardDto.setRewardEach(Integer.parseInt(addRewardEach[i]));							
+						rewardDto.setRewardIsoption(Integer.parseInt(addRewardIsOption[i]));							
 						
 						addRewardDao.insert(rewardDto);
 					}

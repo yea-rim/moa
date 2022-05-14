@@ -1452,4 +1452,36 @@ public class ProjectDao {
 			return check;
 			
 		}
+		
+		//마감된 프로젝트 중에 나의 펀딩 번호를 넣으면 프로젝트 정보 반환
+		public ProjectDto selectSuccessMyFunding(int fundingNo, int memberNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+
+			String sql = "select * from project where project_no = (select distinct project_no from member_funding_info where funding_no = ? and funding_member_no = ?)";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, fundingNo);
+			ps.setInt(2, memberNo);
+			ResultSet rs = ps.executeQuery();
+
+			ProjectDto projectDto = new ProjectDto();
+			if(rs.next()) {
+				projectDto.setProjectNo(rs.getInt("project_no"));
+				projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+				projectDto.setProjectCategory(rs.getString("project_category"));
+				projectDto.setProjectName(rs.getString("project_name"));
+				projectDto.setProjectSummary(rs.getString("project_summary"));
+				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+				projectDto.setProjectPermission(rs.getInt("project_permission"));
+				projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+
+			}else {
+				projectDto = null;
+			}
+
+			return projectDto;
+		}
 }

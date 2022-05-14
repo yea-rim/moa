@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.ProjectDao;
 
 @WebFilter(filterName = "f20-project_detail", urlPatterns = {"/project/project_detail.jsp", 
-		"/project/detail/*", 
+		"/project/detail/body.jsp",
+		"/project/detail/qna.jsp",
+		"/project/detail/notice.jsp",
+		"/project/detail/notice_detail.jsp",
 		"/project/funding.jsp"})
 public class ProjectDetailFilter implements Filter{
 

@@ -3,7 +3,23 @@
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
 
+	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
+	Integer memberNo = (Integer) session.getAttribute("login"); 
+	// memberNo 데이터 여부 판단 -> 로그인 여부 판단 
+	boolean isLogin = memberNo != null;
+	
+	// 세션에서 admin 정보 꺼내기
+	Integer admin = (Integer) session.getAttribute("admin");
+	// adminId 데이터 여부 판단 -> 관리자 권한 판단
+	boolean isAdmin = admin !=null;
+	
+	// 판매자 세션 가져오기
+	Integer seller = (Integer) session.getAttribute("seller");
+	boolean isSeller = seller !=null;
+
+%>
 <%
 	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 %>

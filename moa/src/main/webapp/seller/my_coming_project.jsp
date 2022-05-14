@@ -122,7 +122,9 @@
 	                        <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo()); %>
 					        <div class="float-right m70 mlr20">
 					          	<div class="row mt5">
-					          		<a href="" class="link link-reverse w100 center">배너 신청</a>
+					          	<%-- 공지작성 임의 추가 추후 수정 예정 --%>
+<!-- 					          		<a href="" class="link link-reverse w100 center">배너 신청</a> -->
+					          		<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">공지 작성</a>
 					          	</div>
 					        </div>
 	                        
