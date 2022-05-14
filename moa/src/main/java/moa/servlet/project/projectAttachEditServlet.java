@@ -16,7 +16,7 @@ import moa.beans.AttachDao;
 import moa.beans.AttachDto;
 
 
-@WebServlet(urlPatterns = "/admin/attachEdit.do")
+@WebServlet(urlPatterns = "/admin/attach_edit.do")
 public class projectAttachEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

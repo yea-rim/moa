@@ -19,7 +19,10 @@
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	List<ProjectAttachDto> profileList = projectAttachDao.selectProfileList(projectNo);
 	List<ProjectAttachDto> detailList = projectAttachDao.selectDetailList(projectNo);
-
+	
+	int profileListSize = profileList.size();
+	int detailListSize = detailList.size();
+	
 	AttachDao attachDao = new AttachDao();
 	
 	RewardDao rewardDao = new RewardDao();
@@ -34,7 +37,7 @@
 		border-left: 1px solid #dcdcdc;
 		list-style-type: disc;
 	}
-	.filebox-a input[type="file"] {
+.filebox-a input[type="file"] {
 	position: absolute;
 	width: 0;
 	height: 0;
@@ -50,7 +53,7 @@
 	vertical-align: middle;
 	border: 1px solid #dddddd;
 	border-radius: 0.3em;
-	width: 50%;
+	width: 40%;
 	color: #999999;
 }
 /* label 스타일 변경 */
@@ -63,7 +66,6 @@
 	border-radius: 0.3em;
 	cursor: pointer;
 	height: 30px;
-	margin-left: 10px;
 	font-size: 12px;
 }
 </style>
@@ -81,6 +83,18 @@
 		            $(this).prev().prev().val(fileName);
 		        });
 	        });
+	       
+	      //추가,수정 시 파일 첨부 검사  
+	     $(".btn-file").each(function(){
+				$(this).click(function(){
+			    	 var file = $(this).prev('input').val();
+			    	 if(file==""){
+			    		 alert("파일을 첨부해주세요");
+			    		 return false;
+			    	 }
+				});
+	     });   
+	      
         });
     </script>
 
@@ -102,13 +116,13 @@
 
 		<div class="container w900 m30 ">
 		<div class="row center m50">
-			<h1>프로젝트 정보 수정</h1>
+			<h1>프로젝트 정보</h1>
 		</div>
 		<hr>
 		<div class="row m20">
 			<h3>*프로젝트 기본 정보</h3>
 		</div>
-<form action="project_reinsert.do" method="post" >
+<form action="project_edit.do" method="post" class="insert-form">
 	<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>"> 
 		<div class="row m20">		     					
 			<label>카테고리</label> 
@@ -164,35 +178,30 @@
 			<%} %>
 		</select>
 		</div>
-		<div class="row m20">
-			<label>프로젝트명</label> 
-			<input type="text" name="projectName" class="form-input fill text-length" value="<%=projectDto.getProjectName()%>" 
-			data-len="30" data-success-msg="" data-fail-msg="30자 이내로 입력해주세요." required>
-			<div class="flex-container length">
-				<div class="left-wrapper msg f12 red"></div>
-				<div class="right-wrapper right count f12 gray"></div><span class="f12 gray">/30</span>
+		
+		
+		
+			<div class="row m20">
+				<label>프로젝트명</label> 
+				<input type="text" name="projectName" class="form-input fill checkValue" value="<%=projectDto.getProjectName()%>">
+				<span class="f12 red"></span>
 			</div>
-		</div>
-		<div class="row m20">
-			<label>프로젝트 요약글</label>
-			<textarea name="projectSummary" rows="10" class="form-input fill text-length" data-len="100"
-				data-success-msg="" data-fail-msg="100자 이내로 입력해주세요."><%=projectDto.getProjectSummary()%></textarea>
-				<div class="flex-container length">
-					<div class="left-wrapper msg f12 red"></div>
-					<div class="right-wrapper right count f12 gray">0</div><span class="f12 gray">/100</span>
-				</div>
-		</div>
-		<div class="row m20">
-			<label>펀딩 목표 금액</label> 
-			<input type="number" name="projectTargetMoney" class="form-input fill" value="<%=projectDto.getProjectTargetMoney()%>"> 
-			<span class="font-on" style="color: red; font-size: 12px"></span><br>
-			<span style="color: gray; font-size: 12px"> 
-				※목표 금액 설정 시 꼭알아두세요!<br> 
-				종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.<br> 
-				종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.<br> 
-				제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.<br>
-			</span>
-		</div>
+			<div class="row m20">
+				<label>프로젝트 요약글</label>
+				<textarea name="projectSummary" rows="5" class="form-input fill checkValue"><%=projectDto.getProjectSummary()%></textarea>
+				<span class="f12 red"></span>
+			</div>
+			<div class="row m30">
+				<label>펀딩 목표 금액</label> 
+				<input type="number" name="projectTargetMoney" class="form-input fill checkValue"  value="<%=projectDto.getProjectTargetMoney()%>"> 
+				<span class="font-on f12 red"></span><br>
+				<span class="f12 gray" > 
+					※목표 금액 설정 시 꼭알아두세요!<br> 
+					종료일까지 목표금액을 달성하지 못하면 후원자 결제가 진행되지 않습니다.<br> 
+					종료 전 후원 취소를 대비해 10% 이상 초과 달성을 목표로 해주세요.<br> 
+					제작비, 선물 배송비, 인건비, 예비 비용 등을 함께 고려해주세요.<br>
+				</span>
+			</div>
 		<hr>
 		<div class="row m30">
 			<h3>*펀딩 일정</h3>
@@ -202,7 +211,7 @@
 				<li class="insert-li">
 					<div class="row">펀딩 시작일</div>
 					<div class="row m5">
-						<input type="text" name="projectStartDate" id="start" autocomplete="off" class="form-date" value="<%=projectDto.getProjectStartDate()%>">
+						<input type="text" name="projectStartDate" id="start" autocomplete="off" class="form-date checkValue" value="<%=projectDto.getProjectStartDate()%>">
 					</div>
 				</li>
 				<li class="insert-li">
@@ -214,7 +223,7 @@
 				<li class="insert-li">
 					<div class="row">펀딩 마감일</div>
 					<div class="row m5">
-						<input type="text" name="projectSemiFinish" id="end" autocomplete="off" class="form-date" value="<%=projectDto.getProjectSemiFinish()%>">
+						<input type="text" name="projectSemiFinish" id="end" autocomplete="off" class="form-date checkValue" value="<%=projectDto.getProjectSemiFinish()%>">
 					</div>
 				</li>
 				<li class="insert-li">
@@ -237,14 +246,11 @@
 		
 		<hr>
 	
-		<div class="row mt50 right">
-			<input type="submit" class="btn" value="수정하기"> 
+		<div class="row mt50">
+			<input type="submit" class="btn fill" value="프로젝트 수정하기"> 
 		</div>
-	</form>
+</form>
 	</div>
-	
-
-
 
 <!-- 프로젝트 이미지 수정 파트 -->	
 	
@@ -256,7 +262,6 @@
 	</div>
 	
 	<hr>
-	
 	<!-- 대표 이미지 수정 -->
 	<div class="row m20 mlr30">
 		<h2>* 대표 이미지</h2>
@@ -273,16 +278,44 @@
 					<div class="row center">
 						<img
 							src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=attachDto.getAttachNo()%>"
-							class="card-image-wrapper" width="150px" height="112px">
+							class="card-image-wrapper" width="160px" height="112px">
 					</div>
-					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
-							<form action="attach_reinsert.do" method="post" enctype="multipart/form-data">
+					<div class="row mt15">
+						<div class="filebox-a center w220">
+							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
-								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach">
-								<button type="submit" class="link link-small btn-edit f12">수정</button>
+								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
+								<button type="submit" class="link link-small btn-file f12">수정</button>
+							</form>
+							<%if(count > 2){ %>
+								<a href="<%=request.getContextPath()%>/seller/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
+									<button type="button" class="link link-small btn-del f12">삭제</button>
+								</a>
+							<%} %>	
+						</div>
+					</div>
+				</div>
+				<%
+				}
+				%>
+				<%
+					for (int i=0; i<3-profileListSize; i++) {
+				%>
+				<div class="list-card2 mlr20 m15 center">
+					<div class="row center">
+						<img
+							src="<%=request.getContextPath() %>/image/no_image.png"
+							class="card-image-wrapper" width="150px" height="112px">
+					</div>
+					<div class="row mt15 mlr10">
+						<div class="filebox-a center w220">
+							<form action="attach_insert.do" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="projectNo" value="<%=projectNo%>">
+								<input class="upload-name" placeholder="파일첨부"> 
+								<label for="file1<%=i%>">선택</label> <input type="file" id="file1<%=i%>" name="profileAttach" class="attach">
+								<button type="submit" class="link link-small btn-file f12">추가</button>
 							</form>
 						</div>
 					</div>
@@ -293,9 +326,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- 본문 이미지 수정 -->
+	<!-- 대표 이미지 수정 -->
 	<div class="row m20 mlr30">
-		<h2>* 본문 이미지</h2>
+		<h2>* 본문 이미지 </h2>
 	</div>
 	<div class="row m20">
 		<div class="container">
@@ -312,13 +345,39 @@
 							class="card-image-wrapper" width="150px" height="112px">
 					</div>
 					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
-							<form action="attach_reinsert.do" method="post" enctype="multipart/form-data">
+						<div class="filebox-a center w220">
+							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
-								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach">
-								<button type="submit" class="link link-small btn-edit f12">수정</button>
+								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach" class="attach">
+								<button type="submit" class="link link-small btn-file f12">수정</button>
+							</form>
+							<%if(count2>2){ %>
+									<a href="<%=request.getContextPath()%>seller/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>">
+									<button type="button" class="link link-small btn-del f12">삭제</button>
+								</a>
+							<%} %>
+						</div>
+					</div>
+				</div>
+				<%}%>
+				<%
+					for (int i=0; i<3-detailListSize; i++) {
+				%>
+				<div class="list-card2 mlr20 m15 center">
+					<div class="row center">
+						<img
+							src="<%=request.getContextPath() %>/image/no_image.png"
+							class="card-image-wrapper" width="150px" height="112px">
+					</div>
+					<div class="row mt15 mlr10">
+						<div class="filebox-a center w220">
+							<form action="attach_insert.do" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="projectNo" value="<%=projectNo%>">
+								<input class="upload-name" placeholder="파일첨부"> 
+								<label for="file3<%=i%>">선택</label> <input type="file" id="file3<%=i %>" name="detailAttach" class="attach">
+								<button type="submit" class="link link-small btn-file f12">추가</button>
 							</form>
 						</div>
 					</div>
@@ -341,7 +400,7 @@
 		
 		<hr>
 		
-<form action="reward_reinsert.do" method="post">
+<form action="reward_edit.do" method="post" class="edit-form">
 		<input type="hidden" name="projectNo" value="<%=projectNo%>">
 		<%
 		int num =1;
@@ -352,32 +411,42 @@
 				<div class="left-wrapper">
 					<h3>리워드 <%=num %></h3>
 				</div>
+				<%if(num!=1){ %>
 				<div class="right-wrapper right">
-					<a href="reward_delete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
+					<a href="rewardDelete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
 				</div>
+				<%} %>
 			</div>
 		</div>
 			<input type="hidden" name="rewardNo" value="<%=rewardDto.getRewardNo()%>">
 			<div class="row m20">
-				<label>리워드 이름</label> <input type="text" name="rewardName"
-					class="form-input fill" value="<%=rewardDto.getRewardName()%>">
+				<label>리워드 이름</label> 
+				<input type="text" name="rewardName" class="form-input fill checkValue" value="<%=rewardDto.getRewardName()%>">
+					<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill"><%=rewardDto.getRewardContent()%></textarea>
+				<textarea name="rewardContent" rows="5" class="form-input fill checkValue"><%=rewardDto.getRewardContent()%></textarea>
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
-				<label>리워드 가격</label> <input type="number" name="rewardPrice" 
-				class="form-input fill"  value="<%=rewardDto.getRewardPrice()%>">
+				<label>리워드 가격</label> 
+				<input type="number" name="rewardPrice" class="form-input fill checkValue"  value="<%=rewardDto.getRewardPrice()%>">
+				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
-				<label>리워드 재고</label> <input type="number" name="rewardStock"
-					class="form-input fill"  value="<%=rewardDto.getRewardStock()%>">
+				<div class="row"><label>리워드 재고</label></div>
+				<input type="number" name="rewardStock" class="form-input w80p checkValue"  value="<%=rewardDto.getRewardStock()%>">
+				<span class="f12 red"></span>
+				<input type="checkbox" class="form-input ckbox" value="<%=rewardDto.getRewardIsoption()%>">
+				<input type="hidden" name="rewardIsOption" value="<%=rewardDto.getRewardIsoption()%>">
+				<label class="f12 gray">상세 옵션 여부</label>
 			</div>
 			<div class="row m20">
 				<div class="row"><label>배송비</label></div>
-				<input type="number" name="rewardDelivery" class="form-input w80p" value="<%=rewardDto.getRewardDelivery()%>">
-				<input type="checkbox"  class="form-input rewardEach-cb" value="<%=rewardDto.getRewardEach()%>">
+				<input type="number" name="rewardDelivery" class="form-input w80p checkValue" value="<%=rewardDto.getRewardDelivery()%>">
+				<span class="f12 red"></span>
+				<input type="checkbox"  class="form-input ckbox" value="<%=rewardDto.getRewardEach()%>">
 				<input type="hidden" name="rewardEach" value="<%=rewardDto.getRewardEach()%>">
 				<label class="f12 gray">개별 배송 여부</label>
 			</div>
@@ -388,22 +457,10 @@
 				<a class="btn-delReward"><img src="<%=request.getContextPath()%>/image/del-icon.png" width="20"></a>
 				<a class="btn-addReward"><img src="<%=request.getContextPath()%>/image/add-icon.png" width="20"></a>
 			</div>
-		<div class="row mt50 right">
-			<button type="submit"  class="btn">수정하기</button>
+		<div class="row mt50">
+			<button type="submit"  class="btn fill">리워드 수정하기</button>
 		</div>
 </form>
-</div>
-
-
-	<div class="container w900 mt100">
-	
-		<form>
-			<div class="row">
-				<a href="project_reapply.do?projectNo=<%=projectNo%>" class="link link-reverse fill">
-					<h2 class="center">프로젝트 재신청</h2>
-				</a>
-			</div>
-		</form>
 		
 	</div>
 

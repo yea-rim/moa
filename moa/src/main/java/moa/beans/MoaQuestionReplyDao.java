@@ -33,8 +33,7 @@ public class MoaQuestionReplyDao {
 			moaquestionReplyDto = new MoaQuestionReplyDto();
 			moaquestionReplyDto.setQuestionTargetNo(rs.getInt("question_target_no"));
 			moaquestionReplyDto.setQuestionReplyTime(rs.getDate("question_reply_time"));
-			moaquestionReplyDto.setQuestionReplyContent(rs.getString("question_reply_content"));
-						
+			moaquestionReplyDto.setQuestionReplyContent(rs.getString("question_reply_content"));					
 		} else {
 			moaquestionReplyDto = null;
 		}

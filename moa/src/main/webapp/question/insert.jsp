@@ -10,9 +10,6 @@
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
  <style>
-
-
-
      .table.table-a>tbody>tr>th,
      .table.table-a>tbody>tr>td {
          text-align: left;
@@ -43,6 +40,15 @@
 	        		return true;
 	        	}
 	        });
+	        
+	    	//제목 글자수 자르기
+	    	$('input[name=questionTitle]').on("input",
+	    	function(){
+	    		var count = $(this).val().length; 
+	    			if(count>30){
+	    				$(this).val($(this).val().substring(0,30));
+	    			}
+	    	});
 	        
         });
 </script>

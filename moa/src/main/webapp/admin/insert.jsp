@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-
-		.insert-li{
-			padding: 0px 0px 35px 20px;
-			border-left: 1px solid #dcdcdc;
-			list-style-type: disc;
-		}
-
-
+	.insert-li{
+		padding: 0px 0px 35px 20px;
+		border-left: 1px solid #dcdcdc;
+		list-style-type: disc;
+	}
 </style>	
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_insert.js"></script>
 
-	<!--프로젝트 입력 페이지-->
-	<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
+<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
 	
+	<!--프로젝트 입력 페이지-->
 		<div class="container w600 m30 page">
 			<div class="row center m20">
 				<img src="<%=request.getContextPath()%>/image/pj_insert1.png" width="400">
@@ -103,54 +100,54 @@
 		</div>
 
 		<!--펀딩 일정 선택-->
-								<div class="container w500 m30 page">
-									<div class="row center m20">
-										<img src="<%=request.getContextPath()%>/image/pj_insert2.png" width="400">
-									</div>
-									<div class="row center m60">
-										<h1>펀딩 일정 선택</h1>
-									</div>
-										<div class="row m30">
-											<ul>
-												<li class="insert-li">
-													<div class="row">펀딩 시작일</div>
-													<div class="row m5">
-														<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
-														<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
-													</div>
-												</li>
-												<li class="insert-li">
-													<div class="row">
-														<span>펀딩기간</span>
-														<span class="days gray"></span>
-													</div>
-												</li>
-												<li class="insert-li">
-													<div class="row">펀딩 마감일</div>
-													<div class="row m5">
-														<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
-													</div>
-												</li>
-												<li class="insert-li">
-													<div class="row">정산일</div>
-													<div class="row m5">
-														<span class="f13 gray">펀딩 마감과 동시에 정산이 진행됩니다.</span>
-													</div>
-												</li>
-												<li class="insert-li">
-													<div class="row">배송 마감일</div>
-													<div class="row m5">
-														<span class="f13 gray">배송 마감일은 펀딩 마감일로 부터 30일 이후 입니다.</span><br>
-														<span class="f13 gray">한달 이내에 배송을 모두 완료 해야합니다.</span>
-													</div>
-												</li>
-											</ul>
-								</div>
-									<div class="row center m50">
-										<button type="button" class="btn btn-prev"> ＜ 이전 단계</button>
-										<button type="button" class="btn btn-next">다음 단계 ＞</button>
-									</div>
+	<div class="container w500 m30 page">
+		<div class="row center m20">
+			<img src="<%=request.getContextPath()%>/image/pj_insert2.png" width="400">
+		</div>
+		<div class="row center m60">
+			<h1>펀딩 일정 선택</h1>
+		</div>
+			<div class="row m30">
+				<ul>
+					<li class="insert-li">
+						<div class="row">펀딩 시작일</div>
+						<div class="row m5">
+							<input type="text" name="projectStartDate" id="start" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
+							<div class="row f12 gray">펀딩 시작일은 오늘로 부터 3일 이후로 설정가능합니다.</div>
 						</div>
+					</li>
+					<li class="insert-li">
+						<div class="row">
+							<span>펀딩기간</span>
+							<span class="days gray"></span>
+						</div>
+					</li>
+					<li class="insert-li">
+						<div class="row">펀딩 마감일</div>
+						<div class="row m5">
+							<input type="text" name="projectSemiFinish" id="end" autocomplete="off" placeholder="연도-월-일" class="form-date w40p checkValue">
+						</div>
+					</li>
+					<li class="insert-li">
+						<div class="row">정산일</div>
+						<div class="row m5">
+							<span class="f13 gray">펀딩 마감과 동시에 정산이 진행됩니다.</span>
+						</div>
+					</li>
+					<li class="insert-li">
+						<div class="row">배송 마감일</div>
+						<div class="row m5">
+							<span class="f13 gray">배송 마감일은 펀딩 마감일로 부터 30일 이후 입니다.</span><br>
+							<span class="f13 gray">한달 이내에 배송을 모두 완료 해야합니다.</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+				<div class="row center m50">
+					<button type="button" class="btn btn-prev"> ＜ 이전 단계</button>
+					<button type="button" class="btn btn-next">다음 단계 ＞</button>
+				</div>
+			</div>
 
 		<!--리워드 추가 페이지-->
 		<div class="container w500 m30 page">
