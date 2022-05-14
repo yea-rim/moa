@@ -1,14 +1,12 @@
-<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectDto"%>
+<%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.FundingDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.ProjectDao"%>
 <%@page import="moa.beans.FundingDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
 <% 
 
 	// 세션에서 login 정보 꺼내기 (session은 객체로 저장되기 때문에 업캐스팅)
@@ -51,20 +49,13 @@
 		s = 9;
 	}
 	
-	List<FundingDto> list = fundingDao.selectWaitList(p, s, memberNo);
+	List<FundingDto> list = fundingDao.selectCancelList(p, s, memberNo);
 	
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<script type="text/javascript">
-	$(function(){
-		$(".fd-delete").on("click", function(){
-			return confirm("후원을 취소하시겠습니까?");
-		});
-	});
-</script>
 
 	<div class="container fill m40">
 					<div class="flex-container m20">
@@ -84,24 +75,26 @@
 	<div class="container mt30">
                     <div class="float-container">
                         <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/member/funding_wait_list.jsp" class="link link-btn fill center">후원 대기</a>
+                            <a href="<%=request.getContextPath() %>/member/funding_wait_list.jsp" class="link link-reverse fill center">후원 대기</a>
                         </div>
                         <div class="float-left layer-5 p10">
                             <a href="<%=request.getContextPath() %>/member/funding_finish_list.jsp" class="link link-reverse fill center">후원 완료</a>
                         </div>
                         <div class="float-left layer-5 p10">
-                            <a href="<%=request.getContextPath() %>/member/funding_cancel_list.jsp" class="link link-reverse fill center">후원 취소</a>
+                            <a href="<%=request.getContextPath() %>/member/funding_cancel_list.jsp" class="link link-btn fill center">후원 취소</a>
                         </div>
                 </div>
 
 
     <%for(FundingDto fundingDto : list){ %>
-    <% 
+    <%
+    	System.out.println(fundingDto.getFundingNo());
+    	
     	ProjectDto projectDto = projectDao.selectSuccessMyFunding(fundingDto.getFundingNo(), memberNo); 
 		
-	    ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
+	    ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
 		
-		boolean isExistProjectAttach = projectAttachDto != null; 
+		boolean isExistProjectAttach = projectAttachDto != null;
     %>
     <div class="container mt20">
 		
@@ -117,38 +110,17 @@
 
             <div class="float-left layer-2 m20 mlr50">
                 <div class="row">
-                    <p>결제 예정일 <%=fundingDto.getFundingPaymentDate() %> | 펀딩번호 <%=fundingDto.getFundingNo() %></p>
                     <h2 class="mt10">
-                        <a href="funding_information.jsp?projectNo=<%=projectDto.getProjectNo() %>&fundingNo=<%=fundingDto.getFundingNo() %>" class="link"><%=projectDto.getProjectName() %></a>
+                        <a href="funding_cancel_info.jsp?projectNo=<%=projectDto.getProjectNo() %>&fundingNo=<%=fundingDto.getFundingNo() %>" class="link"><%=projectDto.getProjectName() %></a>
                     </h2>
-
-                    <!-- 리워드 리스트 출력 -->
-                    <p class="mt10 link-gray">
-                    </p>
-                    <p class="mt5 link-gray">
-                    </p>
-                    
-
-                    <p class="mt10">
-                        배송일 : <%=projectDto.getProjectFinishDate() %>
-                    </p>
-
-                    <p class="mt5 p-red">
-                        <%=fundingDto.getFundingTotalprice()+fundingDto.getFundingTotaldelivery() %>원 결제 예정 
-                    </p>
                 </div>
+	            <div class="row w800 mt30">
+	                 <p class="link-gray">
+	                       <%=projectDto.getProjectCategory()%>
+	                 </p>
+	             </div>
             </div>
             
-            <!-- 홍보하기 : 홍보 게시판으로 이동 -->
-			<div class="float-right m50 mlr20">
-				<div class="row mt5">
-					  <a href="funding_cancel.do?fundingNo=<%=fundingDto.getFundingNo() %>" class="link link-reverse w100 center fd-delete">후원취소</a>
-				</div>
-				<div class="row mt5">
-					  <a href="<%=request.getContextPath() %>/community/insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">홍보하기</a>
-				</div>
-			</div>
-        </div>
 
         
     </div>
@@ -180,34 +152,34 @@
 				<%
 				if (p > 1) { // 첫페이지가 아니라면
 				%>
-					<a href="funding_wait_list.jsp?p=1&s=<%=s%>">&laquo;</a>
+					<a href="funding_cancel_list.jsp?p=1&s=<%=s%>">&laquo;</a>
 				<%}%>
 
 				<%
 				if (startBlock > 1) { // 이전 블록이 있으면
 				%>
-					<a href="funding_wait_list.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
+					<a href="funding_cancel_list.jsp?p=<%=startBlock - 1%>&s=<%=s%>">&lt;</a>
 				<%}%>
 
 
 				<!-- 숫자 링크 영역 -->
 				<%for (int i = startBlock; i <= endBlock; i++) {%>
 					<%if (i == p) {%>
-						<a class="active" href="funding_wait_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a class="active" href="funding_cancel_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} else {%>
-						<a href="funding_wait_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
+						<a href="funding_cancel_list.jsp?p=<%=i%>&s=<%=s%>"><%=i%></a>
 					<%} %>
 				<%}%>
 
 				<!-- 다음 버튼 영역 -->
 				<%if (endBlock < lastPage) {%>
-					<a href="funding_wait_list.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
+					<a href="funding_cancel_list.jsp?p=<%=endBlock + 1%>&s=<%=s%>">&gt;</a>
 				<%}%>
 
 				<%
 				if (p < lastPage) { // 마지막 페이지가 아니라면
 				%>
-					<a href="funding_wait_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
+					<a href="funding_cancel_list.jsp?p=<%=lastPage%>&s=<%=s%>">&raquo;</a>
 				<%}%>
 			</div>
 			

@@ -200,6 +200,7 @@
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
 								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
+								
 
 								boolean isExistProjectAttach = projectAttachDto != null;
 								%> 
@@ -264,59 +265,54 @@
             					<%}%>
             				<div class="flex-container3">
             			
-            				<%-- <%
+            				<%
             					int limit2 = 0;
             				
             					for(ProjectDto projectDto : fundingProjectList) {
             					
-								
-								ProjectDto projectDto = projectDao.selectOne(projectNo);
-								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo());
-								
-								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo); 
-								
-								boolean isExistProjectAttach = projectAttachDto != null;
+            						ProjectDto projectOwner = projectDao.selectOne(projectDto.getProjectNo());
+            						
+									SellerDto sellerDto2 = sellerDao.selectOne(projectOwner.getProjectSellerNo());
+									
+									ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectOwner.getProjectNo()); 
+									
+									boolean isExistProjectAttach = projectAttachDto != null;
 								%>
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-<<<<<<< HEAD
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectOwner.getProjectNo()%>">
 					                        	<%if(isExistProjectAttach) { %>
 					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
 					                        		<img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} %>
-=======
-					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
-					                        	<img src="https://dummyimage.com/200x200" alt="" class="card-image-wrapper">
->>>>>>> refs/remotes/origin/main
 					                        </a>
 					                    </div>
 					                    
 					                    <!-- 제목 -->
 					                    <div class="row flex-title m10 mlr10 txt-overflow">
-					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>" class="link">
-					                     		<h2><%=projectDto.getProjectName() %></h2>
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectOwner.getProjectNo()%>" class="link">
+					                     		<h2><%=projectOwner.getProjectName() %></h2>
 					                     	</a>
 					                    </div>
 					
 					                    <!-- 판매자 -->
 					                    <div class="row m10 mlr10">
-					                        <p><%=sellerDto1.getSellerNick() %></p>
+					                        <p><%=sellerDto.getSellerNick() %></p>
 					                    </div>
 					
 					                    <!-- 카테고리 -->
 					                    <div class="row m30 mlr10">
-					                        <p class="link-purple"><%=projectDto.getProjectCategory() %></p>
+					                        <p class="link-purple"><%=projectOwner.getProjectCategory() %></p>
 					                    </div>
 					                </div>
-							<% /* limit2++;
+							<% limit2++;
 	            				
 									if(limit2 == 4) {
 										break;
-									} */
-								}%>  --%>
+									} 
+								}%>
 			                
      				  		</div>
                     	</div>

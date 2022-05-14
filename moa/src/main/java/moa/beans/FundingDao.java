@@ -224,12 +224,22 @@ public class FundingDao {
 	}
 	
 	// 펀딩 예정 목록 조회 (회원번호) 
-		public List<FundingDto> selectWaitList(int memberNo) throws Exception {
+		public List<FundingDto> selectWaitList(int p, int s, int memberNo) throws Exception {
+			int end = p * s;
+			int begin = end - (s - 1);
+			
 			Connection con = JdbcUtils.getConnection();
 			
-			String sql = "select * from funding where funding_member_no = ? and project_semi_finish < sysdate order by funding_date desc";
+			String sql = "select * from ("
+					+ "    select rownum rn, TMP.* from ("
+					+ "        select * from funding where funding_member_no = ? and funding_ispayment = 0 and funding_cancel_date is null order by funding_no desc"
+					+ "    ) TMP"
+					+ ") where rn between ? and ? ";
+			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, memberNo);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -259,6 +269,28 @@ public class FundingDao {
 			
 			return list;
 		}
+		
+		// 펀딩 예정 목록 카운팅 
+		public int countWaitList(int memberNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+			
+			String sql = "select count(*) from funding where funding_member_no = ? and funding_ispayment = 0 and funding_cancel_date is null order by funding_no desc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, memberNo);
+			ResultSet rs = ps.executeQuery();
+			
+			int count;
+			if(rs.next()) {
+				count = rs.getInt(1);
+			} else {
+				count = 0;
+			}
+			
+			con.close();
+			
+			return count;
+		}
+		
 		
 		//회원번호를 넣으면 펀딩 목록을 반환 결제가 된것
 		public List<FundingDto> selectSuccessList(int memberNo) throws Exception {
@@ -313,4 +345,85 @@ public class FundingDao {
 		return count > 0;
 	}
 	
+	
+	// 펀딩 취소 메소드
+	public boolean cancelFunding(int fundingNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update funding set funding_cancel_date = sysdate where funding_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, fundingNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
+	
+	// 펀딩 취소 목록 조회 (회원번호) 
+			public List<FundingDto> selectCancelList(int p, int s, int memberNo) throws Exception {
+				int end = p * s;
+				int begin = end - (s - 1);
+				
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select * from ("
+						+ "    select rownum rn, TMP.* from ("
+						+ "        select * from funding where funding_member_no = ? and funding_cancel_date is not null order by funding_no desc"
+						+ "    ) TMP"
+						+ ") where rn between ? and ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, memberNo);
+				ps.setInt(2, begin);
+				ps.setInt(3, end);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				List<FundingDto> list = new ArrayList<FundingDto>();
+				while(rs.next()) {
+					FundingDto fundingDto = new FundingDto();
+					
+					fundingDto.setFundingNo(rs.getInt("funding_no"));
+					fundingDto.setFundingMemberNo(rs.getInt("funding_member_no"));
+					fundingDto.setFundingDate(rs.getDate("funding_date"));
+					fundingDto.setFundingPost(rs.getString("funding_post"));
+					fundingDto.setFundingBasicAddress(rs.getString("funding_basic_address"));
+					fundingDto.setFundingDetailAddress(rs.getString("funding_detail_address"));
+					fundingDto.setFundingPostMessage(rs.getString("funding_post_message"));
+					fundingDto.setFundingPhone(rs.getString("funding_phone"));
+					fundingDto.setFundingCancelDate(rs.getDate("funding_cancel_date"));
+					fundingDto.setFundingPaymentDate(rs.getDate("funding_payment_date"));
+					fundingDto.setFundingTotalprice(rs.getInt("funding_totalprice"));
+					fundingDto.setFundingTotaldelivery(rs.getInt("funding_totaldelivery"));
+					fundingDto.setFundingGetter(rs.getString("funding_getter"));
+					fundingDto.setFundingIspayment(rs.getString("funding_ispayment"));
+					
+					list.add(fundingDto);
+				}
+				
+				con.close();
+				
+				return list;
+			}
+			
+			// 펀딩 취소 목록 카운팅 
+			public int countFinishList(int memberNo) throws Exception {
+				Connection con = JdbcUtils.getConnection();
+				
+				String sql = "select count(*) from funding where funding_member_no = ? and funding_cancel_date is not null order by funding_no desc";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, memberNo);
+				ResultSet rs = ps.executeQuery();
+				
+				int count;
+				if(rs.next()) {
+					count = rs.getInt(1);
+				} else {
+					count = 0;
+				}
+				
+				con.close();
+				
+				return count;
+			}
 }

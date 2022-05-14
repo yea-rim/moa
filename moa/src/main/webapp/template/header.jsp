@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-<%--     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -125,7 +125,7 @@
                 				</li>
                 			</ul>
                 		</div>
-						<div class="float-right layer-5 right">
+						<div class="float-right layer-5 right mt10 mlr5">
               		               <%if(memberProfileDto != null){ %>             			  		
               							<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="40"  height="40"- class="img img-circle">               				
               						<%}else{ %>
