@@ -6,20 +6,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinRouteStatusDao {
+public class FundingStatusDao {
 	//전체목록
-	public List<JoinRouteStatusDto> selectList() throws Exception {
+	public List<FundingStatusDto> selectList() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from join_route_stasus";
+		String sql = "select * from funding_status order by funding_date";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		List<JoinRouteStatusDto> list = new ArrayList<>();
+		List<FundingStatusDto> list = new ArrayList<>();
 		while(rs.next()) {
-			JoinRouteStatusDto statusDto = new JoinRouteStatusDto();
-			statusDto.setMemberRoute(rs.getString("member_route"));
-			statusDto.setCnt(rs.getInt("cnt"));
+			FundingStatusDto statusDto = new FundingStatusDto();
+			statusDto.setFundingDate(rs.getString("funding_date"));
+			statusDto.setTotal(rs.getInt("total"));
 
 			list.add(statusDto);
 		}
@@ -27,5 +27,4 @@ public class JoinRouteStatusDao {
 		con.close();
 		return list;
 	}
-
 }

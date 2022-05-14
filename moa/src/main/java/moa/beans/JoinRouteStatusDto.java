@@ -1,18 +1,21 @@
 package moa.beans;
 
 public class JoinRouteStatusDto {
-	private String member_route;
+	private String memberRoute;
 	private int cnt;
 	
 	public JoinRouteStatusDto() {
 		super();
 	}
-	public String getMember_route() {
-		return member_route;
+
+	public String getMemberRoute() {
+		return memberRoute;
 	}
-	public void setMember_route(String member_route) {
-		this.member_route = member_route;
+
+	public void setMemberRoute(String memberRoute) {
+		this.memberRoute = memberRoute;
 	}
+
 	public int getCnt() {
 		return cnt;
 	}
