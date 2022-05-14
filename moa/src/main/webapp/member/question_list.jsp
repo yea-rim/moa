@@ -19,7 +19,7 @@
 <style>
   textarea {
     width: 100%;
-    min-height: 3em;
+    min-height: 6em;
     border: none;
     resize: none;
     font-size: 15px;
@@ -111,7 +111,7 @@
 					</td>
 					<td colspan="2" style="vertical-align: top;" class="left">
 						<span style="font-weight: bold;">답변</span><br>
-						<textarea disabled><%=questionReplyDto.getQuestionReplyContent() %></textarea>			
+						<textarea disabled><%=questionReplyDto.getQuestionReplyContent() %></textarea>		
 					</td>
 				</tr>		
 					<%} %>

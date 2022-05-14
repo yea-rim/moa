@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import moa.beans.AttachDao;
 import moa.beans.AttachDto;
 
+
 @WebServlet(urlPatterns = "/seller/attach_edit.do")
 public class SellerProjectAttachEditServlet extends HttpServlet{
 	@Override
@@ -60,7 +61,7 @@ public class SellerProjectAttachEditServlet extends HttpServlet{
 	 		}
 	 		
 	 		//화면 이동
-	 		resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectNo);
+	 		resp.sendRedirect("attach_edit.jsp?projectNo="+projectNo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

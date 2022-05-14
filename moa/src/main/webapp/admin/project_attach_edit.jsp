@@ -35,7 +35,7 @@ AttachDao attachDao = new AttachDao();
 	vertical-align: middle;
 	border: 1px solid #dddddd;
 	border-radius: 0.3em;
-	width: 50%;
+	width: 40%;
 	color: #999999;
 }
 /* label 스타일 변경 */
@@ -48,7 +48,6 @@ AttachDao attachDao = new AttachDao();
 	border-radius: 0.3em;
 	cursor: pointer;
 	height: 30px;
-	margin-left: 10px;
 	font-size: 12px;
 }
 </style>
@@ -87,16 +86,19 @@ AttachDao attachDao = new AttachDao();
 					<div class="row center">
 						<img
 							src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=attachDto.getAttachNo()%>"
-							class="card-image-wrapper" width="150px" height="112px">
+							class="card-image-wrapper" width="160px" height="112px">
 					</div>
-					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
+					<div class="row mt15">
+						<div class="filebox-a center w220">
 							<form action="attachEdit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
 								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
 								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-edit f12">수정</button>
+								<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
+									<button type="button" class="link link-small btn-edit f12">삭제</button>
+								</a>
 							</form>
 						</div>
 					</div>
@@ -114,7 +116,7 @@ AttachDao attachDao = new AttachDao();
 							class="card-image-wrapper" width="150px" height="112px">
 					</div>
 					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
+						<div class="filebox-a center w220">
 							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input class="upload-name" placeholder="파일첨부"> 
@@ -149,7 +151,7 @@ AttachDao attachDao = new AttachDao();
 							class="card-image-wrapper" width="150px" height="112px">
 					</div>
 					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
+						<div class="filebox-a center w220">
 							<form action="attachEdit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
@@ -157,6 +159,9 @@ AttachDao attachDao = new AttachDao();
 								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-edit f12">수정</button>
 							</form>
+									<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>">
+									<button type="button" class="link link-small btn-edit f12">삭제</button>
+								</a>
 						</div>
 					</div>
 				</div>
@@ -171,7 +176,7 @@ AttachDao attachDao = new AttachDao();
 							class="card-image-wrapper" width="150px" height="112px">
 					</div>
 					<div class="row mt15 mlr10">
-						<div class="filebox-a center w200">
+						<div class="filebox-a center w220">
 							<form action="attachInsert.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input class="upload-name" placeholder="파일첨부"> 

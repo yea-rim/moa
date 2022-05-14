@@ -1,4 +1,4 @@
-package moa.servlet.project;
+package moa.servlet.seller;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import moa.beans.AttachDto;
 import moa.beans.ProjectAttachDao;
 import moa.beans.ProjectAttachDto;
 
-@WebServlet(urlPatterns = "/seller/attach_insert.do")
-public class ProjectAttachInsertServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/attachInsert.do")
+public class SellerProjectAttachInsertServlet extends HttpServlet{
 	 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -37,7 +37,6 @@ public class ProjectAttachInsertServlet extends HttpServlet{
 			int projectNo = Integer.parseInt(mRequest.getParameter("projectNo"));
 					
 			// 파일 처리(프로필) 		
-	 		System.out.println(mRequest.getFile("profileAttach"));
 	 		if(mRequest.getFile("profileAttach") != null) {	
 	 			//첨부파일 정보 저장
 		 		AttachDto attachDto = new AttachDto();
@@ -65,7 +64,6 @@ public class ProjectAttachInsertServlet extends HttpServlet{
 	 		
 	 		
 	 		// 파일 처리(본문)
-	 		System.out.println(mRequest.getFile("detailAttach"));
 	 		if(mRequest.getFile("detailAttach") != null) {	
 	 			//첨부파일 정보 저장
 		 		AttachDto attachDto = new AttachDto();
@@ -92,7 +90,7 @@ public class ProjectAttachInsertServlet extends HttpServlet{
 	 		}
 	 		
 	 		//페이지 이동
-	 		resp.sendRedirect("attach_edit.jsp?projectNo="+projectNo);
+	 		resp.sendRedirect("project_attach_edit.jsp?projectNo="+projectNo);
 	 		
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -42,7 +42,7 @@ public class QuestionInsertServlet extends HttpServlet {
 			
 			// 작성자 회원번호
 			int memberNo = (Integer)req.getSession().getAttribute("login");  
-			
+			System.out.println(memberNo);
 			//문의글 등록
 			MoaQuestionDto moaQuestionDto = new MoaQuestionDto();
 			moaQuestionDto.setQuestionNo(moaQuestionNo);
