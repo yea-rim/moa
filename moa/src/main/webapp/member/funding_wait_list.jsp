@@ -64,8 +64,11 @@
                 </div>
             </div>
             
-            <!-- 홍보하기 : 홍보 게시판으로 이동 -->
+            <!-- 홍보하기 : 홍보 게시판으로 이동 + 상세보기 -->
 			<div class="float-right m70 mlr20">
+				<div class="row mt5">
+					  <a href="" class="link link-reverse w100 center">상세보기</a>
+				</div>
 				<div class="row mt5">
 					  <a href="" class="link link-reverse w100 center">홍보하기</a>
 				</div>
