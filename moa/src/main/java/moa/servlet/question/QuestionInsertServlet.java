@@ -88,7 +88,7 @@ public class QuestionInsertServlet extends HttpServlet {
 				moaQuestionAttachDao.insert(moaQuestionAttachDto);
 	 		}
 			// 출력
-			resp.sendRedirect(req.getContextPath()+"/member/question_list.jsp");
+			resp.sendRedirect(req.getContextPath()+"/member/my_page.jsp");
 			
 		}
 		catch(Exception e) {

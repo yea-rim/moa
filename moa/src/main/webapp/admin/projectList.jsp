@@ -12,7 +12,7 @@
 	//페이징 관련 파라미터들을 수신
 	String sort = request.getParameter("sort");
 	if (sort == null) {
-		sort = "최신순";
+		sort = "신청 최신순";
 	}
 	int p;
 	try { //정상적인 숫자가 들어온 경우 - 0이하인 경우 --> Plan A
