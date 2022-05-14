@@ -13,7 +13,10 @@
         <div class="flex-container flex-vertical">
             <div class="flex-container list-admin">
                 <div class="menu-wrapper" style="border-right: 1px solid gray;">
-                <div class="row m20 center" style="font-weight: bold; font-size: 17px;">관리자 메뉴</div><hr>
+                <a href="<%=request.getContextPath()%>/admin/admin_main.jsp" class="link">
+                <div class="row m20 center" style="font-weight: bold; font-size: 17px;">관리자 메뉴</div>
+                </a>
+                <hr>
                     <ul class="m30 mlr30 left">
                         <li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/projectList.jsp" class="link">
