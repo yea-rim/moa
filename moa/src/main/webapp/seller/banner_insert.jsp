@@ -28,7 +28,6 @@
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
-			justify-content: center;
 		}
 		.flex-container1{
 			display: flex;
@@ -50,7 +49,7 @@
 <script type="text/javascript">
 	$(function(){
         $('input[name="banner-term"]').click(function(){
-            var price = 100000;
+            var price = 30000;
             var bannerTerm = $('input[name="banner-term"]:checked').val();
             var total = bannerTerm * price;
             total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -62,36 +61,40 @@
 
 	<!--프로젝트 입력 페이지-->
 	<form action="banner_insert.do" method="post" enctype="multipart/form-data" class="insert-form">
-	
+		<input type="hidden" name="projectNo" value="<%=projectNo %>">
 		<div class="container w800 m30 page">
 			<div class="row center m60">
-				<h1>배너 신청 정보</h1>
+				<h1>배너 신청</h1>
 			</div>
-			<div class="row m30"><h3>* 배너 이용기간</h3></div>
+			<div class="row m30">
+				<h3>* 게시기간 선택</h3>
+			</div>
 			<div class="row m20">
 			
-			<!--  	<select name="projectCategory" class="form-input fill checkValue">
-					<option value="">선택</option>
-					<option value="7">7일</option>
-					<option value="15">15일</option>
-					<option value="30">30일</option>
-				</select> -->
 				<div class="m10">
-					<input type="radio" name="banner-term" value="7" class="select-item"> <label>7일</label>
-					<input type="radio" name="banner-term" value="15" class="select-item"> <label>15일</label>
-					<input type="radio" name="banner-term" value="30" class="select-item"> <label>30일</label>
-					<input type="radio" name="banner-term" value="60" class="select-item"> <label>60일</label>
+					<input type="radio" name="banner-term" value="7" class="select-item checkValue"> <label>1주</label>
+					<input type="radio" name="banner-term" value="14" class="select-item checkValue"> <label>2주</label>
+					<input type="radio" name="banner-term" value="21" class="select-item checkValue"> <label>3주</label>
+					<input type="radio" name="banner-term" value="28" class="select-item checkValue"> <label>4주</label>
 				</div>
-				<div class="mt20">
-					가격: <span id="display"></span>
+				
+				<div class="mt50" style="font-weight:bold">
+					가격 : &nbsp;
+					<span id="display"></span>
+					<span class="f12 gray">
+					<br><br>
+					※ 게시순서는 최근 신청분 순서이나 상황에 따라 유동적 변경 게시<br>
+					※ 4주 이상 연속게시불가<br>
+					※ 부가세 별도
+					</span>
 				</div>
 			</div>
+				<hr style="border: 0.5px solid #f1f2f6">
 			
-			<hr>
 			
 			<div class="row m30">
 				<h3 class="m5">* 배너 이미지 선택</h3>
-				<span class="f12 gray">기존 프로필 중 1장 등록 가능</span>
+				<span class="f12 gray">&nbsp;&nbsp;&nbsp;&nbsp;기존 프로필 중 1장 등록 가능</span>
 			</div>
 			<div class="row m10">
 				
@@ -103,22 +106,31 @@
 						 <img src="<%=request.getContextPath() %>/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="250" height="200">
 					</div>
 					
-					<div class="fill m10">
-						<input type="radio" name="project-attach" value="<%=projectAttachDto.getAttachNo() %>">
+					<div class="m10" style="width:90%">
+						<input type="radio" name="project-attach" class="checkValue" value="<%=projectAttachDto.getAttachNo() %>">
 					</div>
 				</div>
 				<%} %>
 				</div>
-				
-			<br><hr>
+				<hr style="border: 0.5px solid #f1f2f6">
+				<h3>* 입금안내</h3>
+					
+				<span style="color:#AE4A00">
+					<br>
+					※ 납입기한: 배너게시 시작일기준으로 3일전까지 입금하신 후 반드시 담당자에게 확인 <br>
+					※ 예외사항 발생시 납입기한 관련 사항을 반드시 담당자에게 문의하시기 바랍니다.<br>
+					※ 입금 및 승인절차에 따라 배너게시가 가능하며 납입기한까지 미 입금시에는 승인이 취소됩니다.<br> 
+				</span>
+					<br><hr>
 			<div class="flex-container1">
-				<div class="row center m30 flex-items">
+				<div class="row center m30 mlr10 flex-items">
 					<button type="submit" class=" btn btn-next">신청</button>
 				</div>
-				<div class="row center m30 flex-items">
+				<div class="row center m30 mlr10 flex-items">
 					<a href="my_coming_project.jsp" class="link btn-reverse btn-next">취소</a>
 				</div>
 			</div>
 		</div>
 	</form>
+	
 	<jsp:include page="/template/footer.jsp"></jsp:include>

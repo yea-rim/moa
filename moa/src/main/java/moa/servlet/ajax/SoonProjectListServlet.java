@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import moa.beans.ProjectAttachDao;
+import moa.beans.ProjectAttachDto;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
@@ -27,6 +29,14 @@ public class SoonProjectListServlet extends HttpServlet {
 			// 처리 
 			ProjectDao projectDao = new ProjectDao();
 			List<ProjectDto> list = projectDao.selectSoon(p, s);
+			
+			ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+			ProjectAttachDto projectAttachDto;
+			
+			for(ProjectDto projectDto : list) {
+				projectAttachDto = projectAttachDao.selectOne(projectDto.getProjectNo());
+				projectAttachDto.getAttachNo();
+			}
 			
 			// 출력 
 			resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); 

@@ -42,6 +42,7 @@ public class ProjectAttachDao {
 			if(rs.next()) {
 				projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+				projectAttachDto.setProjectNo(rs.getInt("project_no"));
 			}
 			else {
 				projectAttachDto = null;
