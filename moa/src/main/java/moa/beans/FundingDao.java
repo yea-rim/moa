@@ -313,4 +313,90 @@ public class FundingDao {
 		return count > 0;
 	}
 	
+	
+	//펀딩 예약 메서드 트랜잭션 관리(펀딩예약 생성 -> 선택한 리워드 목록 생성 -> 리워드 재고감소)
+	public void fundingReserve(FundingDto fundingDto, List<RewardSelectionDto> list) throws Exception{
+			
+			Connection con = JdbcUtils.getConnection();
+			con.setAutoCommit(false);
+			
+		try {
+			String sql = "insert into funding(funding_no, funding_member_no, funding_getter, funding_post, "
+					+ "funding_basic_address, funding_detail_address, funding_phone, funding_post_message, "
+					+ "funding_payment_date, funding_totalprice, funding_totaldelivery) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, fundingDto.getFundingNo());
+			ps.setInt(2, fundingDto.getFundingMemberNo());
+			ps.setString(3, fundingDto.getFundingGetter());
+			ps.setString(4, fundingDto.getFundingPost());
+			ps.setString(5, fundingDto.getFundingBasicAddress());
+			ps.setString(6, fundingDto.getFundingDetailAddress());
+			ps.setString(7, fundingDto.getFundingPhone());
+			ps.setString(8, fundingDto.getFundingPostMessage());
+			ps.setDate(9, fundingDto.getFundingPaymentDate());
+			ps.setInt(10, fundingDto.getFundingTotalprice());
+			ps.setInt(11, fundingDto.getFundingTotaldelivery());
+			
+			ps.execute();
+			ps.close();
+			
+			
+			for(RewardSelectionDto rewardSelectionDto : list) {
+				
+			if(rewardSelectionDto.getSelectionOption() != null) {
+				sql = "insert into reward_selection(selection_funding_no, selection_reward_no, selection_reward_amount, selection_option) "
+						+ "values(?, ?, ?, ?)";
+			}else {
+				sql = "insert into reward_selection(selection_funding_no, selection_reward_no, selection_reward_amount) "
+						+ "values(?, ?, ?)";
+			}
+				
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, rewardSelectionDto.getSelectionFundingNo());
+			ps.setInt(2, rewardSelectionDto.getSelectionRewardNo());
+			ps.setInt(3, rewardSelectionDto.getSelectionRewardAmount());
+			if(rewardSelectionDto.getSelectionOption() != null) {
+			ps.setString(4, rewardSelectionDto.getSelectionOption());
+			}
+			ps.execute();
+			ps.close();
+			
+			
+			sql = "update reward set reward_stock = reward_stock + ? where reward_no = ?";
+			
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, -(rewardSelectionDto.getSelectionRewardAmount()));
+			ps.setInt(2, rewardSelectionDto.getSelectionRewardNo());
+			
+			int count = ps.executeUpdate();
+			
+			if(count == 0) {
+				throw new Exception();
+			}
+			
+			ps.close();
+			}
+			
+			con.commit();
+			con.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			con.rollback();
+			throw new Exception();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -42,28 +42,20 @@
 
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/funding.js"></script>
 
-
-<!-- 멀티페이징 -->
+<!-- 새로고침 뒤로가기시 경고창띄우기ㅁ -->
 <script type="text/javascript">
-    /* $(function(){
-        var index = 0;
-        move(index);
-     
-     
-     $("#nextstep").click(function(){
-         move(++index);
-     });
-
-     $("#prevstep").click(function(){
-         move(--index);
-     });
-
-     function move(index){
-         $(".page").hide();
-         $(".page").eq(index).show();
-     };
-
-    }); */
+   
+    $(function(){
+    	$(window).on('beforeunload', function(){
+            //do something
+            return "";
+        });
+        // Form Submit
+        $(document).on("submit", "form", function(event){
+            // disable warning
+            $(window).off('beforeunload');
+        });
+    })
  </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -127,7 +119,7 @@
        
     </script>
 
-    <form action="funding.do" method="post">
+    <form action="funding.do" method="post" class="reserve-formcheck">
 		<input name="projectNo" value="<%=projectNo%>" hidden>
         <div class="container w800 page" id="price-container">
 			
@@ -152,7 +144,15 @@
                         <pre><%=rewardDto.getRewardContent() %></pre>
                         </span>
                     <br>
-                    <span style="font-size: 13px;">배송비 : <span class="delivery number" data-value="<%=rewardDto.getRewardEach() %>"><%=rewardDto.getRewardDelivery() %></span></span>
+                    <span style="font-size: 13px;">
+                    배송비 : <span class="delivery number" data-value="<%=rewardDto.getRewardEach() %>"><%=rewardDto.getRewardDelivery() %></span>
+                    ||
+                    <%if(rewardDto.getRewardEach() == 1){ %>
+                    	개별 배송
+                    <%}else { %>
+                    	묶음 배송
+                    <%} %>
+                    </span>
                     <br>
                     <span style="font-size: 13px;">재고 : <%=rewardDto.getRewardStock() %>개     ||     결제 예정일 : <%=projectDao.paymentDate(projectNo) %></span>
                     <div class="flex-container m20 detail">
@@ -316,7 +316,7 @@
 
             <div class="center m40">
                 <button type="button" id="prevstep" class="btn reserve-btn">< 이전 단계로</button>
-                <input type="submit" class="btn reserve-btn" value="결제 예약하기">
+                <input type="submit" class="btn reserve-btn reserve-payment" value="결제 예약하기">
             </div>
 
         </div>

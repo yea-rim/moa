@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectDto"%>
+<%@page import="moa.beans.ProjectDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.MemberDao"%>
@@ -56,16 +58,21 @@
 		s = 10;
 	}
 %>  
+<!-- 프로젝트 정보 -->
+<%
+	ProjectDao projectDao = new ProjectDao();
+	ProjectDto projectDto = projectDao.selectOne(projectNo);
+%>
 <%
 
 
 	PjQnaDao pjQnaDao = new PjQnaDao();
 	List<PjQnaDto> list = new ArrayList<>();
-	if(isAdmin){
+	if/* (isAdmin || (isSeller && projectDto.getProjectSellerNo() == memberNo)){
 		list = pjQnaDao.select(projectNo, p, s);
 	}else if(isLogin && hideSecret){
 		list = pjQnaDao.selectOpen(projectNo, p, s, memberNo);
-	}else if(!isLogin && hideSecret){
+	}else if */(hideSecret){
 		list = pjQnaDao.selectOpen(projectNo, p, s)	;
 	}else{
 		list = pjQnaDao.select(projectNo, p, s);
@@ -84,11 +91,11 @@
 <% 
 
 	int count;
-	if(isAdmin){
+	if/* (isAdmin || (isSeller && projectDto.getProjectSellerNo() == memberNo)){
 		count = pjQnaDao.countByPaging(projectNo);
 	}else if(isLogin && hideSecret){
 		count = pjQnaDao.countByPagingOpen(projectNo, memberNo);
-	}else if(!isLogin && hideSecret){
+	}else if */(hideSecret){
 		count = pjQnaDao.countByPagingOpen(projectNo);	
 	}else{
 		count = pjQnaDao.countByPaging(projectNo);
@@ -113,31 +120,48 @@
 %>
 <jsp:include page="/project/project_template/project_header.jsp"></jsp:include>
     
+    
+<style>
+	.flex-container-jun {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+	.flex-left{
+		display: flex;
+    	justify-content: left;/*display가 flex인 경우 가로 정렬 옵션 */
+   		align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
+		padding-left: 1em;
+		padding-top: 2em;
+		padding-bottom: 2em;
+		padding-right: 0.5em;
+		border-right: 1px solid rgb(231, 231, 231);
+		border-bottom:1px solid rgb(231, 231, 231);
+		border-top:1px solid rgb(231, 231, 231);
+		width: 17%;
+		
+	}
+	.flex-rigth{
+		width: 83%;
+		border-bottom:1px solid rgb(231, 231, 231);
+		border-top:1px solid rgb(231, 231, 231);
+	}
+	.seller-answer2{
+		padding-left: 2em;
+		padding-top: 1em;
+	}
+	
+	.edit-content {
+		position: fixed;
+		top:50%;
+		left:12%;
+		
+		transform: translate(-50%, -50%);
+	
+	}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_qna.js"></script>
-<script type="text/javascript">
-	/* $(function(){
-			
-		$(".delete-confirm").hide();
-		$(".delete-btn").each(function(){
-			var confirm = $(this).parent("div").parent("td").children(".delete-confirm");
-			$(this).click(function(){
-				confirm.show();
-			});
-		});
-		
-		$(".cancel-delete").each(function(){
-			$(this).click(function(){
-				$(this).parent(".delete-confirm").hide();
-			});
-		});
-		
-		$(".no-auth").click(function(){
-			alert("권한이 없습니다.");
-		});
-		
-	}) */
-</script>
 
 <script type="text/javascript">
 	//시작하면 바로 이동
@@ -171,7 +195,7 @@
                 </div>
 				<%if(isLogin) {%>
                 <div class="qna">
-                    <form action="qna_write.do" method="post">
+                    <form action="qna_write.do" method="post" class="write-form">
                     <input name="memberNo" type="hidden" value="<%=memberNo%>">
                     <input name="projectNo" type="hidden" value="<%=projectNo%>">
                         <hr>
@@ -185,7 +209,7 @@
                                 </div>
                                 <div class="right display-center-right">
                                     <label for="check-secret">비밀글</label>
-                                    <input type="checkbox" name="qnaLock" id="check-secret" value="1" checked>
+                                    <input type="checkbox" name="qnaLock" id="check-secret" value="1" checked style="accent-color: #B899CD;">
                                 </div>
                             </div>
                         </div>
@@ -199,7 +223,7 @@
                             </div>
                         </div>
                         <div class=" right m10">
-                            <input type="submit" class="btn" value="작성">
+                            <input type="submit" class="btn write-btn" value="작성">
                             <button type="button" class="hide-qna btn btn-reverse">취소</button>
                         </div>
                         <hr>
@@ -213,30 +237,36 @@
                         <thead>
                             <tr>
                                 <th width="10%">번호</th>
+                                <th>답변</th>
                                 <th width="40%">제목</th>
                                 <th width="25%">작성자</th>
                                 <th>작성일</th>
                             </tr>
                         </thead>
                         <!-- 문의글 목록 -->
-                <%for(PjQnaDto pjQnaDto : list){ %>
                         <tbody>
+                <%for(PjQnaDto pjQnaDto : list){ %>
+                        <!-- 계층형 문의글 깊이가 0인것만 노출되게 표시 -->
                             <tr class="body center">
                                 <td><span class="font14"><%=pjQnaDto.getQnaNo() %></span></td>
-                                <td class="table-title left font14">
-                                <span class="font14">
-                                <%if(pjQnaDto.getDepth() > 0){
-                                	for(int i = 0; i < pjQnaDto.getDepth(); i++){%>
-                                		&nbsp;
+                                <td>
+                                	<span class="font14">
+                                	<!-- 그룹된 계층게시판이 1개 초과이면 답글 달린것으로 판단 -->
+                                	<%if(pjQnaDao.isAnswer(pjQnaDto.getQnaNo())){ %>
+                                	완료
+                                	<%}else{ %>
+                                	예정
                                 	<%} %>
-                                	ㄴ>
-                                <%} %>
+                                	</span>
+                                </td>
+                                <td class="table-title left font14">
+                                	<span class="font14">
                                     <%=pjQnaDto.getQnaTitle() %>
                                     </span>
                                     <%if(pjQnaDto.getQnaLock() == 1){ %>
                                     <span class="font12">[비밀글]</span>
                                     <%} %>
-                                    <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin){ %>
+                                    <%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin || (isSeller && projectDto.getProjectSellerNo() == memberNo)){ %>
                                     <span hidden class="secret" value="1"></span>
                                     <%} %>
                                 </td>
@@ -250,49 +280,100 @@
                             </tr>
                             <!-- 문의 내용 -->
                             <tr class="qna-content" hidden>
-                                <div>
-                                	<%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin){ %>
-                                    <td colspan="4">
-                                        <div>
+                                	<%if(pjQnaDto.getQnaLock() == 0 || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin || (isSeller && projectDto.getProjectSellerNo() == memberNo)){ %>
+                                    <td colspan="5">
+                                        <div class="m50">
                                             <pre class="font14"><%=pjQnaDto.getQnaContent() %></pre>
                                         </div>
-                                        <div class="row right m10">
-                                        	<%if((isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isSeller || isAdmin){ %>
+                                        
+                                        <!-- 수정 창 구현 자기가 쓴 글만 나옴 -->
+                                        <%if(!pjQnaDao.isAnswer(pjQnaDto.getQnaNo()) && (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
+                                        <div class="edit-content" hidden>
+                                        	<form action="<%=request.getContextPath() %>/project/detail/qna_edit.do" method="post" class="edit-formcheck">
+                                        		<input name="projectNo" type="hidden" value="<%=projectNo%>">
+										        <input name="qnaNo" type="hidden" value="<%=pjQnaDto.getQnaNo()%>">
+										        <div class="edit-pop" style="width: 350px;">
+										            <div class="flex-container left m-b10">
+										                <div class="display-center">
+										                    <label>제목</label>
+										                </div>
+										                <div class="flex-container w70p">
+										                    <div class="rigth w70p">
+										                        <input type="text" name="qnaTitle" placeholder="제목입력" class="form-input fill" autocomplete="off" value="<%=pjQnaDto.getQnaTitle()%>">
+										                    </div>
+										                    <div class="right display-center-right">
+										                        <label for="check-secret" class="font14">비밀글</label>
+										                        <%if(pjQnaDto.getQnaLock() == 1){ %>
+										                        <input type="checkbox" name="qnaLock" id="check-secret" value="1" checked style="accent-color: #B899CD;">
+										                        	<%}else{ %>
+										                        <input type="checkbox" name="qnaLock" id="check-secret" value="1" style="accent-color: #B899CD;">
+										                        <%} %>
+										                    </div>
+										                </div>
+										            </div>
+										            <div class="flex-container left">
+										                <div class="flex-vertical display-center">
+										                    <label>내용</label>
+										                </div>
+										                <div class="w70p">
+										                    <textarea name="qnaContent" rows="10" class="float-right fill form-input" placeholder="내용입력"
+										                    autocomplete="off"><%=pjQnaDto.getQnaContent() %></textarea>
+										                </div>
+										            </div>
+										            <div class="right m10">
+										                <input type="submit" class="btn btn-edit" value="수정">
+										                <button type="button" class="btn btn-edit-cancel">취소</button>
+										            </div>
+										        </div>
+										    </form>
+                                        </div>
+                                        <%} %>
+                                        
+                                        	<!-- <hr style="margin-bottom: 0; background-color: rgb(231, 231, 231);"> -->
+                                        
+                                        <!-- 판매자 답변 -->
+                                        <%if(pjQnaDao.isAnswer(pjQnaDto.getQnaNo())){
+                                        	PjQnaDto pjQnaAnswer = pjQnaDao.selectOneAnswer(pjQnaDto.getQnaNo()); %>
+                                        <div class="flex-container-jun fill seller-answer">
+                                        	<div class="flex-left">
+                                        		<span class="left font14">판매자 답변</span>
+                                       		</div>
+                                        	 <div class="flex-rigth">
+                                        	 	<pre class="font14 seller-answer2"><%=pjQnaAnswer.getQnaContent() %></pre>
+                                        	</div>
+                                        </div>
+                                        	<!-- <hr style="margin-top: 0; background-color: rgb(231, 231, 231);"> -->
+                                        <%} %>
+                                        <div class="row right m10"" >
+                                        	<%if(!pjQnaDao.isAnswer(pjQnaDto.getQnaNo()) && ((isSeller && projectDto.getProjectSellerNo() == memberNo)  || isAdmin)){ %>
                                             <button class="btn btn-answer">답글</button>
-                                            <%}else{ %>
-                                            <button class="btn no-auth ">답글</button>
-                                            <%} %>
+                                            <%}%>
+                                            <!-- 자기가 쓴 글만 수정버튼 구현 (관리자도 추후 구현) -->
+                                            <%if(!pjQnaDao.isAnswer(pjQnaDto.getQnaNo()) && ((isLogin && pjQnaDto.getQnaMemberNo() == memberNo) || isAdmin)){ %>
+                                           	 <button class="btn btn-editopen">수정</button>
+                                           	<%} %>
                                             <!-- 자기가 쓴 글만 삭제버튼 구현 (관리자도 추후 구현) -->
                                             <%if(isAdmin || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                             <button class="btn delete-btn btn-reverse">삭제</button>
-                                            <%}else{ %>
-                                            <button class="btn no-auth btn-reverse">삭제</button>
-                                            <%} %>
+                                            <%}%>
                                         </div>
                                         
                                         <!-- 답글 -->
-                                        <%if(isLogin){ %>
+                                        <%if(!pjQnaDao.isAnswer(pjQnaDto.getQnaNo()) && (isSeller && projectDto.getProjectSellerNo() == memberNo)){ %>
                                         <div class="answer" style="padding-left: 10px">
-                                            <form action="qna_write.do" method="post">
+                                            <form action="qna_write.do" method="post" class="seller-answer-formcheck">
                                             	<input name="memberNo" type="hidden" value="<%=memberNo%>">
                     							<input name="projectNo" type="hidden" value="<%=projectNo%>">
                                             	<input name="superNo" type="hidden" value="<%=pjQnaDto.getQnaNo()%>">
                                                 <hr>
-                                                <div class="flex-container left m-b10">
-                                                    <div class="display-center">
-                                                        <label>제목</label>
-                                                    </div>
-                                                    <div class="flex-container w70p">
                                                         <div class="rigth w80p">
-                                                            <input type="text" name="qnaTitle" placeholder="제목입력"
-                                                                class="form-input fill" autocomplete="off">
+                                                            <input type="hidden" name="qnaTitle" class="form-input fill" value="<%=pjQnaDto.getQnaTitle()%>">
                                                         </div>
-                                                        <div class="right display-center-right">
-                                                            <label for="check-answer-secret">비밀글</label>
-                                                            <input type="checkbox" name="qnaLock" id="check-answer-secret" value="1">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        	<%if(pjQnaDto.getQnaLock() == 1){ %>
+                                                            <input type="hidden" name="qnaLock" id="check-answer-secret" value="<%=pjQnaDto.getQnaLock()%>" checked>
+                                                            <%}else {%>
+                                                            <input type="hidden" name="qnaLock" id="check-answer-secret" value="<%=pjQnaDto.getQnaLock()%>">
+                                                            <%} %>
                                                 <div class="flex-container left">
                                                     <div class="flex-vertical display-center">
                                                         <label>내용</label>
@@ -320,20 +401,18 @@
                                         <%} %>
                                     </td>
                                     <%} %>
-                                </div>
                             </tr>
-
-                        </tbody>
 		                <%} %>
+                        </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="5">
                                     <div class="float-container">
                                         <span class="float-left mt10 mlr10">
 	                                        <%if(hideSecret){ %>
-	                                            <input type="checkbox" id="hide-secret" checked>
+	                                            <input type="checkbox" id="hide-secret" checked style="accent-color: #B899CD;">
 	                                        <%}else{ %>
-	                                            <input type="checkbox" id="hide-secret">
+	                                            <input type="checkbox" id="hide-secret" style="accent-color: #B899CD;">
 	                                        <%} %>
                                             <label for="hide-secret" style="font-size: 15px;">비밀글 숨김</label>
                                         </span>
