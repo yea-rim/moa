@@ -30,7 +30,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
 // 기간에 해당되는 배너 4개만
 BannerDao bannerDao = new BannerDao();
-List<BannerDto> banner = bannerDao.selectAll();
+List<BannerDto> banner = bannerDao.selectBanner();
 %>
 <!-- 스와이퍼 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
@@ -51,31 +51,28 @@ List<BannerDto> banner = bannerDao.selectAll();
 	
 	<div class="flex-items1 flex-container2">
 	
-	<!-- <div class="row fill">
-		<img src="https://dummyimage.com/500x400" alt="" width="660" height="400">
-	</div> -->
-	  <!-- 프로필부분의 왼쪽 플로트-->
 	  <div class="flex-container">
 			<div class="swiper">
-				<%for(BannerDto bannerDto : banner) { %>
-				<% boolean isExistBanner = bannerDto != null; %>
 				<div class="swiper-wrapper">
-					<%if(isExistBanner){ %>
-					    <div class="swiper-slide">
-					    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
-				           		<%-- <img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'"> --%>
-			                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-				           	</a>
-			            </div>
-	            	<%}else{ %>
-		            	<div class="swiper-slide">
-		            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
-			                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-		                    </a>
-		            	</div>
-		        	<%} %>
+					<%for(BannerDto bannerDto : banner) { %>
+					
+						<% boolean isExistBanner = bannerDto != null; %>
+						<%if(isExistBanner){ %>
+						    <div class="swiper-slide">
+						    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+					           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+					           	</a>
+				            </div>
+			           	<%}else{ %>
+			            	<div class="swiper-slide">
+			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+				                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
+			                    </a>
+				            </div>
+				        <%} %>
+					
+					<%} %>
 				</div>
-				<%} %>
 				
 				<div class="swiper-pagination"></div>
 				<div class="swiper-button-prev"></div>

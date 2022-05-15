@@ -21,7 +21,7 @@ public class BannerDao {
 		con.close();
 	}
 	
-	public List<BannerDto> selectAll() throws Exception {
+	public List<BannerDto> selectBanner() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select * from ("
@@ -42,5 +42,29 @@ public class BannerDao {
 		con.close();
 		
 		return list;
+	}
+	
+	public BannerDto selectOne(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from banner where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		BannerDto bannerDto;
+		if(rs.next()) {
+			bannerDto = new BannerDto();
+			bannerDto.setAttachNo(rs.getInt("attach_no"));
+			bannerDto.setProjectNo(rs.getInt("project_no"));
+			bannerDto.setBannerStartDate(rs.getDate("banner_start_date"));
+		}
+		else {
+			bannerDto = null;
+		}
+		
+		con.close();
+		
+		return bannerDto;
 	}
 }
