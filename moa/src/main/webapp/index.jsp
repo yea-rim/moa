@@ -56,8 +56,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 				<div class="swiper-wrapper">
 					<%for(BannerDto bannerDto : banner) { %>
 					
-						<% boolean isExistBanner = bannerDto != null; %>
-						<%if(isExistBanner){ %>
+						<%if(bannerDto != null){ %>
 						    <div class="swiper-slide">
 						    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
 					           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
@@ -70,7 +69,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 			                    </a>
 				            </div>
 				        <%} %>
-					
+				        
 					<%} %>
 				</div>
 				
