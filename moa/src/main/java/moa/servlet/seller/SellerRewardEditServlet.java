@@ -77,7 +77,11 @@ public class SellerRewardEditServlet extends HttpServlet{
 			}
 		
 			//상세페이지로 이동
-			resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectNo);			
+			if(req.getParameter("rejected")!=null) {
+				resp.sendRedirect("rejected_project_detail.jsp?projectNo="+projectNo);											
+			}else {
+				resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectNo);							
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

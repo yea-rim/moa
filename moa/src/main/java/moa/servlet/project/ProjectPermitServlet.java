@@ -1,6 +1,7 @@
 package moa.servlet.project;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +21,13 @@ public class ProjectPermitServlet extends HttpServlet{
 			ProjectDao projectDao = new ProjectDao();
 			boolean success = projectDao.projectPermit(projectNo);
 			
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
 			if(success) {
-				resp.sendRedirect(req.getContextPath()+"/admin/permit_success.jsp");
-			}	
-			else {
+				writer.println("<script>alert('프로젝트 승인이 완료되었습니다.'); location.href='"+req.getContextPath()+"/admin/projectList.jsp';</script>"); writer.close();
+			} else {
 				resp.sendError(404);
+				writer.println("<script>alert('프로젝트 승인에 실패하였습니다.'); location.href='"+req.getContextPath()+"/admin/projectList.jsp';</script>"); writer.close();
 			}
 			
 			

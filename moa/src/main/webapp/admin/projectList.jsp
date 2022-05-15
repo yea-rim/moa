@@ -12,7 +12,7 @@
 	//페이징 관련 파라미터들을 수신
 	String sort = request.getParameter("sort");
 	if (sort == null) {
-		sort = "신청 최신순";
+		sort = "최신신청순";
 	}
 	int p;
 	try { //정상적인 숫자가 들어온 경우 - 0이하인 경우 --> Plan A
@@ -49,24 +49,39 @@
       });
 	});
 </script>
+<div class="container w95p">
+		<div class="row mt30">
+			<div class="flex-container">
+				<div class="left-wrapper">
+					<h2>프로젝트 리스트</h2>
+				</div>
+				<div class="right-wrapper right">
+					<form action="projectList.jsp" method="get">
+						<select name="sort" class="sort">
+					<%if(sort.equals("승인여부")){ %>
+							<option>최신신청순</option>
+							<option selected>승인여부</option>
+							<option>시작일임박순</option>
+					<%}else if(sort.equals("최신신청순")){ %>
+							<option selected>최신신청순</option>
+							<option>승인여부</option>
+							<option>시작일임박순</option>
+					<%}else if(sort.equals("시작일임박순")){ %>
+							<option>최신신청순</option>
+							<option>승인여부</option>
+							<option selected>시작일임박순</option>
+					<%} %>
+						</select> 
+					</form>
+				</div>
+			</div>
+		</div>
+<hr>
 
 
 
-	<div class="row center m20 ">
-		<h1>프로젝트 리스트</h1>
-	</div>
-	<div class="row right m20">
-		<form action="projectList.jsp" method="get">
-			<select name="sort" class="sort">
-				<option>선택</option>
-				<option>승인여부</option>
-				<option>최신순</option>
-				<option>시작일임박순</option>
-				<option>펀딩액순</option>
-			</select> 
-		</form>
-	</div>
-	<div class="row">
+
+	<div class="row mt10">
 		<table class="table table-admin table-stripe table-hover">
 			<thead>
 				<tr>
@@ -74,7 +89,7 @@
 					<th width="10%">카테고리</th>
 					<th >프로젝트명</th>
 					<th>목표금액</th>
-					<th width="11%">시작일</th>
+					<th width="12%">시작일</th>
 					<th width="9%">승인여부</th>
 				</tr>
 			</thead>
@@ -121,7 +136,7 @@ if (endBlock > lastPage) {
 }
 %>
 
-<div class="pagination cente m40">
+<div class="pagination center m40">
 		<!-- 이전 버튼 영역 -->
 		<%if (p > 1) { // 첫페이지가 아니라면 %>
 		<a href="projectList.jsp?p=1&s=<%=s%>&sort=<%=sort%>">&laquo;</a>
@@ -155,5 +170,5 @@ if (endBlock > lastPage) {
 		<a href="projectList.jsp?p=<%=lastPage%>&s=<%=s%>&sort=<%=sort%>">&raquo;</a>
 		<%}%>
 </div>
-
+</div>
 <jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include> 

@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/template/header.jsp"></jsp:include>
-
-<div class="row m20">
-<h1>프로젝트 신청이 완료되었습니다.</h1>
-</div>
-<div class="row m20">
-<h1>관리자 승인을 기다려 주세요.</h1>
+<div class="row m40">
+<h2>요청하신 페이지를 찾을 수 없습니다.</h2>
+<br>
+<img src="<%=request.getContextPath()%>/image/404.gif">
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

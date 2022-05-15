@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_insert.js"></script>
 
-<form action="insert.do" method="post" enctype="multipart/form-data" class="insert-form">
+<form action="project_insert.do" method="post" enctype="multipart/form-data" class="insert-form">
 	
 	<!--프로젝트 입력 페이지-->
 		<div class="container w600 m30 page">

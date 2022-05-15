@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MoaQuestionDao;
 
 
-@WebServlet(urlPatterns = "/admin/questionDelete.do")
-public class QuestionAdminDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/question/delete.do")
+public class QuestionDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int questionNo = Integer.parseInt(req.getParameter("questionNo"));
@@ -23,7 +23,12 @@ public class QuestionAdminDeleteServlet extends HttpServlet{
 			
 			
 			//리스트로 이동
-			resp.sendRedirect("question_list.jsp");
+			if(req.getParameter("admin")!=null) {
+				resp.sendRedirect(req.getContextPath()+"/admin/question_list.jsp");								
+			}
+			else {
+				resp.sendRedirect(req.getContextPath()+"/member/my_page.jsp");				
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
