@@ -1,4 +1,4 @@
-package moa.servlet.project;
+package moa.servlet.seller;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +23,8 @@ import moa.beans.ProjectDto;
 import moa.beans.RewardDao;
 import moa.beans.RewardDto;
 
-@WebServlet(urlPatterns = "/project/insert.do")
-public class ProjectInsertServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/seller/insert.do")
+public class SellerProjectInsertServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

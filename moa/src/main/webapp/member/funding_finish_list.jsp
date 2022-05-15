@@ -58,6 +58,9 @@
                         <div class="float-left layer-5 p10">
                             <a href="<%=request.getContextPath() %>/member/funding_finish_list.jsp" class="link link-btn fill center">후원 완료</a>
                         </div>
+                        <div class="float-left layer-5 p10">
+                            <a href="<%=request.getContextPath() %>/member/funding_cancel_list.jsp" class="link link-reverse fill center">후원 취소</a>
+                        </div>
                 </div>
 
 

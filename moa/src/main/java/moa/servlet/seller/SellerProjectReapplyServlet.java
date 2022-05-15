@@ -1,6 +1,7 @@
 package moa.servlet.seller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,10 @@ public class SellerProjectReapplyServlet extends HttpServlet{
 			
 			// 출력
 			if(isSuccess) {
-				resp.sendRedirect("project_reapply_finish.jsp");
+				resp.setContentType("text/html; charset=UTF-8"); 
+				PrintWriter writer = resp.getWriter(); 
+				writer.println("<script>alert('프로젝트 재신청이 완료되었습니다.'); location.href='"+req.getContextPath()+"/seller/my_permit_project.jsp';</script>"); writer.close();
+
 			} else {
 				resp.sendRedirect("project_reapply_finish.jsp?error");
 			}

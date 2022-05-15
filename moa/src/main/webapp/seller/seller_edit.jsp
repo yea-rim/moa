@@ -12,6 +12,23 @@
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script type="text/javascript">
+        $(function(){
+            $(".answer").on("input", function(){
+                var content = $(this).val();
+                var size = content.length;
+                $(".count").text(size);
+                // $(".count").text($(this).val().length);
+
+                if(size >= 10){
+                    $(".count").css("color", "red");
+                }
+                else {
+                    $(".count").css("color", "black");
+                }
+            });
+        });
+    </script>
 
 
 	<div class="container mt40">
@@ -45,7 +62,12 @@
 						<p>판매자로 사용할 닉네임을 입력해주세요.</p>
 					</div>
 					<div class="float-left layer-2">
-						<input type="text" name="sellerNick" value="<%=sellerDto.getSellerNick()%>" class="row m10 form-input fill" autocomplete="off">
+						<input type="text" name="sellerNick" value="<%=sellerDto.getSellerNick()%>" class="row m10 form-input fill answer" autocomplete="off">
+						<span class="length right">
+			                <span class="count">0</span> 
+			                / 
+			                <span class="total">10</span>
+			            </span>
 					</div>
 				</div>
 				

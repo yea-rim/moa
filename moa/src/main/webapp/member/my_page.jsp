@@ -1,3 +1,8 @@
+<%@page import="moa.beans.MoaQuestionAttachDao"%>
+<%@page import="moa.beans.MoaQuestionDao"%>
+<%@page import="moa.beans.MoaQuestionReplyDto"%>
+<%@page import="moa.beans.MoaQuestionReplyDao"%>
+<%@page import="moa.beans.MoaQuestionDto"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.RewardSelectionDto"%>
 <%@page import="moa.beans.RewardSelectionDao"%>
@@ -17,7 +22,15 @@
 <%@page import="moa.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<style>
+  textarea {
+    width: 100%;
+    min-height: 6em;
+    border: none;
+    resize: none;
+    font-size: 15px;
+  }
+</style>    
 <%
 	// 현재 세션에 저장된 로그인 정보 가져오기
 	Integer memberNo = (Integer) session.getAttribute("login");
@@ -44,7 +57,7 @@
 	
 	// 관심 프로젝트 조회
 	JoaDao joaDao = new JoaDao();
-	List<JoaDto> list = joaDao.selectList(memberNo);
+	List<JoaDto> joaList = joaDao.selectList(memberNo);
 	
 	// 프로젝트 Dao 준비 
 	ProjectDao projectDao = new ProjectDao();
@@ -59,10 +72,28 @@
 	
 	// 리워드 셀렉션 Dao 준비
 	RewardSelectionDao rewardSelectionDao = new RewardSelectionDao();
+
+	//1:1문의
+	MoaQuestionDao moaQuestionDao = new MoaQuestionDao();
+	List<MoaQuestionDto> questionList = moaQuestionDao.selecMyQuestion(memberNo);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-
+<script type="text/javascript">
+	$(function() {
+		$(".btn-detail").each(function(){
+			$(this).click(function() {
+				$(this).next().toggle();
+			});
+		});
+		
+		$(".btn-replyDelete").each(function(){
+			$(this).click(function() {
+				return confirm("정말 삭제 하시겠습니까?");
+			});
+		});	
+	});
+</script>
                 <div class="container fill m10">
                     <!-- 마이페이지 상단 바 -->
                     <div class="float-container b-purple">
@@ -153,12 +184,15 @@
                     <div class="row m20">
                         
                     <div class="container">
+            					<%if(joaList.isEmpty()){ %>
+            								<div class="row m20 center">
+											<span>관심 프로젝트가 없습니다.</span>
+            								</div>			
+            					<%}%>
             			<div class="flex-container3">
-            			
-            				<%
-            				int limit = 0; 
-            				
-            				for(JoaDto joaDto : list) {
+            				<%int limit = 0; 
+            					
+            					for(JoaDto joaDto : joaList) {
             					
             					int projectNo = joaDto.getProjectNo();
             					
@@ -166,6 +200,7 @@
 								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo()); 
 								
 								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo);
+								
 
 								boolean isExistProjectAttach = projectAttachDto != null;
 								%> 
@@ -223,67 +258,145 @@
                     <div class="row m20">
                        
                        	<div class="container">
+                       	         <%if(fundingProjectList.isEmpty()){ %>
+            								<div class="row m20 center">
+											<span>후원한 프로젝트가 없습니다.</span>
+            								</div>			
+            					<%}%>
             				<div class="flex-container3">
             			
-            				<%-- <%
+            				<%
             					int limit2 = 0;
             				
             					for(ProjectDto projectDto : fundingProjectList) {
             					
-								
-								ProjectDto projectDto = projectDao.selectOne(projectNo);
-								SellerDto sellerDto1 = sellerDao.selectOne(projectDto.getProjectSellerNo());
-								
-								ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo); 
-								
-								boolean isExistProjectAttach = projectAttachDto != null;
+            						ProjectDto projectOwner = projectDao.selectOne(projectDto.getProjectNo());
+            						
+									SellerDto sellerDto2 = sellerDao.selectOne(projectOwner.getProjectSellerNo());
+									
+									ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectOwner.getProjectNo()); 
+									
+									boolean isExistProjectAttach = projectAttachDto != null;
 								%>
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-<<<<<<< HEAD
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectNo%>">
+					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectOwner.getProjectNo()%>">
 					                        	<%if(isExistProjectAttach) { %>
 					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
 					                        		<img src="<%=request.getContextPath() %>/image/profile.png" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} %>
-=======
-					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
-					                        	<img src="https://dummyimage.com/200x200" alt="" class="card-image-wrapper">
->>>>>>> refs/remotes/origin/main
 					                        </a>
 					                    </div>
 					                    
 					                    <!-- 제목 -->
 					                    <div class="row flex-title m10 mlr10 txt-overflow">
-					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>" class="link">
-					                     		<h2><%=projectDto.getProjectName() %></h2>
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectOwner.getProjectNo()%>" class="link">
+					                     		<h2><%=projectOwner.getProjectName() %></h2>
 					                     	</a>
 					                    </div>
 					
 					                    <!-- 판매자 -->
 					                    <div class="row m10 mlr10">
-					                        <p><%=sellerDto1.getSellerNick() %></p>
+					                        <p><%=sellerDto.getSellerNick() %></p>
 					                    </div>
 					
 					                    <!-- 카테고리 -->
 					                    <div class="row m30 mlr10">
-					                        <p class="link-purple"><%=projectDto.getProjectCategory() %></p>
+					                        <p class="link-purple"><%=projectOwner.getProjectCategory() %></p>
 					                    </div>
 					                </div>
-							<% /* limit2++;
+							<% limit2++;
 	            				
 									if(limit2 == 4) {
 										break;
-									} */
-								}%>  --%>
+									} 
+								}%>
 			                
      				  		</div>
                     	</div>
                        
                     </div>
-                </div>
+                    <div class="row mt30">
+		<h2>1:1 문의</h2>
+	</div>
+	<hr>
+	<div class="row mt20">
+		<table class="table table-admin table-stripe">
+			<thead>
+				<tr>
+					<th width="20%">문의유형</th>
+					<th width="30%">제목</th>
+					<th width="25%">작성일</th>
+					<th width="25%">처리상태</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%if(questionList.isEmpty()){ %>
+					<tr>
+						<td colspan="4">							
+							<br>작성하신 1:1 문의가 없습니다.<br>
+							주문, 배송 및 사이트 이용과 관련한 문의를 하시려면 1:1 문의를 이용해주세요.
+							<br><br>
+						</td>
+					</tr>
+				<% }%>
+				<%
+				for (MoaQuestionDto questionDto : questionList) {	
+					//문의 답변 불러오기
+					MoaQuestionReplyDao moaQuestionReplyDao = new MoaQuestionReplyDao();
+					MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo());
+					
+					//문의 첨부파일 불러오기
+					MoaQuestionAttachDao moaQuestionAttachDao = new MoaQuestionAttachDao();
+					int questionAttachNo = moaQuestionAttachDao.selectOne(questionDto.getQuestionNo());
+				%>
+				<tr style="width:100%;cursor:pointer;" class="btn-detail">
+					<td><%=questionDto.getQuestionType() %></td>
+					<td class="left"><%=questionDto.getQuestionTitle()%></td>
+					<td><%=questionDto.getQuestionTime() %></td>
+					<td>
+						<%if(questionDto.getAnswerStatus() ==0){ %>
+							<span>답변대기</span>
+						<%}else{ %>
+							<span style="color: blue">답변완료</span>
+						<%} %>
+					</td>
+				</tr>
+					<%if(questionDto.getAnswerStatus() == 0){ %>
+				<tr style="display: none;" class="show-detail">
+					<td colspan="3" class="left" style="vertical-align: top;">
+						<%if(questionAttachNo != 0) {%>
+						<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=questionAttachNo%>" width="400"  height="400" class="img" onerror="javascript:this.src='https://dummyimage.com/400x400'"><br>
+						<%} %>
+						<span style="font-weight: bold;">문의내용</span><br>
+					 	<%=questionDto.getQuestionContent() %>				
+					</td>
+					<td>
+							<a href="<%=request.getContextPath()%>/member/questionDelete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="link link-small btn-replyDelete">삭제</a>
+					</td>
+				</tr>
+					<%}else{%>
+					<tr style="display: none;" class="show-detail b-purple">
+					<td colspan="2" class=" b-right left" style="vertical-align: top;">
+					 	<span style="font-weight: bold;">문의내용</span><br>
+					 	<%if(questionAttachNo != 0) {%>
+					 	<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=questionAttachNo%>" width="400"  height="400" class="img" onerror="javascript:this.src='https://dummyimage.com/400x400'"><br>
+					 	<%} %>
+					 	<textarea disabled><%=questionDto.getQuestionContent() %></textarea>
+					</td>
+					<td colspan="2" style="vertical-align: top;" class="left">
+						<span style="font-weight: bold;">답변</span><br>
+						<textarea disabled><%=questionReplyDto.getQuestionReplyContent() %></textarea>		
+					</td>
+				</tr>		
+					<%} %>
+				<%}%>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
