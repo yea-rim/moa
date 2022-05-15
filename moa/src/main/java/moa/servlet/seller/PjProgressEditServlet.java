@@ -37,6 +37,7 @@ public class PjProgressEditServlet extends HttpServlet {
 			MultipartRequest mRequest = new MultipartRequest(req, path, max, encoding, policy);
 			
 			int progressNo = Integer.parseInt(mRequest.getParameter("progressNo"));
+			int projectNo = Integer.parseInt(mRequest.getParameter("projectNo"));
 			
 			
 			PjProgressDto pjProgressDto = new PjProgressDto();
@@ -106,7 +107,7 @@ public class PjProgressEditServlet extends HttpServlet {
 	 		}
 	 		
 			// 출력
-			resp.sendRedirect("my_page.jsp");
+	 		resp.sendRedirect(req.getContextPath()+"/project/detail/notice.jsp?projectNo="+projectNo+"&progressNo="+progressNo);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

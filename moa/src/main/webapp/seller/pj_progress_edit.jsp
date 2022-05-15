@@ -5,6 +5,7 @@
 <%-- 준비 --%>
 <% 
 	int progressNo = Integer.parseInt(request.getParameter("progressNo"));
+	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 %>
 <%-- 처리 --%>
 <% 
@@ -140,6 +141,7 @@ textarea[name=progressContent] {
 
 <form action="progress_edit.do" method="post" enctype="multipart/form-data" class="form-all">
 <input type="hidden" name="progressNo" value="<%=progressNo %>">
+<input type="hidden" name="progressNo" value="<%=projectNo %>">
 	<div class="container w700">
 		<div class="row mt50 m10">
 			<div class="flex-container">

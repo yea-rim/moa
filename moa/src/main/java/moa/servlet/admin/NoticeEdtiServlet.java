@@ -1,4 +1,4 @@
-package moa.servlet.notice;
+package moa.servlet.admin;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import moa.beans.MoaNoticeAttachDto;
 import moa.beans.MoaNoticeDao;
 import moa.beans.MoaNoticeDto;
 
-@WebServlet(urlPatterns = "/notice/edit.do")
+@WebServlet(urlPatterns = "/admin/notice_edit.do")
 public class NoticeEdtiServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -159,7 +159,7 @@ public class NoticeEdtiServlet extends HttpServlet {
 			}
 
 			// 출력
-			resp.sendRedirect("detail.jsp?noticeNo=" + moaNoticeDto.getNoticeNo());
+			resp.sendRedirect("notice_detail.jsp?noticeNo=" + moaNoticeDto.getNoticeNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

@@ -1,4 +1,4 @@
-package moa.servlet.notice;
+package moa.servlet.admin;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import moa.beans.MoaNoticeAttachDto;
 import moa.beans.MoaNoticeDao;
 import moa.beans.MoaNoticeDto;
 
-@WebServlet(urlPatterns = "/notice/insert.do")
+@WebServlet(urlPatterns = "/admin/notice_insert.do")
 public class NoticeInsertServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -132,7 +132,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			}
 
 			// 출력
-			resp.sendRedirect("detail.jsp?noticeNo=" + noticeNo);
+			resp.sendRedirect("notice_detail.jsp?noticeNo=" + noticeNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

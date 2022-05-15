@@ -47,7 +47,13 @@
 	
 	List<ProjectDto> permitList = projectDao.permitSelectList(p, s, sellerNo);
 %>
-
+<style>
+	.flex-container2 {
+		display: flex;
+	    flex-direction: column;
+	    flex-wrap: wrap;
+	}
+</style>
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
 	<div class="flex-container mt40">
@@ -91,9 +97,8 @@
 						<div class="container mt20 p10">
 	
 	                    <div class="float-container b-purple">
-	            
 	                        <!-- 프로젝트 대표 이미지 -->
-	                        <div class="float-left m20 mlr20">
+	                        <div class="float-left m45 mlr20">
 	                            <%if(isExistProjectAttach) { // 사진이 존재하면 %>
 										 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img img-round" width="150px" height="130px">
 								<%} else { // 사진이 없으면 %>
@@ -101,7 +106,7 @@
 								<%} %>
 	                        </div>
 	            
-	                        <div class="float-left m20 mlr20 h150">
+	                        <div class="float-left m50 mlr20 h150">
 	                            
 	                            <!-- 프로젝트 제목 -->
 	                            <div class="row w800">
@@ -122,14 +127,17 @@
 									<%} %>	                                
 	                                <p class="link-gray m5">펀딩 마감일 : <%=projectDto.getProjectSemiFinish() %></p>
 	                            </div>
-	                            
 	                        </div>
 	                        
-	                        <!-- 후원자 명단 보기 -->
-					        <div class="float-right m70 mlr20">
-					          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
+					        <div class="float-right right m70 mlr30 flex-container2">
+			                        <!-- 후원자 명단 보기 -->
+						          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
+						          	<br>
+						          	<!-- 공지 작성 -->	
+						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">공지 작성</a>
+						          	<!-- 배너 신청 -->	
+						          	<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">배너 신청</a>
 					        </div>
-	                        
 	                    </div>
 	                </div>
 					<%} %>

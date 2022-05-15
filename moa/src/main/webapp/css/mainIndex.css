@@ -1,0 +1,109 @@
+.flex-container1 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.flex-container2 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.flex-container4 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.flex-items1 {
+	flex-basis: 60%;
+	padding: 20px;
+}
+
+.flex-items2 {
+	flex-basis: 20%;
+	padding: 10px;
+}
+
+.flex-items3 {
+	flex-basis: 35%;
+	padding: 15px;
+}
+
+.flex-items-a {
+	flex-basis: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.flex-items-b {
+	flex-basis: 50%;
+	padding: 5px;
+	justify-content: center;
+}
+
+.flex-items-c {
+	flex-basis: 30%;
+}
+
+.project-name {
+	font-size: 15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: wrap;
+}
+.more-btn {
+	font-size: 15px;
+	color: gray;
+	text-decoration: none;
+}
+.more-btn:hover{
+	color: black;
+}
+.new-name {
+	font-size: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: wrap;
+}
+
+.percent {
+	color: #B899CD;
+	font-size: 15px;
+}
+
+.seller {
+	font-size: 10px;
+}
+
+.notice-date {
+	font-size: 15px;
+	padding: 10px;
+}
+.category{
+	color: gray;
+	font-size: 10px;
+}
+.modu{
+	 border-top:1px solid gray;
+	 padding-top: 50px;
+}
+	
+.swiper{
+	width: 660px;
+  	height: 400px;
+  	resize: hori;
+}  
+.swiper-pagination,
+.swiper-button-prev,
+.swiper-button-next {
+    color: #B899CD;
+}  
+.swiper-pagination-bullet-active{
+   	background-color: #B899CD;
+}

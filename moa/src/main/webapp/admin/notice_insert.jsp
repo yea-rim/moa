@@ -139,7 +139,7 @@ textarea[name=noticeContent] {
 </script>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-<form action="insert.do" method="post" enctype="multipart/form-data" class="form-all">
+<form action="notice_insert.do" method="post" enctype="multipart/form-data" class="form-all">
 	<div class="container w700">
 		<div class="row mt50 m10">
 			<div class="flex-container">
@@ -199,7 +199,7 @@ textarea[name=noticeContent] {
 					<input type="submit" value="작성하기" class="link link-btn w150 notice-submit">
 				</div>
 				<div class="right-wrapper">
-					<a href="list.jsp"> <input type="button" value="취소"
+					<a href="notice_list.jsp"> <input type="button" value="취소"
 						class="link link-reverse w150">
 					</a>
 				</div>
