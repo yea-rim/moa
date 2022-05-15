@@ -61,13 +61,13 @@
                     </div>
                     <div class="right-wrapper layer-3">
                          <div class="row mlr30 right">
-                            <a href="project_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">프로젝트 수정</a>
+                            <a href="project_edit.jsp?projectNo=<%=projectNo %>&rejected=1" class="link link-reverse w150 center">프로젝트 수정</a>
                         </div>
                         <div class="row mt5 mlr30 right">
-                            <a href="attach_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">이미지 수정</a>
+                            <a href="attach_edit.jsp?projectNo=<%=projectNo %>&rejected=1" class="link link-reverse w150 center">이미지 수정</a>
                         </div>
                         <div class="row mt5 mlr30 right">
-                            <a href="reward_edit.jsp?projectNo=<%=projectNo %>" class="link link-reverse w150 center">리워드 수정</a>
+                            <a href="reward_edit.jsp?projectNo=<%=projectNo %>&rejected=1" class="link link-reverse w150 center">리워드 수정</a>
                         </div>
                         <div class="row mt20 mlr30 right">
                             <a href="project_reapply.do?projectNo=<%=projectNo %>" class="link link-btn w150 center">프로젝트 재신청</a>

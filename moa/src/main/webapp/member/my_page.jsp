@@ -378,7 +378,7 @@
 					 	<%=questionDto.getQuestionContent() %>				
 					</td>
 					<td>
-							<a href="<%=request.getContextPath()%>/member/questionDelete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="link link-small btn-replyDelete">삭제</a>
+							<a href="<%=request.getContextPath()%>/question/delete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="link link-small btn-replyDelete">삭제</a>
 					</td>
 				</tr>
 					<%}else{%>

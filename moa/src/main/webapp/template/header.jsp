@@ -64,7 +64,7 @@
                 <%if(isLogin) { // 로그인 상태라면 %>               	
                 		<%if(isSeller) { // 판매자라면 %>
                 			<div class="float-right layer-5 center m10">
-	                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link link-purple">
+	                			<a href="<%=request.getContextPath() %>/seller/project_insert.jsp" class="link link-purple">
 	                				<button class="btn-reverse">
 	                					<h3>프로젝트 신청</h3>
 	                				</button>

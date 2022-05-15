@@ -27,13 +27,12 @@ public class SellerProjectReapplyServlet extends HttpServlet{
 			boolean isSuccess = projectDao.reapply(projectNo);
 			
 			// 출력
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
 			if(isSuccess) {
-				resp.setContentType("text/html; charset=UTF-8"); 
-				PrintWriter writer = resp.getWriter(); 
-				writer.println("<script>alert('프로젝트 재신청이 완료되었습니다.'); location.href='"+req.getContextPath()+"/seller/my_permit_project.jsp';</script>"); writer.close();
-
+				writer.println("<script>alert('프로젝트 재신청이 완료되었습니다.'); location.href='"+req.getContextPath()+"/seller/my_permit_project.jsp?projectNo"+projectNo+"';</script>"); writer.close();
 			} else {
-				resp.sendRedirect("project_reapply_finish.jsp?error");
+				writer.println("<script>alert('프로젝트 재신청에 실패하였습니다.'); location.href='"+req.getContextPath()+"/seller/reject_project_detail.jsp?projectNo"+projectNo+"';</script>"); writer.close();
 			}
 			
 		} catch (Exception e) {
