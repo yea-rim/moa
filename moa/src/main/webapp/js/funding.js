@@ -258,7 +258,7 @@ $(function () {
 		}
 	};
 	
-	
+	//후원 목록 한개 이상 체크했는지 검사
 	function checkInfo(){
 		var count = 0;
 			if($(this).is(":checked")){
@@ -269,7 +269,7 @@ $(function () {
     
     
     // 들어와야할 정보가 전부 입력됐는지 최종 검사
-   	$(".reserve-btn").click(function(){
+   	$(".reserve-formcheck").submit(function(){
 		var count = 0;
 		$(".reward-checkbox").each(function(){
 			count += checkInfo.call(this);
@@ -285,8 +285,7 @@ $(function () {
 			alert("정보를 올바르게 입력해주시기 바랍니다.");
 			return false;
 		}
-	
 	});
-
+	
 
 });

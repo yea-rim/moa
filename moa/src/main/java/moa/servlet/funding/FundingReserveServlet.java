@@ -84,10 +84,9 @@ public class FundingReserveServlet extends HttpServlet{
 			fundingDto.setFundingTotalprice(totalPrice);
 			fundingDto.setFundingTotaldelivery(totalDelivery);
 			
-			fundingDao.insert(fundingDto);
 			
 			//리워드 선택 정보 등록
-			RewardSelectionDao rewardSelectionDao = new RewardSelectionDao();
+			List<RewardSelectionDto> rewardSelectionDtoList = new ArrayList<>();
 			for(int i = 0; i < rewardNo.length; i++) {
 				RewardSelectionDto rewardSelectionDto = new RewardSelectionDto();
 				rewardSelectionDto.setSelectionFundingNo(fundingDto.getFundingNo());
@@ -96,17 +95,18 @@ public class FundingReserveServlet extends HttpServlet{
 				if(selectionOption != null) {
 				rewardSelectionDto.setSelectionOption(selectionOption[i]);
 				}
-				rewardSelectionDao.insert(rewardSelectionDto);
-				rewardDao.stockCount(Integer.parseInt(rewardNo[i]), -(Integer.parseInt(selectionRewardAmount[i])));
+				rewardSelectionDtoList.add(rewardSelectionDto);
 			}
 			
-			
+			//펀딩정보 리워드선택정보 리워드재고감소 메서드 실행
+			fundingDao.fundingReserve(fundingDto, rewardSelectionDtoList);
 			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp?fundingNo="+fundingNo);
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			resp.sendError(500);
+			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
+			resp.sendRedirect(req.getContextPath() + "/project/funding_fail.jsp?projectNo="+projectNo);
 		}
 		
 	}
