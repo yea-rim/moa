@@ -21,6 +21,7 @@ public class PjProgressDeleteServlet extends HttpServlet {
 		try {
 			// 준비
 			int progressNo = Integer.parseInt(req.getParameter("progressNo"));
+			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 
 			ProgressAttachDao progressAttachDao = new ProgressAttachDao();
 			ProgressAttachDto progressAttachDto = progressAttachDao.selectOne(progressNo);
@@ -42,7 +43,8 @@ public class PjProgressDeleteServlet extends HttpServlet {
 			
 
 			// 출력
-			resp.sendRedirect("my_page.jsp");
+			resp.sendRedirect(req.getContextPath()+"/project/detail/notice.jsp?projectNo="+projectNo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

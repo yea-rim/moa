@@ -1,3 +1,5 @@
+<%@page import="moa.beans.BannerDto"%>
+<%@page import="moa.beans.BannerDao"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.MoaNoticeDto"%>
@@ -10,6 +12,7 @@
 <%@page import="moa.beans.ProjectDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
 ProjectDao projectDao = new ProjectDao();
 List<ProjectDto> list1 = projectDao.selectTop();
@@ -24,110 +27,56 @@ SellerDto sellerDto;
 
 ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 ProjectAttachDao projectAttachDao = new ProjectAttachDao();
+
+// 기간에 해당되는 배너 4개만
+BannerDao bannerDao = new BannerDao();
+List<BannerDto> banner = bannerDao.selectBanner();
 %>
+<!-- 스와이퍼 -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/mainIndex.css">
+    
 <style>
-.flex-container1 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
 
-.flex-container2 {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-
-.flex-container4 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-}
-
-.flex-items1 {
-	flex-basis: 60%;
-	padding: 20px;
-}
-
-.flex-items2 {
-	flex-basis: 20%;
-	padding: 10px;
-}
-
-.flex-items3 {
-	flex-basis: 35%;
-	padding: 15px;
-}
-
-.flex-items-a {
-	flex-basis: 5%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.flex-items-b {
-	flex-basis: 50%;
-	padding: 5px;
-	justify-content: center;
-}
-
-.flex-items-c {
-	flex-basis: 30%;
-}
-
-.project-name {
-	font-size: 15px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: wrap;
-}
-.more-btn {
-	font-size: 15px;
-	color: gray;
-	text-decoration: none;
-}
-.new-name {
-	font-size: 20px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: wrap;
-}
-
-.percent {
-	color: #B899CD;
-	font-size: 15px;
-}
-
-.seller {
-	font-size: 10px;
-}
-
-.notice-date {
-	font-size: 15px;
-	padding: 10px;
-}
-.category{
-	color: gray;
-	font-size: 10px;
-}
-.modu{
-	 border-top:1px solid gray;
-	 padding-top: 50px;
-}
 </style>
-<jsp:include page="/template/header.jsp"></jsp:include>
 
+<!-- 스와이퍼 -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/swiper.js"></script>
+
+<jsp:include page="/template/header.jsp"></jsp:include>
 
 <div class="row flex-container1 flex-items2 modu">
 	
 	<div class="flex-items1 flex-container2">
 	
-	<div class="row fill">
-		<img src="https://dummyimage.com/500x400" alt="" width="660" height="400">
+	  <div class="flex-container">
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					<%for(BannerDto bannerDto : banner) { %>
+					
+						<%if(bannerDto != null){ %>
+						    <div class="swiper-slide">
+						    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+					           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+					           	</a>
+				            </div>
+			           	<%}else{ %>
+			            	<div class="swiper-slide">
+			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+				                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
+			                    </a>
+				            </div>
+				        <%} %>
+				        
+					<%} %>
+				</div>
+				
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
 	</div>
 	
 	<%-- 신규프로젝트 목록 --%>
@@ -143,8 +92,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 		<div class="row flex-container1">
 			<%for (ProjectDto projectDto : list2) {%>
 			<div class="row flex-items2 m10">
-		
-				<div class="row">
+			<div class="flex-container2">
 				<% 	
 					// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
 					projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
@@ -159,24 +107,23 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 						<img src="https://dummyimage.com/200x200" width="200px" height="170px">
 					<%} %>
 					</a>
-				</div>
 			
 			<% 
 				projectVo = projectDao.selectVo(projectDto.getProjectNo());
 				sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 			%>
-			<div class="flex-container2">
-				<div class="category left">
-					<span><%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %></span>
+			
+				<div class="row category left mt10">
+					<%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %> 
 				</div>
 		
-				<div class="row left m10 new-name">
+				<div class="row left new-name m10">
 					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
-					<span><%=projectDto.getProjectName()%></span>
+						<%=projectDto.getProjectName()%>
 					</a>
 				</div>
-				<div class="left percent">
-					<span><%=projectVo.getPercent() %> %</span>
+				<div class="row left percent">
+					<%=projectVo.getPercent() %> %
 				</div>
 			</div>
 			
@@ -185,7 +132,7 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 			<%}%>
 		</div>
 		<div class="center mt30">
-			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="btn-reverse link" style="padding:5px 30px">전체 보러가기</a>
+			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="more-btn">전체 보러가기</a>
 		</div>
 	</div>
 </div>
@@ -205,9 +152,8 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 					</div>
 					<div class="row flex-container2 flex-items-b">
 						<div class="row project-name m10">
-							<a
-								href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>"
-								class="link"> <%=projectDto.getProjectName()%>
+							<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
+								<%=projectDto.getProjectName()%>
 							</a>
 						</div>
 
@@ -215,13 +161,15 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 						projectVo = projectDao.selectVo(projectDto.getProjectNo());
 						sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 						%>
-							<div class="row seller"><%=sellerDto.getSellerNick()%></div>
+							<div class="row seller">
+								<%=sellerDto.getSellerNick()%>
+							</div>
 							<div class="left percent">
 								<span><%=projectVo.getPercent() %>%</span>
 							</div>
 					</div>
 
-					<div class="row flex-items-c m10 right">
+					<div class="row flex-items-c m10 right img-hover">
 					<% 	
 						// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
 						projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
@@ -246,58 +194,57 @@ ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 </div>
 	<%-- 공개예정 프로젝트 목록 --%>
 
-	<div class="row flex-items1">
+<div class="row flex-items1">
 	<hr style="border: solid #f1f2f6 0.5px" />
 		<div class="row left big-text mt50 mlr10">
 			<div class="flex-container1">
 				<div>
-					<a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">
+					<a href="<%=request.getContextPath()%>/project/comingList.jsp" class="link">
 						공개예정 프로젝트
 					</a>
 				</div>
-					<a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="more-btn" >
+					<a href="<%=request.getContextPath()%>/project/comingList.jsp" class="more-btn" >
 						더 보러가기
 					</a>
 			</div>
 		</div>
 
-<div class="row flex-container3">
-	<%for (ProjectDto projectDto : list3) {%>
-	<div class="row flex-items2 m10">
-
-		<div class="row">
-		<% 	
-			// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
-			projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
-						
-			//사진이 있는지 판정
-			boolean isExistPhoto = projectAttachDto != null;	
-		%> 
-			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
-			<%if(isExistPhoto){ %>
-				<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="240px" height="200px">
-			<%} else{ %>
-				<img src="https://dummyimage.com/200x200" width="240px" height="200px">
-			<%} %>
-			</a>
-		</div>
-		
-		<div class="flex-container2">
-			<div class="left mt10" style="color:#B899CD">
-				<span><%=projectDto.getProjectStartDate() %> 오픈예정</span>
+	<div class="row flex-container3">
+		<%for (ProjectDto projectDto : list3) {%>
+		<div class="row flex-items2 m10">
+	
+			<% 	
+				// 프로젝트에 프로필 하나의 attachNo만 정보만 가져옴
+				projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo());
+							
+				//사진이 있는지 판정
+				boolean isExistPhoto = projectAttachDto != null;	
+			%> 
+			<div class="img-hover">
+				<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
+				<%if(isExistPhoto){ %>
+					<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="230px" height="200px" style="border-radius: 10%;">
+				<%} else{ %>
+					<img src="https://dummyimage.com/200x200" width="230px" height="200px" style="border-radius: 10%;">
+				<%} %>
+				</a>
 			</div>
+			
+			<div class="flex-container2">
+				<div class="left mt10" style="color:#B899CD">
+					<span><%=projectDto.getProjectStartDate() %> 오픈예정</span>
+				</div>
+				</div>
+	
+			<div class="row m10 left new-name">
+				<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
+					<span><%=projectDto.getProjectName()%></span>
+				</a>
 			</div>
-
-		<div class="row left m10 new-name">
-			<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link"> 
-				<span><%=projectDto.getProjectName()%></span>
-			</a>
 		</div>
+		<%}%>
 	</div>
-	<%}%>
 </div>
-
-
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

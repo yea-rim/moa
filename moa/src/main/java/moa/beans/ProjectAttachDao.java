@@ -30,7 +30,7 @@ public class ProjectAttachDao {
 			
 			String sql = "SELECT * FROM("
 					+ "SELECT rownum rn, TMP.*from("
-					+ "SELECT attach_no FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
+					+ "SELECT * FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
 					+ ")TMP"
 					+ ")WHERE rn = 1";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class ProjectAttachDao {
 			if(rs.next()) {
 				projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setAttachNo(rs.getInt("attach_no"));
+				projectAttachDto.setProjectNo(rs.getInt("project_no"));
 			}
 			else {
 				projectAttachDto = null;
@@ -66,6 +67,7 @@ public class ProjectAttachDao {
 		con.close();
 		return count>0;
 	}
+	
 	// 한 프로젝트 첨부파일 리스트 
 	public List<ProjectAttachDto> attachList(int projectNo) throws Exception {	
 		Connection con = JdbcUtils.getConnection();

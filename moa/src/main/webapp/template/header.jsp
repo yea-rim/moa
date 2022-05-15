@@ -64,7 +64,7 @@
                 <%if(isLogin) { // 로그인 상태라면 %>               	
                 		<%if(isSeller) { // 판매자라면 %>
                 			<div class="float-right layer-5 center m10">
-	                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link link-purple">
+	                			<a href="<%=request.getContextPath() %>/seller/project_insert.jsp" class="link link-purple">
 	                				<button class="btn-reverse">
 	                					<h3>프로젝트 신청</h3>
 	                				</button>
@@ -155,7 +155,7 @@
                 <li>
                     <a href="<%=request.getContextPath()%>/community/list.jsp"><h3 class="m0">커뮤니티</h3></a>
                     <ul>
-                        <li><a href="<%=request.getContextPath() %>/notice/list.jsp"><h3 class="m0">공지사항</h3></a></li>
+                        <li><a href="<%=request.getContextPath() %>/admin/notice_list.jsp"><h3 class="m0">공지사항</h3></a></li>
                         <li><a href="<%=request.getContextPath() %>/community/list.jsp"><h3 class="m0 ft">홍보하기</h3></a></li>
                     </ul> 
                 </li>

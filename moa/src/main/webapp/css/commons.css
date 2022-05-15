@@ -85,6 +85,7 @@
 .mlr60{margin-left: 60px; margin-right: 60px;}
 
 
+.mb5{margin-bottom: 5px;}
 .mb10{margin-bottom: 10px;}
 .mb20{margin-bottom: 20px;}
 .mb30{margin-bottom: 30px;}
@@ -433,7 +434,7 @@ textarea.form-input {
 .display-center {
     display: flex;
     justify-content: center;/*display가 flex인 경우 가로 정렬 옵션 */
-   align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
+   	align-items: center;/*display가 flex인 경우 세로 정렬 옵션*/
 }
 
 .left-wrapper {
@@ -603,6 +604,9 @@ textarea.form-input {
 .w90p{
     width: 90%;
 }
+.w95p{
+    width: 95%;
+}
 .w100p{
     width: 100%;
 }
@@ -703,6 +707,14 @@ textarea.form-input {
 .img.img-blur {
     /* opacity는 불투명도이며 0부터 1사이로 설정한다. (0 투명, 1 불투명) */
     opacity: 0.4;
+}
+.img-hover{
+        transform: scale(1);
+
+        transition: transform 0.1s ease-in-out;
+}
+.img-hover:hover{
+        transform: scale(1.02);
 }
 
 

@@ -6,12 +6,14 @@
 
 <%
 	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+	String rejected = request.getParameter("rejected");
 	
 	RewardDao rewardDao = new RewardDao();
 	List<RewardDto> rewardList = rewardDao.selectProject(projectNo);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/add_reward.js"></script>
 
 
@@ -31,7 +33,10 @@
 		<div class="row center m50">
 			<h1>리워드 수정</h1>
 		</div>
-<form action="reward_edit.do" method="post" class="edit-form">
+	<form action="reward_edit.do" method="post" class="edit-form">	
+	<%if(rejected!=null){ %>	
+		<input type="hidden" name="rejected" value="<%=rejected%>">
+		<%} %>
 		<input type="hidden" name="projectNo" value="<%=projectNo%>">
 		<%
 		int num =1;

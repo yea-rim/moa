@@ -33,8 +33,12 @@ public class SellerProjectEditServlet extends HttpServlet{
 			
 			
 			if(success) {
-				resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectDto.getProjectNo());
-			}
+				//반려된 프로젝트
+				if(req.getParameter("rejected")!=null) {
+					resp.sendRedirect("rejected_project_detail.jsp?projectNo="+projectDto.getProjectNo());											
+				}else { //심사중 프로젝트
+					resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectDto.getProjectNo());							
+				}			}
 			else {
 				resp.sendError(404);
 			}

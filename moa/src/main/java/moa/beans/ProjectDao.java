@@ -46,7 +46,7 @@ public class ProjectDao {
 
 		String standard;
 		if (sort.equals("마감임박순")) {
-			standard = "p.PROJECT_FINISH_DATE ASC";
+			standard = "p.PROJECT_SEMI_FINISH ASC";
 		} else if (sort.equals("펀딩액순")) {
 			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
@@ -171,7 +171,7 @@ public class ProjectDao {
 
 		String standard;
 		if (sort.equals("마감임박순")) {
-			standard = "p.PROJECT_FINISH_DATE ASC";
+			standard = "p.PROJECT_SEMI_FINISH ASC";
 		} else if (sort.equals("펀딩액순")) {
 			standard = "total DESC";
 		} else if (sort.equals("좋아요순")) {
@@ -748,6 +748,7 @@ public class ProjectDao {
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
 			
 			list.add(projectDto);
 		}
@@ -758,13 +759,41 @@ public class ProjectDao {
 	// 공개예정 프로젝트(메인용) 
 	public List<ProjectDto> selectSoon() throws Exception {
 		Connection con = JdbcUtils.getConnection();
-
+		
 		String sql = "SELECT * FROM("
 				+ "SELECT rownum rn, TMP.*from("
 				+ "SELECT * FROM project WHERE project_permission = 1 and project_start_date > sysdate ORDER BY project_no desc"
 				+ ")TMP"
 				+ ") WHERE rn <= 5";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ProjectDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ProjectDto projectDto = new ProjectDto();
+			projectDto.setProjectNo(rs.getInt("project_no"));
+			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+			
+			list.add(projectDto);
+		}
+		
+		return list;
+	}
+	
+	// 공개예정 프로젝트(메인용) 
+	public List<ProjectDto> selectSoon(int p, int s) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "SELECT * FROM("
+				+ "SELECT rownum rn, TMP.*from("
+				+ "SELECT * FROM project WHERE project_permission = 1 and project_start_date > sysdate ORDER BY project_no desc"
+				+ ")TMP"
+				+ ") WHERE rn BETWEEN ? AND ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, p);
+		ps.setInt(2, s);
 		ResultSet rs = ps.executeQuery();
 
 		List<ProjectDto> list = new ArrayList<>();
@@ -888,9 +917,7 @@ public class ProjectDao {
 	public List<ProjectDto> allSelectList(int p, int s, String sort) throws Exception {
 
 		String standard;
-		if (sort.equals("펀딩액순")) {
-			standard = "order by PROJECT_PRESENT_MONEY DESC";
-		} else if (sort.equals("최신순")) {
+		if (sort.equals("최신신청순")) {
 			standard = "order by PROJECT_NO DESC";
 		} else if (sort.equals("시작일임박순")) {
 			standard = "where sysdate < project_start_date order by project_start_date asc";
