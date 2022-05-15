@@ -298,10 +298,10 @@
 					                    </div>
 					
 					                    <!-- 판매자 -->
-					                    <div class="row m10 mlr10">
+<%-- 					                    <div class="row m10 mlr10">
 					                        <p><%=sellerDto.getSellerNick() %></p>
 					                    </div>
-					
+					 --%>
 					                    <!-- 카테고리 -->
 					                    <div class="row m30 mlr10">
 					                        <p class="link-purple"><%=projectOwner.getProjectCategory() %></p>

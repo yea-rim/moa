@@ -138,7 +138,7 @@
                 			<h3>회원가입</h3>
                 		</a>
                 	</div>
-                	<div class="float-right layer-5 center m10">
+                	<div class="float-right layer-5 right m10">
                 		<a href="<%=request.getContextPath() %>/member/login.jsp" class="link">
 	                        <h3>로그인</h3>
 	                    </a>
