@@ -262,7 +262,7 @@ if(endBlock>lastPage)
 				<div>
 					<select name="type" required class="form-input">
 						<option value="community_title">제목</option>
-						<option value="community_content">내용</option>
+						<option value="community_content" selected>내용</option>
 					</select> 
 				</div>
 				<div>

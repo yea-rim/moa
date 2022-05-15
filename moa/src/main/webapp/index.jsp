@@ -154,7 +154,7 @@ boolean isExistBanner4 = bannerPhoto4 != null;
 			%>
 			
 				<div class="row category left mt10">
-					<%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %>
+					<%=projectDto.getProjectCategory() %> | <%=sellerDto.getSellerNick() %> 
 				</div>
 		
 				<div class="row left new-name m10">
@@ -201,7 +201,9 @@ boolean isExistBanner4 = bannerPhoto4 != null;
 						projectVo = projectDao.selectVo(projectDto.getProjectNo());
 						sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());
 						%>
-							<div class="row seller"><%=sellerDto.getSellerNick()%></div>
+							<div class="row seller">
+								<%=sellerDto.getSellerNick()%>
+							</div>
 							<div class="left percent">
 								<span><%=projectVo.getPercent() %>%</span>
 							</div>

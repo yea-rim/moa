@@ -30,7 +30,7 @@ public class ProjectAttachDao {
 			
 			String sql = "SELECT * FROM("
 					+ "SELECT rownum rn, TMP.*from("
-					+ "SELECT attach_no FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
+					+ "SELECT * FROM PROJECT_ATTACH WHERE project_no = ? AND attach_type = '프로필' order by attach_no asc"
 					+ ")TMP"
 					+ ")WHERE rn = 1";
 			PreparedStatement ps = con.prepareStatement(sql);

@@ -748,6 +748,7 @@ public class ProjectDao {
 			projectDto.setProjectNo(rs.getInt("project_no"));
 			projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
 			projectDto.setProjectName(rs.getString("project_name"));
+			projectDto.setProjectCategory(rs.getString("project_category"));
 			
 			list.add(projectDto);
 		}

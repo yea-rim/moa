@@ -94,7 +94,7 @@
 			
 			<div class="row m30">
 				<h3 class="m5">* 배너 이미지 선택</h3>
-				<span class="f12 gray">&nbsp;&nbsp;&nbsp;&nbsp;기존 프로필 중 1장 등록 가능</span>
+				<span class="f12 gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기존 프로필 중 1장 등록 가능</span>
 			</div>
 			<div class="row m10">
 				
@@ -130,6 +130,7 @@
 					<a href="my_coming_project.jsp" class="link btn-reverse btn-next">취소</a>
 				</div>
 			</div>
+		</div>
 		</div>
 	</form>
 	

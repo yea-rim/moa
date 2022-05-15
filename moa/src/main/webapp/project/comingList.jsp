@@ -223,21 +223,50 @@ if (isSearch) {
 			<form action="comingList.jsp#mainList" method="get">
 				<input type="hidden" name="type" value="<%=type%>"> 
 				<input type="hidden" name="keyword" value="<%=keyword%>"> 
+				
+				<%if(sort.equals("좋아요순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option selected>좋아요순</option>
+					<option>인기순</option>
+				</select> 
+				<%}else if(sort.equals("인기순")){ %>
 				<select name="sort" class="sort">
 					<option>최신순</option>
 					<option>좋아요순</option>
+					<option selected>인기순</option>
+				</select> 
+				<%}else{ %>
+				<select name="sort" class="sort">
+					<option selected>최신순</option>
+					<option>좋아요순</option>
 					<option>인기순</option>
 				</select> 
+				<%} %>
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
 			</form>
 			<%} else {%>
 			<form action="comingList.jsp#mainList" method="get">
+				<%if(sort.equals("좋아요순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option selected>좋아요순</option>
+					<option>인기순</option>
+				</select> 
+				<%}else if(sort.equals("인기순")){ %>
 				<select name="sort" class="sort">
 					<option>최신순</option>
 					<option>좋아요순</option>
+					<option selected>인기순</option>
+				</select> 
+				<%}else{ %>
+				<select name="sort" class="sort">
+					<option selected>최신순</option>
+					<option>좋아요순</option>
 					<option>인기순</option>
 				</select> 
+				<%} %>
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
 			</form>
