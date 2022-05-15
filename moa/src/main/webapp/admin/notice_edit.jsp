@@ -175,10 +175,7 @@ textarea[name=noticeContent] {
 
 
 
-
-
-
-<form action="edit.do" method="post" enctype="multipart/form-data" class="form-all">
+<form action="notice_edit.do" method="post" enctype="multipart/form-data" class="form-all">
 <input type="hidden" name="noticeNo" value="<%=noticeNo %>">
 	<div class="container w700">
 		<div class="row mt50 m10">
@@ -247,8 +244,8 @@ textarea[name=noticeContent] {
 					<input type="submit" value="수정하기" class="link link-btn w150 notice-submit">
 				</div>
 				<div class="right-wrapper">
-					<a href="detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>"> <input type="button" value="취소"
-						class="link link-reverse w150">
+					<a href="notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>"> 
+						<input type="button" value="취소" class="link link-reverse w150">
 					</a>
 				</div>
 			</div>

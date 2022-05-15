@@ -116,15 +116,15 @@ if (isSearch) {
 <div class="container w800 m70">
 				
 				<hr style="border:solid 1px #B899CD">
-			<div class="row flex-container2 m30">
+			<div class="row flex-container2 m10">
 				<div class="flex-items1">번호</div>
 				<div class="flex-items2 center">제목 / 프로젝트이름</div>
 				<div class="flex-items3">날짜</div>
 				<div class="flex-items4 right">작성자</div>
 			</div>
 			
+			<div class="row flex-container1">
 		<%for (CommunityDto communityDto : list) {%>
-			<div class="row flex-container1 m10">
 			
 				<div class="row flex-container2">
 				
@@ -162,9 +162,9 @@ if (isSearch) {
 					
 				</div>
 				
-			</div>
 			<hr style="border:solid 0.5px lightgray">
 		<%}%>
+			</div>
 
 <!--  순자 페이지네이션 -->
 <%
@@ -262,7 +262,7 @@ if(endBlock>lastPage)
 				<div>
 					<select name="type" required class="form-input">
 						<option value="community_title">제목</option>
-						<option value="community_content">내용</option>
+						<option value="community_content" selected>내용</option>
 					</select> 
 				</div>
 				<div>

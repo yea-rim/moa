@@ -127,8 +127,6 @@ SellerDao sellerDao = new SellerDao();
     $(function () {
       $(".sort").change(function () {
     	  this.form.submit();
-    	  
-    	  this.prop("selected", true);
       });
 });
 </script>
@@ -231,25 +229,93 @@ SellerDao sellerDao = new SellerDao();
 			<form action="ongoingList.jsp#mainList" method="get">
 				<input type="hidden" name="type" value="<%=type%>"> 
 				<input type="hidden" name="keyword" value="<%=keyword%>"> 
+				<%if(sort.equals("마감임박순")){ %>
 				<select name="sort" class="sort">
-					<option value="최신순">최신순</option>
-					<option value="마감임박순">마감임박순</option>
-					<option value="좋아요순">좋아요순</option>
-					<option value="인기순">인기순</option>
-					<option value="펀딩액순">펀딩액순</option>
+					<option>최신순</option>
+					<option selected>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
 				</select> 
+				<%} else if(sort.equals("좋아요순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option selected>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} else if(sort.equals("인기순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option selected>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} else if(sort.equals("펀딩액순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option selected>펀딩액순</option>
+				</select> 
+				<%} else{ %>
+				<select name="sort" class="sort">
+					<option selected>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} %>
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
 			</form>
 			<%} else {%>
 			<form action="ongoingList.jsp#mainList" method="get">
+					<%if(sort.equals("마감임박순")){ %>
 				<select name="sort" class="sort">
-					<option value="최신순">최신순</option>
-					<option value="마감임박순">마감임박순</option>
-					<option value="좋아요순">좋아요순</option>
-					<option value="인기순">인기순</option>
-					<option value="펀딩액순">펀딩액순</option>
+					<option>최신순</option>
+					<option selected>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
 				</select> 
+				<%} else if(sort.equals("좋아요순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option selected>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} else if(sort.equals("인기순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option selected>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} else if(sort.equals("펀딩액순")){ %>
+				<select name="sort" class="sort">
+					<option>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option selected>펀딩액순</option>
+				</select> 
+				<%} else{ %>
+				<select name="sort" class="sort">
+					<option selected>최신순</option>
+					<option>마감임박순</option>
+					<option>좋아요순</option>
+					<option>인기순</option>
+					<option>펀딩액순</option>
+				</select> 
+				<%} %>
 				<!-- <input type="submit" value="정렬"> -->
 				<!-- 이 부분은 js에서 onchang로 설정하면 버튼없이 선택하면 바로 바뀜 -->
 			</form>
