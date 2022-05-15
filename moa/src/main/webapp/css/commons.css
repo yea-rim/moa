@@ -11,6 +11,8 @@
 .w120 {width: 120px;}
 .w150 {width: 150px;}
 .w200 {width: 200px;}
+.w210 {width: 210px;}
+.w220 {width: 220px;}
 .w250 {width: 250px;}
 .w300 {width: 300px;}
 .w350 {width: 350px;}
@@ -83,6 +85,7 @@
 .mlr60{margin-left: 60px; margin-right: 60px;}
 
 
+.mb5{margin-bottom: 5px;}
 .mb10{margin-bottom: 10px;}
 .mb20{margin-bottom: 20px;}
 .mb30{margin-bottom: 30px;}
@@ -600,6 +603,9 @@ textarea.form-input {
 }
 .w90p{
     width: 90%;
+}
+.w95p{
+    width: 95%;
 }
 .w100p{
     width: 100%;

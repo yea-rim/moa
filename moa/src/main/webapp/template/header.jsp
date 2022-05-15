@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commons.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/layout.css" type="text/css">
-<%--     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/test.css" type="text/css"> --%>
     
     <!-- 폰트 cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
                 <%if(isLogin) { // 로그인 상태라면 %>               	
                 		<%if(isSeller) { // 판매자라면 %>
                 			<div class="float-right layer-5 center m10">
-	                			<a href="<%=request.getContextPath() %>/project/insert.jsp" class="link link-purple">
+	                			<a href="<%=request.getContextPath() %>/seller/project_insert.jsp" class="link link-purple">
 	                				<button class="btn-reverse">
 	                					<h3>프로젝트 신청</h3>
 	                				</button>
@@ -125,7 +125,7 @@
                 				</li>
                 			</ul>
                 		</div>
-						<div class="float-right layer-5 right">
+						<div class="float-right layer-5 right mt10 mlr5">
               		               <%if(memberProfileDto != null){ %>             			  		
               							<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="40"  height="40"- class="img img-circle">               				
               						<%}else{ %>

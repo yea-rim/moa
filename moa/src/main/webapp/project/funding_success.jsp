@@ -40,7 +40,7 @@
         </div>
         <div>
             <a href="<%=request.getContextPath()%>"><button class="btn">메인페이지 이동</button></a>
-            <a href="<%=request.getContextPath()%>/member/funding.jsp?fundingNo=<%=fundingNo%>"><button class="btn">마이페이지 이동</button></a>
+            <a href="<%=request.getContextPath()%>/member/my_page.jsp"><button class="btn">마이페이지 이동</button></a>
         </div>
     </div>
     

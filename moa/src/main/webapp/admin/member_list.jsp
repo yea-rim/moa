@@ -6,8 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%-- 오류 페이지 --%>
-
 <%
 	String sort = request.getParameter("sort");
 	if (sort == null){
@@ -74,7 +72,7 @@
 					<th>회원 번호</th>
 					<th>이메일</th>
 					<th>닉네임</th>
-					<th>등급?</th>
+					<th>회원 분류</th>
 					<th>판매자 여부</th>
 				</tr>
 			</thead>

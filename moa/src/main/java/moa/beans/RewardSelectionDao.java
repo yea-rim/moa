@@ -59,4 +59,18 @@ public class RewardSelectionDao {
 		
 		return list; 
 	}
+	
+	// 펀딩 번호로 리워드 셀렉션 삭제 (펀딩 취소)
+	public boolean deleteRewardSelection(int fundingNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "delete reward_selection where selection_funding_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, fundingNo);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }

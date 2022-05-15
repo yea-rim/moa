@@ -917,9 +917,7 @@ public class ProjectDao {
 	public List<ProjectDto> allSelectList(int p, int s, String sort) throws Exception {
 
 		String standard;
-		if (sort.equals("펀딩액순")) {
-			standard = "order by PROJECT_PRESENT_MONEY DESC";
-		} else if (sort.equals("최신순")) {
+		if (sort.equals("최신신청순")) {
 			standard = "order by PROJECT_NO DESC";
 		} else if (sort.equals("시작일임박순")) {
 			standard = "where sysdate < project_start_date order by project_start_date asc";
@@ -1429,7 +1427,7 @@ public class ProjectDao {
 				public List<ProjectDto> selectFundingProjectList (int memberNo) throws Exception {
 					Connection con = JdbcUtils.getConnection();
 					
-					String sql = "select distinct project_no from member_funding_info where funding_member_no = ?";
+					String sql = "select project_no from (select * from member_funding_info where funding_member_no= ? order by funding_no desc) group by project_no";
 					PreparedStatement ps = con.prepareStatement(sql);
 					ps.setInt(1, memberNo);
 					ResultSet rs = ps.executeQuery();
@@ -1446,7 +1444,12 @@ public class ProjectDao {
 					con.close();
 					
 					return list;
-				}		
+				}
+				
+				
+		// 특정 회원의 펀딩 예정인 프로젝트 번호 리스트 조회 (페이징)		
+		
+				
 				
 		// 진행예정 진행중 마감된 프로젝트 구분위한 메서드 시작날짜 - 현재날짜, 마감날짜 - 현재날짜를 각각 구해서 계산 후 반환 0:오픈예정 1:진행중 2:마감된
 		public int checkProjectSchedule(int projectNo) throws Exception{
@@ -1467,7 +1470,7 @@ public class ProjectDao {
 			con.close();
 			
 			int check = 1;
-			if(first >= 0 && second > 0) {
+			if(first > 0 && second > 0) {
 				return check = 0;
 			}else if(first < 0 && second < 0) {
 				return check = 2;
@@ -1475,5 +1478,37 @@ public class ProjectDao {
 			
 			return check;
 			
+		}
+		
+		//마감된 프로젝트 중에 나의 펀딩 번호를 넣으면 프로젝트 정보 반환
+		public ProjectDto selectSuccessMyFunding(int fundingNo, int memberNo) throws Exception {
+			Connection con = JdbcUtils.getConnection();
+
+			String sql = "select * from project where project_no = (select distinct project_no from member_funding_info where funding_no = ? and funding_member_no = ?)";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, fundingNo);
+			ps.setInt(2, memberNo);
+			ResultSet rs = ps.executeQuery();
+
+			ProjectDto projectDto = new ProjectDto();
+			if(rs.next()) {
+				projectDto.setProjectNo(rs.getInt("project_no"));
+				projectDto.setProjectSellerNo(rs.getInt("project_seller_no"));
+				projectDto.setProjectCategory(rs.getString("project_category"));
+				projectDto.setProjectName(rs.getString("project_name"));
+				projectDto.setProjectSummary(rs.getString("project_summary"));
+				projectDto.setProjectTargetMoney(rs.getInt("project_target_money"));
+				projectDto.setProjectStartDate(rs.getDate("project_start_date"));
+				projectDto.setProjectSemiFinish(rs.getDate("project_semi_finish"));
+				projectDto.setProjectFinishDate(rs.getDate("project_finish_date"));
+				projectDto.setProjectPermission(rs.getInt("project_permission"));
+				projectDto.setProjectReadcount(rs.getInt("project_readcount"));
+
+			}else {
+				projectDto = null;
+			}
+
+			return projectDto;
 		}
 }

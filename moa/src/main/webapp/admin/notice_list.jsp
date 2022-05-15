@@ -106,6 +106,7 @@ if (isSearch) {
 
 
 
+<<<<<<< HEAD
 <%-- 검색결과 --%>
 <hr style="border:solid 0.5px lightgray">
 
@@ -124,11 +125,23 @@ if (isSearch) {
 		</div>
 	</div>
 	<%-- <%} %> --%>
+=======
+>>>>>>> refs/remotes/origin/main
 	
 <%-- 목록 --%>
-<div class="container w800 m20 center">
-
-    	                
+<div class="container w80p mt30 center">
+		<div class="row mt30 mb10">
+			<div class="flex-container left">
+				<div class="left-wrapper">
+					<h2>공지사항</h2>
+				</div>
+				<div class="right-wrapper right">
+					<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+ 	                
     	    <%for (MoaNoticeDto moaNoticeDto : list) {%>
     	        <% 
 	    	       	// 해당 게시글 사진 가져오기
@@ -143,7 +156,11 @@ if (isSearch) {
 					
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
+<<<<<<< HEAD
 									<a href="notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+=======
+									<a href="<%=request.getContextPath()%>/notice/detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+>>>>>>> refs/remotes/origin/main
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
@@ -271,8 +288,7 @@ if(endBlock>lastPage)
 			   	 <div>
 				 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
 				 </div>
-			</div>
-		</form>
-	
+		</div>
+	</form>
 </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

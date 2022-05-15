@@ -113,7 +113,54 @@ $(function () {
         });
     });
     
-    //문의하기 답글 버튼 비동기통신 로그인 됐으면 작동 안됐으면 작동안함
-    
-    
+    //문의하기 답글 버튼 열기
+    $(".btn-editopen").each(function(){
+		$(this).click(function(){
+			$(".edit-content").hide();
+			$(this).parent("div").parent("td").children(".edit-content").show();
+		});
+	});
+	
+	//문의 수정 취소버튼 구현
+	$(".btn-edit-cancel").each(function(){
+		$(this).click(function(){
+			$(this).parents(".edit-content").hide();
+		});
+	});
+	
+	//문의하기 기본이벤트 차단
+	$(".write-form").submit(function(){
+		var title = $(this).find("input[name=qnaTitle]").val();
+		var content = $(this).find("textarea[name=qnaContent]").val();
+		
+		if(title == "" || content == ""){
+			alert("제목과 내용을 모두 입력해주세요.");
+			return false;
+		}
+	});
+	
+	//답글 기본이벤트 차단
+	$(".seller-answer-formcheck").each(function(){
+		$(this).submit(function(){
+			var content = $(this).find("textarea[name=qnaContent]").val();	
+			if(content == ""){
+				alert("답변 내용을 입력해주세요.");
+				return false;
+			}
+		});
+	});
+	
+    //수정 기본이벤트 차단
+    $(".edit-formcheck").each(function(){
+		$(this).submit(function(){
+			var title = $(this).find("input[name=qnaTitle]").val();
+			var content = $(this).find("textarea[name=qnaContent]").val();
+			
+			console.log(title);
+			if(title == "" || content == ""){
+			alert("제목과 내용을 모두 입력해주세요.");
+			return false;
+			}
+		});
+	});
 });

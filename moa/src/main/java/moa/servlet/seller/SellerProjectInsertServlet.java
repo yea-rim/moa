@@ -1,7 +1,8 @@
-package moa.servlet.project;
+package moa.servlet.seller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Enumeration;
 
@@ -23,8 +24,8 @@ import moa.beans.ProjectDto;
 import moa.beans.RewardDao;
 import moa.beans.RewardDto;
 
-@WebServlet(urlPatterns = "/project/insert.do")
-public class ProjectInsertServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/seller/project_insert.do")
+public class SellerProjectInsertServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -128,8 +129,10 @@ public class ProjectInsertServlet extends HttpServlet {
 				rewardDao.insert(rewardDto);
 			}
 
-			// 신청 성공 페이지로 이동
-			resp.sendRedirect("insert_success.jsp");
+			// 심사중 페이지로 이동
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
+			writer.println("<script>alert('프로젝트 신청이 완료되었습니다. 관리자 승인을 기다려 주세요.'); location.href='"+req.getContextPath()+"/seller/my_permit_project.jsp';</script>"); writer.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

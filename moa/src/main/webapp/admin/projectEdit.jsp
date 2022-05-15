@@ -16,7 +16,7 @@
 		list-style-type: disc;
 	}
 </style>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
+<jsp:include page = "/template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_insert.js"></script>
@@ -29,7 +29,7 @@
 		<div class="row m20">
 			<h3>*프로젝트 기본 정보</h3>
 		</div>
-<form action="projectEdit.do" method="post" class="insert-form">
+<form action="project_edit.do" method="post" class="insert-form">
 	<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>"> 
 		<div class="row m20">		     					
 			<label>카테고리</label> 
@@ -161,4 +161,4 @@
 		</div>
 </form>
 	</div>
-		<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+<jsp:include page = "/template/footer.jsp"></jsp:include>

@@ -162,4 +162,26 @@ public class MoaQuestionDao {
 		return count > 0;
 	}
 	
+	
+	//작성자 조회
+	public int selectWriter(int questionNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select question_writer from moa_question where question_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, questionNo);
+		ResultSet rs = ps.executeQuery();
+		
+		int questionWriter;
+		if(rs.next()) {
+			questionWriter = rs.getInt("question_writer");
+		}
+		else {
+			questionWriter = 0;
+		}
+		
+		con.close();		
+		return questionWriter;
+	}
+	
 }

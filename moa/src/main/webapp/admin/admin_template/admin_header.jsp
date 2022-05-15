@@ -13,7 +13,10 @@
         <div class="flex-container flex-vertical">
             <div class="flex-container list-admin">
                 <div class="menu-wrapper" style="border-right: 1px solid gray;">
-                <div class="row m20 center" style="font-weight: bold; font-size: 17px;">관리자 메뉴</div><hr>
+                <a href="<%=request.getContextPath()%>/admin/admin_main.jsp" class="link">
+                <div class="row m20 center" style="font-weight: bold; font-size: 17px;">관리자 메뉴</div>
+                </a>
+                <hr>
                     <ul class="m30 mlr30 left">
                         <li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/projectList.jsp" class="link">
@@ -47,7 +50,18 @@
                             <a href="<%=request.getContextPath()%>/admin/question_list.jsp" class="link">
                            		1:1 문의 관리
                             </a>
-                        </li>                 
+                        </li>
+						<li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/faq_insert.jsp" class="link">
+                           		FAQ 작성
+                            </a>
+                        </li>   
+                        <li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/banner_list.jsp" class="link">
+                           		배너 관리
+                            </a>
+                        </li>
+                                         
                     </ul>
                 </div>
                 <div class="content-wrapper mlr30 m50">

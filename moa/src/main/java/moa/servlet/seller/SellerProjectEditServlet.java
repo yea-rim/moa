@@ -12,15 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
-@WebServlet(urlPatterns="/seller/project_edit.do")
+@WebServlet(urlPatterns = "/seller/project_edit.do")
 public class SellerProjectEditServlet extends HttpServlet{
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
-			System.out.println(Integer.parseInt(req.getParameter("projectNo")));
-			System.out.println(req.getParameter("projectCategory"));
+
 			ProjectDto projectDto = new ProjectDto();
 			projectDto.setProjectNo(Integer.parseInt(req.getParameter("projectNo")));
 			projectDto.setProjectCategory(req.getParameter("projectCategory"));
@@ -36,8 +33,12 @@ public class SellerProjectEditServlet extends HttpServlet{
 			
 			
 			if(success) {
-				resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectDto.getProjectNo());
-			}
+				//반려된 프로젝트
+				if(req.getParameter("rejected")!=null) {
+					resp.sendRedirect("rejected_project_detail.jsp?projectNo="+projectDto.getProjectNo());											
+				}else { //심사중 프로젝트
+					resp.sendRedirect("permit_project_detail.jsp?projectNo="+projectDto.getProjectNo());							
+				}			}
 			else {
 				resp.sendError(404);
 			}

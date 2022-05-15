@@ -45,10 +45,10 @@
 								status.memberEmail = false;
 								return;
 							} else {
-								$(this).next("span").text(
-								"사용 가능한 이메일입니다.");
-						$("button[name=submit]").attr("disabled", false);
-						status.memberEmail = false;
+								$(this).next("span").text("사용 가능한 이메일입니다.");
+								$("button[name=submit]")
+										.attr("disabled", false);
+								status.memberEmail = false;
 							}
 
 							var that = this;
@@ -56,43 +56,50 @@
 							// 중복 검사
 							$
 									.ajax({
-										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="+ memberEmail,
+										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="
+												+ memberEmail,
 										type : "get",
 										success : function(resp) {
 											// resp는 "NNNNN" 또는 "NNNNY"
 											if (resp == "NNNNN") {
 												$(that).next("span").text(
 														"이미 사용 중인 이메일입니다.");
-												$("button[name=submit]").attr("disabled", true);
+												$("button[name=submit]").attr(
+														"disabled", true);
 												status.memberEmail = false;
 											} else if (resp == "NNNNY") {
 												$(that).next("span").text(
 														"사용 가능한 이메일입니다.");
-												$("button[name=submit]").attr("disabled", false);
+												$("button[name=submit]").attr(
+														"disabled", false);
 												status.memberEmail = true;
 											}
 										}
 									});
 						});
 
-		$("input[name=memberPw]").blur(function() {
+		$("input[name=memberPw]")
+				.blur(
+						function() {
 
-			var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%#&])[A-Za-z\d$@$!%#&]{8,16}$/;
-			var memberPw = $(this).val();
+							var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%#&])[A-Za-z\d$@$!%#&]{8,16}$/;
+							var memberPw = $(this).val();
 
-			var judge = regex.test(memberPw);
-			if (!judge) {
-				$(this).next("span").text("형식에 맞는 비밀번호를 작성해 주세요.");
-				status.password = false;
-				$("button[name=submit]").attr("disabled", true);
-				return;
-			} else {
-				$(this).next("span").text("사용 가능한 비밀번호입니다.");
-				status.password = false;
-				$("button[name=submit]").attr("disabled", false);
-			}
+							var judge = regex.test(memberPw);
+							if (!judge) {
+								$(this).next("span").text(
+										"형식에 맞는 비밀번호를 작성해 주세요.");
+								status.password = false;
+								$("button[name=submit]").attr("disabled", true);
+								return;
+							} else {
+								$(this).next("span").text("사용 가능한 비밀번호입니다.");
+								status.password = false;
+								$("button[name=submit]")
+										.attr("disabled", false);
+							}
 
-		});
+						});
 
 		$("input[name=memberNick]").blur(function() {
 			var regex = /^[가-힣a-zA-Z0-9]{2,10}$/;
@@ -103,7 +110,7 @@
 			if (!judge) {
 				span.text("형식에 맞는 닉네임을 사용하세요.");
 				status.memberNick = false;
-                $("button[name=submit]").prop("disabled");
+				$("button[name=submit]").prop("disabled");
 				return;
 			} else {
 				span.text("사용 가능한 닉네임입니다.");
@@ -149,7 +156,7 @@
 				status.memberPhone = true;
 				$("button[name=submit]").attr("disabled", false);
 			}
-			
+
 			// 휴대폰 중복 검사가 안 됩니다
 
 			$.ajax({
@@ -177,7 +184,7 @@
 
 <form action="join.do" method="post">
 
-	<div class="container w450 m30">
+	<div class="container w450 m20">
 
 		<div class="row center">
 			<h1>회원가입</h1>
@@ -202,7 +209,7 @@
 		</div>
 		<br>
 
-		<div class="row m20">
+		<div class="row">
 			<label>* 닉네임</label> <input type="text" name="memberNick" required
 				placeholder="한글, 숫자 10자 이내" autocomplete="off"
 				class="form-input fill input-round"> <span></span>
@@ -227,7 +234,8 @@
 		</div>
 
 		<div class="row m20">
-			<button type="submit" name="submit" class="btn btn-primary fill" disabled>회원가입</button>
+			<button type="submit" name="submit" class="btn btn-primary fill"
+				disabled>회원가입</button>
 		</div>
 
 	</div>
