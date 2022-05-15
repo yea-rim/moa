@@ -41,7 +41,7 @@ textarea[name=faqContent] {
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
 
 <hr style="border:solid 0.5px lightgray">
-	<div class="container w800 m50">
+	<div class="container w700 m50">
 		
 		<div class="row">
 			<h2>FAQ 작성</h2>

@@ -98,21 +98,15 @@ if (isSearch) {
 	justify-content: center;
 }
 </style>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
+<jsp:include page="/template/header.jsp"></jsp:include>
 
 
 <%-- 목록 --%>
-<div class="container w80p mt30 center">
-		<div class="row mt30 mb10">
-			<div class="flex-container left">
-				<div class="left-wrapper">
-					<h2>공지사항</h2>
-				</div>
-				<div class="right-wrapper right">
-					<a href="notice_insert.jsp" class="link btn-reverse">공지 작성하기</a>
-				</div>
-			</div>
-		</div>
+<hr style="border:solid 0.5px lightgray">
+<div class="container w800 mt30 center">
+	<div class="row center m50">
+		<h1>공지사항</h1>
+	</div>
 		<hr>
  	                
     	    <%for (MoaNoticeDto moaNoticeDto : list) {%>
@@ -129,7 +123,7 @@ if (isSearch) {
 					
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
-									<a href="<%=request.getContextPath()%>/admin/notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+									<a href="<%=request.getContextPath()%>/notice/notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
@@ -145,8 +139,7 @@ if (isSearch) {
 							<span></span>
 							<%} %>
 						</div>
-					</div>
-					
+					</div>					
 				</div>
 					<hr style="border:solid 0.5px lightgray">
     	    <%} %>
@@ -180,6 +173,7 @@ if(endBlock>lastPage)
 	endBlock = lastPage;
 }
 %>
+
 
 	<!-- 이전 버튼 영역 -->
 <div class="pagination center m50">
@@ -239,6 +233,7 @@ if(endBlock>lastPage)
 </div>
 
 
+
 <%-- 검색창 --%>
 
 		<form action="notice_list.jsp" method="get">
@@ -258,4 +253,4 @@ if(endBlock>lastPage)
 		</div>
 	</form>
 </div>
-<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>

@@ -116,13 +116,13 @@ if (isSearch) {
 <div class="container w800 m70">
 				
 				<hr style="border:solid 1px #B899CD">
-			<div class="row flex-container2 m10">
+			<div class="row flex-container2">
 				<div class="flex-items1">번호</div>
 				<div class="flex-items2 center">제목 / 프로젝트이름</div>
 				<div class="flex-items3">날짜</div>
 				<div class="flex-items4 right">작성자</div>
 			</div>
-			
+			<hr style="border:solid 1px #B899CD">
 			<div class="row flex-container1">
 		<%for (CommunityDto communityDto : list) {%>
 			
@@ -159,12 +159,11 @@ if (isSearch) {
 						<span><%=memberDto.getMemberNick() %></span>
 					</div>
 					
-					
 				</div>
-				
-			<hr style="border:solid 0.5px lightgray">
 		<%}%>
 			</div>
+			
+			<br><hr style="border:solid 1px #B899CD">
 
 <!--  순자 페이지네이션 -->
 <%
@@ -275,7 +274,6 @@ if(endBlock>lastPage)
 		</form>
 	</div>
 	
-<hr style="border:solid 1px #B899CD">
 </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

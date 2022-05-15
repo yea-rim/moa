@@ -39,6 +39,7 @@ public class BannerDao {
 		return list;
 	}
 	
+	//배너 관리 페이지 페이지네이션
 	public int CountByPaging() throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
@@ -51,5 +52,18 @@ public class BannerDao {
 		con.close();
 
 		return count;
+	}
+	
+	//배너 승인 처리
+	public boolean bannerPermit(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "update banner set banner_permission = 1 where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+		return count > 0;
 	}
 }

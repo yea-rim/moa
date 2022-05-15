@@ -30,7 +30,7 @@
 	// 관리자 여부
 	boolean isAdmin = session.getAttribute("admin") != null; 
 %>
-<jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>   
+<jsp:include page="/template/header.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -41,33 +41,26 @@
 		
 	});
 </script>
-<div class="container w70p m30">
+<div class="container w60p mt50">
 	<div class="row m10">
 			<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 	</div>
 		<div class="row">
 			<h5><%=moaNoticeDto.getNoticeTime() %></h5>
 		</div>
-	<div class="row m20">
+		<hr  style="border:solid 0.5px #B899CD">
+	<div class="row m20"  style="min-height: 500px; text-align: top;">
  		<%if(isExistPhoto){ %>
 		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%">
 		<%}else{ %>
 		<span></span>
 		<%} %>
-	</div>
-	<div class="row m50 noticeContent">
-			<%=moaNoticeDto.getNoticeContent() %>
+		<%=moaNoticeDto.getNoticeContent() %>
 	</div>
 	<hr style="border:solid 0.5px #B899CD">
 
 
-	 <%-- <%if(isAdmin){ %>  --%>
-		<div class="right" style="height:70px">
-			<a href="notice_edit.jsp?noticeNo=<%=noticeNo %>" class="btn-reverse link">수정</a>
-			<a href="notice_delete.do?noticeNo=<%=noticeNo %>" class="btn link notice-delete">삭제</a>
-		</div>
-	<%-- <%} %>  --%>
-		<div class="center" style="height:70px">
+		<div class="center m30" style="height:70px">
 				<a href="notice_list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
 		</div>
 
@@ -75,4 +68,4 @@
 
 
 
-<jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>

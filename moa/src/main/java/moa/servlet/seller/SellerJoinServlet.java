@@ -2,6 +2,7 @@ package moa.servlet.seller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -102,7 +103,9 @@ public class SellerJoinServlet extends HttpServlet {
 			sellerAttachDao.insert(sellerAttachDto);
 
 			// 출력
-			resp.sendRedirect(req.getContextPath() + "/seller/join_finish.jsp");
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
+			writer.println("<script>alert('판매자 신청이 완료되었습니다.'); location.href='"+req.getContextPath()+"/seller/seller_wait.jsp';</script>"); writer.close();
 
 			req.getSession().setAttribute("sellerNo", sellerDto.getSellerNo());
 			req.getSession().setAttribute("sellerPermission", sellerDto.getSellerPermission());

@@ -162,7 +162,7 @@
 		<span></span>
 		<%} %>
 	</div>
-	<div class="row m50 community-content">
+	<div class="row m50 community-content"  style="min-height: 200px; text-align: top;">
 		<%=communityDto.getCommunityContent() %>
 	</div>
 	<%if(isWriter){ %>
