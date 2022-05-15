@@ -51,11 +51,16 @@
                            		1:1 문의 관리
                             </a>
                         </li>
-					<li class="menu-li">
+						<li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/faq_insert.jsp" class="link">
                            		FAQ 작성
                             </a>
                         </li>   
+                        <li class="menu-li">
+                            <a href="<%=request.getContextPath()%>/admin/banner_list.jsp" class="link">
+                           		배너 관리
+                            </a>
+                        </li>
                                          
                     </ul>
                 </div>
