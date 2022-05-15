@@ -93,10 +93,12 @@
 	
 	        if(checkList) {
 	            // 체크되었으면
-	            $("input[name=memberPw]").prop("type", "text");
+	            $("input[name=currentPw]").prop("type", "text");
+	            $("input[name=changePw]").prop("type", "text");
 	        } else {
 	            // 체크 해제되면 
-	            $("input[name=memberPw]").prop("type", "password");
+	            $("input[name=currentPw]").prop("type", "password");
+	            $("input[name=changePw]").prop("type", "password");
 	        }
 	    });
 	});
@@ -117,7 +119,17 @@
 					<div class="row m30"><hr></div>
 	</div>
 
-	<div class="container w300 m50">
+	<div class="container w400 m50">
+	
+	    <%if(request.getParameter("error=1") != null) { %>
+        	<h3>기존 비밀번호와 같은 비밀번호로 수정할 수 없습니다.</h3>
+        <%} %>
+        
+        <%if(request.getParameter("error=2") != null) { %>
+        	<h3>비밀번호를 입력해주세요.</h3>
+        <%} %>
+        
+	
         <form action="edit_information.do" method="post">
             <div class="row m20">
                 <label> 
@@ -134,6 +146,7 @@
                         <input type="password" name="changePw" class="form-input fill">
                     </div>
                 </label>
+                
             </div>
             
             <div class="row m10">
@@ -141,47 +154,41 @@
 					<input type="checkbox" class="form-input check-pw">
 					<span class="link-gray">비밀번호 보기</span>
 				</label>
+				
+				<div class="row m20">
+                <label>
+                    전화번호  
+                    <div class="row m10">
+                        <input type="text" name="memberPhone" value="<%=memberDto.getMemberPhone() %>" autocomplete="off" class="form-input fill">
+                    </div>
+                </label>
+                
+                <div class="row m20">
+                <label>
+                    주소
+                    <div class="row m10">
+                        <div>
+                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
+                             <button type="button" class="address-find-btn btn">검색</button>
+                        </div>
+                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
+                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill"> </div>
+                    </div>
+                </label>
+
 			</div>
 			
-									<!-- 전화번호 입력 -->
-                                    <div class="row">
-                                        전화번호  
-                                    </div>
-                                    <div class="row m5">
-                                        <input type="text" name="memberPhone" value="<%=memberDto.getMemberPhone() %>" autocomplete="off" class="form-input fill">
-                                    </div>
-        
-                                    <!-- 주소 입력 -->
-                                    <div class="row">
-                                        주소
-                                    </div>
-                                    <div class="row m5">
-                                        <div>
-                                            <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
-                                            <button type="button" class="address-find-btn btn">검색</button>
-                                        </div>
-                                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
-                                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill"> </div>
-                                    </div>
-            
             <div class="row m20">
                 <input type="submit" value="확인" class="btn fill">
             </div>
         </form>
-        
-        <%if(request.getParameter("error=1") != null) { %>
-        	<h3>기존 비밀번호와 같은 비밀번호로 수정할 수 없습니다.</h3>
-        <%} %>
-        
-        <%if(request.getParameter("error=2") != null) { %>
-        	<h3>비밀번호를 입력해주세요.</h3>
-        <%} %>
-        
+       
     </div>
+
     
-    <div class="container">
-        	<div class="row m20 right mlr20">
-            	<a href="exit.jsp" class="link link-btn">
+    <div class="container center">
+        	<div class="row">
+            	<a href="exit.jsp" class="link link-btn fill">
             		회원 탈퇴
             	</a>
         	</div>
