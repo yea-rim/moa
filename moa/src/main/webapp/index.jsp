@@ -1,3 +1,5 @@
+<%@page import="moa.beans.BannerDto"%>
+<%@page import="moa.beans.BannerDao"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.MoaNoticeDto"%>
@@ -26,16 +28,9 @@ SellerDto sellerDto;
 ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 
-// 배너용 
-ProjectAttachDto bannerPhoto1 = projectAttachDao.getAttachNo(125);
-ProjectAttachDto bannerPhoto2 = projectAttachDao.getAttachNo(107);
-ProjectAttachDto bannerPhoto3 = projectAttachDao.getAttachNo(34);
-ProjectAttachDto bannerPhoto4 = projectAttachDao.getAttachNo(101);
-
-boolean isExistBanner1 = bannerPhoto1 != null;
-boolean isExistBanner2 = bannerPhoto2 != null;
-boolean isExistBanner3 = bannerPhoto3 != null;
-boolean isExistBanner4 = bannerPhoto4 != null;
+// 기간에 해당되는 배너 4개만
+BannerDao bannerDao = new BannerDao();
+List<BannerDto> banner = bannerDao.selectAll();
 %>
 <!-- 스와이퍼 -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
@@ -62,63 +57,32 @@ boolean isExistBanner4 = bannerPhoto4 != null;
 	  <!-- 프로필부분의 왼쪽 플로트-->
 	  <div class="flex-container">
 			<div class="swiper">
+				<%for(BannerDto bannerDto : banner) { %>
+				<% boolean isExistBanner = bannerDto != null; %>
 				<div class="swiper-wrapper">
-					<%if(isExistBanner1){ %>
+					<%if(isExistBanner){ %>
 					    <div class="swiper-slide">
-					    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerPhoto1.getProjectNo() %>">
-				           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerPhoto1.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+					    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+				           		<%-- <img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'"> --%>
+			                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
 				           	</a>
 			            </div>
 	            	<%}else{ %>
 		            	<div class="swiper-slide">
-		            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerPhoto2.getProjectNo() %>">
-		                    	<img src="https://via.placeholder.com/500x300" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
-		                    </a>
-		            	</div>
-		        	<%} %>
-				</div>
-				<div class="swiper-wrapper">
-					<%if(isExistBanner2){ %>
-					    <div class="swiper-slide">
-					    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerPhoto3.getProjectNo() %>">
-				           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerPhoto2.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
-				           	</a>
-			            </div>
-	            	<%}else{ %>
-		            	<div class="swiper-slide">
-		            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerPhoto4.getProjectNo() %>">
+		            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
 			                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
 		                    </a>
 		            	</div>
 		        	<%} %>
 				</div>
-				<div class="swiper-wrapper">
-					<%if(isExistBanner3){ %>
-					    <div class="swiper-slide">
-				           	<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerPhoto3.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
-			            </div>
-	            	<%}else{ %>
-		            	<div class="swiper-slide">
-		                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-		            	</div>
-		        	<%} %>
-				</div>
-				<div class="swiper-wrapper">
-					<%if(isExistBanner4){ %>
-					    <div class="swiper-slide">
-				           	<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerPhoto4.getAttachNo() %>" width="660px" height="400px">
-			            </div>
-	            	<%}else{ %>
-		            	<div class="swiper-slide">
-		                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-		            	</div>
-		        	<%} %>
-				</div>
-			<div class="swiper-pagination"></div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
-		</div>
+				<%} %>
+				
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
 	</div>
+	
 	<%-- 신규프로젝트 목록 --%>
 
 	<div class="row flex-items1">
