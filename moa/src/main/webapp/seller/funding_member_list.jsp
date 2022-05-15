@@ -125,14 +125,17 @@
                         </thead>
                         <tbody>
                             <%for(FundingDto fundingDto : list) { 
+                            	
                             		
                             		MemberDao memberDao = new MemberDao();
                             		MemberDto memberDto = memberDao.selectOne(fundingDto.getFundingMemberNo());
+                            		
+                            		FundingDto nowFundingDto = fundingDao.selectOne(fundingDto.getFundingNo(), memberDto.getMemberNo());
                             %>
                             	<tr>
-	                                <td><%=fundingDto.getFundingNo() %></td>
+	                                <td><%=nowFundingDto.getFundingNo() %></td>
 	                                <td><%=memberDto.getMemberNick() %></td>
-	                                <td><%=fundingDto.getFundingDate() %></td>
+	                                <td><%=nowFundingDto.getFundingDate() %></td>
 	                                <td><a href="funding_member_detail.jsp?memberNo=<%=memberDto.getMemberNo() %>&projectNo=<%=projectNo %>&fundingNo=<%=fundingDto.getFundingNo()%>" class="link link-purple">상세보기</a></td>
                             	</tr>
                             <%} %>
