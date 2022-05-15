@@ -106,30 +106,8 @@ if (isSearch) {
 
 
 
-<<<<<<< HEAD
-<%-- 검색결과 --%>
-<hr style="border:solid 0.5px lightgray">
-
-<div class="container w800 m30">
-	<div class="row center">
-		<a href="notice_list.jsp?p=1&s=10" class="link">
-			<h1>공지사항</h1>
-		</a>
-	</div>
-</div>
-
-	<%-- <%if(isAdmin){ %> --%>
-	<div class="container w800 m10">
-		<div class="row left">
-			<a href="notice_insert.jsp" class="link btn-reverse">공지 작성하기</a>
-		</div>
-	</div>
-	<%-- <%} %> --%>
-=======
->>>>>>> refs/remotes/origin/main
-	
 <%-- 목록 --%>
-<div class="container w80p mt30 center">
+<div class="container w80 mt30 center">
 		<div class="row mt30 mb10">
 			<div class="flex-container left">
 				<div class="left-wrapper">
@@ -156,11 +134,7 @@ if (isSearch) {
 					
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
-<<<<<<< HEAD
 									<a href="notice_detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
-=======
-									<a href="<%=request.getContextPath()%>/notice/detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
->>>>>>> refs/remotes/origin/main
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
@@ -273,7 +247,6 @@ if(endBlock>lastPage)
 </h3>
 
 <%-- 검색창 --%>
-
 		<form action="notice_list.jsp" method="get">
 			<div class="flex-container search">
 				<div>
