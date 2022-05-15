@@ -1,3 +1,5 @@
+<%@page import="moa.beans.ProjectDto"%>
+<%@page import="moa.beans.ProjectDao"%>
 <%@page import="moa.beans.ProgressAttachDto"%>
 <%@page import="moa.beans.ProgressAttachDao"%>
 <%@page import="moa.beans.PjProgressDto"%>
@@ -25,6 +27,8 @@
 %>
 <%
 	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+	ProjectDao projectDao = new ProjectDao();
+	ProjectDto projectDto = projectDao.selectOne(projectNo);
 %>    
 <%	
 	int progressNo = Integer.parseInt(request.getParameter("progressNo"));
@@ -87,5 +91,12 @@
                     <div class="row">
 <pre class="pre"><%=pjProgressDto.getProgressContent() %></pre>
                     </div>
+                    <%if(isSeller && memberNo == projectDto.getProjectSellerNo()) {%>
+                    <div class="row right mt100">
+                    	<a href="<%=request.getContextPath()%>/seller/pj_progress_edit.jsp?progressNo=" + <%=progressNo %>><button class="btn">수정</button></a>
+                    	<a href="<%=request.getContextPath()%>/seller/pj_progress_delete.do?progressNo=" + <%=progressNo %>><button class="btn btn-reverse">삭제</button></a>
+                    </div>
+                    <%} %>
+                    
                 </div>
 <jsp:include page="/project/project_template/project_footer.jsp"></jsp:include>

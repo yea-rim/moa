@@ -21,15 +21,10 @@ public class FundingCancelServlet extends HttpServlet{
 			
 			// 처리
 			FundingDao fundingDao = new FundingDao();
-			boolean isSuccess = fundingDao.cancelFunding(fundingNo);
 			
+			fundingDao.fundingCancel(fundingNo);
 			
-			// 출력
-			if(isSuccess) {
-				resp.sendRedirect("funding_cancel_finish.jsp");
-			} else {
-				resp.sendError(500);
-			}
+			resp.sendRedirect("funding_cancel_finish.jsp");
 			
 		} catch (Exception e){
 			e.printStackTrace();

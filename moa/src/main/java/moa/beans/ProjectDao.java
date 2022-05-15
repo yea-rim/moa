@@ -1441,7 +1441,7 @@ public class ProjectDao {
 			con.close();
 			
 			int check = 1;
-			if(first >= 0 && second > 0) {
+			if(first > 0 && second > 0) {
 				return check = 0;
 			}else if(first < 0 && second < 0) {
 				return check = 2;
