@@ -5,7 +5,8 @@
     
 <%
 	int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-	
+	String rejected = request.getParameter("rejected");
+
 	ProjectDao projectDao = new ProjectDao();
 	ProjectDto projectDto = projectDao.selectOne(projectNo);
 %>
@@ -41,6 +42,9 @@
 			<h3>*프로젝트 기본 정보</h3>
 		</div>
 <form action="project_edit.do" method="post" class="insert-form">
+	<%if(rejected!=null){ %>	
+		<input type="hidden" name="rejected" value="<%=rejected%>">
+	<%} %>
 	<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>"> 
 		<div class="row m20">		     					
 			<label>카테고리</label> 

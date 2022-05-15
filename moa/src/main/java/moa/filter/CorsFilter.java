@@ -22,7 +22,7 @@ public class CorsFilter implements Filter {
 		
 		try {
 			
-			resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+			//resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
 			resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
 			
 			chain.doFilter(req, resp);

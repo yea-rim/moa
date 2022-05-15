@@ -114,7 +114,7 @@
 						<%} %>
 					</td>
 					<td>
-						<a href="<%=request.getContextPath()%>/admin/questionDelete.do?questionNo=<%=questionDto.getQuestionNo() %>" class="btn-replyDelete">
+						<a href="<%=request.getContextPath()%>/question/delete.do?questionNo=<%=questionDto.getQuestionNo() %>&admin=1" class="btn-replyDelete">
 						<img src="<%=request.getContextPath()%>/image/delete.png" width="20">
 						</a>
 					</td>

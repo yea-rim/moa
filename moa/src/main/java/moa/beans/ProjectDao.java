@@ -888,9 +888,7 @@ public class ProjectDao {
 	public List<ProjectDto> allSelectList(int p, int s, String sort) throws Exception {
 
 		String standard;
-		if (sort.equals("펀딩액순")) {
-			standard = "order by PROJECT_PRESENT_MONEY DESC";
-		} else if (sort.equals("최신순")) {
+		if (sort.equals("최신신청순")) {
 			standard = "order by PROJECT_NO DESC";
 		} else if (sort.equals("시작일임박순")) {
 			standard = "where sysdate < project_start_date order by project_start_date asc";

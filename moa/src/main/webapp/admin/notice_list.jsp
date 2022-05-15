@@ -93,28 +93,21 @@ if (isSearch) {
 
 
 
-<%-- 검색결과 --%>
-
-<div class="container w600 m30">
-	<div class="row center">
-		<a href="list.jsp?p=1&s=10" class="link">
-			<h1>공지사항</h1>
-		</a>
-	</div>
-</div>
-
-	<%-- <%if(isAdmin){ %> --%>
-	<div class="container w800 m10">
-		<div class="row left">
-			<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
-		</div>
-	</div>
-	<%-- <%} %> --%>
 	
 <%-- 목록 --%>
-<div class="container w800 m20 center">
-
-    	                
+<div class="container w80p mt30 center">
+		<div class="row mt30 mb10">
+			<div class="flex-container left">
+				<div class="left-wrapper">
+					<h2>공지사항</h2>
+				</div>
+				<div class="right-wrapper right">
+					<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+ 	                
     	    <%for (MoaNoticeDto moaNoticeDto : list) {%>
     	        <% 
 	    	       	// 해당 게시글 사진 가져오기
@@ -129,7 +122,7 @@ if (isSearch) {
 					
 						<div class="row flex-items1 flex-container1">
 							<div class="row notice-name left m10">
-									<a href="detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
+									<a href="<%=request.getContextPath()%>/notice/detail.jsp?noticeNo=<%=moaNoticeDto.getNoticeNo() %>" class="link">
 										<h2><%=moaNoticeDto.getNoticeTitle() %></h2>
 									</a>
 							</div>
@@ -242,24 +235,22 @@ if(endBlock>lastPage)
 </h3>
 
 <%-- 검색창 --%>
-
-		<form action="list.jsp" method="get">
-			<div class="flex-container search">
-				<div>
-					<select name="type" required class="form-input">
-						<option value="notice_title">제목</option>
-						<option value="notice_content">내용</option>
-					</select> 
-				</div>
-				<div>
-			   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
-			   	 </div>
-			   	 <div>
-				 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
-				 </div>
+	<form action="list.jsp" method="get">
+		<div class="flex-container search">
+			<div>
+				<select name="type" required class="form-input">
+					<option value="notice_title">제목</option>
+					<option value="notice_content">내용</option>
+				</select> 
 			</div>
-		</form>
-	
+			<div>
+		   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
+		   	 </div>
+		   	 <div>
+			 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
+			 </div>
+		</div>
+	</form>
 </div>
 
 <jsp:include page="/admin/admin_template/admin_footer.jsp"></jsp:include>
