@@ -89,11 +89,21 @@
 					}
 				});
 	        });
+			
+			$(".profile-formcheck").submit(function(){
+				if(status.memberNick){
+					return true;
+				}else{
+					alert("닉네임을 작성해주세요.");
+					return false;
+				}
+			});
+		
 		});
     </script>
 
                 <div class="container fill m40">
-                    <form action="edit.do" method="post" enctype="multipart/form-data">
+                    <form action="edit.do" method="post" enctype="multipart/form-data" class="profile-formcheck">
 						<input type = "hidden" name = "memberNo" value="<%=memberNo%>">
                     
                         <div class="flex-container">

@@ -42,13 +42,21 @@
                 if(!judge) {
                     $(this).next("p").text("비밀번호 형식을 맞춰주세요.");
                     status.changePw = false;
-                    $("input[type=submit]").attr("disabled", true);
                     return;
                 } else {
                 	$(this).next("p").text("");
                 	status.changePw = true;
-                	$("input[type=submit]").attr("disabled", false);
                 }
+            });
+            
+            $(".pw-formcheck").submit(function(){
+            	if(status.changePw){
+            		return true;
+            	}else{
+            		alert("형식에 맞게 입력 해주세요.");
+            		return false;
+            	}
+            		
             });
             
         });
@@ -90,7 +98,7 @@
                         
 	                        <div class="float-left layer-2">
 	                            
-		                     <form action="change_password.do" method="post">
+		                     <form action="change_password.do" method="post" class="pw-formcheck">
 					            <div class="row">
 					                <label>
 					                    변경할 비밀번호

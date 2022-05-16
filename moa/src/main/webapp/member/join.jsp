@@ -41,21 +41,17 @@
 							if (!judge) {
 								$(this).next("span").text(
 										"이메일을 형식에 맞게 작성해 주세요.");
-								$("button[name=submit]").attr("disabled", true);
 								status.memberEmail = false;
 								return;
 							} else {
 								$(this).next("span").text("사용 가능한 이메일입니다.");
-								$("button[name=submit]")
-										.attr("disabled", false);
-								status.memberEmail = false;
+								status.memberEmail = true;
 							}
 
 							var that = this;
 
 							// 중복 검사
-							$
-									.ajax({
+							$.ajax({
 										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="
 												+ memberEmail,
 										type : "get",
@@ -64,22 +60,17 @@
 											if (resp == "NNNNN") {
 												$(that).next("span").text(
 														"이미 사용 중인 이메일입니다.");
-												$("button[name=submit]").attr(
-														"disabled", true);
 												status.memberEmail = false;
 											} else if (resp == "NNNNY") {
 												$(that).next("span").text(
 														"사용 가능한 이메일입니다.");
-												$("button[name=submit]").attr(
-														"disabled", false);
 												status.memberEmail = true;
 											}
 										}
 									});
 						});
 
-		$("input[name=memberPw]")
-				.blur(
+		$("input[name=memberPw]").blur(
 						function() {
 
 							var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{8,16}$/;
@@ -89,14 +80,11 @@
 							if (!judge) {
 								$(this).next("span").text(
 										"형식에 맞는 비밀번호를 작성해 주세요.");
-								status.password = false;
-								$("button[name=submit]").attr("disabled", true);
+								status.memberPw = false;
 								return;
 							} else {
 								$(this).next("span").text("사용 가능한 비밀번호입니다.");
-								status.password = false;
-								$("button[name=submit]")
-										.attr("disabled", false);
+								status.memberPw = true;
 							}
 
 						});
@@ -110,12 +98,10 @@
 			if (!judge) {
 				span.text("형식에 맞는 닉네임을 사용하세요.");
 				status.memberNick = false;
-				$("button[name=submit]").prop("disabled");
 				return;
 			} else {
 				span.text("사용 가능한 닉네임입니다.");
 				status.memberNick = true;
-				$("button[name=submit]").attr("disabled", false);
 			}
 
 			var that = this;
@@ -129,12 +115,10 @@
 				success : function(resp) {
 					if (resp === "Y") {
 						span.text("사용 가능한 닉네임입니다.");
-						$("button[name=submit]").attr("disabled", false);
 						status.memberNick = true;
 					} else if (resp === "N") {
 						span.text("이미 사용 중인 닉네임입니다.");
 						status.memberNick = false;
-						$("button[name=submit]").attr("disabled", true);
 					}
 				}
 			});
@@ -149,12 +133,10 @@
 			if (!judge) {
 				span.text("형식에 맞는 전화번호를 입력해 주세요.");
 				status.memberPhone = false;
-				$("button[name=submit]").attr("disabled", true);
 				return;
 			} else {
 				span.text("사용 가능한 전화번호입니다.");
 				status.memberPhone = true;
-				$("button[name=submit]").attr("disabled", false);
 			}
 
 
@@ -168,20 +150,44 @@
 					if (resp === "Yes") {
 						span.text("가입 가능한 전화번호입니다.");
 						status.memberPhone = true;
-						$("button[name=submit]").attr("disabled", false);
 					} else if (resp === "No") {
 						span.text("이미 가입된 전화번호입니다.");
 						status.memberPhone = false;
-						$("button[name=submit]").attr("disabled", true);
 					}
 				}
 			});
 		});
+		
+		$("select[name=memberRoute]").blur(function(){
+			var val = $(this).val();
+			if(val ==""){
+				status.memberRoute = false;
+			}else{
+				status.memberRoute = true;
+			}
+			
+		});
+		
+		
+		$(".login-formcheck").submit(function(){
+			console.log(status.memberEmail);
+			console.log(status.memberPhone);
+			console.log(status.memberNick);
+			console.log(status.memberPw);
+			console.log(status.memberRoute);
+			if(status.memberEmail && status.memberPw && status.memberNick && status.memberPhone && status.memberRoute){
+				return true;
+			}else{
+				alert("필수 정보를 모두 입력해주세요.");
+				return false;
+			}
+		});
+		
 
 	});
 </script>
 
-<form action="join.do" method="post">
+<form action="seller_join.do" method="post" class="login-formcheck">
 
 	<div class="container w450 m20">
 
@@ -190,12 +196,12 @@
 		</div>
 
 		<div class="row m20">
-			<label>* 이메일</label> <input type="email" name="memberEmail" required
+			<label>* 이메일</label> <input type="email" name="memberEmail"
 				class="form-input fill input-round" autocomplete="off"> <span></span>
 		</div>
 
 		<div class="row">
-			<label>* 비밀번호</label> <input type="password" name="memberPw" required
+			<label>* 비밀번호</label> <input type="password" name="memberPw"
 				placeholder="영어, 숫자, 특수문자 8~16자" class="form-input fill input-round">
 			<span></span>
 		</div>
@@ -209,13 +215,13 @@
 		<br>
 
 		<div class="row">
-			<label>* 닉네임</label> <input type="text" name="memberNick" required
+			<label>* 닉네임</label> <input type="text" name="memberNick" 
 				placeholder="한글, 숫자 10자 이내" autocomplete="off"
 				class="form-input fill input-round"> <span></span>
 		</div>
 
 		<div class="row m20">
-			<label>* 전화번호</label> <input type="tel" name="memberPhone" required
+			<label>* 전화번호</label> <input type="tel" name="memberPhone"
 				placeholder="- 제외하고 입력" class="form-input fill input-round"
 				autocomplete="off"> <span></span>
 		</div>
@@ -223,7 +229,7 @@
 		<div class="row m20">
 			<label>가입 경로</label> <select name="memberRoute"
 				class="form-input input-round">
-				<option selected disabled>선택</option>
+				<option selected value="">선택</option>
 				<option value="친구 추천">친구 추천</option>
 				<option value="인터넷 검색">인터넷 검색</option>
 				<option value="광고">광고</option>
@@ -233,8 +239,7 @@
 		</div>
 
 		<div class="row m20">
-			<button type="submit" name="submit" class="btn btn-primary fill"
-				disabled>회원가입</button>
+			<button type="submit" name="submit" class="btn btn-primary fill">회원가입</button>
 		</div>
 
 	</div>
