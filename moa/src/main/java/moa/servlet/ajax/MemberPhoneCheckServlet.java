@@ -17,18 +17,26 @@ public class MemberPhoneCheckServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//준비
+			Integer memberNo = (Integer) req.getSession().getAttribute("login");
 			String memberPhone = req.getParameter("memberPhone");
 			
 			//처리
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.findByPhone(memberPhone);
 			
+			MemberDto realMember = memberDao.selectOne(memberNo);
+			
+			// 현재 핸드폰 번호 
+			String currentPhone = realMember.getMemberPhone();
+						
+			boolean isSame = currentPhone.equals(memberPhone);
+			
 			//출력
-			if(memberDto != null) {//사용중
-				resp.getWriter().print("No");
+			if(memberDto == null || isSame) {// 사용 가능 
+				resp.getWriter().print("Yes");
 			}
 			else {//사용가능
-				resp.getWriter().print("Yes");
+				resp.getWriter().print("No");
 			}
 		}
 		catch(Exception e) {

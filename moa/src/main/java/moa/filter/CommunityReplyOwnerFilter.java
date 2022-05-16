@@ -25,7 +25,7 @@ public class CommunityReplyOwnerFilter implements Filter{
 		
 		try {		
 			// 1. 관리자인지 확인
-			String admin  = (String) req.getSession().getAttribute("admin");
+			Integer admin  = (Integer) req.getSession().getAttribute("admin");
 			if(admin != null) {
 				chain.doFilter(request, response);
 				return;

@@ -34,6 +34,11 @@
 <%
 	// 현재 세션에 저장된 로그인 정보 가져오기
 	Integer memberNo = (Integer) session.getAttribute("login");
+	
+	// Admin 확인
+	Integer admin = (Integer) session.getAttribute("admin");
+	
+	boolean isAdmin = admin != null; 
 
 	// 회원 상세 조회
 	MemberDao memberDao = new MemberDao();
@@ -51,8 +56,9 @@
 	SellerDao sellerDao = new SellerDao();
 	SellerDto sellerDto = sellerDao.selectOne(memberDto.getMemberNo());
 	
-	boolean isSellerWait = sellerDto != null && sellerDto.getSellerRegistDate() == null; // Dto에 정보는 있지만 registDate가 없으면 대기 상태 
 	boolean isSeller = sellerDto != null && sellerDto.getSellerRegistDate() != null; // true면 seller 
+	boolean isSellerWait = sellerDto != null && sellerDto.getSellerRegistDate() == null; // Dto에 정보는 있지만 registDate가 없으면 대기 상태
+	boolean isSellerRefused = sellerDto != null && sellerDto.getSellerPermission() == 2;
 	
 	
 	// 관심 프로젝트 조회
@@ -112,21 +118,35 @@
                         <div class="float-left m20 mlr20">
                             <div class="row m10">
                             	<div class="float-container">
-                            		 <%if(isSeller) { // 판매자이면 %>
+                            		 <%if(isSellerRefused) { // 판매자이면 %>
                             		 		<div class="float-left">
+	                            				<h4>(회원번호) </h4>
+	                            			</div>
+	                            			<div class="float-left mlr10">
+	                            				<h3><%=memberDto.getMemberNo() %></h3>
+	                            			</div>
+                            		<%} else if(isSeller) { // 반려된 상태이면  %>
+                            				<div class="float-left">
                             					<h4>(판매자 번호) </h4>
 	                            			</div>
 	                            			<div class="float-left mlr10">
 	                            				<h3><%=sellerDto.getSellerNo() %></h3>
 	                            			</div>
-                            		<%} else { // 일반 회원이면 %>
+                            		<%} else if(isAdmin) { // 일반 회원이면 %>
 	                            			<div class="float-left">
 	                            				<h4>(회원번호) </h4>
 	                            			</div>
 	                            			<div class="float-left mlr10">
 	                            				<h3><%=memberDto.getMemberNo() %></h3>
 	                            			</div>
-                            		<% } %>
+                            		<% } else {%>
+                            				<div class="float-left">
+	                            				<h4>(회원번호) </h4>
+	                            			</div>
+	                            			<div class="float-left mlr10">
+	                            				<h3><%=memberDto.getMemberNo() %></h3>
+	                            			</div>
+                            		<%} %>
                             	</div>
                             </div>
                             <div class="row">
@@ -143,7 +163,7 @@
                         <div class="float-right m70 mlr40">
                             
                             <!-- 프로젝트 관련 버튼 -->
-                            <%if(isSellerWait) { // 판매자 대기일 때 (판매자 신청 현황으로 이동) %>
+                            <%if(isSellerWait || isSellerRefused) { // 판매자 대기일 때 (판매자 신청 현황으로 이동) %>
 		                            <a href="<%=request.getContextPath() %>/member/seller_wait.jsp" class="link link-reverse h60">
 			                             <h3>판매자 신청</h3>
 	                                	<h3 class="center">(신청현황)</h3>

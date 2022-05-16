@@ -112,7 +112,11 @@
 	                            <!-- 거절 메세지 -->
 	                            <div class="row w800 mt30">
 	                                <p class="link-gray">
+	                                <%if(projectDto.getProjectRefuseMsg() == null) { %>
+	                                	반려 사유 : 없음 
+	                                <%} else {%>
 	                                    반려 사유 : <%=projectDto.getProjectRefuseMsg() %>
+	                                   <%} %>
 	                                </p>
 	                            </div>
 	                            

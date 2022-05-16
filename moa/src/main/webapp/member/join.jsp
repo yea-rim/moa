@@ -187,7 +187,7 @@
 	});
 </script>
 
-<form action="seller_join.do" method="post" class="login-formcheck">
+<form action="join.do" method="post" class="login-formcheck">
 
 	<div class="container w450 m20">
 

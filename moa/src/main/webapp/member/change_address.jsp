@@ -125,14 +125,25 @@
 		                     <form action="change_address.do" method="post">
 		                     	<label>
 				                    주소
-				                    <div class="row m10">
-				                        <div>
-				                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" value="<%=memberDto.getMemberPost() %>" readonly> 
-				                             <button type="button" class="address-find-btn btn">검색</button>
-				                        </div>
-				                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" value="<%=memberDto.getMemberBasicAddress() %>" readonly> </div>
-				                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill" value="<%=memberDto.getMemberDetailAddress()%>"></div>
-				                    </div>
+				                    <%if(memberDto.getMemberPost() == null) { %>
+					                    <div class="row m10">
+					                        <div>
+					                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
+					                             <button type="button" class="address-find-btn btn">검색</button>
+					                        </div>
+					                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
+					                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill" ></div>
+					                    </div>
+				                    <%} else {%>
+					                    <div class="row m10">
+					                        <div>
+					                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" value="<%=memberDto.getMemberPost() %>" readonly> 
+					                             <button type="button" class="address-find-btn btn">검색</button>
+					                        </div>
+					                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" value="<%=memberDto.getMemberBasicAddress() %>" readonly> </div>
+					                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill" value="<%=memberDto.getMemberDetailAddress()%>"></div>
+					                    </div>
+				                    <%} %>
 				                    <div class="row m10">
 				                    	<input type="submit" value="변경하기" class="link link-btn fill">
 				                    </div>
