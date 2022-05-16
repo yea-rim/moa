@@ -66,7 +66,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 	});
 </script>
 
-<form action="join.do" method="post" enctype="multipart/form-data">
+<form action="seller_join.do" method="post" enctype="multipart/form-data">
 
 	<div class="container w450 m30">
 
