@@ -42,7 +42,7 @@ public class QuestionOwnerFilter implements Filter{
 			if(auth) {
 				chain.doFilter(request, response);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)
-				resp.sendError(403);				
+				resp.sendError(403);			
 			}
 			
 		} catch (Exception e) {

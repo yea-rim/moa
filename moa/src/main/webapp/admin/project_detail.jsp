@@ -42,7 +42,16 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/swiper.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$(".btn-refuse").click(function(){
+			if($("textarea[name=projectRefuseMsg]").val()==""){
+				alret("거절 메세지를 입력해주세요");
+				return false;
+			}
+		});
+	});
+</script>
 <%
 //프로젝트 번호
 int projectNo = Integer.parseInt(request.getParameter("projectNo"));
@@ -198,7 +207,7 @@ boolean isProfile = profileList.size() > 0;
 						<label>반려 메세지 입력</label> <input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
 						<textarea name="projectRefuseMsg" rows="5" class="float-right fill form-input mt5" placeholder="내용입력" autocomplete="off"></textarea>
 						<div class="row center">
-							<button class="btn btn-reverse fill">반려하기</button>
+							<button class="btn btn-reverse fill btn-refuse">반려하기</button>
 						</div>
 					</form>
 				</div>
@@ -218,7 +227,9 @@ boolean isProfile = profileList.size() > 0;
 			<a href="project_attach_edit.jsp?projectNo=<%=projectDto.getProjectNo()%>" class="link link-reverse">이미지 수정</a>
 			<%} %>
 		</div>
-		<img src="https://via.placeholder.com/400x500" width="100%">
+            <%for(ProjectAttachDto projectAttachDto : detailList){ %>
+          			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%">
+          	<%} %>
 	</div>
 
 	<!-- 본문 오른쪽 리워드 부분 -->

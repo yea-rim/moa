@@ -67,7 +67,7 @@ public class ProjectOwnerFilter implements Filter{
 			ProjectDto projectDto = projectDao.selectOne(projectNo);
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == projectDto.getProjectSellerNo();
-			
+		
 			if(auth) {
 				chain.doFilter(request, response);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)

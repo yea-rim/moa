@@ -93,7 +93,7 @@ public class MoaFaqDao {
 		} else if (sort.equals("기타")) {
 			standard = "where faq_category = '기타'";
 		} else {
-			standard = "order by moa_faq desc";
+			standard = "order by faq_no desc";
 		}
 
 		int end = p * s;
@@ -139,6 +139,20 @@ public class MoaFaqDao {
 		con.close();
 
 		return count;
+	}
+	
+	//삭제 
+	public boolean delete(int faqNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "delete moa_faq where faq_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, faqNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+
+		return count > 0;
 	}
 
 }
