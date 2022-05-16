@@ -41,6 +41,10 @@ public class SellerApproveServlet extends HttpServlet{
 			PrintWriter writer = resp.getWriter(); 
 			if(success) {
 				writer.println("<script>alert('판매자 승인이 완료되었습니다.'); location.href='"+req.getContextPath()+"/admin/seller_list.jsp';</script>"); writer.close();
+				
+				req.getSession().setAttribute("sellerNo", sellerDto.getSellerNo());
+				req.getSession().setAttribute("sellerPermission", sellerDto.getSellerPermission());
+			
 			}
 			else {
 				writer.println("<script>alert('판매자 승인에 실패하였습니다.'); location.href='"+req.getContextPath()+"/admin/seller_list.jsp';</script>"); writer.close();
