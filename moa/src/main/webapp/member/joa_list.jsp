@@ -111,9 +111,7 @@
             	<form action="<%=request.getContextPath()%>/project/joa_delete.do" method="post">
             		<input type="hidden" name="memberNo" value="<%=memberNo%>">
             		<input type="hidden" name="projectNo" value="<%=projectDto.getProjectNo()%>">
-            		<button class="btn link-purple w100 p10">
-            			좋아요
-            		</button>
+            		<button class="btn link-purple w100 p10">좋아요 취소</button>
             	</form>
             </div>
         </div>

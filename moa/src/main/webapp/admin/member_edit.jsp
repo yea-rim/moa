@@ -6,8 +6,8 @@
 	pageEncoding="UTF-8"%>
 
 <%
-// 로그인 세션으로 회원 정보 가져오기 
-Integer memberNo = (Integer) session.getAttribute("login");
+// 회원 번호
+int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 
 // 상세 조회
 MemberDao memberDao = new MemberDao();

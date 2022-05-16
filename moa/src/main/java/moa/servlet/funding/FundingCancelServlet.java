@@ -1,6 +1,7 @@
 package moa.servlet.funding;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +25,9 @@ public class FundingCancelServlet extends HttpServlet{
 			
 			fundingDao.fundingCancel(fundingNo);
 			
-			resp.sendRedirect("funding_cancel_finish.jsp");
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
+			writer.println("<script>alert('후원 취소가 완료되었습니다.'); location.href='"+req.getContextPath()+"/member/funding_cancel_list.jsp';</script>"); writer.close();
 			
 		} catch (Exception e){
 			e.printStackTrace();

@@ -26,12 +26,12 @@
 
 <form action="progress_edit.do" method="post" enctype="multipart/form-data" class="form-all">
 <input type="hidden" name="progressNo" value="<%=progressNo %>">
-<input type="hidden" name="progressNo" value="<%=projectNo %>">
+<input type="hidden" name="projectNo" value="<%=projectNo %>">
 	<div class="container w700">
 		<div class="row mt50 m10">
 			<div class="flex-container">
 				<div class="left-wrapper mlr10">
-					<h3>프로젝트 공지 작성</h3>
+					<h3>프로젝트 공지 수정</h3>
 				</div>
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 		<div class="row m50">
 			<div class="flex-container">
 				<div class="left-wrapper right mlr10">
-					<input type="submit" value="작성하기" class="link link-btn w150 board-submit">
+					<input type="submit" value="수정하기" class="link link-btn w150 board-submit">
 				</div>
 				<div class="right-wrapper">
 					<a href="list.jsp"> <input type="button" value="취소" class="link link-reverse w150">
