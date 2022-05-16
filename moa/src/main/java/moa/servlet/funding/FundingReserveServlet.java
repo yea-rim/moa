@@ -58,6 +58,9 @@ public class FundingReserveServlet extends HttpServlet{
 				RewardDto rewardDto = rewardDao.selectOne(projectNo, Integer.parseInt(rewardNo[i]));
 				int price = rewardDto.getRewardPrice();
 				int amount = Integer.parseInt(selectionRewardAmount[i]);
+				if(rewardDto.getRewardStock() < amount) {
+					resp.sendRedirect(req.getContextPath() + "/project/funding_fail.jsp?projectNo="+projectNo);
+				}
 				totalPrice += amount * price;
 				
 				if(rewardDto.getRewardEach()==1) {
@@ -100,6 +103,8 @@ public class FundingReserveServlet extends HttpServlet{
 			
 			//펀딩정보 리워드선택정보 리워드재고감소 메서드 실행
 			fundingDao.fundingReserve(fundingDto, rewardSelectionDtoList);
+			
+			
 			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp?fundingNo="+fundingNo);
 			
 			
