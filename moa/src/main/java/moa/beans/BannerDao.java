@@ -17,7 +17,7 @@ public class BannerDao {
 
 		String sql ="select*from(" 
 				+ "select rownum rn, TMP.* from (" 
-				+ "select * from banner"
+				+ "select * from banner order by banner_no desc nulls last"
 				+ ") TMP" 
 				+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -28,6 +28,7 @@ public class BannerDao {
 		List<BannerDto> list = new ArrayList<>();
 		while (rs.next()) {
 			BannerDto bannerDto = new BannerDto();
+			bannerDto.setBannerNo(rs.getInt("banner_no"));
 			bannerDto.setAttachNo(rs.getInt("attach_no"));
 			bannerDto.setProjectNo(rs.getInt("project_no"));
 			bannerDto.setBannerTerm(rs.getInt("banner_term"));
@@ -90,22 +91,22 @@ public class BannerDao {
 		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
 		
-		BannerDto BannerDto;
+		BannerDto bannerDto;
 		if(rs.next()) {
-			BannerDto = new BannerDto();
-			
-			BannerDto.setAttachNo(rs.getInt("attach_no"));
-			BannerDto.setBannerPermission(rs.getInt("banner_permission"));
-			BannerDto.setBannerStartDate(rs.getDate("banner_start_date"));
-			BannerDto.setBannerTerm(rs.getInt("banner_term"));
+			bannerDto = new BannerDto();
+			bannerDto.setBannerNo(rs.getInt("banner_no"));
+			bannerDto.setAttachNo(rs.getInt("attach_no"));
+			bannerDto.setBannerPermission(rs.getInt("banner_permission"));
+			bannerDto.setBannerStartDate(rs.getDate("banner_start_date"));
+			bannerDto.setBannerTerm(rs.getInt("banner_term"));
 		}
 		else {
-			BannerDto = null;
+			bannerDto = null;
 		}
 		
 		con.close();
 		
-		return BannerDto;
+		return bannerDto;
 	}
 	
 	//마감날짜 조회
@@ -130,15 +131,33 @@ public class BannerDao {
 		return finishDate;
 	}
 	
+	// 배너 시퀀스 생성
+	public int getSequence() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select banner_seq.nextval from dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+		rs.next(); // 데이터가 무조건 1개이기 때문에 바로 이동 지시 (무조건 true가 나옴)
+		int bannerNo = rs.getInt("nextval");
+
+		con.close();
+		
+		return bannerNo;
+		
+	}
+	
 	//배너 신청
 	public void insert(BannerDto bannerDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "INSERT INTO banner(project_no, attach_no, banner_term) VALUES(?,?,?)";
+		String sql = "INSERT INTO banner(banner_no, project_no, attach_no, banner_term) VALUES(?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, bannerDto.getProjectNo());
-		ps.setInt(2, bannerDto.getAttachNo());
-		ps.setInt(3, bannerDto.getBannerTerm());
+		ps.setInt(1, bannerDto.getBannerNo());
+		ps.setInt(2, bannerDto.getProjectNo());
+		ps.setInt(3, bannerDto.getAttachNo());
+		ps.setInt(4, bannerDto.getBannerTerm());
 		ps.execute();
 		
 		con.close();

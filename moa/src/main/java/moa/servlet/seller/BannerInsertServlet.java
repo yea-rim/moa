@@ -28,6 +28,9 @@ public class BannerInsertServlet extends HttpServlet {
 			
 			BannerDao bannerDao = new BannerDao();
 			
+			// banner 시퀀스 생성 
+			bannerDto.setBannerNo(bannerDao.getSequence());
+			
 			// 기존에 신청했는지 확인
 			BannerDto bannerDto2 = bannerDao.selectOne(projectNo);
 			

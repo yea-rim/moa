@@ -123,7 +123,6 @@ if (isSearch) {
 				<div class="flex-items3">날짜</div>
 				<div class="flex-items4 right">작성자</div>
 			</div>
-			<hr style="border:solid 1px #B899CD">
 			<div class="row flex-container1">
 			<%for (CommunityDto communityDto : list) {%>
 			
@@ -163,7 +162,6 @@ if (isSearch) {
 		<%}%>
 			</div>
 			
-			<br><hr style="border:solid 1px #B899CD">
 
 <!--  순자 페이지네이션 -->
 <%

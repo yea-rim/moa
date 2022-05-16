@@ -8,7 +8,17 @@ public class BannerDto {
 	private int bannerTerm;
 	private Date bannerStartDate;
 	private int bannerPermission;
+	private int bannerNo;
 	
+	
+	public int getBannerNo() {
+		return bannerNo;
+	}
+
+	public void setBannerNo(int bannerNo) {
+		this.bannerNo = bannerNo;
+	}
+
 	public BannerDto() {
 		super();
 	}
