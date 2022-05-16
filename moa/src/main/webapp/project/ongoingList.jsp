@@ -69,7 +69,7 @@ if (isSearch) {
 	list = projectDao.ongoingSelectList(p, s, sort);
 }
 
-
+boolean isExist = list.size() > 0;
 SellerDao sellerDao = new SellerDao();
 %>
 <title>moa 펀딩진행중</title>
@@ -284,6 +284,7 @@ SellerDao sellerDao = new SellerDao();
 	
 		<%-- 결과목록 --%>
 		<div class="container">
+		 <%if(isExist){ %>
 		 <div class="row flex-container2" id="mainList">
 		 <%for(ProjectDto projectDto : list) { %>
 	 		<% 	
@@ -331,6 +332,11 @@ SellerDao sellerDao = new SellerDao();
             </div>
           <%} %>
           </div>
+          <%}else{ %>
+          	<div class="center">
+          		<h1>진행중인 프로젝트가 없습니다.</h1>
+          	</div>
+          <%} %>
          </div>
 
 

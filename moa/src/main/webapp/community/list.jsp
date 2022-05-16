@@ -54,6 +54,7 @@ if (isSearch) {
 } else {
 	list = communityDao.selectList(p, s);
 }
+boolean isExist = list.size() > 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -124,6 +125,7 @@ if (isSearch) {
 				<div class="flex-items4 right">작성자</div>
 			</div>
 			<div class="row flex-container1">
+			<%if(isExist){ %>
 			<%for (CommunityDto communityDto : list) {%>
 			
 				<div class="flex-container2 content" style="border-bottom: 0.5px solid lightgray">
@@ -159,7 +161,12 @@ if (isSearch) {
 					</div>
 					
 				</div>
-		<%}%>
+			<%}%>
+			<%} else { %>
+			<div class="center">
+				<span>게시글이 존재하지 않습니다.</span>
+			</div>
+			<%} %>
 			</div>
 			
 

@@ -64,6 +64,7 @@ if (isSearch) {
 } else {
 	list = projectDao.comingSelectList(p, s, sort);
 }
+boolean isExist = list.size() > 0;
 %>
 <title>moa 펀딩예정</title>
 	
@@ -234,6 +235,7 @@ if (isSearch) {
 	
 		<%-- 결과목록 --%>
 		<div class="container">
+		<%if(isExist){ %>
 		 <div class="row flex-container2" id="mainList">
 		 <%for(ProjectDto projectDto : list) { %>
 		 	<% 	
@@ -270,6 +272,11 @@ if (isSearch) {
             </div>
           <%} %>
           </div>
+          <%}else{ %>
+          	<div class="center">
+          		<h1>예정중인 펀딩이 없습니다.</h1>
+          	</div>
+          <%} %>
          </div>
 
 
