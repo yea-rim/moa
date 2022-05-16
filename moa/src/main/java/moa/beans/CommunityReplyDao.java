@@ -35,6 +35,28 @@ public class CommunityReplyDao {
 
 		con.close();
 	}
+	
+	public CommunityReplyDto selectOne(int communityReplyNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from community_reply where community_reply_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, communityReplyNo);
+		ResultSet rs = ps.executeQuery();
+		
+		CommunityReplyDto communityReplyDto;
+		if(rs.next()) {
+			communityReplyDto = new CommunityReplyDto();
+			communityReplyDto.setCommunityMemberNo(rs.getInt("community_member_no"));
+		}
+		else {
+			communityReplyDto = null;
+		}
+		
+		con.close();
+		
+		return communityReplyDto;
+	}
 
 	public List<CommunityReplyDto> selectAll(int communityNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
