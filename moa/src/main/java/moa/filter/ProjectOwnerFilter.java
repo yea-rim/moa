@@ -32,8 +32,6 @@ import moa.beans.ProjectDto;
 			"/seller/success_project_detail.jsp",
 			"/seller/banner_insert.do",
 			"/seller/progress_delete.do",
-			"/seller/progress_edit.do",
-			"/seller/progress_insert.do",
 			"/seller/attach_delete.do",
 			"/seller/attach_edit.do",
 			"/seller/attach_reinsert.do",
