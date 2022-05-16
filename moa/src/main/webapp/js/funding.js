@@ -266,7 +266,7 @@ $(function () {
     //전화번호 정규식 검사
     $("input[name=fundingPhone]").blur(checkPhone);
     function checkPhone(){
-		var regex = /^010[0-1][0-9]{3}[0-9]{4}$/;
+		var regex = /^010[1-9][0-9]{3}[0-9]{4}$/;
 		var text = $(this).val();
 		
 		var judge = regex.test(text);

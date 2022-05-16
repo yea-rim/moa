@@ -25,11 +25,11 @@
 </script>
 
 <script type="text/javascript">
-        var status = {
-            changePw : true
-        }
-
         $(function(){
+        	
+	        var status = {
+	            changePw : true
+	        }
             // 1. 비밀번호 형식 검사
             $("input[name=changePw]").blur(function(){
                 var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{8,16}$/;

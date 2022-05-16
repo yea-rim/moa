@@ -20,17 +20,21 @@ public class SellerNickCheckServlet extends HttpServlet{
 		try {
 			//준비
 			String sellerNick = req.getParameter("sellerNick");
+			int memberNo = (Integer) req.getSession().getAttribute("login");
+			int seller = (Integer) req.getSession().getAttribute("seller");
+			
+			
 			
 			//처리
 			SellerDao sellerDao = new SellerDao();
 			SellerDto sellerDto = sellerDao.findByNickname(sellerNick);
-			
+			SellerDto realSellerDto = sellerDao.selectOne(memberNo);
 			//출력
-			if(sellerDto != null) {//사용중
-				resp.getWriter().print("NN");
+			if(sellerDto == null || realSellerDto.getSellerNick().equals(sellerDto.getSellerNick())) {//사용중
+				resp.getWriter().print("YY");
 			}
 			else {//사용가능
-				resp.getWriter().print("YY");
+				resp.getWriter().print("NN");
 			}
 		}
 		catch(Exception e) {

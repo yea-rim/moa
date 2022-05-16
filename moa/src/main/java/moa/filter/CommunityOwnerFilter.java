@@ -40,7 +40,7 @@ public class CommunityOwnerFilter implements Filter{
 			boolean auth = memberNo == communityDto.getCommunityMemberNo();
 			
 			if(auth) {
-				chain.doFilter(request, response);
+				chain.doFilter(req, resp);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)
 				resp.sendError(403);				
 			}
