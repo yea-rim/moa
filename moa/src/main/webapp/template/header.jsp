@@ -168,4 +168,4 @@
                 </li>
         </nav>
         <section>
-            <article>
+            <article style="min-height: 700px;">

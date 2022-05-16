@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Date"%>
 <%@page import="moa.beans.SellerDto"%>
 <%@page import="moa.beans.SellerDao"%>
 <%@page import="moa.beans.ProjectDao"%>
@@ -32,9 +34,11 @@
 <%
 	BannerDao bannerDao = new BannerDao();
 	List<BannerDto> list = bannerDao.selectList(p, s);
+	
+	SimpleDateFormat f = new SimpleDateFormat("MM/dd");
 %>
 
-<div class="container w900"> 
+<div class="container w950"> 
 	<div class="row mt30">
 		<h2>배너 신청 리스트</h2>
 	</div>
@@ -47,6 +51,7 @@
 					<th>프로젝트명</th>
 					<th>신청일수</th>
 					<th>승인여부</th>
+					<th>등록여부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -58,7 +63,10 @@
 					
 					//판매자
 					SellerDao sellerDao = new SellerDao();
-					SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());														
+					SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());	
+					
+					//배너 마감일
+					Date bannerFinishDate = bannerDao.getBannerFinishDate(projectDto.getProjectNo());
 				%>
 				<tr onclick="location.href='<%=request.getContextPath()%>/admin/banner_detail.jsp?attachNo=<%=bannerDto.getAttachNo() %>&projectNo=<%=bannerDto.getProjectNo() %>';" style="width:100%;cursor:pointer;">
 					<td><%=sellerDto.getSellerNick()%></td>
@@ -69,6 +77,14 @@
 							<span style="color: red">승인대기</span>
 						<%}else{ %>
 							<span style="color: blue">승인완료</span>
+						<%} %>
+					</td>
+					<td>
+						<%if(bannerDto.getBannerPermission()==1 && bannerDto.getBannerStartDate() == null){ %>
+							<span >대기중</span>
+						<%}else{ %>
+							<span>등록중</span><br>
+							<span>(<%=f.format(bannerDto.getBannerStartDate()) %>~<%=f.format(bannerFinishDate )%>)</span>
 						<%} %>
 					</td>
 				</tr>

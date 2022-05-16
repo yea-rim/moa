@@ -1,6 +1,7 @@
 package moa.beans;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -65,5 +66,67 @@ public class BannerDao {
 
 		con.close();
 		return count > 0;
+	}
+	
+	//배너 등록 처리
+	public boolean bannerRegist(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+
+		String sql = "update banner set banner_regist = sysdate where project_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		int count = ps.executeUpdate();
+
+		con.close();
+		return count > 0;
+	}
+	
+	//단일 조회
+	public BannerDto selectOne(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from banner where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		BannerDto BannerDto;
+		if(rs.next()) {
+			BannerDto = new BannerDto();
+			
+			BannerDto.setAttachNo(rs.getInt("attach_no"));
+			BannerDto.setBannerPermission(rs.getInt("banner_permission"));
+			BannerDto.setBannerStartDate(rs.getDate("banner_start_date"));
+			BannerDto.setBannerTerm(rs.getInt("banner_term"));
+		}
+		else {
+			BannerDto = null;
+		}
+		
+		con.close();
+		
+		return BannerDto;
+	}
+	
+	//마감날짜 조회
+	public Date getBannerFinishDate(int projectNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select banner_start_date + banner_term f from banner where project_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, projectNo);
+		ResultSet rs = ps.executeQuery();
+		
+		Date finishDate;
+		if(rs.next()) {
+			finishDate = rs.getDate("f");
+		}
+		else {
+			finishDate = null;
+		}
+		
+		con.close();
+		
+		return finishDate;
 	}
 }

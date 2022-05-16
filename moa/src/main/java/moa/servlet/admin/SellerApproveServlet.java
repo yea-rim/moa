@@ -1,6 +1,7 @@
 package moa.servlet.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,12 +37,13 @@ public class SellerApproveServlet extends HttpServlet{
 			System.out.println(success);
 			System.out.println(req.getParameter("sellerRegistDate"));
 			
+			resp.setContentType("text/html; charset=UTF-8"); 
+			PrintWriter writer = resp.getWriter(); 
 			if(success) {
-				resp.sendRedirect("seller_join_list.jsp");
-				req.getSession().setAttribute("seller", sellerDto.getSellerPermission());	
+				writer.println("<script>alert('판매자 승인이 완료되었습니다.'); location.href='"+req.getContextPath()+"/admin/seller_list.jsp';</script>"); writer.close();
 			}
 			else {
-				resp.sendRedirect("approve_fail.jsp");
+				writer.println("<script>alert('판매자 승인에 실패하였습니다.'); location.href='"+req.getContextPath()+"/admin/seller_list.jsp';</script>"); writer.close();
 			}
 		}
 		catch(Exception e) {
