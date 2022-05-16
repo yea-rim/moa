@@ -153,11 +153,33 @@ $(function () {
     //수량증가버튼
     $(".plus-btn").each(function () {
         $(this).click(function () {
+			var stock = parseInt($(this).parents(".reward-select").find(".reward-stock").text());
+			console.log(stock);
             var count = $(this).prev("input");
-            $(this).prev("input").val(parseInt(count.val()) + 1);
+            count.val(parseInt(count.val()) + 1);
+			if(count.val() > stock){
+				alert("재고가 부족합니다");
+				count.val(stock);
+			}
             total();
         });
     });
+    
+    //수량 입력 재고 체크
+    $("input[name=selectionRewardAmount]").each(function(){
+		var count = $(this);
+		var stock = parseInt($(this).parents(".reward-select").find(".reward-stock").text());
+		$(this).blur(function(){
+		console.log(count.val());
+		console.log(stock);
+			if(count.val() > stock){
+				alert("재고 수량을 초과 했습니다.");
+				count.val(stock);
+			}
+			total();
+		});
+	});
+    
 
     // 주문수량에 맞춰서 총가격을 구하는 함수
     function total() {
@@ -165,13 +187,13 @@ $(function () {
         $(".reward-checkbox").each(function () {
 
             var price = withoutCommas($(this).parent(".check-reward").parent(".reward-select").find(".reward-price").text());
-             console.log(price);
+             /*console.log(price);*/
             var amount = $(this).parent(".check-reward").parent(".reward-select").find("input[name=selectionRewardAmount]").val();
-             console.log(amount);
+             /*console.log(amount);*/
 
             if ($(this).is(":checked")) {
                 total += parseInt(price) * parseInt(amount);
-                console.log(total);
+                /*console.log(total);*/
             }
         });
         
@@ -275,10 +297,10 @@ $(function () {
 			count += checkInfo.call(this);
 		});
 		var judge = count > 0;
-		console.log(status.getter);
+		/*console.log(status.getter);
 		console.log(status.phone);
 		console.log(status.address);
-		console.log(judge);
+		console.log(judge);*/
 		if(judge && status.getter && status.phone && status.address){
 			return true;
 		}else{

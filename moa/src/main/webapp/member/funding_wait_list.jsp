@@ -145,7 +145,7 @@
             <!-- 홍보하기 : 홍보 게시판으로 이동 -->
 			<div class="float-right m50 mlr20">
 				<div class="row mt5">
-					  <a href="funding_cancel.do?fundingNo=<%=fundingDto.getFundingNo() %>" class="link link-reverse w100 center fd-delete">후원취소</a>
+					  <a href="funding_cancel.do?fundingNo=<%=fundingDto.getFundingNo() %>&projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center fd-delete">후원취소</a>
 				</div>
 				<div class="row mt5">
 					  <a href="<%=request.getContextPath() %>/community/insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse w100 center">홍보하기</a>

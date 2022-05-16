@@ -54,23 +54,23 @@ List<BannerDto> banner = bannerDao.selectBanner();
 	  <div class="flex-container">
 			<div class="swiper">
 				<div class="swiper-wrapper">
-					<%for(BannerDto bannerDto : banner) { %>
 					
-						<%if(bannerDto != null){ %>
+					<%if(banner.size() > 0){ %>
+						<%for(BannerDto bannerDto : banner) { %>
 						    <div class="swiper-slide">
 						    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
 					           		<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=bannerDto.getAttachNo() %>" width="660px" height="400px" onerror="javascript:this.src='https://dummyimage.com/200x200'">
 					           	</a>
 				            </div>
+						<%} %>
 			           	<%}else{ %>
 			            	<div class="swiper-slide">
-			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=bannerDto.getProjectNo() %>">
+			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=">
 				                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
 			                    </a>
 				            </div>
 				        <%} %>
 				        
-					<%} %>
 				</div>
 				
 				<div class="swiper-pagination"></div>
