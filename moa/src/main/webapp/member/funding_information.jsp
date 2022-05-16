@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
@@ -45,6 +46,8 @@
 	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectDto.getProjectNo()); 
 	
 	boolean isExistProjectAttach = projectAttachDto != null; 
+	
+	DecimalFormat df = new DecimalFormat("###,###");
 %>    
     
 <jsp:include page = "/template/header.jsp"></jsp:include>
@@ -127,15 +130,15 @@
 	                		</div>
 	                		<div class="float-container">
 	                			<div class="float-left layer-5 mt10"><h3>개수</h3></div>
-	                			<div class="float-left layer-4 mt10"><p><%=rewardSelectionDto.getSelectionRewardAmount()%></p></div>
+	                			<div class="float-left layer-4 mt10"><p><%=df.format(rewardSelectionDto.getSelectionRewardAmount())%></p></div>
 	                		</div>
 	                		<div class="float-container">
 	                			<div class="float-left layer-5 mt10"><h3>리워드 금액</h3></div>
-	                			<div class="float-left layer-4 mt10"><p><%=rewardDto.getRewardPrice() %>원</p></div>
+	                			<div class="float-left layer-4 mt10"><p><%=df.format(rewardDto.getRewardPrice() )%>원</p></div>
 	                		</div>
 	                		<div class="float-container">
 	                			<div class="float-left layer-5 mt10"><h3>리워드 배송비</h3></div>
-	                			<div class="float-left layer-4 mt10"><p><%=rewardDto.getRewardDelivery()%>원</p></div>
+	                			<div class="float-left layer-4 mt10"><p><%=df.format(rewardDto.getRewardDelivery())%>원</p></div>
 	                		</div>
 	                	</div>
 	                	<br>
@@ -178,7 +181,7 @@
                 	
                 	
                 	<div class= "row m20 mt30 right">
-                		<h2>총 결제 금액 : <%=totalPay%>원</h2>
+                		<h2>총 결제 금액 : <%=df.format(totalPay)%>원</h2>
                 	</div>
 
 <jsp:include page = "/template/footer.jsp"></jsp:include>

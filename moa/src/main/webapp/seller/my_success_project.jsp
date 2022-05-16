@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectDto"%>
 <%@page import="java.util.List"%>
@@ -42,6 +43,7 @@
 	ProjectDao projectDao = new ProjectDao();
 	
 	List<ProjectDto> list = projectDao.getSuccessList(p, s, sellerNo);
+	
 %>
 
 <jsp:include page = "/template/header.jsp"></jsp:include>

@@ -76,6 +76,7 @@
 	//1:1문의
 	MoaQuestionDao moaQuestionDao = new MoaQuestionDao();
 	List<MoaQuestionDto> questionList = moaQuestionDao.selecMyQuestion(memberNo);
+	
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -347,6 +348,7 @@
 				for (MoaQuestionDto questionDto : questionList) {	
 					//문의 답변 불러오기
 					MoaQuestionReplyDao moaQuestionReplyDao = new MoaQuestionReplyDao();
+					/* MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo()); */
 					MoaQuestionReplyDto questionReplyDto = moaQuestionReplyDao.selectOne(questionDto.getQuestionNo());
 					
 					//문의 첨부파일 불러오기

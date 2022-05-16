@@ -13,7 +13,7 @@
 	</div>
 
 
-	<div class="container">
+	<div class="container mt100">
 		<div class="row center">
 			<h2>후원이 취소되었습니다.</h2>
 		</div>

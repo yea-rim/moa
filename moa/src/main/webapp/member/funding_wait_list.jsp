@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectDto"%>
@@ -25,6 +26,7 @@
 	Integer seller = (Integer) session.getAttribute("seller");
 	boolean isSeller = seller !=null;
 
+	DecimalFormat df = new DecimalFormat("###,###");
 %>
 
 <%
@@ -134,7 +136,8 @@
                     </p>
 
                     <p class="mt5 p-red">
-                        <%=fundingDto.getFundingTotalprice()+fundingDto.getFundingTotaldelivery() %>원 결제 예정 
+                    	<%int total = fundingDto.getFundingTotalprice()+fundingDto.getFundingTotaldelivery();  %>
+                        <%=df.format(total) %>원 결제 예정 
                     </p>
                 </div>
             </div>
