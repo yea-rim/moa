@@ -85,6 +85,7 @@
                 				SellerDto sellerDto = sellerDao.selectOne(memberNo);
                 				
                 				boolean isRequestSeller = sellerDto != null && sellerDto.getSellerPermission() == 0;
+                				boolean isSeller2 = sellerDto != null && sellerDto.getSellerPermission() == 1;
                 				
                 				if(isRequestSeller) { // 판매자 신청을 한 회원이면 %>
                 					<div class="float-right layer-5 center m10">
@@ -94,6 +95,14 @@
 			                				</button>
 			                			</a>
 		                			</div>
+		                		<%}else if(isSeller2){ %>
+				                	<div class="float-right layer-5 center m10">
+			                			<a href="<%=request.getContextPath() %>/seller/project_insert.jsp" class="link link-purple">
+			                				<button class="btn-reverse">
+			                					<h3>프로젝트 신청</h3>
+			                				</button>
+			                			</a>
+			                		</div>
                 				<%} else { // 판매자 신청을 하지 않은 회원이면 %>
 	                				<div class="float-right layer-5 center m10">
 			                			<a href="<%=request.getContextPath() %>/member/seller_join.jsp" class="link link-purple">
@@ -127,7 +136,7 @@
                 		</div>
 						<div class="float-right layer-5 right mt10 mlr5">
               		               <%if(memberProfileDto != null){ %>             			  		
-              							<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="40"  height="40"- class="img img-circle">               				
+              							<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="40"  height="40" class="img img-circle">               				
               						<%}else{ %>
               							<img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="40" height="40" class="img img-circle">      			
               						<% }%>

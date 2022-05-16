@@ -50,7 +50,7 @@
 		</div>
 	<div class="row m20">
  		<%if(isExistPhoto){ %>
-		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%">
+		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%" class="m20">
 		<%}else{ %>
 		<span></span>
 		<%} %>
@@ -58,7 +58,6 @@
 	<div class="row m50 noticeContent">
 			<%=moaNoticeDto.getNoticeContent() %>
 	</div>
-	<hr style="border:solid 0.5px #B899CD">
 
 
 	 <%if(isAdmin){ %>
@@ -67,9 +66,11 @@
 			<a href="notice_delete.do?noticeNo=<%=noticeNo %>" class="btn link notice-delete">삭제</a>
 		</div>
 	<%} %>
+		
 		<div class="center" style="height:70px">
-				<a href="notice_list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
+				<a href="notice_list.jsp" class="btn-reverse link">공지 목록</a>
 		</div>
+		<hr style="border:solid 0.5px #B899CD">
 
 </div>
 

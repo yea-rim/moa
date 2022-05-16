@@ -165,9 +165,14 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 					<label class="m10">(*) 본인인증 자료</label>
 			<div class="filebox">
 				<input class="upload-name" placeholder="첨부파일" disabled>
+<<<<<<< HEAD
 				<label for="file">파일 찾기</label> 
 				<input class="m20" type="file" id="file" name="attach" accept="image/*">
 				<span></span>
+=======
+				<label for="file">파일 찾기</label> <input class="m20" type="file"
+					id="file" name="attach" accept="image/*" required>
+>>>>>>> refs/remotes/origin/main
 			</div>
 		</div>
 

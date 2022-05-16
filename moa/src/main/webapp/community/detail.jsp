@@ -171,7 +171,7 @@
 	</div>
 	<div class="row m20">
 		<%if(isExistPhoto){ %>
-		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=communityPhotoDto.getAttachNo() %>" width="100%">
+		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=communityPhotoDto.getAttachNo() %>" width="100%" class="m20">
 		<%}else{ %>
 		<span></span>
 		<%} %>

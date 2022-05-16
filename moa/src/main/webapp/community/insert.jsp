@@ -44,9 +44,9 @@
 						<th>첨부파일</th>
 						<td>
 							<div class="filebox-a">
-								<input class="upload-name" placeholder="첨부파일"> 
+								<input class="upload-name" placeholder="첨부파일" disabled> 
 									<label for="file">파일선택</label> 
-								<input type="file" id="file" name="attach">
+								<input type="file" id="file" accept="image/*" name="attach">
 							</div>
 						</td>
 					</tr>

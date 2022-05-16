@@ -11,9 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import moa.beans.CommunityDao;
-import moa.beans.CommunityDto;
-import moa.beans.MoaQuestionDao;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
@@ -27,16 +24,12 @@ import moa.beans.ProjectDto;
 			"/seller/my_coming_project.jsp",
 			"/seller/my_fail_project.js",
 			"/seller/my_ongoing_project.jsp",
-			"/seller/my_page.jsp",
-			"/seller/my_permit_project.jsp",
 			"/seller/my_rejected_project.jsp",
 			"/seller/my_sponsor.jsp",
-			"/seller/my_success_project.jsp",
 			"/seller/permit_project_detail.jsp",
 			"/seller/pj_progress_edit.jsp",
 			"/seller/pj_progress_insert.jsp",
 			"/seller/project_edit.jsp",
-			"/seller/project_insert.jsp",
 			"/seller/project_reapply.jsp",
 			"/seller/rejected_project_detail.jsp",
 			"/seller/reward_edit.jsp",
@@ -71,10 +64,11 @@ public class ProjectOwnerFilter implements Filter{
 			
 			// 2. 작성자 본인인지 확인
 			int memberNo = (int) req.getSession().getAttribute("login");
-			int ProjectNo = Integer.parseInt(req.getParameter("ProjectNo"));
+			
+			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
 			ProjectDao projectDao = new ProjectDao();
-			ProjectDto projectDto = projectDao.selectOne(ProjectNo);
+			ProjectDto projectDto = projectDao.selectOne(projectNo);
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == projectDto.getProjectSellerNo();
 			

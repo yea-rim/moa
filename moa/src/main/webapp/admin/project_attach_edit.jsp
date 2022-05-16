@@ -121,7 +121,7 @@ AttachDao attachDao = new AttachDao();
 							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
-								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>"> 
+								<input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>" disabled> 
 								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-file f12">수정</button>
 							</form>
