@@ -30,6 +30,8 @@
 	else {
 		attachDto = null;
 	}
+	
+	communityDto.getCommunityContent();
 %>
 <title>moa 홍보게시글 작성</title>
 

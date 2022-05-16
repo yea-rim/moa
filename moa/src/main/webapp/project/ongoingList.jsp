@@ -123,7 +123,7 @@ SellerDao sellerDao = new SellerDao();
 		
 				<div class="row center on-category">
 					<a href="ongoingList.jsp" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/전체-카테고리.jpeg" class="img" id="all">
+					<img src="<%=request.getContextPath()%>/project/image/전체-카테고리.jpeg" class="img5" id="all">
 					<hr style="border: solid #B899CD 1px">
 					<label for="all">전체</label>
 					</a> 
@@ -131,7 +131,7 @@ SellerDao sellerDao = new SellerDao();
 		
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=패션/잡화" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/패션잡화-카테고리.jpeg" class="img" id="fashion">
+					<img src="<%=request.getContextPath()%>/project/image/패션잡화-카테고리.jpeg" class="img5" id="fashion">
 					<hr style="border: solid #B899CD 1px">
 					<label for="fashion">패션/잡화</label>
 					</a>
@@ -139,7 +139,7 @@ SellerDao sellerDao = new SellerDao();
 				
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=뷰티" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/뷰티-카테고리.jpeg" class="img" id="beauty">
+					<img src="<%=request.getContextPath()%>/project/image/뷰티-카테고리.jpeg" class="img5" id="beauty">
 					<hr style="border: solid #B899CD 1px">
 					<label for="beauty">뷰티</label>
 					</a> 
@@ -147,7 +147,7 @@ SellerDao sellerDao = new SellerDao();
 				
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=푸드" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/푸드-카테고리.jpeg" class="img" id="food">
+					<img src="<%=request.getContextPath()%>/project/image/푸드-카테고리.jpeg" class="img5" id="food">
 					<hr style="border: solid #B899CD 1px">
 					<label for="food">푸드</label>
 					</a> 
@@ -155,7 +155,7 @@ SellerDao sellerDao = new SellerDao();
 				
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=홈/리빙" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/홈리빙-카테고리.jpeg" class="img" id="living">
+					<img src="<%=request.getContextPath()%>/project/image/홈리빙-카테고리.jpeg" class="img5" id="living">
 					<hr style="border: solid #B899CD 1px">
 					<label for="living">홈/리빙</label>
 					</a> 
@@ -163,7 +163,7 @@ SellerDao sellerDao = new SellerDao();
 				
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=테크/가전" class="link">
-					<img src="<%=request.getContextPath()%>/project/image/테크-카테고리.jpeg" class="img" id="tech">
+					<img src="<%=request.getContextPath()%>/project/image/테크-카테고리.jpeg" class="img5" id="tech">
 					<hr style="border: solid #B899CD 1px">
 					<label for="tech">테크/가전</label>
 					</a>
@@ -171,7 +171,7 @@ SellerDao sellerDao = new SellerDao();
 				
 				<div class="row center on-category">
 					<a href="ongoingList.jsp?type=project_category&keyword=기타" class="link">
-					<img src="<%=request.getContextPath() %>/project/image/etc-카테고리.jpeg" class="img" id="etc">
+					<img src="<%=request.getContextPath() %>/project/image/etc-카테고리.jpeg" class="img5" id="etc">
 					<hr style="border: solid #B899CD 1px">
 					<label for="etc">기타</label>
 					</a>

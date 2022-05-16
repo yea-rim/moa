@@ -1,3 +1,5 @@
+<%@page import="moa.beans.BannerDto"%>
+<%@page import="moa.beans.BannerDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
@@ -140,7 +142,19 @@
 						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">공지 작성</a>
 						          	<br>
 						          	<!-- 배너 신청 -->	
-						          	<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center mt5">배너 신청</a>
+						          	<%
+						          		BannerDao bannerDao = new BannerDao(); 
+						          		BannerDto bannerDto = bannerDao.selectOne(projectDto.getProjectNo());
+						          	%>
+						          	<%if(bannerDto == null){ %>
+						          		<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center mt5">배너 신청</a>
+						          	<%}else{ %>
+						          		<%if(bannerDto.getBannerPermission() == 1){ %>
+						          			<a href="#" class="link link-reverse center mt5">배너 심사완료</a>
+						          		<%}else{ %>
+						          			<a href="#" class="link link-reverse center mt5">배너 심사중</a>
+						          		<%} %>
+						          	<%} %>
 					        </div>
 	                    </div>
 	                </div>

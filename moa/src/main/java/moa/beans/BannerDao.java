@@ -73,7 +73,7 @@ public class BannerDao {
 	public boolean bannerRegist(int projectNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update banner set banner_regist = sysdate where project_no = ?";
+		String sql = "update banner set banner_start_date = sysdate where project_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectNo);
 		int count = ps.executeUpdate();

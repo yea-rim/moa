@@ -92,7 +92,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		</div>
 		
 		<%if(isExist1){ %>
-		<div class="row flex-container1">
+		<div class="row flex-container6">
 			<%for (ProjectDto projectDto : list2) {%>
 			<div class="row flex-items2 m10">
 			<div class="flex-container2">
@@ -105,9 +105,9 @@ List<BannerDto> banner = bannerDao.selectBanner();
 				%> 
 					<a href="<%=request.getContextPath()%>/project/project_detail.jsp?projectNo=<%=projectDto.getProjectNo()%>">
 					<%if(isExistPhoto){ %>
-						<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="200px" height="170px">
+						<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo() %>" width="200px" height="180px">
 					<%} else{ %>
-						<img src="https://dummyimage.com/200x200" width="200px" height="170px">
+						<img src="https://dummyimage.com/200x200" width="200px" height="180px">
 					<%} %>
 					</a>
 			

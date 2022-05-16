@@ -133,7 +133,7 @@
         
         <div class="container mt60">
 			
-			<form action="edit.do" method="post" class="seller-edit-formcheck">	
+			<form action="<%=request.getContextPath() %>/member/seller_edit.do" method="post" class="seller-edit-formcheck">	
 			<input type="hidden" name="sellerNo" value="<%=sellerDto.getSellerNo()%>">
 				
 				<div class="float-container">

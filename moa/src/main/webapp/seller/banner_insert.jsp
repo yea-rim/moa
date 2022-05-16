@@ -96,6 +96,7 @@
 					<span class="f12 gray">
 					<br><br>
 					※ 게시순서는 최근 신청분 순서이나 상황에 따라 유동적 변경 게시<br>
+					※ 동시게시 배너수 제한으로 승인이 안될 수 있음 <br>
 					※ 4주 이상 연속게시불가<br>
 					※ 부가세 별도
 					</span>
@@ -116,7 +117,7 @@
 				<%for(ProjectAttachDto projectAttachDto : list){ %>
 				<div class="flex-container2 center">
 					<div class="flex-items">
-						 <img src="<%=request.getContextPath() %>/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="250" height="200" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+						 <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="250" height="200" onerror="javascript:this.src='https://dummyimage.com/200x200'">
 					</div>
 					<div class="m10" style="width:90%">
 						<input type="radio" name="projectAttach" class="checkValue" value="<%=projectAttachDto.getAttachNo() %>">
