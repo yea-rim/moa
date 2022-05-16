@@ -123,7 +123,7 @@ if (isSearch) {
 				<div class="flex-items3">날짜</div>
 				<div class="flex-items4 right">작성자</div>
 			</div>
-			
+			<hr style="border:solid 1px #B899CD">
 			<div class="row flex-container1">
 			<%for (CommunityDto communityDto : list) {%>
 			
@@ -160,8 +160,10 @@ if (isSearch) {
 					</div>
 					
 				</div>
-			<%}%>
+		<%}%>
 			</div>
+			
+			<br><hr style="border:solid 1px #B899CD">
 
 <!--  순자 페이지네이션 -->
 <%
@@ -283,9 +285,8 @@ if(endBlock>lastPage)
 				 	<button type="submit" class="btn-reverse" style="height:100%">검색</button>
 				 </div>
 			</div>
-		</form>
-	
-	<hr style="border:solid 1px #B899CD">
+		</form>	
+		<hr style="border:solid 1px #B899CD">
 	</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

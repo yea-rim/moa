@@ -281,7 +281,7 @@
 									<div class="list-card mlr30 m15">
 					                    <!-- 이미지 자리 -->
 					                    <div class="row center">
-					                    	<a href="<%=request.getContextPath() %>/project/projectDetail.jsp?projectNo=<%=projectOwner.getProjectNo()%>">
+					                    	<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectOwner.getProjectNo()%>">
 					                        	<%if(isExistProjectAttach) { %>
 					                        		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="card-image-wrapper" width="150px" height="112px">
 					                        	<%} else {%>
@@ -299,9 +299,9 @@
 					
 					                    <!-- 판매자 -->
 					                    <div class="row m10 mlr10">
-					                        <p><%=sellerDto.getSellerNick() %></p>
+					                        <p><%=sellerDto2.getSellerNick() %></p>
 					                    </div>
-					
+				
 					                    <!-- 카테고리 -->
 					                    <div class="row m30 mlr10">
 					                        <p class="link-purple"><%=projectOwner.getProjectCategory() %></p>
@@ -318,7 +318,8 @@
                     	</div>
                        
                     </div>
-                    <div class="row mt30">
+     
+    <div class="row m30">
 		<h2>1:1 문의</h2>
 	</div>
 	<hr>

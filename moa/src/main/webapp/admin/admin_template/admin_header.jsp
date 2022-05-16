@@ -26,21 +26,15 @@
                         
                         <li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/member_list.jsp" class="link">
-                           		회원 목록
+                           		전체 회원 관리
                             </a>
                         </li>
                             
                         <li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/seller_list.jsp" class="link">
-                           		판매자 목록
+                           		판매자 관리
                             </a>
-                        </li>
-                        
-                        <li class="menu-li">
-                            <a href="<%=request.getContextPath()%>/admin/seller_join_list.jsp" class="link">
-                           		판매자 신청 목록
-                            </a>
-                        </li>      
+                        </li> 
                          <li class="menu-li">
                             <a href="<%=request.getContextPath()%>/admin/notice_list.jsp" class="link">
                            		공지사항 관리
