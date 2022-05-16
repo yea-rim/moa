@@ -34,7 +34,7 @@ public class PjQnaFilter implements Filter {
 				Integer qnaNo = Integer.parseInt(req.getParameter("qnaNo"));
 				PjQnaDao pjQnaDao = new PjQnaDao();
 				PjQnaDto pjQnaDto = pjQnaDao.selectOne(qnaNo);
-				if((pjQnaDto.getQnaNo()==memberNo) || admin != null) {
+				if((pjQnaDto.getQnaMemberNo()==memberNo) || admin != null) {
 					chain.doFilter(req, resp);
 					return;
 				}else {

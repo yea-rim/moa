@@ -32,7 +32,7 @@ public class RewardDao {
 	
 	//프로젝트 번호 입력하면 그에 속하는 리워드 리스트 반환
 	public List<RewardDto> selectProject(int projectNo) throws Exception{
-		String sql = "select * from reward where reward_project_no = ? order by reward_no desc";
+		String sql = "select * from reward where reward_project_no = ? order by reward_no asc";
 		
 		Connection con = JdbcUtils.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
