@@ -17,7 +17,7 @@ public class BannerDao {
 
 		String sql ="select*from(" 
 				+ "select rownum rn, TMP.* from (" 
-				+ "select * from banner"
+				+ "select * from banner order by "
 				+ ") TMP" 
 				+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
