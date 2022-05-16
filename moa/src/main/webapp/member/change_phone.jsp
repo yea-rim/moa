@@ -1,5 +1,15 @@
+<%@page import="moa.beans.MemberDto"%>
+<%@page import="moa.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	Integer memberNo = (Integer) request.getSession().getAttribute("login");
+
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto = memberDao.selectOne(memberNo);
+%>    
+    
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
     <style type="text/css">
@@ -9,11 +19,11 @@
     </style>
 
 <script type="text/javascript">
-        var status = {
-            memberPhone : false
-        }
 
         $(function(){
+            var status = {
+                    memberPhone : true
+                }
             
             // 1. 전화번호 형식 검사 
             $("input[name=memberPhone]").blur(function(){
@@ -105,7 +115,7 @@
 					                    전화번호
 					            </label>
 					            <div class="row m10">
-				                     	<input type="text" name="memberPhone" class="form-input fill" autocomplete="off" placeholder="'-'를 제외하고 입력해주세요.">
+				                     	<input type="text" name="memberPhone" class="form-input fill" autocomplete="off" value="<%=memberDto.getMemberPhone()%>">
 						                <p class="right msg"></p>
 					            </div>
 					            <div class="row m10">

@@ -20,88 +20,88 @@
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		var status = {
-	            sellerNick : true,
-	            sellerAccountNo: true,
-	            sellerAccountBank: true
-	        }
+$(function() {
+	var status = {
+            sellerNick : true,
+            sellerAccountNo: true,
+            sellerAccountBank: true
+        }
 
-		// 판매자 닉네임 형식 검사 --> 중복 검사
-		$("input[name=sellerNick]").blur(function() {
-			var regex = /^[가-힣a-zA-Z0-9]{2,10}$/;
-			var sellerNick = $(this).val();
+	// 판매자 닉네임 형식 검사 --> 중복 검사
+	$("input[name=sellerNick]").blur(function() {
+		var regex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+		var sellerNick = $(this).val();
+		var span = $(this).next("span");
+
+		var judge = regex.test(sellerNick);
+		if (!judge) {
+			span.text("형식에 맞는 판매자 닉네임을 입력해주세요.");
+			status.sellerNick = false;
+			return;
+		} else {
+			span.text("");
+			status.sellerNick = true;
+		}
+
+		var that = this;
+
+		$.ajax({
+			url : "http://localhost:8080/moa/ajax/sellerNick.do",
+			type : "post",
+			data : {
+				sellerNick : sellerNick
+			},
+			success : function(resp) {
+				if (resp === "YY") {
+					span.text("");
+					status.sellerNick = true;
+				} else if (resp === "NN") {
+					span.text("이미 사용 중인 판매자 닉네임입니다.");
+					status.sellerNick = false;
+				}
+			}
+			
+			
+		});
+	
+	});
+	
+		$("input[name=sellerAccountNo]").blur(function() {
+			var regex = /[0-9]/;
+			var sellerAccountNo = $(this).val();
 			var span = $(this).next("span");
 
-			var judge = regex.test(sellerNick);
+			var judge = regex.test(sellerAccountNo);
 			if (!judge) {
-				span.text("형식에 맞는 판매자 닉네임을 입력해주세요.");
-				status.sellerNick = false;
+				span.text("숫자만 입력해주세요.");
+				status.sellerAccountNo = false;
 				return;
 			} else {
 				span.text("");
-				status.sellerNick = true;
+				status.sellerAccountNo = true;
 			}
-
-			var that = this;
-
-			$.ajax({
-				url : "http://localhost:8080/moa/ajax/sellerNick.do",
-				type : "post",
-				data : {
-					sellerNick : sellerNick
-				},
-				success : function(resp) {
-					if (resp === "YY") {
-						span.text("");
-						status.sellerNick = true;
-					} else if (resp === "NN") {
-						span.text("이미 사용 중인 판매자 닉네임입니다.");
-						status.sellerNick = false;
-					}
-				}
-				
-				
-			});
-		
 		});
 		
-			$("input[name=sellerAccountNo]").blur(function() {
-				var regex = /[0-9]/;
-				var sellerAccountNo = $(this).val();
-				var span = $(this).next("span");
-
-				var judge = regex.test(sellerAccountNo);
-				if (!judge) {
-					span.text("숫자만 입력해주세요.");
-					status.sellerAccountNo = false;
-					return;
-				} else {
-					span.text("");
-					status.sellerAccountNo = true;
-				}
-			});
-			
-			$("input[name=sellerAccountBank]").blur(function(){
-				if($(this).val() == ""){
-					status.sellerAccountBank = false;
-				}else{
-					status.sellerAccountBank = true;
-				}
-			});
-			
-			
-			$(".seller-edit-formcheck").submit(function(){
-				if(status.sellerNick && status.sellerAccountNo && status.sellerAccountBank){
-					return true;
-				}else{
-					alert("필수 정보를 입력해주세요.");
-					return false;
-				}
-			});
-			
+		$("input[name=sellerAccountBank]").blur(function(){
+			if($(this).val() == ""){
+				status.sellerAccountBank = false;
+			}else{
+				status.sellerAccountBank = true;
+			}
+		});
 		
-	});
+		
+		$(".seller-edit-formcheck").submit(function(){
+			if(status.sellerNick && status.sellerAccountNo && status.sellerAccountBank){
+				return true;
+			}else{
+				alert("필수 정보를 입력해주세요.");
+				return false;
+			}
+		});
+		
+	
+});
 </script>
 
 
@@ -128,7 +128,7 @@
         
         <div class="container mt60">
 			
-			<form action="edit.do" method="post" class="seller-edit-formcheck">	
+			<form action="<%=request.getContextPath() %>/member/seller_edit.do" method="post" class="seller-edit-formcheck">	
 			<input type="hidden" name="sellerNo" value="<%=sellerDto.getSellerNo()%>">
 				
 				<div class="float-container">

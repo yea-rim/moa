@@ -90,7 +90,11 @@
                             <h2 class="p-red">프로젝트 반려 사유</h2>
                         </div>
                         <div class="left-wrpper layer-2 p30">
-                            <p class="p-red"><%=projectDto.getProjectRefuseMsg() %></p>
+                            <%if(projectDto.getProjectRefuseMsg() == null) { %>
+                            	<p class="p-red"> 없음 </p>
+                            <%} else { %>
+                            	<p class="p-red"><%=projectDto.getProjectRefuseMsg() %></p>
+                            <%} %>
                         </div>
                     </div>
                 

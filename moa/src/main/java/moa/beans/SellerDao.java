@@ -52,6 +52,7 @@ public class SellerDao {
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
 			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 		} else {
 			sellerDto = null;
 		}
@@ -109,6 +110,7 @@ public class SellerDao {
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
 			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 
 			list.add(sellerDto);
 		}
@@ -138,6 +140,7 @@ public class SellerDao {
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
 			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 
 			list.add(sellerDto);
 		}
@@ -193,6 +196,7 @@ public class SellerDao {
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
 			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 
 			list.add(sellerDto);
 		}
@@ -228,6 +232,7 @@ public class SellerDao {
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
 			sellerDto.setSellerPermission(rs.getInt("seller_permission"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 
 			list.add(sellerDto);
 		}
@@ -271,6 +276,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 
 			list.add(sellerDto);
 		}
@@ -316,6 +322,7 @@ public class SellerDao {
 			sellerDto.setSellerAccountNo(rs.getString("seller_account_no"));
 			sellerDto.setSellerNick(rs.getString("seller_nick"));
 			sellerDto.setSellerType(rs.getString("seller_type"));
+			sellerDto.setSellerRefuseMsg(rs.getString("seller_refuse_msg"));
 		} else {
 			sellerDto = null;
 		}

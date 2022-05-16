@@ -24,7 +24,8 @@ public class QuestionOwnerFilter implements Filter{
 		
 		try {		
 			// 1. 관리자인지 확인
-			String admin  = (String) req.getSession().getAttribute("admin");
+			Integer admin  = (Integer) req.getSession().getAttribute("admin");
+			
 			if(admin != null) {
 				chain.doFilter(request, response);
 				return;
@@ -42,7 +43,7 @@ public class QuestionOwnerFilter implements Filter{
 			if(auth) {
 				chain.doFilter(request, response);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)
-				resp.sendError(403);				
+				resp.sendError(403);			
 			}
 			
 		} catch (Exception e) {

@@ -78,4 +78,10 @@ $(function() {
 		var fileName = fileFullName.substring(12, fileFullName.length);
 		$(".upload-name2").val(fileName);
 	});
+	
+	$("#file").on('change', function() {
+		var fileFullName = $("#file").val();
+		var fileName = fileFullName.substring(12, fileFullName.length);
+		$(".upload-name").val(fileName);
+	});
 });

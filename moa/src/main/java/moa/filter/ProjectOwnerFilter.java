@@ -52,7 +52,7 @@ public class ProjectOwnerFilter implements Filter{
 		
 		try {		
 			// 1. 관리자인지 확인
-			String admin  = (String) req.getSession().getAttribute("admin");
+			Integer admin  = (Integer) req.getSession().getAttribute("admin");
 			if(admin != null) {
 				chain.doFilter(request, response);
 				return;
@@ -67,7 +67,7 @@ public class ProjectOwnerFilter implements Filter{
 			ProjectDto projectDto = projectDao.selectOne(projectNo);
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == projectDto.getProjectSellerNo();
-			
+		
 			if(auth) {
 				chain.doFilter(request, response);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)

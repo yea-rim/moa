@@ -86,8 +86,9 @@
                 				
                 				boolean isRequestSeller = sellerDto != null && sellerDto.getSellerPermission() == 0;
                 				boolean isSeller2 = sellerDto != null && sellerDto.getSellerPermission() == 1;
+                				boolean isRefuse = sellerDto.getSellerPermission() == 2; 
                 				
-                				if(isRequestSeller) { // 판매자 신청을 한 회원이면 %>
+                				if(isRequestSeller || isRefuse) { // 판매자 신청을 한 회원이면 %>
                 					<div class="float-right layer-5 center m10">
 			                			<a href="<%=request.getContextPath() %>/member/seller_wait.jsp" class="link link-purple">
 			                				<button class="btn-reverse">

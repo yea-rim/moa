@@ -12,6 +12,7 @@
 	justify-content: flex-start;
 }
 
+
 .flex-container1 .flex-items,
 .flex-container2 .flex-items {
 	flex-basis:33.33%;
@@ -36,7 +37,7 @@
 	flex-grow: 1;
 } 
 
-.img {
+.img5 {
 	border-radius: 100%;
 	width:60px;
 	height: 60px;

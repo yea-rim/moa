@@ -22,7 +22,7 @@ public class SellerFilter implements Filter{
 			
 			//판매자 세션이 null이면
 			if(seller == null) {
-				resp.sendRedirect(req.getContextPath()+"/member/seller_join.jsp");
+				resp.sendError(403);
 			} 
 			else { 
 				chain.doFilter(request, response); // 통과 

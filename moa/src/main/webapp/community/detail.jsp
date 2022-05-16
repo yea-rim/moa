@@ -47,6 +47,9 @@
 	// 본문 작성자인지 판단
 	Integer memberNo = (Integer) session.getAttribute("login"); 
 	boolean isWriter = memberNo != null && memberNo.equals(memberDto.getMemberNo());
+	
+	Integer admin = (Integer)session.getAttribute("admin");
+	boolean isAdmin = admin != null;
 %>
 <style>
 .community-title {
@@ -179,7 +182,7 @@
 	<div class="row m50 community-content"  style="min-height: 200px; text-align: top;">
 		<%=communityDto.getCommunityContent() %>
 	</div>
-	<%if(isWriter){ %>
+	<%if(isWriter || isAdmin){ %>
 	<div class="row right ">
 		<a href="edit.jsp?communityNo=<%=communityNo %>" class="btn-reverse link">수정</a>
 		<a href="delete.do?communityNo=<%=communityNo %>" class="btn link community-delete">삭제</a>

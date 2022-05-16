@@ -119,7 +119,7 @@ public class MoaNoticeAttachDao {
 	public boolean deleteContent(int noticeNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "delete moa_notice_attach where notice_no = ? attach_type = '본문'";
+		String sql = "delete moa_notice_attach where notice_no = ? and attach_type = '본문'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, noticeNo);
 		int count = ps.executeUpdate();
