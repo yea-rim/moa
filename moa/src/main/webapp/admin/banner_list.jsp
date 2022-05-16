@@ -80,9 +80,11 @@
 						<%} %>
 					</td>
 					<td>
-						<%if(bannerDto.getBannerPermission()==1 && bannerDto.getBannerStartDate() == null){ %>
+						<%if(bannerDto.getBannerPermission()==0){ %>
+							<span></span>
+						<%}else if(bannerDto.getBannerPermission()==1 && bannerDto.getBannerStartDate() == null){ %>
 							<span >대기중</span>
-						<%}else{ %>
+						<%}else { %>
 							<span>등록중</span><br>
 							<span>(<%=f.format(bannerDto.getBannerStartDate()) %>~<%=f.format(bannerFinishDate )%>)</span>
 						<%} %>
