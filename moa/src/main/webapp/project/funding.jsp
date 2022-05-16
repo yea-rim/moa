@@ -325,7 +325,7 @@
                                     <button type="button" class="address-find-btn btn">검색</button>
                                 </div>
                                 <div><input type="text" name="fundingBasicAddress" placeholder="기본주소" class="form-input fill m5 check-address" readonly> </div>
-                                <div><input type="text" name="fundingDetailAddress" placeholder="상세주소" class="form-input fill check-address"> </div>
+                                <div><input type="text" name="fundingDetailAddress" placeholder="상세주소" class="form-input fill check-address" autocomplete="off"> </div>
                             </div>
                         </div>
                         <div>
@@ -333,7 +333,7 @@
                                 배송메세지
                             </div>
                             <div class="row m5">
-                                <input type="text" name="fundingPostMessage" class="form-input fill" placeholder="ex) 부재 시 경비실에 맡겨 주세요.">
+                                <input type="text" name="fundingPostMessage" class="form-input fill" autocomplete="off" placeholder="ex) 부재 시 경비실에 맡겨 주세요.">
                             </div>
                         </div>
 

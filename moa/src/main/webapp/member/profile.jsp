@@ -60,12 +60,10 @@
 				if (!judge) {
 					span.text("형식에 맞는 닉네임을 사용하세요.");
 					status.memberNick = false;
-					$("input[type=submit]").prop("disabled");
 					return;
 				} else {
 					span.text("");
 					status.memberNick = true;
-					$("input[type=submit]").attr("disabled", false);
 				}
 
 				var that = this;
@@ -79,12 +77,10 @@
 					success : function(resp) {
 						if (resp === "Y") {
 							span.text("사용 가능한 닉네임입니다.");
-							$("input[type=submit]").attr("disabled", false);
 							status.memberNick = true;
 						} else if (resp === "N") {
 							span.text("이미 사용 중인 닉네임입니다.");
 							status.memberNick = false;
-							$("input[type=submit]").attr("disabled", true);
 						}
 					}
 				});

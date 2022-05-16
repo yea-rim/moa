@@ -23,7 +23,7 @@ public class MemberJoinServlet extends HttpServlet {
 			memberDto.setMemberPw(req.getParameter("memberPw"));
 			memberDto.setMemberNick(req.getParameter("memberNick"));
 			memberDto.setMemberPhone(req.getParameter("memberPhone"));
-//			memberDto.setMemberRoute(req.getParameter("memberRoute"));
+			memberDto.setMemberRoute(req.getParameter("memberRoute"));
 
 			// 처리
 			MemberDao memberDao = new MemberDao();
