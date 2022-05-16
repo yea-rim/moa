@@ -95,7 +95,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 
 		<div class="row m30">
 			<label class="m10">(*) 판매자 타입</label> <select name="sellerType"
-				class="form-input input-round">
+				class="form-input input-round" required>
 				<option selected disabled>선택</option>
 				<option value="개인 사업자">개인 사업자</option>
 				<option value="법인 사업자">법인 사업자</option>
@@ -109,7 +109,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 			<div class="filebox">
 				<input class="upload-name" value="첨부파일" placeholder="첨부파일">
 				<label for="file">파일 찾기</label> <input class="m20" type="file"
-					id="file" name="attach" accept="image/*">
+					id="file" name="attach" accept="image/*" required>
 			</div>
 		</div>
 
