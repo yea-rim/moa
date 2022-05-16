@@ -34,7 +34,7 @@
         $(function(){
             // 1. 비밀번호 형식 검사
             $("input[name=changePw]").blur(function(){
-                var regex = /[a-zA-Z0-9]{8,16}/;
+                var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{8,16}$/;
                 var changePw = $(this).val();
 
                 var judge = regex.test(changePw);

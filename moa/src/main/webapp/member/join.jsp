@@ -82,7 +82,7 @@
 				.blur(
 						function() {
 
-							var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%#&])[A-Za-z\d$@$!%#&]{8,16}$/;
+							var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$])[A-Za-z\d!@#$]{8,16}$/;
 							var memberPw = $(this).val();
 
 							var judge = regex.test(memberPw);
