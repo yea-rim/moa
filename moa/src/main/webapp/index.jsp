@@ -69,9 +69,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 						<%} %>
 			           	<%}else{ %>
 			            	<div class="swiper-slide">
-			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=">
-				                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-			                    </a>
+				                  <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
 				            </div>
 				        <%} %>
 				        
