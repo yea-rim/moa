@@ -61,12 +61,12 @@
 	<hr style="border:solid 0.5px #B899CD">
 
 
-	 <%-- <%if(isAdmin){ %>  --%>
+	 <%if(isAdmin){ %>
 		<div class="right" style="height:70px">
 			<a href="notice_edit.jsp?noticeNo=<%=noticeNo %>" class="btn-reverse link">수정</a>
 			<a href="notice_delete.do?noticeNo=<%=noticeNo %>" class="btn link notice-delete">삭제</a>
 		</div>
-	<%-- <%} %>  --%>
+	<%} %>
 		<div class="center" style="height:70px">
 				<a href="notice_list.jsp" class="btn-reverse link">목록으로 돌아가기</a>
 		</div>

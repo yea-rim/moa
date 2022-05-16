@@ -129,4 +129,45 @@ public class BannerDao {
 		
 		return finishDate;
 	}
+	
+	//배너 신청
+	public void insert(BannerDto bannerDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "INSERT INTO banner(project_no, attach_no, banner_term) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, bannerDto.getProjectNo());
+		ps.setInt(2, bannerDto.getAttachNo());
+		ps.setInt(3, bannerDto.getBannerTerm());
+		ps.execute();
+		
+		con.close();
+	}
+	
+	//배너에 올라갈 이미지
+	public List<BannerDto> selectBanner() throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from ("
+				+ "	select rownum rn, TMP.* from ("
+				+ " SELECT * FROM banner WHERE banner_start_date < sysdate AND banner_start_date + banner_term > sysdate "
+				+ "	)TMP"
+				+ ")where rn <= 4";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<BannerDto> list = new ArrayList<>();
+		while(rs.next()) {
+			BannerDto bannerDto = new BannerDto();
+			bannerDto.setAttachNo(rs.getInt("attach_no"));
+			bannerDto.setProjectNo(rs.getInt("project_no"));
+			
+			list.add(bannerDto);
+		}
+		
+		con.close();
+		
+		return list;
+	}
+	
 }
