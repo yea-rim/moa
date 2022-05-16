@@ -106,6 +106,15 @@
 		opacity: 0.8;
 	}
 	
+	.scrolltop{
+		position: fixed;
+		bottom: 50px;
+		right: 50px;
+	}
+
+	.scrolltop:hover{
+		cursor: pointer;
+	}	
 </style>
 <!-- 스와이퍼 -->
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -143,6 +152,10 @@ $(function(){
 		
 	});
 	
+	$(".scrolltop").click(function(){
+		$("html, body").animate({scrollTop : 0}, 400);
+	});
+	
 });
 
 </script>
@@ -172,11 +185,16 @@ $(function(){
 						<div class="swiper">
 							<div class="swiper-wrapper">
 								  <%if(isProfile){ %>
+								  <%if(profileList.size() == 1){ %>
+								  <%for(ProjectAttachDto projectAttachDto : profileList){ %>
+					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
+					            	<%} %>
+				            		<%}else{ %>
 				            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
 					            		<div class="swiper-slide">
 					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
 					            		</div>
-				            		<%} %>
+				            		<%}} %>
 				            		<%}else{ %>
 				            			<div class="swiper-slide">
 				                    		<img src="https://via.placeholder.com/500x300" width="100%" height="100%">
@@ -189,11 +207,12 @@ $(function(){
 				            			</div>
 				                	<%} %>
 							</div>
+							<%if(profileList.size() != 1){ %>
 							<div class="swiper-pagination"></div>
 							
 							<div class="swiper-button-prev"></div>
 							<div class="swiper-button-next"></div>
-						
+							<%} %>
 						</div>
 						
                 <%-- <%if(isProfile){ %>
@@ -392,6 +411,10 @@ $(function(){
             	</div>
             
         </div>
+    </div>
+    
+    <div>
+    	<button type="button"><img src="<%=request.getContextPath() %>/project/image/scrolltop.png" class="scrolltop" width="80px"></button>
     </div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

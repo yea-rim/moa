@@ -23,6 +23,18 @@
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectHeader.css">
 
+<style>
+	.scrolltop{
+		position: fixed;
+		bottom: 50px;
+		right: 50px;
+	}
+
+	.scrolltop:hover{
+		cursor: pointer;
+	}
+</style>
+
 <script type="text/javascript">
 /* 숫자 콤마 찍기 */
 /* $(function(){
@@ -86,5 +98,8 @@
             	</div>
             
         </div>
+    </div>
+    <div>
+    	<button type="button"><img src="<%=request.getContextPath() %>/project/image/scrolltop.png" class="scrolltop" width="80px"></button>
     </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
