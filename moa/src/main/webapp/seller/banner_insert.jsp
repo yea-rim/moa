@@ -16,6 +16,7 @@
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	List<ProjectAttachDto> list = projectAttachDao.selectProfileList(projectNo);
 	
+	boolean isExist = list.size() > 0;
 %>
 <style>
 
@@ -110,17 +111,20 @@
 			<div class="row m10">
 				
 				
+				<%if(isExist){ %>
 				<div class="flex-container mt20">
 				<%for(ProjectAttachDto projectAttachDto : list){ %>
 				<div class="flex-container2 center">
 					<div class="flex-items">
-						 <img src="<%=request.getContextPath() %>/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="250" height="200">
+						 <img src="<%=request.getContextPath() %>/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="250" height="200" onerror="javascript:this.src='https://dummyimage.com/200x200'">
 					</div>
-					
 					<div class="m10" style="width:90%">
 						<input type="radio" name="projectAttach" class="checkValue" value="<%=projectAttachDto.getAttachNo() %>">
 					</div>
 				</div>
+				<%} %>
+				<%} else{ %>
+					<h3 style="color:red">등록된 프로필이 없습니다.</h3>
 				<%} %>
 				</div>
 				<hr style="border: 0.5px solid #f1f2f6">

@@ -16,6 +16,7 @@
 <%-- 준비 --%>
 <% 
 	int communityNo = Integer.parseInt(request.getParameter("communityNo"));
+	boolean isMember = session.getAttribute("login") != null;
 %>
 <%-- 처리 --%>
 <% 
@@ -58,7 +59,6 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: center;
 }
 .flex-items1 {
 	flex-basis:10%;
@@ -186,11 +186,13 @@
 	</div>
 	<%} %>
 </div>
+	
 
 	<%-- 댓글 입력창 --%>
 	<div class="container w800 m20">
 		<h4>댓글</h4>
 		<hr>
+	<%if(isMember){ %>
 				<form action="reply_insert.do" method="post">
 					<input type="hidden" name="communityNo" value="<%=communityNo %>">
 					<div class="flex-container1" style="height:40px">
@@ -202,7 +204,19 @@
 						</div>
 					</div>
 				</form>
-		
+	<%} else{ %>
+				<form action="reply_insert.do" method="post">
+					<input type="hidden" name="communityNo" value="<%=communityNo %>">
+					<div class="flex-container1" style="height:40px">
+						<div class="flex-items4">
+							<input type="text" name="community_reply_content" autocomplete="off" class="form-input community-reply" placeholder="로그인을 해주세요"  style="height:100%" disabled>
+						</div>
+						<div class="flex-items-a">
+							<input type="button" value="작성" class="btn reply-btn" style="height:100%">
+						</div>
+					</div>
+				</form>
+	<%} %>
 		<%-- 댓글 목록 --%>
 		<div class="container m30" id="reply">
 		<%for(CommunityReplyDto communityReplyDto : list) { %>
