@@ -57,22 +57,22 @@
 			<input type="hidden" name="rewardNo" value="<%=rewardDto.getRewardNo()%>">
 			<div class="row m20">
 				<label>리워드 이름</label> 
-				<input type="text" name="rewardName" class="form-input fill checkValue" value="<%=rewardDto.getRewardName()%>">
+				<input type="text" name="rewardName" class="form-input fill checkValue" value="<%=rewardDto.getRewardName()%>" autocomplete="off">
 					<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 내용</label>
-				<textarea name="rewardContent" rows="5" class="form-input fill checkValue"><%=rewardDto.getRewardContent()%></textarea>
+				<textarea name="rewardContent" rows="5" class="form-input fill checkValue" autocomplete="off"><%=rewardDto.getRewardContent()%></textarea>
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>리워드 가격</label> 
-				<input type="number" name="rewardPrice" class="form-input fill checkValue"  value="<%=rewardDto.getRewardPrice()%>">
+				<input type="number" name="rewardPrice" class="form-input fill checkValue"  value="<%=rewardDto.getRewardPrice()%>" autocomplete="off">
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<div class="row"><label>리워드 재고</label></div>
-				<input type="number" name="rewardStock" class="form-input w80p checkValue"  value="<%=rewardDto.getRewardStock()%>">
+				<input type="number" name="rewardStock" class="form-input w80p checkValue"  value="<%=rewardDto.getRewardStock()%>" autocomplete="off">
 				<span class="f12 red"></span>
 				<input type="checkbox" class="form-input ckbox" value="<%=rewardDto.getRewardIsoption()%>">
 				<input type="hidden" name="rewardIsOption" value="<%=rewardDto.getRewardIsoption()%>">
@@ -80,7 +80,7 @@
 			</div>
 			<div class="row m20">
 				<div class="row"><label>배송비</label></div>
-				<input type="number" name="rewardDelivery" class="form-input w80p checkValue" value="<%=rewardDto.getRewardDelivery()%>">
+				<input type="number" name="rewardDelivery" class="form-input w80p checkValue" value="<%=rewardDto.getRewardDelivery()%>" autocomplete="off">
 				<span class="f12 red"></span>
 				<input type="checkbox"  class="form-input ckbox" value="<%=rewardDto.getRewardEach()%>">
 				<input type="hidden" name="rewardEach" value="<%=rewardDto.getRewardEach()%>">

@@ -60,7 +60,7 @@
 					<p class="link-gray"><%=sellerDto.getSellerType()%></p>
 				</div>
 			<div class="row m20 mt50 center">
-				<a href="seller_edit.jsp" class="link link-btn fill">변경하기</a>
+				<a href="<%=request.getContextPath() %>/seller/seller_edit.jsp" class="link link-btn fill">변경하기</a>
 			</div>
 			</div>
 			

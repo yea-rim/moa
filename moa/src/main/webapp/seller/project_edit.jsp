@@ -105,17 +105,17 @@
 		
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill checkValue" value="<%=projectDto.getProjectName()%>">
+				<input type="text" name="projectName" class="form-input fill checkValue" value="<%=projectDto.getProjectName()%>" autocomplete="off">
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">
 				<label>프로젝트 요약글</label>
-				<textarea name="projectSummary" rows="5" class="form-input fill checkValue"><%=projectDto.getProjectSummary()%></textarea>
+				<textarea name="projectSummary" rows="5" class="form-input fill checkValue" autocomplete="off"><%=projectDto.getProjectSummary()%></textarea>
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m30">
 				<label>펀딩 목표 금액</label> 
-				<input type="number" name="projectTargetMoney" class="form-input fill checkValue"  value="<%=projectDto.getProjectTargetMoney()%>"> 
+				<input type="number" name="projectTargetMoney" class="form-input fill checkValue"  value="<%=projectDto.getProjectTargetMoney()%>" autocomplete="off"> 
 				<span class="font-on f12 red"></span><br>
 				<span class="f12 gray" > 
 					※목표 금액 설정 시 꼭알아두세요!<br> 
