@@ -92,7 +92,7 @@ public class ProjectAttachInsertServlet extends HttpServlet{
 	 		}
 	 		
 	 		//페이지 이동
-	 		resp.sendRedirect("attach_edit.jsp?projectNo="+projectNo);
+	 		resp.sendRedirect("project_attach_edit.jsp?projectNo="+projectNo);
 	 		
 		} catch (Exception e) {
 			e.printStackTrace();

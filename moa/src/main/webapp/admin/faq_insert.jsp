@@ -39,13 +39,11 @@ textarea[name=faqContent] {
 </script>
 
 <jsp:include page="/admin/admin_template/admin_header.jsp"></jsp:include>
-
-<hr style="border:solid 0.5px lightgray">
-	<div class="container w800 m50">
-		
-		<div class="row">
+	<div class="container w700 m50">
+		<div class="row m10">
 			<h2>FAQ 작성</h2>
 		</div>
+		<hr style="border:solid 0.5px lightgray">
 		
 		<form action="insert.do" method="post" enctype="multipart/form-data">
 					

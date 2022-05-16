@@ -144,7 +144,7 @@ boolean isProfile = profileList.size() > 0;
         	</div>
         </div>
 
-		<div class="row fill" style="margin-top: 160px;">
+		<div class="row fill" style="margin-top: 150px;">
 					<%
 					boolean beforeStart = projectDto.getProjectStartDate().after(now);
 					if(beforeStart) {%>

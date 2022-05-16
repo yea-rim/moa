@@ -137,7 +137,7 @@
 						          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
 						          	<br>
 						          	<!-- 공지 작성 -->	
-						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center ">공지 작성</a>
+						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">공지 작성</a>
 						          	<br>
 						          	<!-- 배너 신청 -->	
 						          	<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center mt5">배너 신청</a>

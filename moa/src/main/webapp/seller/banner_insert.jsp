@@ -15,6 +15,7 @@
 	
 	ProjectAttachDao projectAttachDao = new ProjectAttachDao();
 	List<ProjectAttachDto> list = projectAttachDao.selectProfileList(projectNo);
+	
 %>
 <style>
 
@@ -48,19 +49,29 @@
 
 <script type="text/javascript">
 	$(function(){
-        $('input[name="banner-term"]').click(function(){
+        $('input[name="bannerTerm"]').click(function(){
             var price = 30000;
-            var bannerTerm = $('input[name="banner-term"]:checked').val();
+            var bannerTerm = $('input[name="bannerTerm"]:checked').val();
             var total = bannerTerm * price;
             total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             $("#display").text(total+" 원");
         });
+        
+        $(".insert-form").on("submit", function(){
+        	if($('.checkValue:checked').length < 2){
+        		alert("선택을 전부 완료해주세요");
+        		return false;
+        	}
+        	else{
+        		return true;
+        	}
+        })
 	});
 </script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_insert.js"></script>
 
 	<!--프로젝트 입력 페이지-->
-	<form action="banner_insert.do" method="post" enctype="multipart/form-data" class="insert-form">
+	<form action="banner_insert.do" method="post" class="insert-form">
 		<input type="hidden" name="projectNo" value="<%=projectNo %>">
 		<div class="container w800 m30 page">
 			<div class="row center m60">
@@ -72,10 +83,10 @@
 			<div class="row m20">
 			
 				<div class="m10">
-					<input type="radio" name="banner-term" value="7" class="select-item checkValue"> <label>1주</label>
-					<input type="radio" name="banner-term" value="14" class="select-item checkValue"> <label>2주</label>
-					<input type="radio" name="banner-term" value="21" class="select-item checkValue"> <label>3주</label>
-					<input type="radio" name="banner-term" value="28" class="select-item checkValue"> <label>4주</label>
+					<input type="radio" name="bannerTerm" value="7" class="select-item checkValue"> <label>1주</label>
+					<input type="radio" name="bannerTerm" value="14" class="select-item checkValue"> <label>2주</label>
+					<input type="radio" name="bannerTerm" value="21" class="select-item checkValue"> <label>3주</label>
+					<input type="radio" name="bannerTerm" value="28" class="select-item checkValue"> <label>4주</label>
 				</div>
 				
 				<div class="mt50" style="font-weight:bold">
@@ -107,7 +118,7 @@
 					</div>
 					
 					<div class="m10" style="width:90%">
-						<input type="radio" name="project-attach" class="checkValue" value="<%=projectAttachDto.getAttachNo() %>">
+						<input type="radio" name="projectAttach" class="checkValue" value="<%=projectAttachDto.getAttachNo() %>">
 					</div>
 				</div>
 				<%} %>
@@ -127,6 +138,8 @@
 					<button type="submit" class=" btn btn-next">신청</button>
 				</div>
 				<div class="row center m30 mlr10 flex-items">
+				<% 
+				%>
 					<a href="my_coming_project.jsp" class="link btn-reverse btn-next">취소</a>
 				</div>
 			</div>

@@ -302,7 +302,7 @@
 					                    <div class="row m10 mlr10">
 					                        <p><%=sellerDto2.getSellerNick() %></p>
 					                    </div>
-					
+				
 					                    <!-- 카테고리 -->
 					                    <div class="row m30 mlr10">
 					                        <p class="link-purple"><%=projectOwner.getProjectCategory() %></p>
@@ -319,7 +319,8 @@
                     	</div>
                        
                     </div>
-                    <div class="row mt30">
+     
+    <div class="row m30">
 		<h2>1:1 문의</h2>
 	</div>
 	<hr>

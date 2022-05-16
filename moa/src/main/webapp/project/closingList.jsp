@@ -68,53 +68,9 @@ if (isSearch) {
 %>
 <title>moa 펀딩마감</title>
 	
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectList.css">
 <style>
 
-.flex-container1 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.flex-container2 {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-
-.flex-container1 .flex-items,
-.flex-container2 .flex-items {
-	flex-basis:33.33%;
-	padding: 2em; 
-}
-
-.category{
-	padding: 30px;
-}
-
-
-.a {
-	flex-grow: 1;
-}
-
-.b {
-	flex-grow: 1;
-} 
-
-.img {
-	border-radius: 100%;
-	width:60px;
-	height: 60px;
-}
-.project-name {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    height: 3em; 
-    font-size: 20px;
-    padding-top:10px;
-}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -133,19 +89,19 @@ if (isSearch) {
 	<div class="container">
 	
 		<div class="row flex-container1 m30">
-			<div class="row center category">
+			<div class="row center cl-category">
 				<a href="comingList.jsp" class="link">
 				<h2>펀딩예정</h2>
 				</a>
 			</div>
 			
-			<div class="row center category">
+			<div class="row center cl-category">
 				<a href="ongoingList.jsp" class="link">
 				<h2>펀딩진행중</h2>
 				</a>
 			</div>
 			
-			<div class="row center category">
+			<div class="row center cl-category">
 				<a href="closingList.jsp" class="link">
 				<h2>펀딩마감</h2>
 				</a>
@@ -159,7 +115,7 @@ if (isSearch) {
 			<div class="row flex-container1">
 		
 		
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/전체-카테고리.jpeg" class="img" id="all">
 					<hr style="border: solid #B899CD 1px">
@@ -167,7 +123,7 @@ if (isSearch) {
 					</a> 
 				</div>
 		
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=패션/잡화" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/패션잡화-카테고리.jpeg" class="img" id="fashion">
 					<hr style="border: solid #B899CD 1px">
@@ -175,7 +131,7 @@ if (isSearch) {
 					</a>
 				</div>
 				
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=뷰티" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/뷰티-카테고리.jpeg" class="img" id="beauty">
 					<hr style="border: solid #B899CD 1px">
@@ -183,7 +139,7 @@ if (isSearch) {
 					</a> 
 				</div>
 				
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=푸드" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/푸드-카테고리.jpeg" class="img" id="food">
 					<hr style="border: solid #B899CD 1px">
@@ -191,7 +147,7 @@ if (isSearch) {
 					</a> 
 				</div>
 				
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=홈/리빙" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/홈리빙-카테고리.jpeg" class="img" id="living">
 					<hr style="border: solid #B899CD 1px">
@@ -199,7 +155,7 @@ if (isSearch) {
 					</a> 
 				</div>
 				
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=테크/가전" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/테크-카테고리.jpeg" class="img" id="tech">
 					<hr style="border: solid #B899CD 1px">
@@ -207,7 +163,7 @@ if (isSearch) {
 					</a>
 				</div>
 				
-				<div class="row center category">
+				<div class="row center cl-category">
 					<a href="closingList.jsp?type=project_category&keyword=기타" class="link">
 					<img src="<%=request.getContextPath()%>/project/image/etc-카테고리.jpeg" class="img" id="etc">
 					<hr style="border: solid #B899CD 1px">
@@ -219,7 +175,7 @@ if (isSearch) {
 		
 		</div>
 		<%-- 정렬기준 선택창  --%>
-		<div class="row right category">
+		<div class="row right cl-category">
 			<%if (isSearch) {%>
 			<form action="closingList.jsp#mainList" method="get">
 				<input type="hidden" name="type" value="<%=type%>"> 
@@ -320,7 +276,7 @@ if (isSearch) {
                 <%} %>
                 </a>
               </div>
-              <div class="row project-name"><%=projectDto.getProjectName() %></div>
+              <div class="row project-name2"><%=projectDto.getProjectName() %></div>
                <% 
               	SellerDao sellerDao = new SellerDao();
               	SellerDto sellerDto = sellerDao.selectOne(projectDto.getProjectSellerNo());

@@ -58,7 +58,7 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 }
 .flex-items1 {
 	flex-basis:10%;
@@ -91,9 +91,6 @@
 	flex-basis:90%;
 }
 
-.reply-btn {
-	height: 40px;
-}
 .reply-container {
 	display: none;
 	position: relative;
@@ -109,6 +106,23 @@
 		$(".reply-btn").click(function () {
 	         $(this).parent(".flex-container1").next(".reply-container").toggle();
 	    });
+		
+		        var replyAdd = document.querySelectorAll(".replyButton");
+
+		        for (var i = 0; i < replyAdd.length; i++) {
+		          replyAdd[i].addEventListener("click", function () {
+		            var container = document.querySelector("#target");
+		            var template = document.querySelector(".row-template");
+
+		            if (container.innerHTML == "") {
+		              this.value = "취소";
+		              container.innerHTML = template.innerHTML;
+		            } else {
+		              this.value = "수정";
+		              container.innerHTML = "";
+		            }
+		          });
+		        }
 		
 		$(".community-reply").on("input", function(){
 	    	  var content = $(this).val();
@@ -162,7 +176,7 @@
 		<span></span>
 		<%} %>
 	</div>
-	<div class="row m50 community-content">
+	<div class="row m50 community-content"  style="min-height: 200px; text-align: top;">
 		<%=communityDto.getCommunityContent() %>
 	</div>
 	<%if(isWriter){ %>
@@ -215,7 +229,7 @@
 					
 				</div>
 					<%-- 댓글 수정창 --%>
-					<div class="reply-container">
+					<div class="reply-container row-template">
 							<form action="reply_edit.do" method="post" class="row center">
 								<input type="hidden" name="communityNo" value="<%=communityNo %>">
 								<input type="hidden" name="communityReplyNo" value="<%=communityReplyDto.getCommunityReplyNo() %>">

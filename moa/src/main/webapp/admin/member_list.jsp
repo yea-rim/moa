@@ -47,33 +47,43 @@
 	});
 </script>
 
-<div class="container w950 m30">
-
-	<div class="row center">
-		<h1>회원 목록</h1>
-	</div>
+<div class="container w90p">
+		<div class="row mt30">
+			<div class="flex-container">
+				<div class="left-wrapper">
+					<h2>회원 목록</h2>
+				</div>
+				<div class="right-wrapper right">
+					<form action="member_list.jsp" method="get">
+						<select name="sort" class="sort">
+					<%if(sort.equals("가입최신순")){ %>
+							<option selected>가입최신순</option>
+							<option>판매자</option>
+							<option>일반회원</option>
+					<%}else if(sort.equals("판매자")){ %>
+							<option >가입최신순</option>
+							<option selected>판매자</option>
+							<option>일반회원</option>
+					<%}else if(sort.equals("일반회원")){ %>
+							<option >가입최신순</option>
+							<option>판매자</option>
+							<option selected>일반회원</option>
+					<%} %>
+						</select> 
+					</form>
+				</div>
+			</div>
+		</div>
+<hr>
 	
-	<div class="row right">
-		<form action="member_list.jsp" method="get">
-			<select name="sort" class="sort">
-				<option>선택</option>
-				<option>가입최신순</option>
-				<option>판매자신청중</option>
-				<option>판매자승인</option>
-				<option>판매자거절</option>
-			</select>
-		</form>
-	</div>		
-	
-	<div class="row">
-		<table class="table table-border">
+	<div class="row mb30">
+		<table class="table table-admin table-stripe table-hover">
 			<thead>
 				<tr>
 					<th>회원 번호</th>
 					<th>이메일</th>
 					<th>닉네임</th>
 					<th>회원 분류</th>
-					<th>판매자 여부</th>
 				</tr>
 			</thead>
 			
@@ -88,19 +98,13 @@
 					<td><%=memberDto.getMemberNo()%></td>
 					<td><%=memberDto.getMemberEmail()%></td>
 					<td><%=memberDto.getMemberNick()%></td>
-					<td><%if(sellerDto != null) { %>판매자<%} else {%>일반회원<%} %></td>
-					<td>
-					<%if(sellerDto != null) {%>
-					<%if(sellerDto.getSellerPermission()==0){ %>
-							<span style="color: red">승인필요</span>
-						<%}else if(sellerDto.getSellerPermission()==1){%>
-							<span style="color: blue">승인완료</span>
- 						<%}else{ %>
-							거절 
+					<td><%if(sellerDto != null) { %>
+						<%if(sellerDto.getSellerRegistDate() !=null) {%>
+							판매자
+						<%}else{ %>
+							판매자심사중
 						<%} %>
-						<%} %>
-						
-					</td>
+					<%} else {%>일반회원<%} %></td>
 				</tr>
 				<%} %>
 			</tbody>

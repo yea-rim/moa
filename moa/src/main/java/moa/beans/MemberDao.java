@@ -345,16 +345,12 @@ public class MemberDao {
 		String standard;
 		if (sort.equals("가입최신순")) {
 			standard = "order by member_no desc";
-		} else if (sort.equals("판매자신청중")) {
-			standard = "where seller_permission = 0";
-		} else if (sort.equals("판매자승인")) {
-			standard = "where seller_permission = 1 order by seller_regist_date desc";
-		} else if (sort.equals("판매자거절")) {
-			standard = "where seller_permission = 2 order by seller_regist_date desc";
+		} else if (sort.equals("판매자")) {
+			standard = "where seller_permission = 1";
 		} else {
-			standard = "order by member_no asc";
-		}
-
+			standard = "where seller_regist_date is null";
+		} 
+		
 		int end = p * s;
 		int begin = end - (s - 1);
 
