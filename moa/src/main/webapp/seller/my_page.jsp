@@ -11,6 +11,7 @@
 
 	SellerDao sellerDao = new SellerDao();
 	SellerDto sellerDto = sellerDao.selectOne(memberNo);
+	System.out.println(sellerDto != null);
 	
 	// 회원 프로필 사진 조회
 	MemberProfileDao memberProfileDao = new MemberProfileDao();
