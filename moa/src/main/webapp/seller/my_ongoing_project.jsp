@@ -136,7 +136,7 @@
 	                        
 					        <div class="float-right right m50 mlr30 flex-container2">
 			                        <!-- 후원자 명단 보기 -->
-						          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse">후원자 명단</a>
+						          	<a href="funding_member_list.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">후원자 명단</a>
 						          	<br>
 						          	<!-- 공지 작성 -->	
 						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">공지 작성</a>
