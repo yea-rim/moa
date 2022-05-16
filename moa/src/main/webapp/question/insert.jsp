@@ -105,7 +105,7 @@
                         <th>파일첨부</th>
                         <td>
                             <div class="filebox-a">
-                                <input class="upload-name" placeholder="첨부파일">
+                                <input class="upload-name" placeholder="첨부파일" accept="image/*" disabled>
                                 <label for="file">파일선택</label> 
                                 <input type="file" id="file" name="attach">
                             </div>

@@ -69,9 +69,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 						<%} %>
 			           	<%}else{ %>
 			            	<div class="swiper-slide">
-			            		<a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=">
-				                    <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
-			                    </a>
+				                  <img src="https://via.placeholder.com/500x300" width="660px" height="400px">
 				            </div>
 				        <%} %>
 				        
@@ -141,7 +139,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		</div>
 			<%} else{ %>
 			<div class="m10">
-				<img src="https://dummyimage.com/200x200" width="100%" height="100%">
+				<img src="https://dummyimage.com/200x200" width="200px" height="170px">
 			</div>
 			<%} %>
 	</div>

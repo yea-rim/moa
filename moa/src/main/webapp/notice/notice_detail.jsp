@@ -51,7 +51,7 @@
 		<hr  style="border:solid 0.5px #B899CD">
 	<div class="row m20"  style="min-height: 500px; text-align: top;">
  		<%if(isExistPhoto){ %>
-		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%">
+		<img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=moaNoticeAttachDto.getAttachNo() %>" width="100%" class="m20">
 		<%}else{ %>
 		<span></span>
 		<%} %>

@@ -97,12 +97,12 @@
 						<td>
 							<div class="filebox-a">
 							<%if(attachDtoProfile != null){ %>
-								<input class="upload-name1" placeholder="<%=attachDtoProfile.getAttachUploadname() %>"> 
+								<input class="upload-name1" placeholder="<%=attachDtoProfile.getAttachUploadname() %>" disabled> 
 							<%} else{ %>
-								<input class="upload-name1" placeholder="파일첨부"> 
+								<input class="upload-name1" placeholder="파일첨부" disabled> 
 							<%} %>
 									<label for="file1">파일선택</label> 
-								<input type="file" id="file1" name="attachProfile">
+								<input type="file" id="file1" accept="image/*" name="attachProfile">
 							</div>
 						</td>
 					</tr>
@@ -111,12 +111,12 @@
 						<td>
 							<div class="filebox-a">
 							<%if(attachDtoContent != null){ %>
-								<input class="upload-name2" placeholder="<%=attachDtoContent.getAttachUploadname() %>"> 
+								<input class="upload-name2" placeholder="<%=attachDtoContent.getAttachUploadname() %>" disabled> 
 							<%} else{ %>
-								<input class="upload-name2" placeholder="파일첨부"> 
+								<input class="upload-name2" placeholder="파일첨부" disabled> 
 							<%} %>
 									<label for="file2">파일선택</label> 
-								<input type="file" id="file2" name="attachContent">
+								<input type="file" id="file2" accept="image/*" name="attachContent">
 							</div>
 						</td>
 					</tr>
