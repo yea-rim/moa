@@ -21,10 +21,6 @@ import moa.beans.ProjectDto;
 			"/seller/fail_project_detail.jsp",
 			"/seller/funding_member_detail.jsp",
 			"/seller/funding_member_list.jsp",
-			"/seller/my_coming_project.jsp",
-			"/seller/my_fail_project.js",
-			"/seller/my_ongoing_project.jsp",
-			"/seller/my_rejected_project.jsp",
 			"/seller/my_sponsor.jsp",
 			"/seller/permit_project_detail.jsp",
 			"/seller/pj_progress_edit.jsp",
@@ -71,7 +67,7 @@ public class ProjectOwnerFilter implements Filter{
 			ProjectDto projectDto = projectDao.selectOne(projectNo);
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == projectDto.getProjectSellerNo();
-			
+		
 			if(auth) {
 				chain.doFilter(request, response);
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)

@@ -7,7 +7,7 @@
 <%
 String sort = request.getParameter("sort");
 if (sort == null) {
-	sort = "회원정보";
+	sort = "전체";
 }
 
 int p;
@@ -37,28 +37,6 @@ int begin = end - (s - 1);
 MoaFaqDao moaFaqDao = new MoaFaqDao();
 List<MoaFaqDto> list = moaFaqDao.allSelectList(p, s, sort);
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>moa FAQ</title>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-// 	$(function() {
-// 		$('#show_hide').click(function() {
-// 			if ($('#content').css("display") == "none") {
-// 				$('#content').show();
-// 			} else if ($('#content').css("display") != "none") {
-// 				$('#content').hide();
-// 			}
-// 		});
-
-// 	});
-</script>
-
-
 <style>
 .flex-container1 {
 	display: flex;
@@ -109,22 +87,47 @@ List<MoaFaqDto> list = moaFaqDao.allSelectList(p, s, sort);
 
 <hr style="border: solid 0.5px lightgray">
 
+
+<div class="container w750 m70">
 <div class="row center">
 	<h1 class=" m70">moa FAQ</h1>
-	</a>
 </div>
-
-<div class="container w950 m70">
 
 	<!-- 안 돌아감!! -->
 	<div class="row right">
 		<form action="faq_list.jsp" method="get">
 			<select name="sort" class="sort">
-				<option>선택</option>
-				<option>회원정보</option>
-				<option>운영정책</option>
-				<option>이용문의</option>
-				<option>기타</option>
+			<%if(sort.equals("회원정보")){ %>
+					<option>전체</option>
+					<option selected>회원정보</option>
+					<option>운영정책</option>
+					<option>이용문의</option>
+					<option>기타</option>
+			<%}else if(sort.equals("운영정책")){ %>
+					<option>전체</option>
+					<option >회원정보</option>
+					<option selected>운영정책</option>
+					<option>이용문의</option>
+					<option>기타</option>
+			<%}else if(sort.equals("이용문의")){ %>
+					<option>전체</option>
+					<option >회원정보</option>
+					<option>운영정책</option>
+					<option selected>이용문의</option>
+					<option>기타</option>
+			<%}else if(sort.equals("기타")){ %>
+					<option>전체</option>
+					<option >회원정보</option>
+					<option>운영정책</option>
+					<option >이용문의</option>
+					<option selected>기타</option>
+			<%}else{ %>
+					<option selected>전체</option>
+					<option >회원정보</option>
+					<option>운영정책</option>
+					<option >이용문의</option>
+					<option >기타</option>
+			<%} %>
 			</select>
 		</form>
 	</div>
@@ -134,7 +137,7 @@ List<MoaFaqDto> list = moaFaqDao.allSelectList(p, s, sort);
 	<%
 	for (MoaFaqDto moaFaqDto : list) {
 	%>
-	<div class="row flex-container1 m10" onclick="location.href='<%=request.getContextPath()%>/faq/faq_detail.jsp?faqNo=<%=moaFaqDto.getFaqNo() %>';">
+	<div class="row flex-container1 m10" onclick="location.href='<%=request.getContextPath()%>/faq/faq_detail.jsp?faqNo=<%=moaFaqDto.getFaqNo() %>';" style="cursor: pointer;">
 		<div class="row flex-container2">
 			<div class="flex-items1 bottom">
 				<span><%=moaFaqDto.getFaqNo()%> </span>
@@ -181,7 +184,6 @@ if (endBlock > lastPage) {
 }
 %>
 
-<h3>
 	<!-- 이전 버튼 영역 -->
 	<div class="pagination center m50">
 		<%
@@ -237,7 +239,6 @@ if (endBlock > lastPage) {
 		%>
 	</div>
 
-</h3>
 
 <hr style="border: solid 1px #B899CD">
 

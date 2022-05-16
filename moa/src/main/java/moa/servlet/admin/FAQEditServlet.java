@@ -21,7 +21,7 @@ import moa.beans.CommunityPhotoDto;
 import moa.beans.MoaFaqDao;
 import moa.beans.MoaFaqDto;
 
-@WebServlet(urlPatterns = "/admin/edit.do")
+@WebServlet(urlPatterns = "/admin/faq_edit.do")
 public class FAQEditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class FAQEditServlet extends HttpServlet {
 			MoaFaqDto moaFaqDto = new MoaFaqDto();
 			moaFaqDto.setFaqNo(faqNo);
 			moaFaqDto.setFaqTitle(req.getParameter("faqTitle"));
-
+			moaFaqDto.setFaqCategory(req.getParameter("faqCategory"));
 			String faqContent = req.getParameter("faqContent");
 			faqContent = faqContent.replace("\r\n", "<br>");
 			moaFaqDto.setFaqContent(faqContent);
@@ -42,7 +42,7 @@ public class FAQEditServlet extends HttpServlet {
 			moaFaqDao.edit(moaFaqDto);
 
 			// 출력
-			resp.sendRedirect("/faq/detail.jsp?faqNo=" + moaFaqDto.getFaqNo());
+			resp.sendRedirect(req.getContextPath()+"/faq/faq_detail.jsp?faqNo=" +faqNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
