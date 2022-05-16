@@ -16,6 +16,7 @@
                 // 체크 해제되면 
                 $("input[name=memberPw]").prop("type", "password");
             }
+            
         });
 	});
 </script>

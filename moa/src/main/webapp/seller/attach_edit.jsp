@@ -152,7 +152,7 @@ AttachDao attachDao = new AttachDao();
 						<div class="filebox-a center w220">
 							<form action="attach_insert.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
-								<input class="upload-name" placeholder="파일첨부"> 
+								<input class="upload-name" placeholder="파일첨부" disabled> 
 								<label for="file1<%=i%>">선택</label> <input type="file" id="file1<%=i%>" name="profileAttach" class="attach">
 								<button type="submit" class="link link-small btn-file f12">추가</button>
 							</form>

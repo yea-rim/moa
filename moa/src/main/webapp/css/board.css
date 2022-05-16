@@ -4,6 +4,9 @@ textarea[name=noticeContent] {
 textarea[name=communityContent] {
 	height: 400px;
 }
+textarea[name=progressContent] {
+	height: 400px;
+}
 
 .filebox-a input[type="file"] {
 	position: absolute;

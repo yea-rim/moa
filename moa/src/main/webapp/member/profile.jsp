@@ -89,11 +89,21 @@
 					}
 				});
 	        });
+			
+			$(".profile-formcheck").submit(function(){
+				if(status.memberNick){
+					return true;
+				}else{
+					alert("닉네임을 작성해주세요.");
+					return false;
+				}
+			});
+		
 		});
     </script>
 
                 <div class="container fill m40">
-                    <form action="edit.do" method="post" enctype="multipart/form-data">
+                    <form action="edit.do" method="post" enctype="multipart/form-data" class="profile-formcheck">
 						<input type = "hidden" name = "memberNo" value="<%=memberNo%>">
                     
                         <div class="flex-container">
@@ -129,9 +139,9 @@
                                         	AttachDao attachDao = new AttachDao();
                                         	AttachDto attachDto = attachDao.selectOne(memberProfileDto.getAttachNo());
                                         %>
-	                                    	 <input class="upload-name" value="<%=attachDto.getAttachUploadname()%>" placeholder="<%=attachDto.getAttachUploadname()%>" style="height: 35px;">
+	                                    	 <input class="upload-name" placeholder="<%=attachDto.getAttachUploadname()%>" style="height: 35px;" disabled>
 	                                    <%} else { // 존재하지 않는다면 %>
-	                                    	 <input class="upload-name" value="첨부파일" placeholder="첨부파일" style="height: 35px;">
+	                                    	 <input class="upload-name" placeholder="첨부파일" style="height: 35px;" disabled>
 	                                    <%} %>
                                         <label for="file" style="height: 35px; font-size:13px;">파일찾기</label> 
                                         <input type="file" id="file" name="attach">

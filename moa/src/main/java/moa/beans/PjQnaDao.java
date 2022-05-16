@@ -146,7 +146,7 @@ public class PjQnaDao {
 		rs.next();
 		
 		int count = rs.getInt(1);
-		
+		con.close();
 		return count;
 	}
 	
@@ -166,6 +166,7 @@ public class PjQnaDao {
 		rs.next();
 		
 		int count = rs.getInt(1);
+		con.close();
 		
 		return count;
 	}
@@ -185,7 +186,7 @@ public class PjQnaDao {
 			rs.next();
 			
 			int count = rs.getInt(1);
-			
+			con.close();
 			return count;
 		}
 	

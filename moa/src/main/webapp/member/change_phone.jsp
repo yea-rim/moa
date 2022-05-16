@@ -25,12 +25,10 @@
 				if(!judge) {
 					$(this).next("p").text("전화번호 형식에 맞게 입력해주세요.");
 					status.memberPhone = false;
-					$("input[type=submit]").attr("disabled", true);
 					return; 
 				} else {
 					$(this).next("p").text("");
 					status.memberPhone = true;
-					$("input[type=submit]").attr("disabled", false);
 				}
 				
 	            var that = this;
@@ -46,14 +44,22 @@
 						if (resp === "Yes") {
 							$(that).next("p").text("");
 							status.memberPhone = true;
-							$("input[type=submit]").attr("disabled", false);
 						} else if (resp === "No") {
 							$(that).next("p").text("이미 가입된 전화번호입니다.");
 							status.memberPhone = false;
-							$("input[type=submit]").attr("disabled", true);
 						}
 					}
 				});
+            });
+            
+            $(".phone-formcheck").submit(function(){
+            	if(status.memberPhone){
+            		return true;
+            	}else{
+            		alert("형식에 맞게 입력 해주세요.");
+            		return false;
+            	}
+            	
             });
         });
     </script>
@@ -94,7 +100,7 @@
                         
 	                        <div class="float-left layer-2">
 	                            
-		                     <form action="change_phone.do" method="post">
+		                     <form action="change_phone.do" method="post" class="phone-formcheck">
 		                     	<label>
 					                    전화번호
 					            </label>

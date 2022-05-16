@@ -26,7 +26,6 @@ import moa.beans.ProjectDto;
 			"/seller/my_ongoing_project.jsp",
 			"/seller/my_rejected_project.jsp",
 			"/seller/my_sponsor.jsp",
-			"/seller/my_success_project.jsp",
 			"/seller/permit_project_detail.jsp",
 			"/seller/pj_progress_edit.jsp",
 			"/seller/pj_progress_insert.jsp",
@@ -65,6 +64,7 @@ public class ProjectOwnerFilter implements Filter{
 			
 			// 2. 작성자 본인인지 확인
 			int memberNo = (int) req.getSession().getAttribute("login");
+			
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
 			ProjectDao projectDao = new ProjectDao();

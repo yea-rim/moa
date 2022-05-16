@@ -171,7 +171,7 @@
                 <li>
                     <a href="#"><h3 class="m0">고객센터</h3></a>
                   	<ul>
-                        <li><a href="#"><h3 class="m0">FAQ</h3></a></li>
+                        <li><a href="<%=request.getContextPath()%>/faq/faq_list.jsp"><h3 class="m0">FAQ</h3></a></li>
                         <li><a href="<%=request.getContextPath() %>/question/insert.jsp"><h3 class="m0 ft">1:1문의</h3></a></li>
                     </ul>
                 </li>

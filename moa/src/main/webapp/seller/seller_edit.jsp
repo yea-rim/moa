@@ -23,7 +23,8 @@
 	$(function() {
 		var status = {
 	            sellerNick : false,
-	            sellerAccountNo: false
+	            sellerAccountNo: false,
+	            sellerAccountBank: false
 	        }
 
 		// 판매자 닉네임 형식 검사 --> 중복 검사
@@ -36,12 +37,10 @@
 			if (!judge) {
 				span.text("형식에 맞는 판매자 닉네임을 입력해주세요.");
 				status.sellerNick = false;
-				$("input[type=submit]").prop("disabled");
 				return;
 			} else {
 				span.text("");
 				status.sellerNick = true;
-				$("input[type=submit]").attr("disabled", false);
 			}
 
 			var that = this;
@@ -55,21 +54,20 @@
 				success : function(resp) {
 					if (resp === "YY") {
 						span.text("");
-						$("input[type=submit]").attr("disabled", false);
 						status.sellerNick = true;
 					} else if (resp === "NN") {
 						span.text("이미 사용 중인 판매자 닉네임입니다.");
 						status.sellerNick = false;
-						$("input[type=submit]").attr("disabled", true);
 					}
 				}
 				
 				
 			});
-			
-			
+		
+		});
+		
 			$("input[name=sellerAccountNo]").blur(function() {
-				var regex = /^[0-9]{30}$/;
+				var regex = /^[0-9]$/;
 				var sellerAccountNo = $(this).val();
 				var span = $(this).next("span");
 
@@ -77,16 +75,37 @@
 				if (!judge) {
 					span.text("숫자만 입력해주세요.");
 					status.sellerAccountNo = false;
-					$("input[type=submit]").prop("disabled");
 					return;
 				} else {
 					span.text("");
 					status.sellerAccountNo = true;
-					$("input[type=submit]").attr("disabled", false);
 				}
 			});
+			
+			$("input[name=sellerAccountBank]").blur(function(){
+				if($(this).val() == ""){
+					status.sellerAccountBank = false;
+				}else{
+					status.sellerAccountBank = true;
+				}
+			});
+			
+			
+			$(".seller-edit-formcheck").submit(function(){
+				if(status.sellerNick && status.sellerAccountNo && status.sellerAccountBank){
+					return true;
+				}else{
+					alert("필수 정보를 입력해주세요.");
+					return false;
+				}
+			});
+			
+			$(function(){
+				$(".form-answer").submit(function(){
+					if(sellerNick, sellerAccountNo, )
+				});
+			});
 		
-		});
 	});
 </script>
 
@@ -114,7 +133,7 @@
         
         <div class="container mt60">
 			
-			<form action="edit.do" method="post">	
+			<form action="edit.do" method="post" class="seller-edit-formcheck">	
 			<input type="hidden" name="sellerNo" value="<%=sellerDto.getSellerNo()%>">
 				
 				<div class="float-container">
@@ -160,7 +179,7 @@
 				
 				
 				<div class="row m20 mt50 center">
-					<input type="submit" value="변경하기" class="btn">
+					<input type="submit" value="변경하기" class="btn form-answer">
 				</div>
 			
 			</form>
