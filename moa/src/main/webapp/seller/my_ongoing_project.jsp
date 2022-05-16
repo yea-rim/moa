@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectVo"%>
@@ -46,6 +47,8 @@
 	List<ProjectDto> list = projectDao.ongoingSelectList(p, s, sellerNo);
 	
 	List<ProjectDto> permitList = projectDao.permitSelectList(p, s, sellerNo);
+	
+	DecimalFormat df = new DecimalFormat("###,###");
 %>
 <style>
 	.flex-container2 {
@@ -118,12 +121,12 @@
 	                            <!-- 프로젝트 요약 -->
 	                            <%ProjectVo projectVo = projectDao.selectVo(projectDto.getProjectNo());%>
 	                            <div class="row w800 mt20">
-	                            	<p class="link-gray m5">목표 금액 : <%=projectDto.getProjectTargetMoney() %>원</p>
-	                            	<p class="link-gray m5">모인 금액 : <%=projectVo.getPresentMoney() %>원</p>
+	                            	<p class="link-gray m5">목표 금액 : <%=df.format(projectDto.getProjectTargetMoney()) %>원</p>
+	                            	<p class="link-gray m5">모인 금액 : <%=df.format(projectVo.getPresentMoney()) %>원</p>
 	                            	<%if(projectVo.getPercent() >= 100) { %>
-	                                	<p class="p-red m5">달성율 : <%=projectVo.getPercent() %>%</p>
+	                                	<p class="p-red m5">달성율 : <%=df.format(projectVo.getPercent()) %>%</p>
 									<%} else {%>
-										<p class="link-gray m5">달성율 : <%=projectVo.getPercent() %>%</p>
+										<p class="link-gray m5">달성율 : <%=df.format(projectVo.getPercent()) %>%</p>
 									<%} %>	                                
 	                                <p class="link-gray m5">펀딩 마감일 : <%=projectDto.getProjectSemiFinish() %></p>
 	                            </div>
@@ -137,7 +140,7 @@
 						          	<a href="pj_progress_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">공지 작성</a>
 						          	<br>
 						          	<!-- 배너 신청 -->	
-						          	<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center">배너 신청</a>
+						          	<a href="banner_insert.jsp?projectNo=<%=projectDto.getProjectNo() %>" class="link link-reverse center mt5">배너 신청</a>
 					        </div>
 	                    </div>
 	                </div>
