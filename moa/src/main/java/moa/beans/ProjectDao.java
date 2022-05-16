@@ -1427,7 +1427,7 @@ public class ProjectDao {
 				public List<ProjectDto> selectFundingProjectList (int memberNo) throws Exception {
 					Connection con = JdbcUtils.getConnection();
 					
-					String sql = "select project_no from (select * from member_funding_info where funding_member_no= ? order by funding_no desc) group by project_no";
+					String sql = "select project_no from (select * from member_funding_info where funding_member_no= ?) order by funding_no desc";
 					PreparedStatement ps = con.prepareStatement(sql);
 					ps.setInt(1, memberNo);
 					ResultSet rs = ps.executeQuery();
@@ -1447,8 +1447,6 @@ public class ProjectDao {
 				}
 				
 				
-		// 특정 회원의 펀딩 예정인 프로젝트 번호 리스트 조회 (페이징)		
-		
 				
 				
 		// 진행예정 진행중 마감된 프로젝트 구분위한 메서드 시작날짜 - 현재날짜, 마감날짜 - 현재날짜를 각각 구해서 계산 후 반환 0:오픈예정 1:진행중 2:마감된

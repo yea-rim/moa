@@ -158,11 +158,11 @@ h2{
     .swiper-pagination,
     .swiper-button-prev,
     .swiper-button-next {
-    	color: black;
+    	color: #b899cd;
     }
     
     .swiper-pagination-bullet-active{
-    	background-color: black;
+    	background-color: #b899cd;
     }
     
     .summary-box {

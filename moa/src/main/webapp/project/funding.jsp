@@ -34,7 +34,35 @@
 
 
 <style>
+	.sold-out{
+		position:absolute; 
+		top:0; 
+		left:0; 
+		width:100%; 
+		height:100%;
+		opacity:0.4;
+		background-color: rgb(231, 231, 231);
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	border-radius: 0.3em;
+		z-index: 1;
+		
+    	transition: 0.2s ease-in-out;
+	}
+	
+	.sold-out:hover{
+		opacity: 0.8;
+	}
+	
+	input::-webkit-inner-spin-button {
+  		appearance: none;
+ 		-moz-appearance: none;
+ 	 	-webkit-appearance: none;
+	}
 
+
+출처: https://codiving.kr/58 [코드에 빠지다]
 </style>
 
 <!-- jquery cdn -->
@@ -129,10 +157,14 @@
             <hr>
 			
 			<%for(RewardDto rewardDto : list) {%>
-            <div class="flex-container reward-select m20">
+            <div class="flex-container reward-select m20" style="position:relative;">
 				<span class="rewardCount" hidden><%=count++ %></span>
                 <div class="check-reward w30p">
-                    <input type="checkbox" name="rewardNo" value="<%=rewardDto.getRewardNo() %>" class="reward-checkbox">
+               		<%if(rewardDto.getRewardStock() == 0) {%>
+                    	<input type="checkbox" name="rewardNo" value="<%=rewardDto.getRewardNo() %>" class="reward-checkbox" disabled>
+                    <%}else{ %>
+                    	<input type="checkbox" name="rewardNo" value="<%=rewardDto.getRewardNo() %>" class="reward-checkbox">
+                    <%} %>
                 </div>
                 
                 <div class="reward m30 w70p">
@@ -154,13 +186,17 @@
                     <%} %>
                     </span>
                     <br>
-                    <span style="font-size: 13px;">재고 : <%=rewardDto.getRewardStock() %>개     ||     결제 예정일 : <%=projectDao.paymentDate(projectNo) %></span>
+                    <span style="font-size: 13px;">재고 : <span class="reward-stock"><%=rewardDto.getRewardStock() %></span>개     ||     결제 예정일 : <%=projectDao.paymentDate(projectNo) %></span>
                     <div class="flex-container m20 detail">
                         <div class="amount">
                             <label style="margin-bottom: 10px;">수량</label>
                             <div style="height: 30px; display: flex;">
 	                            <button type="button" class="minus-btn">-</button>
-	                            <input type="text" name="selectionRewardAmount" class="form-input" value="1" readonly>
+	                            <%if(rewardDto.getRewardStock() == 0) {%>
+	                            	<input type="number" name="selectionRewardAmount" class="form-input" value="0" style="padding-left: 0; padding-right: 0; text-align: center;" disabled>
+	                            <%}else{ %>
+	                            	<input type="number" name="selectionRewardAmount" class="form-input" value="1" style="padding-left: 0; padding-right: 0; text-align: center;">
+	                            <%} %>
 	                            <button type="button" class="plus-btn">+</button>
                             </div>
                         </div>
@@ -173,6 +209,11 @@
                         <!-- <div class="detail-option"></div> -->
                     </div>
                 </div>
+                <%if(rewardDto.getRewardStock() == 0) {%>
+                <div class="sold-out">
+                    <span style="font-size: 18px; color:#520088; opacity:1;">재고 없음</span>
+                </div>
+                <%} %>
             </div>
             <%} %>
 

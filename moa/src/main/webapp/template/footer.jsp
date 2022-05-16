@@ -17,27 +17,42 @@
         </section>
         <footer>
             
-<div class="flex-container0">      
-<div class="row left a">
-<pre>
-KH정보교육원 ｜ 사업자등록번호 : 851-87-00622 ｜ 서울 강남 제2014-01호 ｜ 대표자 : 양진선 ｜ 책임자 : 최홍석 ｜  개인정보관리책임자 : 양진선
-			                
-강남지원 1관 : 서울특별시 강남구 테헤란로14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F
-강남지원 2관 : 서울특별시 강남구 테헤란로10길 9 그랑프리 빌딩 4F, 5F, 7F
-강남지원 3관 : 서울특별시 강남구 테헤란로 130 호산빌딩 5F, 6F
-종로지원 : 서울특별시 중구 남대문로 120 대일빌딩 2F, 3F
-당산지원 : 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F
-								
-Copyright © 1998-2022 KH Information Educational Institute All Right Reserved
-</pre>
-</div>
-					
-<div class="row right b m10">
-<a href="<%=request.getContextPath()%>/question/insert.jsp" class="btn link">
-MOA에 1:1 문의하기
-</a>
-</div>
-</div>				
+			<div class="float-container">     
+					<div class="float-left" style="width: 30%;">
+						<div class="row center">
+							<h5>moa 고객센터</h5>
+						</div>
+						<div class="row center mt5">
+							<h3>5555-5555</h3>
+						</div>
+						<div class="row center mt10">
+							<p class="link-gray f12">상담 가능 시간 : 평일 오전 9시 ~ 오후 6시 (주말, 공휴일 제외)</p>
+						</div>
+						<div class="row center mt20">
+							<p class="f13">이메일 (24시간 접수 가능)</p>
+						</div>
+						<div class="row center mt5">
+							<p class="link-gray f12">펀딩 : moa@moa.moa</p>
+						</div>
+						<div class="row center mt10">
+							<p class="link-gray f12">일부 상품의 경우 모아는 통신판매중개자이며 통신판매 당사자가 아닙니다.</p>
+						</div>
+					</div>
+					<div class="float-left" style="width: 40%;">
+						<div class="row center">
+							<p class="f13">모아(주) | 대표이사 모아 | 사업자등록번호 555-55-55555</p>
+						</div>
+						<div class="row center mt5">
+							<p class="f13">서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F</p>
+						</div>
+					</div>
+									
+					<div class="float-left center" style="width: 30%;">
+						<a href="<%=request.getContextPath()%>/question/insert.jsp" class="link link-btn">
+						MOA에 1:1 문의하기
+						</a>
+					</div>
+			</div>				
         </footer>
     </main>
 </body>

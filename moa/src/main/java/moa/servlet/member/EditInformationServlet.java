@@ -17,28 +17,31 @@ public class EditInformationServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 준비 
+			Integer memberNo = (Integer) req.getSession().getAttribute("login");
+			
+			
 			String currentPw = req.getParameter("currentPw");
 			String changePw = req.getParameter("changePw");
 			
-			Integer memberNo = (Integer) req.getSession().getAttribute("login");
 			
 			MemberDto changeDto = new MemberDto();
 			changeDto.setMemberPhone(req.getParameter("memberPhone"));
 			changeDto.setMemberPost(req.getParameter("memberPost"));
 			changeDto.setMemberBasicAddress(req.getParameter("memberBasicAddress"));
 			changeDto.setMemberDetailAddress(req.getParameter("memberDetailAddress"));
+			changeDto.setMemberNo(memberNo);
 			
 			// 처리 
 			// 1. 기존 비밀번호와 새로운 비밀번호가 일치하는지 검사 
 			boolean isSamePassword =  currentPw.equals(changePw); // 변경하면 안되는 상황 
 			if(isSamePassword) {
-				resp.sendRedirect("password.jsp?error=1");
+				resp.sendRedirect("edit_information.jsp?error=1");
 				return;
 			}
 			// 2. 입력창이 비어있는지 검사 
 			boolean isEmpty = currentPw == null || changePw == null;
 			if(isEmpty) {
-				resp.sendRedirect("password.jsp?error=2");
+				resp.sendRedirect("edit_information.jsp?error=2");
 				return; 
 			}
 			

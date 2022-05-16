@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.ProjectAttachDto"%>
 <%@page import="moa.beans.ProjectAttachDao"%>
 <%@page import="moa.beans.RewardDto"%>
@@ -21,6 +22,8 @@
 	ProjectAttachDto projectAttachDto = projectAttachDao.getAttachNo(projectNo); 
 	
 	boolean isExistProjectAttach = projectAttachDto != null; 
+	
+	DecimalFormat df = new DecimalFormat("###,###");
 %>    
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
@@ -92,7 +95,7 @@
                             <h2>펀딩 목표 금액</h2>
                         </div>
                         <div class="left-wrpper layer-2 p30">
-                            <p><%=projectDto.getProjectTargetMoney() %>원</p>
+                            <p><%=df.format(projectDto.getProjectTargetMoney()) %>원</p>
                         </div>
                     </div>
                     <div class="flex-container">
@@ -139,15 +142,15 @@
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>리워드 가격</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardPrice() %>원</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardPrice()) %>원</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>리워드 재고</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardStock() %>개</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardStock()) %>개</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>배송비</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardDelivery() %>원</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardDelivery()) %>원</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>개별 배송 여부</h4>

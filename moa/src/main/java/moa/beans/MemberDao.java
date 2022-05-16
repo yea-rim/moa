@@ -403,4 +403,40 @@ public class MemberDao {
 
 		return count;
 	}
+	
+	// 전화번호 변경 메소드
+	public boolean changePhone(String memberPhone, int memberNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update member set member_phone = ? where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, memberPhone);
+		ps.setInt(2, memberNo);
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
+	
+	// 주소 변경 메소드
+	public boolean changeAddress(MemberDto memberDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update member set member_post = ?, member_basic_address = ?, member_detail_address = ? where member_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, memberDto.getMemberPost());
+		ps.setString(2, memberDto.getMemberBasicAddress());
+		ps.setString(3, memberDto.getMemberDetailAddress());
+		ps.setInt(4, memberDto.getMemberNo());
+		
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count > 0; 
+	}
 }

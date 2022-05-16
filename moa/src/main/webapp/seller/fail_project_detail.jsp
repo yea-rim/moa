@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.RewardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="moa.beans.RewardDao"%>
@@ -27,6 +28,7 @@
 	RewardDao rewardDao = new RewardDao();
 	List<RewardDto> rewardList = rewardDao.selectProject(projectNo);
 	
+	DecimalFormat df = new DecimalFormat("###,###");
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -68,19 +70,19 @@
                             <h3>모인 금액</h3>
                         </div>
                         <div class="row m10">
-                            <p><%=projectVo.getPresentMoney() %>원</p>
+                            <p><%=df.format(projectVo.getPresentMoney()) %>원</p>
                         </div>
                         <div class="row mt20 m10">
                             <h3>달성율</h3>
                         </div>
                         <div class="row m10">
-                            <p><%=projectVo.getPercent() %>%</p>
+                            <p><%=df.format(projectVo.getPercent())%>%</p>
                         </div>
                         <div class="row mt20 m10">
                             <h3>후원자 수</h3>
                         </div>
                         <div class="row m10">
-                            <p><%=projectVo.getSponsor() %>명</p>
+                            <p><%=df.format(projectVo.getSponsor()) %>명</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +105,7 @@
                             <h2>펀딩 목표 금액</h2>
                         </div>
                         <div class="left-wrapper layer-5 ptb30">
-                            <p><%=projectDto.getProjectTargetMoney() %>원</p>
+                            <p><%=df.format(projectDto.getProjectTargetMoney()) %>원</p>
                         </div>
                     </div>
                     <div class="flex-container">
@@ -146,15 +148,15 @@
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>리워드 가격</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardPrice() %>원</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardPrice()) %>원</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>리워드 재고</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardStock() %>개</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardStock()) %>개</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>배송비</h4>
-	                                <p class="m5 link-gray"><%=rewardDto.getRewardDelivery() %>원</p>
+	                                <p class="m5 link-gray"><%=df.format(rewardDto.getRewardDelivery() )%>원</p>
 	                            </div>
 	                            <div class="row m15">
 	                                <h4>개별 배송 여부</h4>
