@@ -100,11 +100,6 @@
 				}
 			});
 			
-			$(function(){
-				$(".form-answer").submit(function(){
-					if(sellerNick, sellerAccountNo, )
-				});
-			});
 		
 	});
 </script>
