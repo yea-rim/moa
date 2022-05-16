@@ -139,7 +139,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		</div>
 			<%} else{ %>
 			<div class="m10">
-				<img src="https://dummyimage.com/200x200" width="100%" height="100%">
+				<img src="https://dummyimage.com/200x200" width="200px" height="170px">
 			</div>
 			<%} %>
 	</div>

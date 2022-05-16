@@ -52,7 +52,7 @@ boolean isAdmin = session.getAttribute("admin") != null;
 						<th>프로필 파일</th>
 						<td>
 							<div class="filebox-a">
-								<input class="upload-name1" placeholder="첨부파일"> 
+								<input class="upload-name1" placeholder="첨부파일" disabled> 
 									<label for="file1">파일선택</label> 
 								<input type="file" id="file1" accept="image/*" name="attachProfile">
 							</div>
