@@ -711,7 +711,7 @@ public class ProjectDao {
 
 		String sql = "SELECT * FROM(" 
 				+ "SELECT rownum rn, TMP.*from("
-				+ "SELECT * FROM project WHERE project_permission = 1 ORDER BY project_readcount DESC" 
+				+ "SELECT * FROM project WHERE project_permission = 1 and PROJECT_START_DATE < sysdate AND PROJECT_SEMI_FINISH  > sysdate ORDER BY project_readcount DESC" 
 				+ ")TMP"
 				+ ") WHERE rn <= 8";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -736,7 +736,7 @@ public class ProjectDao {
 		
 		String sql = "SELECT * FROM("
 				+ "SELECT rownum rn, TMP.*from("
-				+ "SELECT * FROM project WHERE project_permission = 1 and project_start_date < sysdate ORDER BY project_no desc"
+				+ "SELECT * FROM project WHERE project_permission = 1 and project_start_date < sysdate and project_semi_finish > sysdate ORDER BY project_no desc"
 				+ ")TMP"
 				+ ") WHERE rn <= 6";
 		PreparedStatement ps = con.prepareStatement(sql);

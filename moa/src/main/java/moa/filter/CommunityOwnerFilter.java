@@ -15,7 +15,7 @@ import moa.beans.CommunityDao;
 import moa.beans.CommunityDto;
 
 //커뮤니티(홍보게시판) 필터
-@WebFilter(filterName = "g1-communityOwner", urlPatterns = {"/community/edit.do", "/community/edit.jsp", "/community/delete.do"})
+@WebFilter(filterName = "g1-communityOwner", urlPatterns = {"/community/edit.jsp", "/community/delete.do"})
 public class CommunityOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -23,7 +23,8 @@ public class CommunityOwnerFilter implements Filter{
 		
 		try {		
 			// 1. 관리자인지 확인
-			Integer admin  = (Integer) req.getSession().getAttribute("admin");
+			Integer admin  = (Integer)req.getSession().getAttribute("admin");
+			
 			if(admin != null) {
 				chain.doFilter(request, response);
 				return;

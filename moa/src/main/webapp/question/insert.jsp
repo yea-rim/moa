@@ -92,13 +92,13 @@
                     <tr>
                         <th>제목</th>
                         <td>
-                           <input type="text" class="form-input fill" name="questionTitle" placeholder="제목을 입력해주세요">
+                           <input type="text" class="form-input fill" name="questionTitle" placeholder="제목을 입력해주세요" autocomplete="off">
                         </td>
                     </tr>
                     <tr>
                         <th style="vertical-align:middle">문의내용</th>
                         <td>
-                           <textarea rows="5" class="form-input fill" name="questionContent" placeholder="내용을 입력해주세요"></textarea>
+                           <textarea rows="5" class="form-input fill" name="questionContent" placeholder="내용을 입력해주세요" autocomplete="off"></textarea>
                         </td>
                     </tr>
                     <tr>

@@ -23,7 +23,7 @@ public class AdminFilter implements Filter{
 			
 			//관리자 세션이 null이면
 			if(admin == null) {
-				resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
+				resp.sendError(403);
 			} 
 			else { 
 				chain.doFilter(request, response); // 통과 

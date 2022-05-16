@@ -73,6 +73,7 @@
 				<%} else if(isRefused)  {%>
 					<p></p>
 				<%} %>
+				<a href="<%=request.getContextPath() %>/member/seller_edit.jsp" class="link link-btn fill">변경하기</a>
 			</div>
 			</div>
 			

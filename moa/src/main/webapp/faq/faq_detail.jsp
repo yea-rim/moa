@@ -14,8 +14,8 @@ int faqNo = Integer.parseInt(request.getParameter("faqNo"));
 MoaFaqDao moaFaqDao = new MoaFaqDao();
 MoaFaqDto moaFaqDto = moaFaqDao.selectOne(faqNo);
 
-Integer memberNo = (Integer) session.getAttribute("login");
-boolean isAdmin = memberNo == 1;
+Integer admin = (Integer) session.getAttribute("admin");
+boolean isAdmin = admin != null;
 %>
 
 <style>
@@ -70,7 +70,14 @@ boolean isAdmin = memberNo == 1;
 </script>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
-
+<script type="text/javascript">
+$(function(){
+	//삭제 기본 이벤트 차단
+	$(".del").click(function() {
+		return confirm("정말 삭제 하시겠습니까?");
+	});
+});
+</script>
 <div class="container w800 m30">
 	<div class="row m10" class="faq-title">
 		<h2><%=moaFaqDto.getFaqTitle()%></h2>
@@ -85,9 +92,9 @@ boolean isAdmin = memberNo == 1;
 	if (isAdmin) {
 	%>
 	<div class="row right ">
-		<a href="/admin/faq_edit.jsp?faqNo=<%=faqNo%>"
-			class="btn-reverse link">수정</a> <a
-			href="/admin/delete.do?faqNo=<%=faqNo%>" class="btn-reverse link">삭제</a>
+		<a href="<%=request.getContextPath() %>/admin/faq_edit.jsp?faqNo=<%=faqNo%>"
+			class="btn-reverse link">수정</a> 
+			<a href="<%=request.getContextPath() %>/admin/faq_delete.do?faqNo=<%=faqNo%>" class="btn-reverse link del">삭제</a>		
 	</div>
 	<%
 	}

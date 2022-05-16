@@ -35,6 +35,23 @@ textarea[name=faqContent] {
     		  length--;
     	  }
       });
+      
+  	//전송 시 확인
+  	$(".insert-form").submit(function(){
+  			var count = 0;
+  			var target = $(this).find(".checkValue");
+  				target.each(function(){
+  					if($(this).val()==""){
+  						count++;
+  					}
+  				});
+  				if(count>0){
+  					alert("필수 사항을 모두 입력해주세요");
+  					return false;			
+  				}else{
+  					return true;		
+  				}
+  	});
 });
 </script>
 
@@ -45,11 +62,11 @@ textarea[name=faqContent] {
 		</div>
 		<hr style="border:solid 0.5px lightgray">
 		
-		<form action="insert.do" method="post" enctype="multipart/form-data">
+		<form action="faq_insert.do" method="post" class="insert-form">
 					
 			<div class="row fill m10">			
-			<select name="faqCategory" required class="form-input fill">
-				<option  selected disabled>선택</option>
+			<select name="faqCategory" class="form-input fill checkValue">
+				<option value="">선택</option>
 				<option value="회원정보">회원정보</option>
 				<option value="운영정책">운영정책</option>
 				<option value="이용문의">이용문의</option>
@@ -58,11 +75,11 @@ textarea[name=faqContent] {
 			</div>
 
 		<div class="row fill m10">
-				<input type="text" name="faqTitle" required placeholder="FAQ 제목을 입력해 주세요."  class="form-input fill" autocomplete="off" class="faq-title">
+				<input type="text" name="faqTitle" placeholder="FAQ 제목을 입력해 주세요."  class="form-input fill" autocomplete="off" class="faq-title checkValue">
 			</div>
 			
 			<div class="row fill center m10">
-				<textarea name="faqContent" required placeholder="FAQ 본문을 입력해 주세요." class="faq-content" autocomplete="off" ></textarea>
+				<textarea name="faqContent" placeholder="FAQ 본문을 입력해 주세요." class="faq-content checkValue" autocomplete="off" ></textarea>
 			</div>
 			
 			<div class="row center fill">

@@ -18,7 +18,7 @@ public class BannerRegistServlet extends HttpServlet{
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
 			BannerDao bannerDao = new BannerDao();
-			boolean success = bannerDao.bannerPermit(projectNo);
+			boolean success = bannerDao.bannerRegist(projectNo);
 			
 			resp.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter writer = resp.getWriter(); 

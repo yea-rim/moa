@@ -50,7 +50,7 @@
                         
                         	<!-- 프로필 사진 출력 -->
                             <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
+                                    <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="150" class="img img-circle">
                                     	
                                     <%-- <%=memberProfileDto.getAttachNo() %> --%>
                                     	
@@ -111,7 +111,10 @@
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
-		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+<!-- 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"> -->
+		                     <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img card-image-wrapper" width="150px" height="112px">
+		                     
+		                     </a></div>
 		            <%} else { %>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
@@ -137,7 +140,7 @@
 <!-- 여기까지 예정된 프로젝트 -->
 
 
-<!-- 예정된 프로젝트 -->                        
+<!-- 진행 중인 프로젝트 -->                        
 				<hr style="border: solid lightgray 0.5px"/>
                 <div class="row left mt50 mlr10">
                     <h2><a href="<%=request.getContextPath()%>/project/ongoingList.jsp" class="link">진행 중인 프로젝트</a></h2>
@@ -161,8 +164,8 @@
 		        	<!-- 이미지 자리 -->
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
-		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
-		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
+		            <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img card-image-wrapper" width="150px" height="112px">
+					</a></div>
 		            <%} else { %>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
@@ -213,8 +216,9 @@
 		        	<%if(isExistFile) {%>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
-		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
-		            <%} else { %>
+		            <img src="<%=request.getContextPath() %>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" alt="" class="img card-image-wrapper" width="150px" height="112px">
+					</a></div>
+					<%} else { %>
 		            <div class="row center">
 		                <a href="<%=request.getContextPath() %>/project/project_detail.jsp?projectNo=<%=projectNo%>">
 		                     <img src="https://dummyimage.com/150x112" alt="" class="card-image-wrapper" width="150px" height="112px"></a></div>
