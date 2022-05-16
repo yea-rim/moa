@@ -18,9 +18,44 @@ import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
 //프로젝트 필터
-@WebFilter(urlPatterns = {		
-										
-				})
+@WebFilter(filterName = "g3-projectOwner", urlPatterns = {
+			"/seller/attach_edit.jsp",
+			"/seller/banner_insert.jsp",
+			"/seller/fail_project_detail.jsp",
+			"/seller/funding_member_detail.jsp",
+			"/seller/funding_member_list.jsp",
+			"/seller/my_coming_project.jsp",
+			"/seller/my_fail_project.js",
+			"/seller/my_ongoing_project.jsp",
+			"/seller/my_page.jsp",
+			"/seller/my_permit_project.jsp",
+			"/seller/my_rejected_project.jsp",
+			"/seller/my_sponsor.jsp",
+			"/seller/my_success_project.jsp",
+			"/seller/permit_project_detail.jsp",
+			"/seller/pj_progress_edit.jsp",
+			"/seller/pj_progress_insert.jsp",
+			"/seller/project_edit.jsp",
+			"/seller/project_insert.jsp",
+			"/seller/project_reapply.jsp",
+			"/seller/rejected_project_detail.jsp",
+			"/seller/reward_edit.jsp",
+			"/seller/success_project_detail.jsp",
+			"/seller/banner_insert.do",
+			"/seller/progress_delete.do",
+			"/seller/progress_edit.do",
+			"/seller/progress_insert.do",
+			"/seller/attach_delete.do",
+			"/seller/attach_edit.do",
+			"/seller/attach_reinsert.do",
+			"/seller/project_delete.do",
+			"/seller/project_edit.do",
+			"/seller/project_reapply.do",
+			"/seller/project_reinsert.do",
+			"/seller/reward_delete.do",
+			"/seller/reward_edit.do",
+			"/seller/reward_reinsert.do"
+			})
 public class ProjectOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;

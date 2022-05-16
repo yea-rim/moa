@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.MoaQuestionDao;
 
 //1:1문의 삭제 필터
-@WebFilter(urlPatterns = {		
-				"/question/delete.do"						
+@WebFilter(filterName = "g4-questionOwner" , urlPatterns = {		
+				"/question/delete.do"
 				})
 public class QuestionOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

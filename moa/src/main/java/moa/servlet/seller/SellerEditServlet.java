@@ -39,10 +39,10 @@ public class SellerEditServlet extends HttpServlet{
 				if(isSeller) { // 판매자 승인이 났으면  
 					resp.sendRedirect(req.getContextPath()+"/seller/my_page.jsp");
 				} else { // 판매자 승인이 나지 않았으면 
-					resp.sendRedirect(req.getContextPath()+"/seller/seller_wait.jsp");
+					resp.sendRedirect(req.getContextPath()+"/member/seller_wait.jsp");
 				}
 			} else { // 수정 실패시 
-				resp.sendRedirect(req.getContextPath()+"/seller/seller_wait.jsp?error");
+				resp.sendRedirect(req.getContextPath()+"/member/seller_wait.jsp?error");
 			}
 			
 		} catch (Exception e) {

@@ -144,7 +144,7 @@
                             
                             <!-- 프로젝트 관련 버튼 -->
                             <%if(isSellerWait) { // 판매자 대기일 때 (판매자 신청 현황으로 이동) %>
-		                            <a href="<%=request.getContextPath() %>/seller/seller_wait.jsp" class="link link-reverse h60">
+		                            <a href="<%=request.getContextPath() %>/member/seller_wait.jsp" class="link link-reverse h60">
 			                             <h3>판매자 신청</h3>
 	                                	<h3 class="center">(신청현황)</h3>
 			                        </a>
@@ -153,7 +153,7 @@
 	                                	<h3>나의 프로젝트 관리</h3>
 	                            	</a>
                         	<%} else { // 일반회원일 때 판매자 신청 페이지로 이동 %>
-                        			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-reverse h60">
+                        			<a href="<%=request.getContextPath() %>/member/seller_join.jsp" class="link link-reverse h60">
 	                                	<h3>판매자 신청</h3>
 	                                	<h3 class="center">(신청현황)</h3>
 	                            	</a>

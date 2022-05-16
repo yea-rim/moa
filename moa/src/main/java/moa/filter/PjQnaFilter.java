@@ -16,7 +16,7 @@ import moa.beans.PjQnaDto;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
-//@WebFilter (urlPatterns = "")
+@WebFilter (filterName = "g2-pjQna", urlPatterns = {"/project/detail/qna_write.do","/project/detail/qna_edit.do","/project/detail/qna_delete.do"})
 public class PjQnaFilter implements Filter {
 	
 	@Override

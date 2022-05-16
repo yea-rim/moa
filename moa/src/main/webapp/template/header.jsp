@@ -88,7 +88,7 @@
                 				
                 				if(isRequestSeller) { // 판매자 신청을 한 회원이면 %>
                 					<div class="float-right layer-5 center m10">
-			                			<a href="<%=request.getContextPath() %>/seller/seller_wait.jsp" class="link link-purple">
+			                			<a href="<%=request.getContextPath() %>/member/seller_wait.jsp" class="link link-purple">
 			                				<button class="btn-reverse">
 			                					<h3>판매자 신청</h3>
 			                				</button>
@@ -96,7 +96,7 @@
 		                			</div>
                 				<%} else { // 판매자 신청을 하지 않은 회원이면 %>
 	                				<div class="float-right layer-5 center m10">
-			                			<a href="<%=request.getContextPath() %>/seller/seller_join.jsp" class="link link-purple">
+			                			<a href="<%=request.getContextPath() %>/member/seller_join.jsp" class="link link-purple">
 			                				<button class="btn-reverse">
 			                					<h3>판매자 신청</h3>
 			                				</button>
