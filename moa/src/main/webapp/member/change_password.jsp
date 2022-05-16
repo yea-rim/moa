@@ -15,11 +15,9 @@
 	
 	        if(checkList) {
 	            // 체크되었으면
-	            $("input[name=currentPw]").prop("type", "text");
 	            $("input[name=changePw]").prop("type", "text");
 	        } else {
 	            // 체크 해제되면 
-	            $("input[name=currentPw]").prop("type", "password");
 	            $("input[name=changePw]").prop("type", "password");
 	        }
 	    });
@@ -28,7 +26,7 @@
 
 <script type="text/javascript">
         var status = {
-            changePw : false
+            changePw : true
         }
 
         $(function(){
@@ -47,6 +45,7 @@
                 	$(this).next("p").text("");
                 	status.changePw = true;
                 }
+                console.log(status.changePw);
             });
             
             $(".pw-formcheck").submit(function(){

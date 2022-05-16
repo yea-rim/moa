@@ -8,6 +8,9 @@
 
 	SellerDao sellerDao = new SellerDao();
 	SellerDto sellerDto = sellerDao.selectOne(memberNo);
+	
+	boolean isWaiting = sellerDto.getSellerPermission() == 0; 
+	boolean isRefused = sellerDto.getSellerPermission() == 2; 
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -29,7 +32,12 @@
         
         <div class="container w400 mt100">
 		        <div class="row m30 center">
-		        	<h1 class="link-purple">판매자 승인 대기 중입니다.</h1>
+		        	<%if(isWaiting) { %>
+		        		<h1 class="link-purple">판매자 승인 대기 중입니다.</h1>
+		        	<%} else if (isRefused) {%>
+		        		<h1 class="link-purple">판매자 승인 거절되었습니다.</h1>
+		        		<p class="mt10 link-purple">사유 : <%=sellerDto.getSellerRefuseMsg() %></p>
+		        	<%} %>
 		        </div>
 
 				<div class="row mt100">
@@ -60,6 +68,11 @@
 					<p class="link-gray"><%=sellerDto.getSellerType()%></p>
 				</div>
 			<div class="row m20 mt50 center">
+				<%if(isWaiting) { %>
+					<a href="seller_edit.jsp" class="link link-btn fill">변경하기</a>
+				<%} else if(isRefused)  {%>
+					<p></p>
+				<%} %>
 				<a href="<%=request.getContextPath() %>/member/seller_edit.jsp" class="link link-btn fill">변경하기</a>
 			</div>
 			</div>

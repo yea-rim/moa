@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.CommunityDao;
 import moa.beans.CommunityDto;
-import moa.beans.MoaQuestionDao;
 
 //커뮤니티(홍보게시판) 필터
 @WebFilter(filterName = "g1-communityOwner", urlPatterns = {"/community/edit.jsp", "/community/delete.do"})
@@ -25,6 +24,7 @@ public class CommunityOwnerFilter implements Filter{
 		try {		
 			// 1. 관리자인지 확인
 			Integer admin  = (Integer)req.getSession().getAttribute("admin");
+			
 			if(admin != null) {
 				chain.doFilter(request, response);
 				return;

@@ -10,6 +10,8 @@ public class SellerDto {
 	private String sellerAccountNo;
 	private String sellerType;
 	private int sellerPermission;
+	private String sellerRefuseMsg;
+	
 	public SellerDto() {
 		super();
 	}
@@ -66,6 +68,14 @@ public class SellerDto {
 
 	public void setSellerType(String sellerType) {
 		this.sellerType = sellerType;
+	}
+
+	public String getSellerRefuseMsg() {
+		return sellerRefuseMsg;
+	}
+
+	public void setSellerRefuseMsg(String sellerRefuseMsg) {
+		this.sellerRefuseMsg = sellerRefuseMsg;
 	}
 
 	

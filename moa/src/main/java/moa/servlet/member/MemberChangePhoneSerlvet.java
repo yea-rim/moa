@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.MemberDao;
+import moa.beans.MemberDto;
 
 @WebServlet(urlPatterns="/member/change_phone.do")
 public class MemberChangePhoneSerlvet extends HttpServlet{
@@ -23,14 +24,21 @@ public class MemberChangePhoneSerlvet extends HttpServlet{
 			
 			// 처리
 			MemberDao memberDao = new MemberDao();
-			boolean isSuccess = memberDao.changePhone(memberPhone, memberNo);
+			MemberDto realMember = memberDao.selectOne(memberNo);
+			
+			// 현재 핸드폰 번호 
+			String currentPhone = realMember.getMemberPhone();
+			
+			boolean isSame = currentPhone.equals(memberPhone);
+			
+			memberDao.changePhone(memberPhone, memberNo);
+			
+			if(isSame) {
+				memberDao.changePhone(memberPhone, memberNo);
+			} 
 			
 			// 출력
-			if(isSuccess) {
-				resp.sendRedirect("my_page.jsp");
-			} else {
-				resp.sendError(500);
-			}
+			resp.sendRedirect("my_page.jsp");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
