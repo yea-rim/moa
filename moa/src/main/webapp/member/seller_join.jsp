@@ -66,7 +66,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 	});
 </script>
 
-<form action="join.do" method="post" enctype="multipart/form-data">
+<form action="seller_join.do" method="post" enctype="multipart/form-data">
 
 	<div class="container w450 m30">
 
@@ -107,7 +107,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 		<div class="row m20">
 					<label class="m10">(*) 본인인증 자료</label>
 			<div class="filebox">
-				<input class="upload-name" value="첨부파일" placeholder="첨부파일">
+				<input class="upload-name" placeholder="첨부파일" disabled>
 				<label for="file">파일 찾기</label> <input class="m20" type="file"
 					id="file" name="attach" accept="image/*" required>
 			</div>

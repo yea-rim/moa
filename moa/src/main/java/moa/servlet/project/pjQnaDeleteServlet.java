@@ -17,13 +17,13 @@ public class pjQnaDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int qnaNo = Integer.parseInt(req.getParameter("qnaNo"));
-			
+			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			PjQnaDao pjQnaDao = new PjQnaDao();
 			
 			boolean delete = pjQnaDao.delete(qnaNo);
 			
-
-			resp.sendRedirect(req.getContextPath()+"/project/detail/qna.jsp");
+			resp.sendRedirect(req.getContextPath()+"/project/detail/qna.jsp?projectNo="+projectNo);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

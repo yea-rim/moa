@@ -27,7 +27,6 @@
 
 .flex-items1 {
 	flex-basis: 50%;
-	padding: 20px;
 }
 
 .flex-items2 {
@@ -37,7 +36,6 @@
 
 .flex-items3 {
 	flex-basis: 35%;
-	padding: 15px;
 }
 
 .flex-items-a {

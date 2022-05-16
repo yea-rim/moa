@@ -21,6 +21,10 @@ import moa.beans.ProjectDto;
 			"/seller/fail_project_detail.jsp",
 			"/seller/funding_member_detail.jsp",
 			"/seller/funding_member_list.jsp",
+			"/seller/my_coming_project.jsp",
+			"/seller/my_fail_project.js",
+			"/seller/my_ongoing_project.jsp",
+			"/seller/my_rejected_project.jsp",
 			"/seller/my_sponsor.jsp",
 			"/seller/permit_project_detail.jsp",
 			"/seller/pj_progress_edit.jsp",
@@ -60,11 +64,11 @@ public class ProjectOwnerFilter implements Filter{
 			
 			// 2. 작성자 본인인지 확인
 			int memberNo = (int) req.getSession().getAttribute("login");
-			int ProjectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
+			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
 			
 			ProjectDao projectDao = new ProjectDao();
-			ProjectDto projectDto = projectDao.selectOne(ProjectNo);
+			ProjectDto projectDto = projectDao.selectOne(projectNo);
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == projectDto.getProjectSellerNo();
 			
