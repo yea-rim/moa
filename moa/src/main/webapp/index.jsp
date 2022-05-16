@@ -18,6 +18,10 @@ ProjectDao projectDao = new ProjectDao();
 List<ProjectDto> list1 = projectDao.selectTop();
 List<ProjectDto> list2 = projectDao.selectNew();
 List<ProjectDto> list3 = projectDao.selectSoon();
+
+boolean isExist1 = list1.size() > 0;
+boolean isExist2 = list2.size() > 0;
+boolean isExist3 = list3.size() > 0;
 %>
 
 <%
@@ -88,7 +92,8 @@ List<BannerDto> banner = bannerDao.selectBanner();
 			</a>
 		<hr style="border: solid lightgray 0.5px" />
 		</div>
-
+		
+		<%if(isExist1){ %>
 		<div class="row flex-container1">
 			<%for (ProjectDto projectDto : list2) {%>
 			<div class="row flex-items2 m10">
@@ -134,6 +139,11 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		<div class="center mt30">
 			<a href="<%=request.getContextPath() %>/project/ongoingList.jsp" class="more-btn">전체 보러가기</a>
 		</div>
+			<%} else{ %>
+			<div class="m10">
+				<img src="https://dummyimage.com/200x200" width="100%" height="100%">
+			</div>
+			<%} %>
 	</div>
 </div>
 	
@@ -143,6 +153,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		<hr style="border: solid lightgray 0.5px" />
 		<%int count = 0;%>
 		<div class="row flex-container2 mt10">
+		<%if(isExist2){ %>
 			<%for (ProjectDto projectDto : list1) {%>
 			<%count++;%>
 			<div class="container fill" style="border-bottom: 0.5px solid #f1f2f6">
@@ -188,6 +199,12 @@ List<BannerDto> banner = bannerDao.selectBanner();
 				</div>
 			</div>
 			<%}%>
+			<%}else{ %>
+			<div class="m50">
+				<h6>인기프로젝트가 존재하지 않습니다.</h6>
+				<img src="https://dummyimage.com/500x400" width="100%" height="100%" class="m20">
+			</div>
+			<%} %>
 		</div>
 	</div>
 	
@@ -195,6 +212,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 	<%-- 공개예정 프로젝트 목록 --%>
 
 <div class="row flex-items1">
+	<%if(isExist3){ %>
 	<hr style="border: solid #f1f2f6 0.5px" />
 		<div class="row left big-text mt50 mlr10">
 			<div class="flex-container1">
@@ -210,6 +228,7 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		</div>
 
 	<div class="row flex-container3">
+	
 		<%for (ProjectDto projectDto : list3) {%>
 		<div class="row flex-items2 m10">
 	
@@ -244,6 +263,23 @@ List<BannerDto> banner = bannerDao.selectBanner();
 		</div>
 		<%}%>
 	</div>
+	<%}else{ %>
+	<div class="row left big-text mt50 mlr10">
+			<div class="flex-container1">
+				<div>
+					<a href="<%=request.getContextPath()%>/project/comingList.jsp" class="link">
+						공개예정 프로젝트
+					</a>
+				</div>
+			</div>
+		</div>
+
+	<div class="row flex-container5">
+		<div class="m50">
+			<span>공개예정 프로젝트가 존재하지 않습니다.</span>
+		</div>
+	</div>
+	<%} %>
 </div>
 
 

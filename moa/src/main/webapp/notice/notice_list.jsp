@@ -60,7 +60,7 @@ if (isSearch) {
 } else {
 	list = moaNoticeDao.selectList(p, s);
 }
-
+boolean isExist = list.size() > 0;
 %>
 
 	
@@ -108,7 +108,7 @@ if (isSearch) {
 		<h1>공지사항</h1>
 	</div>
 		<hr>
- 	                
+ 	         <%if(isExist){ %>
     	    <%for (MoaNoticeDto moaNoticeDto : list) {%>
     	        <% 
 	    	       	// 해당 게시글 사진 가져오기
@@ -143,7 +143,9 @@ if (isSearch) {
 				</div>
 					<hr style="border:solid 0.5px lightgray">
     	    <%} %>
-    	                
+    	    <% } else{%>
+    	    	<span>공지글이 존재하지 않습니다.</span>      
+    	    <%} %>
 <!--  순자 페이지네이션 -->
 <%
 int count;
