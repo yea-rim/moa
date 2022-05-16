@@ -37,6 +37,8 @@ public class BannerDao {
 			BannerDto bannerDto = new BannerDto();
 			bannerDto.setAttachNo(rs.getInt("attach_no"));
 			bannerDto.setProjectNo(rs.getInt("project_no"));
+			
+			list.add(bannerDto);
 		}
 		
 		con.close();

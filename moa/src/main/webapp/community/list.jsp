@@ -77,18 +77,19 @@ if (isSearch) {
 }
 .flex-items1 {
 	flex-basis:10%;
+	height: 50px;
 }
 .flex-items2 {
 	flex-basis:60%;
+	height: 50px;
 }
 .flex-items3 {
 	flex-basis:15%;
+	height: 50px;
 }
 .flex-items4 {
 	flex-basis:15%;
-}
-.bottom{
-	align-self: flex-end;
+	height: 50px;
 }
 .community-name {
     text-overflow: ellipsis;
@@ -116,7 +117,7 @@ if (isSearch) {
 <div class="container w800 m70">
 				
 				<hr style="border:solid 1px #B899CD">
-			<div class="row flex-container2 m10">
+			<div class="row flex-container2">
 				<div class="flex-items1">번호</div>
 				<div class="flex-items2 center">제목 / 프로젝트이름</div>
 				<div class="flex-items3">날짜</div>
@@ -124,11 +125,10 @@ if (isSearch) {
 			</div>
 			
 			<div class="row flex-container1">
-		<%for (CommunityDto communityDto : list) {%>
+			<%for (CommunityDto communityDto : list) {%>
 			
-				<div class="row flex-container2">
-				
-					<div class="flex-items1 bottom">
+				<div class="flex-container2 content" style="border-bottom: 0.5px solid lightgray">
+					<div class="flex-items1">
 						<span><%=communityDto.getCommunityNo() %> </span>
 					</div>
 					
@@ -136,7 +136,7 @@ if (isSearch) {
 						ProjectDao projectDao = new ProjectDao();
 						ProjectDto projectDto = projectDao.selectOne(communityDto.getCommunityProjectNo());
 					%>
-					<div class="flex-items2 bottom community-name">
+					<div class="flex-items2 community-name">
 						<span>
 							<a href="detail.jsp?communityNo=<%=communityDto.getCommunityNo() %>" class="link">
 								<h3><%=communityDto.getCommunityTitle() %>(<%=communityDto.getCommunityReplycount() %>)</h3>
@@ -147,7 +147,7 @@ if (isSearch) {
 						</span>
 					</div>
 
-					<div class="flex-items3 bottom">
+					<div class="flex-items3">
 						<span><%=communityDto.getCommunityTime() %></span>
 					</div>
 								
@@ -155,15 +155,12 @@ if (isSearch) {
 						MemberDao memberDao = new MemberDao();
 						MemberDto memberDto = memberDao.selectOne(communityDto.getCommunityMemberNo());
 					%>
-					<div class="flex-items4 row right bottom">
+					<div class="flex-items4 right">
 						<span><%=memberDto.getMemberNick() %></span>
 					</div>
 					
-					
 				</div>
-				
-			<hr style="border:solid 0.5px lightgray">
-		<%}%>
+			<%}%>
 			</div>
 
 <!--  순자 페이지네이션 -->
@@ -260,10 +257,24 @@ if(endBlock>lastPage)
 		<form action="list.jsp" method="get">
 			<div class="flex-container search">
 				<div>
+				<%if(isSearch){ %>
+					<%if(type.equals("community_content")){ %>
+						<select name="type" required class="form-input">
+							<option value="community_title">제목</option>
+							<option value="community_content" selected>내용</option>
+						</select> 
+					<%} else{ %>
+						<select name="type" required class="form-input">
+							<option value="community_title" selected>제목</option>
+							<option value="community_content">내용</option>
+						</select> 
+					<%} %>
+				<%} else{ %>
 					<select name="type" required class="form-input">
-						<option value="community_title">제목</option>
-						<option value="community_content" selected>내용</option>
+						<option value="community_title" selected>제목</option>
+						<option value="community_content">내용</option>
 					</select> 
+				<%} %>
 				</div>
 				<div>
 			   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
@@ -273,9 +284,8 @@ if(endBlock>lastPage)
 				 </div>
 			</div>
 		</form>
-	</div>
 	
-<hr style="border:solid 1px #B899CD">
-</div>
+	<hr style="border:solid 1px #B899CD">
+	</div>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

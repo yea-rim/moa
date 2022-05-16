@@ -114,7 +114,7 @@ if (isSearch) {
 					<h2>공지사항</h2>
 				</div>
 				<div class="right-wrapper right">
-					<a href="insert.jsp" class="link btn-reverse">공지 작성하기</a>
+					<a href="notice_insert.jsp" class="link btn-reverse">공지 작성하기</a>
 				</div>
 			</div>
 		</div>
@@ -250,10 +250,24 @@ if(endBlock>lastPage)
 		<form action="notice_list.jsp" method="get">
 			<div class="flex-container search">
 				<div>
+			<%if(isSearch){ %>
+				<%if(type.equals("notice_content")){ %>
 					<select name="type" required class="form-input">
 						<option value="notice_title">제목</option>
 						<option value="notice_content" selected>내용</option>
 					</select> 
+				<%}else { %>
+					<select name="type" required class="form-input">
+						<option value="notice_title" selected>제목</option>
+						<option value="notice_content">내용</option>
+					</select> 
+				<%} %>
+			<%} else{ %>
+				<select name="type" required class="form-input">
+						<option value="notice_title" selected>제목</option>
+						<option value="notice_content">내용</option>
+					</select> 
+			<%} %>
 				</div>
 				<div>
 			   	 	<input type="text" name="keyword" placeholder="검색어 입력" autocomplete="off" required class="form-input" style="height:100%">
