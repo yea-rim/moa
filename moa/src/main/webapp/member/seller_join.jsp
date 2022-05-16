@@ -16,6 +16,14 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 <script type="text/javascript">
 	$(function() {
 		
+		var status = {
+				sellerNick : false,
+				sellerAccountBank : false,
+				sellerAccountNo : false,
+				sellerTypeCheck : false,
+				sellerAttach : false
+		}
+		
 		// 파일명 input에 출력하는 JS
 		$("#file").on('change', function() {
 			var fileFullName = $(this).val();
@@ -33,12 +41,10 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 			if (!judge) {
 				span.text("형식에 맞는 판매자 닉네임을 사용하세요.");
 				status.sellerNick = false;
-				$("button[name=submit]").prop("disabled");
 				return;
 			} else {
 				span.text("사용 가능한 판매자 닉네임입니다.");
 				status.sellerNick = true;
-				$("button[name=submit]").attr("disabled", false);
 			}
 
 			var that = this;
@@ -52,21 +58,69 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 				success : function(resp) {
 					if (resp === "YY") {
 						span.text("사용 가능한 판매자 닉네임입니다.");
-						$("button[name=submit]").attr("disabled", false);
 						status.sellerNick = true;
 					} else if (resp === "NN") {
 						span.text("이미 사용 중인 판매자 닉네임입니다.");
 						status.sellerNick = false;
-						$("button[name=submit]").attr("disabled", true);
 					}
 				}
 			});
 		});
 		
+		$("input[name=sellerAccountBank]").blur(function(){
+			if($(this).val() == ""){
+				$(this).next("span").text("은행 정보를 입력해주세요.");
+				status.sellerAccountBank = false;
+			}else{
+				status.sellerAccountBank = true;
+			}
+		})
+		
+		$("input[name=sellerAccountNo").blur(function(){
+			
+			if($(this).val() == ""){
+				$(this).next("span").text("계좌 정보를 입력해주세요.");
+				status.sellerAccountNo = false;
+			}else{
+				status.sellerAccountNo = true;
+			}
+		});
+		
+		$("select[name=sellerType]").blur(function(){
+			
+			if($(this).val() == ""){
+				$(this).next("span").text("타입을 선택해주세요.");
+				status.sellerTypeCheck = false;
+			}else{
+				status.sellerTypeCheck = true;
+			}
+		});
+		
+		$("input[name=attach]").on("input", function(){
+			
+			if($(this).val() == ""){
+				$(this).next("span").text("파일을 선택해주세요.");
+				status.sellerAttach = false;
+			}else{
+				status.sellerAttach = true;
+			}
+		});
+		
+		$(".seller-join-formcheck").submit(function(){
+			if(status.sellerNick && status.sellerAccountBank && status.sellerAccountNo && status.sellerTypeCheck && status.sellerAttach){
+				return true;
+			}else{
+				alert("필수 정보를 모두 입력해주세요.");
+				return false;
+			}
+		});
+		
+		
+		
 	});
 </script>
 
-<form action="join.do" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/member/seller_join.do" method="post" enctype="multipart/form-data" class="seller-join-formcheck">
 
 	<div class="container w450 m30">
 
@@ -78,43 +132,47 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 			value="<%=memberDto.getMemberNo()%>">
 
 		<div class="row m30">
-			<label class="m10">(*) 판매자 닉네임</label> <input type="text" name="sellerNick" required
+			<label class="m10">(*) 판매자 닉네임</label> <input type="text" name="sellerNick"
 				class="form-input fill input-round" autocomplete="off">
 				<span></span>
 		</div>
 
 		<div class="row m30">
 			<label class="m10">(*) 입금 은행</label> <input type="text" name="sellerAccountBank"
-				required class="form-input fill input-round" autocomplete="off">
+				 class="form-input fill input-round" autocomplete="off">
+				 <span></span>
 		</div>
 
 		<div class="row m30">
 			<label class="m10">(*) 계좌 번호</label> <input type="text" name="sellerAccountNo"
-				required class="form-input fill input-round" autocomplete="off">
+				 class="form-input fill input-round" autocomplete="off">
+				 <span></span>
 		</div>
 
 		<div class="row m30">
 			<label class="m10">(*) 판매자 타입</label> <select name="sellerType"
-				class="form-input input-round" required>
-				<option selected disabled>선택</option>
+				class="form-input input-round">
+				<option selected value="">선택</option>
 				<option value="개인 사업자">개인 사업자</option>
 				<option value="법인 사업자">법인 사업자</option>
 				<option value="개인 판매자">개인 판매자</option>
 			</select>
+			<span></span>
 		</div>
 
 		<!-- 인증 사진 등록 (attach table)-->
 		<div class="row m20">
 					<label class="m10">(*) 본인인증 자료</label>
 			<div class="filebox">
-				<input class="upload-name" value="첨부파일" placeholder="첨부파일">
-				<label for="file">파일 찾기</label> <input class="m20" type="file"
-					id="file" name="attach" accept="image/*" required>
+				<input class="upload-name" placeholder="첨부파일" disabled>
+				<label for="file">파일 찾기</label> 
+				<input class="m20" type="file" id="file" name="attach" accept="image/*">
+				<span></span>
 			</div>
 		</div>
 
 		<div class="row m40">
-			<button type="submit" name="submit" class="btn btn-primary fill" disabled>판매자 신청</button>
+			<button type="submit" name="submit" class="btn btn-primary fill">판매자 신청</button>
 		</div>
 	</div>
 </form>

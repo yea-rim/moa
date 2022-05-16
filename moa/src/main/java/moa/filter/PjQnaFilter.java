@@ -30,10 +30,9 @@ public class PjQnaFilter implements Filter {
 			Integer admin  = (Integer) req.getSession().getAttribute("admin");
 			Integer seller = (Integer) req.getSession().getAttribute("seller");
 			int projectNo = Integer.parseInt(req.getParameter("projectNo"));
-			Integer qnaNo = Integer.parseInt(req.getParameter("qnaNo"));
-			Integer superNo = Integer.parseInt(req.getParameter("superNo"));
 			//qnaNo가 넘어왔다면 edit나 delete란 뜻으로 작성자나 관리자인지 검사
-			if(qnaNo != null) {
+			if(req.getParameter("qnaNo") != null) {
+				Integer qnaNo = Integer.parseInt(req.getParameter("qnaNo"));
 				PjQnaDao pjQnaDao = new PjQnaDao();
 				PjQnaDto pjQnaDto = pjQnaDao.selectOne(qnaNo);
 				if((pjQnaDto.getQnaNo()==memberNo) || admin != null) {
@@ -44,7 +43,8 @@ public class PjQnaFilter implements Filter {
 			}
 			
 			//qna_write.do 필터링 답글일경구
-			if(superNo!=null) {
+			if(req.getParameter("superNo")!=null) {
+				Integer superNo = Integer.parseInt(req.getParameter("superNo"));
 				ProjectDao projectDao = new ProjectDao();
 				ProjectDto projectDto = projectDao.selectOne(projectNo);
 				if((seller != null && memberNo == projectDto.getProjectSellerNo()) || admin != null) {
