@@ -22,7 +22,7 @@ public class SellerRewardDeleteServlet extends HttpServlet{
 			boolean success = rewardDao.delete(rewardNo);
 			
 			if(success) {
-				resp.sendRedirect("project_reapply.jsp?projectNo="+projectNo);
+				resp.sendRedirect("rejected_project_detail.jsp?projectNo="+projectNo);
 			}
 			else {
 				resp.sendError(404);

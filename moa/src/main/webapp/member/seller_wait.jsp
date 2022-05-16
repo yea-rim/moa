@@ -71,9 +71,8 @@
 				<%if(isWaiting) { %>
 					<a href="seller_edit.jsp" class="link link-btn fill">변경하기</a>
 				<%} else if(isRefused)  {%>
-					<p></p>
+					<a href="seller_edit.jsp" class="link link-btn fill">판매자 재신청</a>
 				<%} %>
-				<a href="<%=request.getContextPath() %>/member/seller_edit.jsp" class="link link-btn fill">변경하기</a>
 			</div>
 			</div>
 			
