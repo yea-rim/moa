@@ -125,7 +125,7 @@ $(function(){
             <%=projectDto.getProjectName() %>
         	</div>
         	<div class="m50 project-seller center">
-	        	<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link">
+	        	<a href="<%=request.getContextPath()%>/project/seller_page.jsp?sellerNo=<%=projectDto.getProjectSellerNo()%>" class="link">
         		<%if(isExistProfile) { // 프로필 사진 존재한다면 %>
                          <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="30px"  height="30px" class="img img-circle" onerror="javascript:this.src='https://dummyimage.com/200x200'">
                 <%} else { // 존재하지 않는다면 %>

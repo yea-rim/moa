@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.ProjectDao;
 
-@WebFilter(filterName = "f20-project_detail", urlPatterns = {"/project/project_detail.jsp", 
+@WebFilter(filterName = "g7-project_detail", urlPatterns = {"/project/project_detail.jsp", 
 		"/project/detail/body.jsp",
 		"/project/detail/qna.jsp",
 		"/project/detail/notice.jsp",

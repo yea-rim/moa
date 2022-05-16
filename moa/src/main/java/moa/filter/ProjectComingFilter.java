@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.ProjectDao;
 
-@WebFilter(filterName = "f21-project_coming", urlPatterns = "/project/project_coming.jsp")
+@WebFilter(filterName = "g6-project_coming", urlPatterns = "/project/project_coming.jsp")
 public class ProjectComingFilter implements Filter {
 
 	@Override

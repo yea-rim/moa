@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = "/ajax/*")
+@WebFilter(filterName = "g0-cors", urlPatterns = "/ajax/*")
 public class CorsFilter implements Filter {
 	
 	@Override

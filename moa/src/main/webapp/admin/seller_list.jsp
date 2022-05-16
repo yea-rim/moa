@@ -58,7 +58,7 @@
 					<td><%=sellerDto.getSellerAccountNo()%></td>
 					<td><%=sellerDto.getSellerType()%></td>
 					<td>
-						<a href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">ℹ️</a>
+						<a href="<%=request.getContextPath()%>/project/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link">ℹ️</a>
 					</td>
 					<td>
 					<%if(sellerDto.getSellerRegistDate()==null){ %>

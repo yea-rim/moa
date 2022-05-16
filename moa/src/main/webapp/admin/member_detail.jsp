@@ -158,7 +158,7 @@ SellerAttachDto sellerAttachDto = sellerAttachDao.selectOne(memberNo);
 		<div class="float-container center">
 			<div class="float-left center layer-2 h40 " style="font-size: 14px;">
 				<a
-					href="<%=request.getContextPath()%>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>">
+					href="<%=request.getContextPath()%>/project/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>">
 					<button class="btn w90p h100p">판매자 페이지</button>
 				</a>
 			</div>

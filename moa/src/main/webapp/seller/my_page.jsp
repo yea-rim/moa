@@ -51,7 +51,7 @@
         	
         	<div class="float-left">
 	        	<div class="row m30 mlr20">
-	                <h2><a href="<%=request.getContextPath() %>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link link-purple">[<%=sellerDto.getSellerNick() %>]</a></h2>
+	                <h2><a href="<%=request.getContextPath() %>/project/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link link-purple">[<%=sellerDto.getSellerNick() %>]</a></h2>
 	            </div>
 	
 	            <div class="row mt30 m10 mlr20 link-gray">
