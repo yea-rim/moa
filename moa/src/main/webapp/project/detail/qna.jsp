@@ -394,7 +394,7 @@
                                         <%if(isAdmin || (isLogin && pjQnaDto.getQnaMemberNo() == memberNo)){ %>
                                         <div class="row delete-confirm right">
 											<span class="font14">삭제하시겠습니까?</span>
-											<a href="qna_delete.do?qnaNo=<%=pjQnaDto.getQnaNo() %>" class="confirm-btn link btn link-btn">삭제</a>       
+											<a href="qna_delete.do?qnaNo=<%=pjQnaDto.getQnaNo() %>&projectNo=<%=projectNo %>" class="confirm-btn link btn link-btn">삭제</a>       
 											<button class="cancel-delete btn btn-reverse">취소</button>                          
                                         </div>
                                         <%} %>
