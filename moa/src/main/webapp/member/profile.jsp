@@ -1,3 +1,5 @@
+<%@page import="moa.beans.AttachDao"%>
+<%@page import="moa.beans.AttachDto"%>
 <%@page import="moa.beans.MemberProfileDto"%>
 <%@page import="moa.beans.MemberProfileDao"%>
 <%@page import="moa.beans.MemberDto"%>
@@ -18,15 +20,20 @@
 	MemberProfileDto memberProfileDto = memberProfileDao.selectOne(memberNo);
 	
 	// 회원 프로필 존재 여부 확인 
-	boolean isExistProfile = memberProfileDto != null; 
+	boolean isExistProfile = memberProfileDto != null;
+	
 %>
     
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+<style type="text/css">
+	span {
+		color: red; 
+	}
+</style>
+
     <script type="text/javascript">
         $(function(){
-            // 주소 api JS
-            $(".address-find-btn").click(findAddress); // 콜백 함수 (예약 실행)
             
 	        // 파일명 input에 출력하는 JS
 	        $("#file").on('change',function(){
@@ -35,7 +42,54 @@
 	            $(".upload-name").val(fileName);
 	        });
         });
+        
+    </script>
+    
+    <script type="text/javascript">
+    $(function(){
+		var status = {
+	        	memberNick : false
+	        }
+	        
+	        $("input[name=memberNick]").blur(function() {
+				var regex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+				var memberNick = $(this).val();
+				var span = $(this).next("span");
 
+				var judge = regex.test(memberNick);
+				if (!judge) {
+					span.text("형식에 맞는 닉네임을 사용하세요.");
+					status.memberNick = false;
+					$("input[type=submit]").prop("disabled");
+					return;
+				} else {
+					span.text("");
+					status.memberNick = true;
+					$("input[type=submit]").attr("disabled", false);
+				}
+
+				var that = this;
+
+				$.ajax({
+					url : "http://localhost:8080/moa/ajax/nick.do",
+					type : "post",
+					data : {
+						memberNick : memberNick
+					},
+					success : function(resp) {
+						if (resp === "Y") {
+							span.text("사용 가능한 닉네임입니다.");
+							$("input[type=submit]").attr("disabled", false);
+							status.memberNick = true;
+						} else if (resp === "N") {
+							span.text("이미 사용 중인 닉네임입니다.");
+							status.memberNick = false;
+							$("input[type=submit]").attr("disabled", true);
+						}
+					}
+				});
+	        });
+		});
     </script>
 
                 <div class="container fill m40">
@@ -61,10 +115,8 @@
                                 <!-- 프로필 사진 출력 -->
                                 <div class="row">
                                     <%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-                                    	<img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="200px" height="200px"class="img img-circle">
-                                    	
-                                    	<%-- <%=memberProfileDto.getAttachNo() %> --%>
-                                    	
+                                    	<%-- <img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="200px" height="200px"class="img img-circle"> --%>
+                                    	<a href="delete_profile.do?memberNo=<%=memberNo%>"><img src = "<%=request.getContextPath() %>/attach/download.do?attachNo=<%=memberProfileDto.getAttachNo()%>" width="200px" height="200px"class="img img-circle"></a>
                                     <%} else { // 존재하지 않는다면 %>
                                     	<img src="<%=request.getContextPath() %>/image/profile.png" alt="기본 프로필" width="200px" height="200px" class="img img-circle">
                                     <%} %>
@@ -73,14 +125,21 @@
                                 <!-- 프로필 사진 등록 (attach table)-->
                                 <div class="row m20 right">
                                     <div class="filebox center">
-                                        <input class="upload-name" value="첨부파일" placeholder="첨부파일">
-                                        <label for="file">파일찾기</label> 
+                                        <%if(isExistProfile) { // 프로필 사진 존재한다면 
+                                        	AttachDao attachDao = new AttachDao();
+                                        	AttachDto attachDto = attachDao.selectOne(memberProfileDto.getAttachNo());
+                                        %>
+	                                    	 <input class="upload-name" value="<%=attachDto.getAttachUploadname()%>" placeholder="<%=attachDto.getAttachUploadname()%>" style="height: 35px;">
+	                                    <%} else { // 존재하지 않는다면 %>
+	                                    	 <input class="upload-name" value="첨부파일" placeholder="첨부파일" style="height: 35px;">
+	                                    <%} %>
+                                        <label for="file" style="height: 35px; font-size:13px;">파일찾기</label> 
                                         <input type="file" id="file" name="attach">
                                     </div>
                                 </div>
                             <div>
                             	<%if(isExistProfile) { // 프로필 사진 존재한다면 %>
-									<a href="delete_profile.do?memberNo=<%=memberNo%>"><button type="button" class="btn">프로필 사진 삭제</button></a>
+									<p class="f12 link-purple">프로필 사진을 클릭하면 기본 프로필로 변경됩니다.</p>
 								<%} %>
                             </div>
                             </div>
@@ -96,6 +155,7 @@
                                     </div>
                                     <div class="row m5">
                                         <input type="text" name="memberNick" value="<%=memberDto.getMemberNick() %>" autocomplete="off" class="form-input fill">
+                                        <span class="mt5"></span>
                                     </div>
         
                                     <!-- 변경 버튼 -->

@@ -51,7 +51,7 @@
         	
         	<div class="float-left">
 	        	<div class="row m30 mlr20">
-	                <h2>[<%=sellerDto.getSellerNick() %>]</h2>
+	                <h2><a href="<%=request.getContextPath() %>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link link-purple">[<%=sellerDto.getSellerNick() %>]</a></h2>
 	            </div>
 	
 	            <div class="row mt30 m10 mlr20 link-gray">
@@ -73,12 +73,6 @@
 				</a>
         	</div>
         	
-        	<div class="float-right mt70 mlr20">
-        		<a href="<%=request.getContextPath() %>/seller/seller_page.jsp?sellerNo=<%=sellerDto.getSellerNo()%>" class="link link-reverse h40">
-					<h3>판매자 페이지</h3>
-				</a>
-        	</div>
-        
         </div> 
 
         <div class="float-container">

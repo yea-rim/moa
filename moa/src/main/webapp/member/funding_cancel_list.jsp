@@ -88,7 +88,7 @@
 
     <%for(FundingDto fundingDto : list){ %>
     <%
-    	System.out.println(fundingDto.getFundingNo());
+    	/* System.out.println(fundingDto.getFundingNo()); */
     	
     	ProjectDto projectDto = projectDao.selectSuccessMyFunding(fundingDto.getFundingNo(), memberNo); 
 		
@@ -108,7 +108,7 @@
 								<%} %>
             </div>
 
-            <div class="float-left layer-2 m20 mlr50">
+            <div class="float-left m20 mlr50" style="width: 78%;">
                 <div class="row">
                     <h2 class="mt10">
                         <a href="funding_cancel_info.jsp?projectNo=<%=projectDto.getProjectNo() %>&fundingNo=<%=fundingDto.getFundingNo() %>" class="link"><%=projectDto.getProjectName() %></a>

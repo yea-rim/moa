@@ -20,26 +20,26 @@ public class MemberChangePwServlet extends HttpServlet{
 			// 준비
 			Integer memberNo = (Integer) req.getSession().getAttribute("login");
 			
-			String currentPw = req.getParameter("currentPw");
 			String changePw = req.getParameter("changePw");
 			
 			// 처리
-			// 1. 기존 비밀번호와 새로운 비밀번호가 일치하는지 검사 
-			boolean isSamePw = currentPw.equals(changePw);
-			// 2. 입력창이 비어있는지 검사
-			boolean isEmpty = currentPw == null || changePw ==  null;
-			
-			if(isSamePw || isEmpty) {
-				resp.sendRedirect("change_password.jsp?error=1");
-				return;
-			}
-		
-			
-			// 변경 진행
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.selectOne(memberNo);
-			memberDao.changePassword(memberDto.getMemberEmail(), changePw);
 			
+			String currentPw = memberDto.getMemberPw();
+			
+			// 1 현재 비밀번호 일치 검사 
+			boolean isSame = currentPw.equals(changePw);
+			
+			if (isSame) {
+				resp.sendRedirect(req.getContextPath()+"/member/change_password.jsp?error");
+				return;
+			}
+			
+			// 변경 진행
+			memberDao.changePassword(memberDto.getMemberEmail(), changePw);
+				
+		
 			// 출력
 			resp.sendRedirect(req.getContextPath()+"/member/my_page.jsp");
 			

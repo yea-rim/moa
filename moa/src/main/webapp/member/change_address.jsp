@@ -2,7 +2,8 @@
 <%@page import="moa.beans.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<jsp:include page = "/template/header.jsp"></jsp:include>
+
 <%
 	// 로그인 세션으로 회원 정보 가져오기 
 	Integer memberNo = (Integer) session.getAttribute("login");
@@ -11,10 +12,9 @@
 	MemberDao memberDao = new MemberDao();
 	MemberDto memberDto = memberDao.selectOne(memberNo);
 %>
-    
-<jsp:include page="/template/header.jsp"></jsp:include>
 
-	<!-- kakao 우편 API -->
+    
+    <!-- kakao 우편 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         function findAddress() {
@@ -69,7 +69,7 @@
             }).open();
         }
     </script>
-
+    
     <script type="text/javascript">
         $(function(){
             // 주소 api JS
@@ -86,24 +86,6 @@
     </script>
 
 
-<script type="text/javascript">
-	$(function(){
-		$(".check-pw").click(function(){
-	        var checkList = $(".check-pw").prop("checked");
-	
-	        if(checkList) {
-	            // 체크되었으면
-	            $("input[name=currentPw]").prop("type", "text");
-	            $("input[name=changePw]").prop("type", "text");
-	        } else {
-	            // 체크 해제되면 
-	            $("input[name=currentPw]").prop("type", "password");
-	            $("input[name=changePw]").prop("type", "password");
-	        }
-	    });
-	});
-</script>
-
 	<div class="container fill m40">
 					<div class="flex-container m20">
                             <!-- 마이페이지 메인으로 이동 -->
@@ -119,79 +101,50 @@
 					<div class="row m30"><hr></div>
 	</div>
 
-	<div class="container w400 m50">
-	
-	    <%if(request.getParameter("error=1") != null) { %>
-        	<h3>기존 비밀번호와 같은 비밀번호로 수정할 수 없습니다.</h3>
-        <%} %>
-        
-        <%if(request.getParameter("error=2") != null) { %>
-        	<h3>비밀번호를 입력해주세요.</h3>
-        <%} %>
-        
-	
-        <form action="edit_information.do" method="post">
-            <div class="row m20">
-                <label> 
-                    기존 비밀번호 
-                    <div class="row m10">
-                        <input type="password" name="currentPw" class="form-input fill">
-                    </div>
-                </label>
-            </div>
-            <div class="row m20">
-                <label>
-                    변경할 비밀번호
-                    <div class="row m10">
-                        <input type="password" name="changePw" class="form-input fill">
-                    </div>
-                </label>
-                
-            </div>
-            
-            <div class="row m10">
-				<label>
-					<input type="checkbox" class="form-input check-pw">
-					<span class="link-gray">비밀번호 보기</span>
-				</label>
-				
-				<div class="row m20">
-                <label>
-                    전화번호  
-                    <div class="row m10">
-                        <input type="text" name="memberPhone" value="<%=memberDto.getMemberPhone() %>" autocomplete="off" class="form-input fill">
-                    </div>
-                </label>
-                
-                <div class="row m20">
-                <label>
-                    주소
-                    <div class="row m10">
-                        <div>
-                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" readonly> 
-                             <button type="button" class="address-find-btn btn">검색</button>
-                        </div>
-                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" readonly> </div>
-                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill"> </div>
-                    </div>
-                </label>
 
-			</div>
+			<div class="container">
 			
-            <div class="row m20">
-                <input type="submit" value="확인" class="btn fill">
-            </div>
-        </form>
-       
-    </div>
-
-    
-    <div class="container center">
-        	<div class="row">
-            	<a href="exit.jsp" class="link link-btn fill">
-            		회원 탈퇴
-            	</a>
-        	</div>
-    </div>
-
-<jsp:include page="/template/footer.jsp"></jsp:include>
+                    <div class="float-container">
+                        <div class="float-left layer-2">
+                            <div class="row">
+                                <h2><a href="<%=request.getContextPath() %>/member/change_password.jsp" class="link">비밀번호 변경</a></h2>
+                            </div>
+                            <div class="row m40">
+                                <h2><a href="<%=request.getContextPath() %>/member/change_phone.jsp" class="link">전화번호 변경</a></h2>
+                            </div>
+                            <div class="row m40">
+                                <h2><a href="<%=request.getContextPath() %>/member/change_address.jsp" class="link link-purple" class="link"><li>주소 변경</li></a></h2>
+                            </div>
+                            <div class="row m40">
+                                <h2><a href="<%=request.getContextPath() %>/member/exit.jsp" class="link">회원 탈퇴</a></h2>
+                            </div>
+                        </div>
+                        
+	                        <div class="float-left layer-2">
+	                            
+		                     <form action="change_address.do" method="post">
+		                     	<label>
+				                    주소
+				                    <div class="row m10">
+				                        <div>
+				                             <input type="text" name="memberPost" id="memberPost" placeholder="우편번호" class="form-input" value="<%=memberDto.getMemberPost() %>" readonly> 
+				                             <button type="button" class="address-find-btn btn">검색</button>
+				                        </div>
+				                        <div><input type="text" name="memberBasicAddress" placeholder="기본주소" class="form-input fill m5" value="<%=memberDto.getMemberBasicAddress() %>" readonly> </div>
+				                        <div><input type="text" name="memberDetailAddress" placeholder="상세주소" class="form-input fill" value="<%=memberDto.getMemberDetailAddress()%>"></div>
+				                    </div>
+				                    <div class="row m10">
+				                    	<input type="submit" value="변경하기" class="link link-btn fill">
+				                    </div>
+				                </label>
+		                     </form>
+		                     
+                    	
+                    	</div>
+                    	
+                    	
+                </div>
+                
+              </div>
+                
+<jsp:include page = "/template/footer.jsp"></jsp:include>

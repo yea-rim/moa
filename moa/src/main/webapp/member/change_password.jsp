@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <jsp:include page = "/template/header.jsp"></jsp:include>
 
+    <style type="text/css">
+        .msg {
+            color: red;
+        }
+    </style>
+
 <script type="text/javascript">
 	$(function(){
 		$(".check-pw").click(function(){
@@ -22,7 +28,6 @@
 
 <script type="text/javascript">
         var status = {
-            currentPw : false,
             changePw : false
         }
 
@@ -35,11 +40,17 @@
                 var judge = regex.test(changePw);
 
                 if(!judge) {
-                    $(this).next("span").text("비밀번호 형식을 맞춰주세요.");
+                    $(this).next("p").text("비밀번호 형식을 맞춰주세요.");
                     status.changePw = false;
+                    $("input[type=submit]").attr("disabled", true);
                     return;
+                } else {
+                	$(this).next("p").text("");
+                	status.changePw = true;
+                	$("input[type=submit]").attr("disabled", false);
                 }
             });
+            
         });
     </script>
 
@@ -60,39 +71,34 @@
 
 
 			<div class="container">
-                    <div class="flex-container">
-                        <div class="p10 mlr40" style="flex-grow: 1;">
+			
+                    <div class="float-container">
+                        <div class="float-left layer-2">
                             <div class="row">
-                                <h2><a href="" class="link link-purple"><li>비밀번호 변경</li></a></h2>
+                                <h2><a href="<%=request.getContextPath() %>/member/change_password.jsp" class="link link-purple"><li>비밀번호 변경</li></a></h2>
                             </div>
                             <div class="row m40">
-                                <h2><a href="" class="link">전화번호 변경</a></h2>
+                                <h2><a href="<%=request.getContextPath() %>/member/change_phone.jsp" class="link">전화번호 변경</a></h2>
                             </div>
                             <div class="row m40">
-                                <h2><a href="" class="link">주소 변경</a></h2>
+                                <h2><a href="<%=request.getContextPath() %>/member/change_address.jsp" class="link">주소 변경</a></h2>
+                            </div>
+                            <div class="row m40">
+                                <h2><a href="<%=request.getContextPath() %>/member/exit.jsp" class="link">회원 탈퇴</a></h2>
                             </div>
                         </div>
                         
-	                        <div class="p10 mlr50" style="flex-grow: 2;">
+	                        <div class="float-left layer-2">
 	                            
 		                     <form action="change_password.do" method="post">
-	                            <div class="row m20">
-					                <label> 
-					                    기존 비밀번호 
-					                    <div class="row m10">
-					                        <input type="password" name="currentPw" class="form-input fill" autocomplete="off">
-					                    </div>
-					                </label>
-					            </div>
-					            <div class="row m20">
+					            <div class="row">
 					                <label>
 					                    변경할 비밀번호
-					                    <div class="row m10">
-					                        <input type="password" name="changePw" class="form-input fill" autocomplete="off">
-						                    <span></span>
-					                    </div>
 					                </label>
-					                
+					                    <div class="row m10">
+					                        <input type="password" name="changePw" class="form-input fill" autocomplete="off" placeholder="비밀번호(영문, 숫자, 특수 문자 포함)">
+						                    <p class="right msg"></p>
+					                    </div>
 					            </div>
 					            
 					            <div class="row m10">
@@ -102,12 +108,25 @@
 									</label>
 	                        </div>
 	                        
-	                        <div class="row m10">
+	                        <div class="row mt30">
 	                        	<input type="submit" value="변경하기" class="link link-btn fill">
 	                        </div>
                         
 		                    </form>
+		                    
+		                    <%if(request.getParameter("error") != null) { %>
+                    			<div class="row mt20 fill">
+		                    		<h3 class="center">기존 비밀번호와 다른 비밀번호를 입력해주세요.</h3>
+		                    	</div>
+                    	<%} %>
+		                    
                     	</div>
+                    	
+                    	
                 </div>
+             </div>
+              
+                
+                
                 
 <jsp:include page = "/template/footer.jsp"></jsp:include>
