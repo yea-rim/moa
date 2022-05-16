@@ -36,11 +36,13 @@ public class CommunityOwnerFilter implements Filter{
 			
 			CommunityDao communityDao = new CommunityDao();
 			CommunityDto communityDto = communityDao.selectOne(CommunityNo);
+			System.out.println(communityDto.getCommunityMemberNo());
 			//Login 필터를 거쳐오기 때문에 null일 수가 없으므로 null 검사는 안해도 됨
 			boolean auth = memberNo == communityDto.getCommunityMemberNo();
 			
 			if(auth) {
-				chain.doFilter(request, response);
+				chain.doFilter(req, resp);
+				return;
 			}else { //본인이아니라면: 권한 없음 에러 발생(403, forbidden)
 				resp.sendError(403);				
 			}

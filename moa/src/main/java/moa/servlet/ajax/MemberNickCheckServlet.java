@@ -18,17 +18,20 @@ public class MemberNickCheckServlet extends HttpServlet{
 		try {
 			//준비
 			String memberNick = req.getParameter("memberNick");
+			int memberNo = (Integer) req.getSession().getAttribute("login");
 			
 			//처리
 			MemberDao memberDao = new MemberDao();
 			MemberDto memberDto = memberDao.findByNickname(memberNick);
+			MemberDto realMemberDto = memberDao.selectOne(memberNo);
+			
 			
 			//출력
-			if(memberDto != null) {//사용중
-				resp.getWriter().print("N");
+			if(memberDto == null || memberDto.getMemberNick().equals(realMemberDto.getMemberNick())) {//사용중
+				resp.getWriter().print("Y");
 			}
 			else {//사용가능
-				resp.getWriter().print("Y");
+				resp.getWriter().print("N");
 			}
 		}
 		catch(Exception e) {

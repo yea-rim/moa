@@ -174,7 +174,7 @@ $(function(){
 								  <%if(isProfile){ %>
 				            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
 					            		<div class="swiper-slide">
-					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="600px">
+					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
 					            		</div>
 				            		<%} %>
 				            		<%}else{ %>

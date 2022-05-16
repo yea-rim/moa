@@ -235,7 +235,7 @@ $(function(){
   		            <span class="small">
         	            목표금액&nbsp;&nbsp;
             	    </span>
-                    <span class="small">
+                    <span class="small number">
             	        <%=projectDto.getProjectTargetMoney() %>
 	                </span>
                 </div>

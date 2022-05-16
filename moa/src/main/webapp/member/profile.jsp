@@ -48,7 +48,7 @@
     <script type="text/javascript">
     $(function(){
 		var status = {
-	        	memberNick : false
+	        	memberNick : true
 	        }
 	        
 	        $("input[name=memberNick]").blur(function() {

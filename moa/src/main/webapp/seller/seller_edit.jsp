@@ -22,9 +22,9 @@
 <script type="text/javascript">
 	$(function() {
 		var status = {
-	            sellerNick : false,
-	            sellerAccountNo: false,
-	            sellerAccountBank: false
+	            sellerNick : true,
+	            sellerAccountNo: true,
+	            sellerAccountBank: true
 	        }
 
 		// 판매자 닉네임 형식 검사 --> 중복 검사
@@ -67,7 +67,7 @@
 		});
 		
 			$("input[name=sellerAccountNo]").blur(function() {
-				var regex = /^[0-9]$/;
+				var regex = /[0-9]/;
 				var sellerAccountNo = $(this).val();
 				var span = $(this).next("span");
 
