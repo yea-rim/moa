@@ -1,0 +1,68 @@
+.flex-container1 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.flex-container2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.flex-container1 .flex-items,
+.flex-container2 .flex-items {
+	flex-basis:33.33%;
+	padding: 2em; 
+}
+
+/* 진행중인 펀딩목록용 */
+.on-category{
+	padding: 20px 30px;
+}
+
+/* 마감된 펀딩목록용 */
+.cl-category{
+	padding: 30px;
+}
+
+.a {
+	flex-grow: 1;
+}
+
+.b {
+	flex-grow: 1;
+} 
+
+.img {
+	border-radius: 100%;
+	width:60px;
+	height: 60px;
+}
+
+/* 진행중인 펀딩목록용 */
+.project-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 3em; 
+    font-size: 20px;
+}
+
+/* 마감된 펀딩목록용 */
+.project-name2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 3em; 
+    font-size: 20px;
+    padding-top:10px;
+}
+/* 예정된 펀딩목록용 */
+.project-name3 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 3em; 
+    font-weight: bold;
+    padding-top:10px;
+}
