@@ -26,12 +26,12 @@
 
 <form action="progress_edit.do" method="post" enctype="multipart/form-data" class="form-all">
 <input type="hidden" name="progressNo" value="<%=progressNo %>">
-<input type="hidden" name="progressNo" value="<%=projectNo %>">
+<input type="hidden" name="projectNo" value="<%=projectNo %>">
 	<div class="container w700">
 		<div class="row mt50 m10">
 			<div class="flex-container">
 				<div class="left-wrapper mlr10">
-					<h3>프로젝트 공지 작성</h3>
+					<h3>프로젝트 공지 수정</h3>
 				</div>
 			</div>
 		</div>
