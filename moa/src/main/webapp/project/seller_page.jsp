@@ -77,11 +77,6 @@
                                 <h2><%=sellerDto.getSellerNick() %></h2>
                             </div>
                         </div> 
-                        <div class="float-right m60 mlr20">
-                            <a href="" class="link link-reverse">
-                                <h3 class="center">판매자 구독</h3>
-                            </a>
-                        </div>
                     </div>
 
                 <div class="row m20">

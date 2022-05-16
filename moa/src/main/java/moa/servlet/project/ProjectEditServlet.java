@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
-@WebServlet(urlPatterns = "/admin/projectEdit.do")
+@WebServlet(urlPatterns = "/admin/project_edit.do")
 public class ProjectEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

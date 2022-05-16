@@ -18,6 +18,17 @@ public class SellerFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse) response;
 		
 		try {		
+			
+			// 1. 관리자인지 확인
+			Integer admin  = (Integer) req.getSession().getAttribute("admin");
+			
+			if(admin != null) {
+				chain.doFilter(request, response);
+				return;
+			}
+			
+			
+			//2. 판매자인지
 			Integer seller = (Integer) req.getSession().getAttribute("seller");
 			
 			//판매자 세션이 null이면

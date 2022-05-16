@@ -7,11 +7,16 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<h1>찾으시는 아이디는 <%=memberEmail%> 입니다</h1>
+ 
+<div class="container w800">
+	<div class="row mt100 center">
+		<h1>찾으시는 아이디는 <%=memberEmail%> 입니다</h1>
+	</div>
+	<div class="row m30 center">
+		<h3><a href="login.jsp" class="link"> >> 로그인 하러가기</a></h3>
+	</div>
+</div>
 
-<h2><a href="login.jsp">로그인 하러가기</a></h2>
-<h2>
-	<a href="<%=request.getContextPath()%>">메인 페이지로 이동</a>
-</h2>
+
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

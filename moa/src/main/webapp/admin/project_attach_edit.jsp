@@ -116,8 +116,8 @@ AttachDao attachDao = new AttachDao();
 							src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=attachDto.getAttachNo()%>"
 							class="card-image-wrapper" width="160px" height="112px">
 					</div>
-					<div class="row mt15">
-						<div class="filebox-a center w220">
+					<div class="float-container row mt15 w220">
+						<div class="filebox-a center float-left mt15" style="width: 80%;">
 							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
@@ -125,13 +125,15 @@ AttachDao attachDao = new AttachDao();
 								<label for="file<%=count%>">선택</label> <input type="file" id="file<%=count++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-file f12">수정</button>
 							</form>
+						</div>						
 							<%if(count > 2){ %>
+							<div class="float-right mt15" style="width: 20%;">
 								<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
 									<button type="button" class="link link-small btn-del f12">삭제</button>
 								</a>
+							</div>
 							<%} %>	
 						</div>
-					</div>
 				</div>
 				<%
 				}
@@ -180,8 +182,8 @@ AttachDao attachDao = new AttachDao();
 							src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=attachDto.getAttachNo()%>"
 							class="card-image-wrapper" width="150px" height="112px">
 					</div>
-					<div class="row mt15 mlr10">
-						<div class="filebox-a center w220">
+					<div class="float-container row mt15 w220">
+						<div class="filebox-a center float-left mt15" style="width: 80%;">
 							<form action="attach_edit.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="projectNo" value="<%=projectNo%>">
 								<input type="hidden" name="attachNo" value="<%=attachDto.getAttachNo()%>">
@@ -189,13 +191,15 @@ AttachDao attachDao = new AttachDao();
 								<label for="file2<%=count2%>">선택</label> <input type="file" id="file2<%=count2++ %>" name="attach" class="attach">
 								<button type="submit" class="link link-small btn-file f12">수정</button>
 							</form>
+						</div>
 							<%if(count2>2){ %>
-									<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>">
+							<div class="float-right mt15" style="width: 20%;">
+									<a href="<%=request.getContextPath()%>/admin/attach_delete.do?attachNo=<%=attachDto.getAttachNo()%>&projectNo=<%=projectNo%>">
 									<button type="button" class="link link-small btn-del f12">삭제</button>
 								</a>
+							</div>
 							<%} %>
 						</div>
-					</div>
 				</div>
 				<%}%>
 				<%

@@ -51,7 +51,7 @@
 
 </head>
 <body>
-임시 출력 : memberNo = <%=memberNo %> , admin = <%=admin %> , seller = <%=seller %>
+<%-- 임시 출력 : memberNo = <%=memberNo %> , admin = <%=admin %> , seller = <%=seller %> --%>
     <main>
 
         <header>
