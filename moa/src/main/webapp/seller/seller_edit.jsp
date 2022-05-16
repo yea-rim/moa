@@ -23,6 +23,7 @@
 	$(function() {
 		var status = {
 	            sellerNick : false,
+	            sellerAccountBank: false, 
 	            sellerAccountNo: false
 	        }
 
@@ -84,6 +85,12 @@
 					status.sellerAccountNo = true;
 					$("input[type=submit]").attr("disabled", false);
 				}
+			});
+			
+			$(function(){
+				$(".form-answer").submit(function(){
+					if(sellerNick, sellerAccountNo, )
+				});
 			});
 		
 		});
@@ -160,7 +167,7 @@
 				
 				
 				<div class="row m20 mt50 center">
-					<input type="submit" value="변경하기" class="btn">
+					<input type="submit" value="변경하기" class="btn form-answer">
 				</div>
 			
 			</form>
