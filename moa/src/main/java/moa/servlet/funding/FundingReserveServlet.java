@@ -58,6 +58,9 @@ public class FundingReserveServlet extends HttpServlet{
 				RewardDto rewardDto = rewardDao.selectOne(projectNo, Integer.parseInt(rewardNo[i]));
 				int price = rewardDto.getRewardPrice();
 				int amount = Integer.parseInt(selectionRewardAmount[i]);
+				if(rewardDto.getRewardStock() < amount) {
+					resp.sendRedirect(req.getContextPath() + "/project/funding_fail.jsp?projectNo="+projectNo);
+				}
 				totalPrice += amount * price;
 				
 				if(rewardDto.getRewardEach()==1) {

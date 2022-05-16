@@ -85,8 +85,26 @@
     
 
 <style>
-
+	.sold-out{
+		position:absolute; 
+		top:0; 
+		left:0; 
+		width:100%; 
+		height:100%;
+		opacity:0.4;
+		background-color: rgb(231, 231, 231);
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	border-radius: 0.3em;
+		z-index: -1;
+		
+    	transition: 0.2s ease-in-out;
+	}
 	
+	.sold-out:hover{
+		opacity: 0.8;
+	}
 	
 </style>
 <!-- 스와이퍼 -->
@@ -115,6 +133,15 @@ $(function(){
 	function withoutCommas(num) {
 	return num.toString().replace(",", '');
 	}
+	
+	$(".reward-stock").each(function(){
+		var stock = parseInt($(this).text());
+		console.log(stock);
+		if(stock == 0){
+			$(this).parent("span").parent("button").parent("a").next(".sold-out").css("z-index", "999");
+		}
+		
+	});
 	
 });
 
@@ -147,7 +174,7 @@ $(function(){
 								  <%if(isProfile){ %>
 				            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
 					            		<div class="swiper-slide">
-					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
+					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="600px">
 					            		</div>
 				            		<%} %>
 				            		<%}else{ %>
@@ -337,25 +364,29 @@ $(function(){
 			        	<span style="color: gray; font-size: 13px; font-weight: bold;">리워드 선택</span>
 			        </div>
                		<%for(RewardDto rewardDto : rewardList){ %>	
-	                	<div class="fill m-b10">
+	                	<div class="fill m-b10" style="position:relative;">
                     		<a href="<%=request.getContextPath() %>/project/funding.jsp?projectNo=<%=projectNo%>&rewardCount=<%=rewardCount++ %>" class="link">
-                    		<button class="fill reward shadow" style="text-align: left;">
-		                        <div style="color: black;">
-		                        	<h3><span class="number"><%=rewardDto.getRewardPrice() %></span>원 + </h3>
-		                        </div>
-		                        <br>
-		                        <span>
-			                        <%=rewardDto.getRewardName() %>
-		                        </span>
-		                        <br>
-		                        <span style="font-size: 13px;">
-			                        · <%=rewardDto.getRewardContent() %>
-		                        </span>
-		                        <br>
-		                        <span style="font-size: 13px;">
-		                        	재고 : <%=rewardDto.getRewardStock() %>
-		                        </span>
-                    		</button></a>
+	                    		<button class="fill reward shadow" style="text-align: left;">
+			                        <div style="color: black;">
+			                        	<h3><span class="number"><%=rewardDto.getRewardPrice() %></span>원 + </h3>
+			                        </div>
+			                        <br>
+			                        <span>
+				                        <%=rewardDto.getRewardName() %>
+			                        </span>
+			                        <br>
+			                        <span style="font-size: 13px;">
+				                        · <%=rewardDto.getRewardContent() %>
+			                        </span>
+			                        <br>
+			                        <span style="font-size: 13px;">
+			                        	재고 : <span class="reward-stock"><%=rewardDto.getRewardStock() %></span>
+			                        </span>
+	                    		</button>
+                    		</a>
+                    		<div class="sold-out">
+                    			<span style="font-size: 18px; color:#520088; opacity:1;">재고 없음</span>
+                    		</div>
                 		</div>
                 	<%} %>
             	</div>

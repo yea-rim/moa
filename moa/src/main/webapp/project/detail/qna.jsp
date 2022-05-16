@@ -183,7 +183,6 @@
         <div class="float-container center">
         
             <!-- 상세페이지 본문 부분-->
-
             <div class="float-left left-container mt30">
             
 			<div class="right m10">

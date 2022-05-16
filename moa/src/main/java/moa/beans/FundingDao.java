@@ -132,7 +132,7 @@ public class FundingDao {
 		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
-				+ "select distinct funding_no, funding_member_no from member_funding_info where project_no = ? order by funding_no desc "
+				+ "select distinct i.funding_no, i.funding_member_no from member_funding_info i inner join funding f on f.funding_no = i.funding_no where i.project_no = ? and f.funding_cancel_date is null order by i.funding_no desc"
 				+ ") TMP"
 				+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -458,6 +458,7 @@ public class FundingDao {
 			sql = "update funding set funding_cancel_date = sysdate where funding_no = ?";
 			
 			ps = con.prepareStatement(sql);
+			
 			ps.setInt(1, fundingNo);
 			
 			int count = ps.executeUpdate();
@@ -469,12 +470,12 @@ public class FundingDao {
 			
 			//취소된 펀딩 리워드 재고 증가
 			for(RewardSelectionDto rewardSelectionDto : list) {
-				
 			sql = "update reward set reward_stock = reward_stock + ? where reward_no = ?";
+			
+			ps = con.prepareStatement(sql);
 			
 			ps.setInt(1, rewardSelectionDto.getSelectionRewardAmount());
 			ps.setInt(2, rewardSelectionDto.getSelectionRewardNo());
-			
 			int stockCount = ps.executeUpdate();
 			
 			if(stockCount == 0) {
@@ -482,8 +483,8 @@ public class FundingDao {
 			}
 			
 			ps.close();
-			
 			}
+			
 			
 			con.commit();
 			con.close();
