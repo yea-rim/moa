@@ -103,6 +103,8 @@ public class FundingReserveServlet extends HttpServlet{
 			
 			//펀딩정보 리워드선택정보 리워드재고감소 메서드 실행
 			fundingDao.fundingReserve(fundingDto, rewardSelectionDtoList);
+			
+			
 			resp.sendRedirect(req.getContextPath() + "/project/funding_success.jsp?fundingNo="+fundingNo);
 			
 			
