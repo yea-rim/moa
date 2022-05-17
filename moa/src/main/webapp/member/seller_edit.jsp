@@ -46,7 +46,7 @@ $(function() {
 		var that = this;
 
 		$.ajax({
-			url : "http://localhost:8080/moa/ajax/sellerNick.do",
+			url : "<%=request.getContextPath()%>/ajax/sellerNick.do",
 			type : "post",
 			data : {
 				sellerNick : sellerNick

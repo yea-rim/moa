@@ -45,7 +45,7 @@
 	            
 	            // 2. 전화번호 중복 검사 
 	            $.ajax({
-					url : "http://localhost:8080/moa/ajax/phone.do",
+					url : "<%=request.getContextPath()%>/ajax/phone.do",
 					type : "post",
 					data : {
 						memberPhone : memberPhone

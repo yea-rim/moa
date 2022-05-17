@@ -96,9 +96,9 @@ $(function () {
     $("#hide-secret").on("input", function(){
 		var projectNo = new URL(window.location.href).searchParams.get("projectNo");
         if($(this).is(":checked")){
-                location.replace("/moa/project/detail/qna.jsp?secret=1&projectNo=" + projectNo);
+                location.replace(context + "/project/detail/qna.jsp?secret=1&projectNo=" + projectNo);
         }else{
-                location.replace("/moa/project/detail/qna.jsp?projectNo=" + projectNo);
+                location.replace(context + "/project/detail/qna.jsp?projectNo=" + projectNo);
 		}
     })
     

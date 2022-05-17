@@ -49,7 +49,7 @@
 				</div>
 				<%if(num!=1){ %>
 				<div class="right-wrapper right">
-					<a href="reward_delete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
+					<a href="<%=request.getContextPath() %>/admin/reward_delete.do?rewardNo=<%=rewardDto.getRewardNo()%>&projectNo=<%=rewardDto.getRewardProjectNo() %>" class="link link-reverse del">삭제</a>
 				</div>
 				<%} %>
 			</div>

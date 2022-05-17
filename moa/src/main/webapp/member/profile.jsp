@@ -69,7 +69,7 @@
 				var that = this;
 
 				$.ajax({
-					url : "http://localhost:8080/moa/ajax/nick.do",
+					url : "<%=request.getContextPath()%>/ajax/nick.do",
 					type : "post",
 					data : {
 						memberNick : memberNick

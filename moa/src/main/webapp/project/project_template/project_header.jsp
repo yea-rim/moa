@@ -84,6 +84,9 @@
 
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	var context = "<%=request.getContextPath()%>";
+</script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/joa.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/swiper.js"></script>
 

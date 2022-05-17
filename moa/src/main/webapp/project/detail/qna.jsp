@@ -161,6 +161,9 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	var context = "<%=request.getContextPath()%>";
+</script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/project_qna.js"></script>
 
 <script type="text/javascript">
