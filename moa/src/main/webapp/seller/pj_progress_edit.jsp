@@ -67,7 +67,7 @@
 		<div class="row m50">
 			<div class="flex-container">
 				<div class="left-wrapper right mlr10">
-					<input type="submit" value="작성하기" class="link link-btn w150 board-submit">
+					<input type="submit" value="수정하기" class="link link-btn w150 board-submit">
 				</div>
 				<div class="right-wrapper">
 					<a href="list.jsp"> <input type="button" value="취소" class="link link-reverse w150">

@@ -69,7 +69,7 @@
         	</div>
         	
         	<div class="float-right mt70 mlr20">
-        		<a href="<%=request.getContextPath() %>/seller/seller_edit.jsp" class="link link-reverse h40">
+        		<a href="<%=request.getContextPath() %>/member/seller_edit.jsp" class="link link-reverse h40">
 					<h3>정보 수정</h3>
 				</a>
         	</div>

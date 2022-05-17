@@ -118,14 +118,14 @@
                         <div class="float-left m20 mlr20">
                             <div class="row m10">
                             	<div class="float-container">
-                            		 <%if(isSellerRefused) { // 판매자이면 %>
+                            		 <%if(isSellerRefused) { // 반려된 상태면 %>
                             		 		<div class="float-left">
 	                            				<h4>(회원번호) </h4>
 	                            			</div>
 	                            			<div class="float-left mlr10">
 	                            				<h3><%=memberDto.getMemberNo() %></h3>
 	                            			</div>
-                            		<%} else if(isSeller) { // 반려된 상태이면  %>
+                            		<%} else if(isSeller) { // 판매자이면 %>
                             				<div class="float-left">
                             					<h4>(판매자 번호) </h4>
 	                            			</div>
@@ -152,7 +152,9 @@
                             <div class="row">
                                 
                                 <!-- 닉네임 출력 -->
-                                <%if(isSeller) { %>
+                                <%if(isSellerRefused || isSellerWait) { // 반려된 상태면 || 대기 상태면  %>
+                                	<h2><%=memberDto.getMemberNick() %></h2>
+                                <%} else if(isSeller) { %>
                                 		<h2><%=memberDto.getMemberNick() %> (<%=sellerDto.getSellerNick() %>)</h2>
                                 <%} else { %>
                                 		<h2><%=memberDto.getMemberNick() %></h2>
@@ -166,7 +168,7 @@
                             <%if(isSellerWait || isSellerRefused) { // 판매자 대기일 때 (판매자 신청 현황으로 이동) %>
 		                            <a href="<%=request.getContextPath() %>/member/seller_wait.jsp" class="link link-reverse h60">
 			                             <h3>판매자 신청</h3>
-	                                	<h3 class="center">(신청현황)</h3>
+	                                	<h3 class="center mt5">(신청현황)</h3>
 			                        </a>
                             <%} else if(isSeller) { // 판매자일 때 프로젝트 관리 페이지로 이동 %>
                         			<a href="<%=request.getContextPath() %>/seller/my_page.jsp" class="link link-reverse h40">

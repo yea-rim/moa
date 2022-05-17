@@ -23,11 +23,43 @@
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/projectHeader.css">
 
+<style>
+	.scrolltop{
+		position: fixed;
+		bottom: 50px;
+		right: 50px;
+	}
+
+	.scrolltop:hover{
+		cursor: pointer;
+	}
+	.sold-out{
+		position:absolute; 
+		top:0; 
+		left:0; 
+		width:100%; 
+		height:100%;
+		opacity:0.4;
+		background-color: rgb(231, 231, 231);
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	border-radius: 0.3em;
+		z-index: -1;
+		
+    	transition: 0.2s ease-in-out;
+	}
+	
+	.sold-out:hover{
+		opacity: 0.8;
+	}
+</style>
+
 <script type="text/javascript">
 /* 숫자 콤마 찍기 */
-/* $(function(){
+$(function(){
 	
-	$(".number").each(function(){
+	/* $(".number").each(function(){
 		$(this).text(withCommas(parseInt(($(this).text()))));
 	})
 	
@@ -38,9 +70,22 @@
 
 	function withoutCommas(num) {
 	return num.toString().replace(",", '');
-	}
+	} */
+	$(".reward-stock").each(function(){
+		var stock = parseInt($(this).text());
+		console.log(stock);
+		if(stock == 0){
+			$(this).parent("span").parent("button").parent("a").next(".sold-out").css("z-index", "999");
+		}
+		
+	});
 	
-}); */
+	$(".scrolltop").click(function(){
+		$("html, body").animate({scrollTop : 0}, 400);
+	});
+	
+});
+
 </script>
 
             </div>
@@ -62,7 +107,7 @@
 			        	<span style="color: gray; font-size: 13px; font-weight: bold;">리워드 선택</span>
 			        </div>
                		<%for(RewardDto rewardDto : rewardList){ %>	
-	                	<div class="fill m-b10">
+	                	<div class="fill m-b10" style="position:relative;">
                     		<a href="<%=request.getContextPath() %>/project/funding.jsp?projectNo=<%=projectNo%>&rewardCount=<%=rewardCount++ %>" class="link">
                     		<button class="fill reward shadow" style="text-align: left;">
 		                        <div style="color: black;">
@@ -78,13 +123,20 @@
 		                        </span>
 		                        <br>
 		                        <span style="font-size: 13px;">
-		                        	재고 : <%=rewardDto.getRewardStock() %>
+		                        	재고 : <span class="reward-stock"><%=rewardDto.getRewardStock() %></span>
 		                        </span>
-                    		</button></a>
+                    		</button>
+                    		</a>
+                    		<div class="sold-out">
+                    			<span style="font-size: 18px; color:#520088; opacity:1;">재고 없음</span>
+                    		</div>
                 		</div>
                 	<%} %>
             	</div>
             
         </div>
+    </div>
+    <div>
+    	<button type="button"><img src="<%=request.getContextPath() %>/project/image/scrolltop.png" class="scrolltop" width="80px"></button>
     </div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

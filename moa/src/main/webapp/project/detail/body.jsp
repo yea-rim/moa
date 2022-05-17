@@ -57,7 +57,7 @@
 <div>
 	<%if(isDetail){ %>
 		<%for(ProjectAttachDto projectAttachDto : detailList){ %>
-			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>">
+			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="600px">
 		<%} %>
 	<%}else{ %>
     	<img src="https://via.placeholder.com/720x2000" width="100%">

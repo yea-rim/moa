@@ -132,11 +132,16 @@ $(function(){
 						<div class="swiper">
 							<div class="swiper-wrapper">
 								  <%if(isProfile){ %>
+				            		<%if(profileList.size() == 1){ %>
+								  <%for(ProjectAttachDto projectAttachDto : profileList){ %>
+					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
+					            	<%} %>
+				            		<%}else{ %>
 				            		<%for(ProjectAttachDto projectAttachDto : profileList){ %>
 					            		<div class="swiper-slide">
 					            			<img src="<%=request.getContextPath()%>/attach/download.do?attachNo=<%=projectAttachDto.getAttachNo()%>" width="100%" height="100%">
 					            		</div>
-				            		<%} %>
+				            		<%}} %>
 				            		<%}else{ %>
 				            			<div class="swiper-slide">
 				                    		<img src="https://via.placeholder.com/500x300" width="100%" height="100%">
@@ -149,11 +154,12 @@ $(function(){
 				            			</div>
 				                	<%} %>
 							</div>
+							<%if(profileList.size() != 1){ %>
 							<div class="swiper-pagination"></div>
 							
 							<div class="swiper-button-prev"></div>
 							<div class="swiper-button-next"></div>
-						
+							<%} %>
 						</div>
 						
                 <%-- <%if(isProfile){ %>

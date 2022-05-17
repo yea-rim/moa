@@ -37,6 +37,8 @@ public class ProjectDao {
 
 			list.add(projectDto);
 		}
+		
+		con.close();
 
 		return list;
 	}
@@ -87,6 +89,8 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
+		
 		return list;
 	}
 	
@@ -121,6 +125,7 @@ public class ProjectDao {
 					
 					list.add(projectDto);
 				}
+				con.close();
 				
 				return list;
 			}
@@ -161,6 +166,7 @@ public class ProjectDao {
 				
 				list.add(projectDto);
 			}
+			con.close();
 			
 			return list;
 		}
@@ -214,6 +220,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -294,6 +301,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -341,6 +349,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -390,6 +399,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -439,6 +449,7 @@ public class ProjectDao {
 			
 			list.add(projectDto);
 		}
+		con.close();
 		
 		return list;
 	}
@@ -490,6 +501,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -533,6 +545,7 @@ public class ProjectDao {
 
 			list.add(projectDto);
 		}
+		con.close();
 
 		return list;
 	}
@@ -572,6 +585,7 @@ public class ProjectDao {
 				list.add(projectDto);
 			}
 
+			con.close();
 			return list;
 		}
 
@@ -618,6 +632,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 	
@@ -654,6 +669,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -727,6 +743,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 	
@@ -753,6 +770,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 		
+		con.close();
 		return list;
 	}
 	
@@ -779,6 +797,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 		
+		con.close();
 		return list;
 	}
 	
@@ -806,7 +825,7 @@ public class ProjectDao {
 
 			list.add(projectDto);
 		}
-
+		con.close();
 		return list;
 	}
 
@@ -955,6 +974,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 
@@ -991,6 +1011,7 @@ public class ProjectDao {
 			list.add(projectDto);
 		}
 
+		con.close();
 		return list;
 	}
 	
@@ -1028,6 +1049,7 @@ public class ProjectDao {
 				list.add(projectDto);
 			}
 
+			con.close();
 			return list;
 		}
 		
@@ -1194,6 +1216,7 @@ public class ProjectDao {
 				list.add(projectDto);
 			}
 			
+			con.close();
 			return list;
 		}
 		
@@ -1233,6 +1256,7 @@ public class ProjectDao {
 				list.add(projectDto);
 			}
 
+			con.close();
 			return list;
 		}
 
@@ -1366,7 +1390,7 @@ public class ProjectDao {
 			String sql = "select * from ("
 					+ "    select rownum rn, TMP.* from ("
 					+ "        select * from project P"
-					+ "            inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent < 100 and v.daycount < 0"
+					+ "            inner join project_vo V on P.project_no = V.project_no where P.project_seller_no = ? and V.percent is null or V.percent < 100 and v.daycount < 0"
 					+ "    ) TMP"
 					+ ") where rn between ? and ?";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -1427,7 +1451,7 @@ public class ProjectDao {
 				public List<ProjectDto> selectFundingProjectList (int memberNo) throws Exception {
 					Connection con = JdbcUtils.getConnection();
 					
-					String sql = "select project_no from (select * from member_funding_info where funding_member_no= ?) order by funding_no desc";
+					String sql = "select funding_no, project_no from (select * from member_funding_info where funding_member_no= ?) group by project_no, funding_no order by funding_no desc";
 					PreparedStatement ps = con.prepareStatement(sql);
 					ps.setInt(1, memberNo);
 					ResultSet rs = ps.executeQuery();
@@ -1474,6 +1498,7 @@ public class ProjectDao {
 				return check = 2;
 			}
 			
+			con.close();
 			return check;
 			
 		}
@@ -1507,6 +1532,7 @@ public class ProjectDao {
 				projectDto = null;
 			}
 
+			con.close();
 			return projectDto;
 		}
 }

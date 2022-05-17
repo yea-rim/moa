@@ -7,7 +7,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /** 
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * 		= *.png :  모든 png 페이지
  * 	
  */
-@WebFilter(filterName = "f1-UTF8", urlPatterns ="/*")
+//@WebFilter(filterName = "f1-UTF8", urlPatterns ="/*")
 public class UTF8EncodingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

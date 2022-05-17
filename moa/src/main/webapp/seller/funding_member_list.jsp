@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="moa.beans.MemberDto"%>
 <%@page import="moa.beans.MemberDao"%>
 <%@page import="moa.beans.FundingDto"%>
@@ -56,6 +57,8 @@
 		// 해당 프로젝트와 관련된 정보들 가져오기 
 		FundingDao fundingDao = new FundingDao();
 		List<FundingDto> list = fundingDao.selectFundingNo(p, s, projectNo);
+		
+		DecimalFormat df = new DecimalFormat("###,###");
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -92,7 +95,7 @@
                             <h3>모인 금액</h3>
                         </div>
                         <div class="row m10">
-                            <p><%=projectVo.getPresentMoney() %>원</p>
+                            <p><%=df.format(projectVo.getPresentMoney()) %>원</p>
                         </div>
                         <div class="row mt20 m10">
                             <h3>남은 기간</h3>
