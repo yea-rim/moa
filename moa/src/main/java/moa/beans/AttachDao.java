@@ -9,7 +9,7 @@ import java.util.List;
 public class AttachDao {
 
 	// 저장 위치를 지정
-	public static final String path = System.getProperty("user.home") + "/upload";
+	public static final String path = System.getProperty("D:") + "/upload/kh95";
 
 	// 등록
 	// 시퀀스 번호 생성

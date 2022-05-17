@@ -37,7 +37,7 @@
 			</div>
 			<div class="row m20">
 				<label>프로젝트명</label> 
-				<input type="text" name="projectName" class="form-input fill checkValue" placeholder="제목을 입력해주세요">
+				<input type="text" name="projectName" class="form-input fill checkValue" placeholder="제목을 입력해주세요" autocomplete="off">
 				<span class="f12 red"></span>
 			</div>
 			<div class="row m20">

@@ -25,7 +25,7 @@ public class NoticeEdtiServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 파일 저장
-			String path = System.getProperty("user.home") + "/upload";
+			String path = System.getProperty("D:") + "/upload/kh95";
 
 			File dir = new File(path);
 			dir.mkdirs(); // 폴더생성

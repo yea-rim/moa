@@ -28,7 +28,7 @@ public class MemberInformationServlet extends HttpServlet{
 		try {
 			
 			// 파일 관련 코드 
-			String path = System.getProperty("user.home")+"/upload";
+			String path = System.getProperty("D:") + "/upload/kh95";
 			
 			File dir = new File(path);
 			dir.mkdirs();
