@@ -1427,7 +1427,7 @@ public class ProjectDao {
 				public List<ProjectDto> selectFundingProjectList (int memberNo) throws Exception {
 					Connection con = JdbcUtils.getConnection();
 					
-					String sql = "select project_no from (select * from member_funding_info where funding_member_no= ?) order by funding_no desc";
+					String sql = "select funding_no, project_no from (select * from member_funding_info where funding_member_no= ?) group by project_no, funding_no order by funding_no desc";
 					PreparedStatement ps = con.prepareStatement(sql);
 					ps.setInt(1, memberNo);
 					ResultSet rs = ps.executeQuery();
