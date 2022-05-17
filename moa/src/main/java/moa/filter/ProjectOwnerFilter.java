@@ -7,7 +7,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,30 +14,30 @@ import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
 //프로젝트 필터
-@WebFilter(filterName = "g3-projectOwner", urlPatterns = {
-			"/seller/attach_edit.jsp",
-			"/seller/banner_insert.jsp",
-			"/seller/fail_project_detail.jsp",
-			"/seller/funding_member_detail.jsp",
-			"/seller/funding_member_list.jsp",
-			"/seller/my_sponsor.jsp",
-			"/seller/permit_project_detail.jsp",
-			"/seller/project_edit.jsp",
-			"/seller/project_reapply.jsp",
-			"/seller/rejected_project_detail.jsp",
-			"/seller/reward_edit.jsp",
-			"/seller/success_project_detail.jsp",
-			"/seller/banner_insert.do",
-			"/seller/progress_delete.do",
-			"/seller/attach_delete.do",
-			"/seller/project_delete.do",
-			"/seller/project_edit.do",
-			"/seller/project_reapply.do",
-			"/seller/project_reinsert.do",
-			"/seller/reward_delete.do",
-			"/seller/reward_edit.do",
-			"/seller/reward_reinsert.do"
-			})
+//@WebFilter(filterName = "g3-projectOwner", urlPatterns = {
+//			"/seller/attach_edit.jsp",
+//			"/seller/banner_insert.jsp",
+//			"/seller/fail_project_detail.jsp",
+//			"/seller/funding_member_detail.jsp",
+//			"/seller/funding_member_list.jsp",
+//			"/seller/my_sponsor.jsp",
+//			"/seller/permit_project_detail.jsp",
+//			"/seller/project_edit.jsp",
+//			"/seller/project_reapply.jsp",
+//			"/seller/rejected_project_detail.jsp",
+//			"/seller/reward_edit.jsp",
+//			"/seller/success_project_detail.jsp",
+//			"/seller/banner_insert.do",
+//			"/seller/progress_delete.do",
+//			"/seller/attach_delete.do",
+//			"/seller/project_delete.do",
+//			"/seller/project_edit.do",
+//			"/seller/project_reapply.do",
+//			"/seller/project_reinsert.do",
+//			"/seller/reward_delete.do",
+//			"/seller/reward_edit.do",
+//			"/seller/reward_reinsert.do"
+//			})
 public class ProjectOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;

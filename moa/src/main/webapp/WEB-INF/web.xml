@@ -34,14 +34,193 @@
 	
 	<!-- 필터 등록 -->
 	<filter>
-		<filter-name>utf8Filter</filter-name>
-		<filter-class>moa.filter.UTF8EncodingFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>utf8Filter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+      <filter-name>utf8Filter</filter-name>
+      <filter-class>moa.filter.UTF8EncodingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>utf8Filter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>LoginMemberFilter</filter-name>
+      <filter-class>moa.filter.LoginMemberFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>LoginMemberFilter</filter-name>
+      <url-pattern>/community/insert.jsp</url-pattern>
+      <url-pattern>/community/insert.do</url-pattern>
+      <url-pattern>/community/reply_insert.do</url-pattern>
+      <url-pattern>/community/edit.do</url-pattern>
+      <url-pattern>/community/delete.do</url-pattern>
+      <url-pattern>/community/reply_insert.do</url-pattern>
+      <url-pattern>/community/reply_edit.do</url-pattern>
+      <url-pattern>/community/reply_delete.do</url-pattern>
+      <url-pattern>/member/change_address.jsp</url-pattern>
+      <url-pattern>/member/change_password.jsp</url-pattern>
+      <url-pattern>/member/change_phone.jsp</url-pattern>
+      <url-pattern>/member/confirm_pw.jsp</url-pattern>
+      <url-pattern>/member/funding_cancel_finish.jsp</url-pattern>
+      <url-pattern>/member/funding_cancel_info.jsp</url-pattern>
+      <url-pattern>/member/funding_cancel_list.jsp</url-pattern>
+      <url-pattern>/member/funding_finish_list.jsp</url-pattern>
+      <url-pattern>/member/funding_information.jsp</url-pattern>
+      <url-pattern>/member/funding_wait_list.jsp</url-pattern>
+      <url-pattern>/member/joa_list.jsp</url-pattern>
+      <url-pattern>/member/my_page.jsp</url-pattern>
+      <url-pattern>/member/profile.jsp</url-pattern>
+      <url-pattern>/member/funding_cancel.do</url-pattern>
+      <url-pattern>/member/confirm_pw.do</url-pattern>
+      <url-pattern>/member/edit_information.do</url-pattern>
+      <url-pattern>/member/change_address.do</url-pattern>
+      <url-pattern>/member/change_phone.do</url-pattern>
+      <url-pattern>/member/change_password.do</url-pattern>
+      <url-pattern>/member/edit.do</url-pattern>
+      <url-pattern>/member/logout.do</url-pattern>
+      <url-pattern>/member/delete_profile.do</url-pattern>
+      <url-pattern>/member/seller_wait.jsp</url-pattern>
+      <url-pattern>/project/qna_write.do</url-pattern>
+      <url-pattern>/project/qna_edit.do</url-pattern>
+      <url-pattern>/project/qna_delete.do</url-pattern>
+      <url-pattern>/project/funding.jsp</url-pattern>
+      <url-pattern>/project/funding_success.jsp</url-pattern>
+      <url-pattern>/project/funding_fail.jsp</url-pattern>
+      <url-pattern>/project/funding.do</url-pattern>
+      <url-pattern>/question/delete.do</url-pattern>
+      <url-pattern>/question/insert.do</url-pattern>
+      <url-pattern>/seller/*</url-pattern>
+      <url-pattern>/question/insert.jsp</url-pattern>
+   </filter-mapping>
 	
+	<filter>
+      <filter-name>AdminFilter</filter-name>
+      <filter-class>moa.filter.AdminFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>AdminFilter</filter-name>
+      <url-pattern>/admin/*</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>CommunityOwnerFilter</filter-name>
+      <filter-class>moa.filter.CommunityOwnerFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>CommunityOwnerFilter</filter-name>
+      <url-pattern>/community/edit.jsp</url-pattern>
+      <url-pattern>/community/delete.do</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>CommunityReplyOwnerFilter</filter-name>
+      <filter-class>moa.filter.CommunityReplyOwnerFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>CommunityReplyOwnerFilter</filter-name>
+      <url-pattern>/community/reply_delete.do</url-pattern>
+      <url-pattern>/community/reply_edit.do</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>CorsFilter</filter-name>
+      <filter-class>moa.filter.CorsFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>CorsFilter</filter-name>
+      <url-pattern>/ajax/*</url-pattern>
+   </filter-mapping>
+   
+    
+   
+   <filter>
+      <filter-name>PjQnaFilter</filter-name>
+      <filter-class>moa.filter.PjQnaFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>PjQnaFilter</filter-name>
+      <url-pattern>/project/detail/qna_write.do</url-pattern>
+      <url-pattern>/project/detail/qna_edit.do</url-pattern>
+      <url-pattern>/project/detail/qna_delete.do</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>ProjectClosingFilter</filter-name>
+      <filter-class>moa.filter.ProjectClosingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ProjectClosingFilter</filter-name>
+      <url-pattern>/project/project_closing.jsp</url-pattern>
+   </filter-mapping>
+   
+    <filter>
+      <filter-name>ProjectComingFilter</filter-name>
+      <filter-class>moa.filter.ProjectComingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ProjectComingFilter</filter-name>
+      <url-pattern>/project/project_coming.jsp</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>ProjectDetailFilter</filter-name>
+      <filter-class>moa.filter.ProjectDetailFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ProjectDetailFilter</filter-name>
+      <url-pattern>/project/project_detail.jsp</url-pattern>
+      <url-pattern>/project/detail/body.jsp</url-pattern>
+      <url-pattern>/project/detail/qna.jsp</url-pattern>
+      <url-pattern>/project/detail/notice.jsp</url-pattern>
+      <url-pattern>/project/detail/notice_detail.jsp</url-pattern>
+      <url-pattern>/project/funding.jsp</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>ProjectOwnerFilter</filter-name>
+      <filter-class>moa.filter.ProjectOwnerFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ProjectOwnerFilter</filter-name>
+      <url-pattern>/seller/attach_edit.jsp</url-pattern>
+      <url-pattern>/seller/banner_insert.jsp</url-pattern>
+      <url-pattern>/seller/fail_project_detail.jsp</url-pattern>
+      <url-pattern>/seller/funding_member_detail.jsp</url-pattern>
+      <url-pattern>/seller/funding_member_list.jsp</url-pattern>
+      <url-pattern>/seller/my_sponsor.jsp</url-pattern>
+      <url-pattern>/seller/permit_project_detail.jsp</url-pattern>
+      <url-pattern>/seller/project_edit.jsp</url-pattern>
+      <url-pattern>/seller/project_reapply.jsp</url-pattern>
+      <url-pattern>/seller/rejected_project_detail.jsp</url-pattern>
+      <url-pattern>/seller/reward_edit.jsp</url-pattern>
+      <url-pattern>/seller/success_project_detail.jsp</url-pattern>
+      <url-pattern>/seller/banner_insert.do</url-pattern>
+      <url-pattern>/seller/progress_delete.do</url-pattern>
+      <url-pattern>/seller/attach_delete.do</url-pattern>
+      <url-pattern>/seller/project_delete.do</url-pattern>
+      <url-pattern>/seller/project_edit.do</url-pattern>
+      <url-pattern>/seller/project_reapply.do</url-pattern>
+      <url-pattern>/seller/project_reinsert.do</url-pattern>
+      <url-pattern>/seller/reward_delete.do</url-pattern>
+      <url-pattern>/seller/reward_edit.do</url-pattern>
+      <url-pattern>/seller/reward_reinsert.do</url-pattern>
+   </filter-mapping>
 	
+	<filter>
+      <filter-name>QuestionOwnerFilter</filter-name>
+      <filter-class>moa.filter.QuestionOwnerFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>QuestionOwnerFilter</filter-name>
+      <url-pattern>/question/delete.do</url-pattern>
+   </filter-mapping>
+   
+   <filter>
+      <filter-name>SellerFilter</filter-name>
+      <filter-class>moa.filter.SellerFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>SellerFilter</filter-name>
+      <url-pattern>/seller/*</url-pattern>
+   </filter-mapping>
 	
 </web-app>

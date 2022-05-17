@@ -85,6 +85,7 @@ public class ProjectAttachDao {
 			
 			list.add(projectAttachDto);
 		}
+		con.close();
 		return list;
 	}
 	
@@ -92,7 +93,7 @@ public class ProjectAttachDao {
 	public List<ProjectAttachDto> selectProfileList(int projectNo) throws Exception {	
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select * from project_attach where project_no=? and attach_type = '프로필'";
+		String sql = "select * from project_attach where project_no=? and attach_type = '프로필' order by attach_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, projectNo);
 		ResultSet rs = ps.executeQuery();
@@ -105,6 +106,7 @@ public class ProjectAttachDao {
 			
 			list.add(projectAttachDto);
 		}
+		con.close();
 		return list;
 	}
 	
@@ -125,6 +127,7 @@ public class ProjectAttachDao {
 			
 			list.add(projectAttachDto);
 		}
+		con.close();
 		return list;
 	}
 	

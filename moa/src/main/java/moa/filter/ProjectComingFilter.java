@@ -7,13 +7,12 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.ProjectDao;
 
-@WebFilter(filterName = "g6-project_coming", urlPatterns = "/project/project_coming.jsp")
+//@WebFilter(filterName = "g6-project_coming", urlPatterns = "/project/project_coming.jsp")
 public class ProjectComingFilter implements Filter {
 
 	@Override

@@ -7,18 +7,17 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.ProjectDao;
 
-@WebFilter(filterName = "g7-project_detail", urlPatterns = {"/project/project_detail.jsp", 
-		"/project/detail/body.jsp",
-		"/project/detail/qna.jsp",
-		"/project/detail/notice.jsp",
-		"/project/detail/notice_detail.jsp",
-		"/project/funding.jsp"})
+//@WebFilter(filterName = "g7-project_detail", urlPatterns = {"/project/project_detail.jsp", 
+//		"/project/detail/body.jsp",
+//		"/project/detail/qna.jsp",
+//		"/project/detail/notice.jsp",
+//		"/project/detail/notice_detail.jsp",
+//		"/project/funding.jsp"})
 public class ProjectDetailFilter implements Filter{
 
 	
