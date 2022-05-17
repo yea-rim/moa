@@ -31,7 +31,7 @@ public class SellerProjectInsertServlet extends HttpServlet {
 		try {
 
 			// 파일 저장
-			String path = System.getProperty("user.home") + "/upload";// 저장할 경로 /운영체제에서 사용자에게 제공되는 home폴더
+			String path = System.getProperty("D:") + "/upload/kh95";// 저장할 경로 /운영체제에서 사용자에게 제공되는 home폴더
 
 			File dir = new File(path);
 			dir.mkdirs(); // 폴더생성
