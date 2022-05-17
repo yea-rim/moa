@@ -7,7 +7,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +15,7 @@ import moa.beans.PjQnaDto;
 import moa.beans.ProjectDao;
 import moa.beans.ProjectDto;
 
-@WebFilter (filterName = "g2-pjQna", urlPatterns = {"/project/detail/qna_write.do","/project/detail/qna_edit.do","/project/detail/qna_delete.do"})
+//@WebFilter (filterName = "g2-pjQna", urlPatterns = {"/project/detail/qna_write.do","/project/detail/qna_edit.do","/project/detail/qna_delete.do"})
 public class PjQnaFilter implements Filter {
 	
 	@Override

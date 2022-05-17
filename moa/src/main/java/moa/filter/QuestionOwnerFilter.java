@@ -7,16 +7,15 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import moa.beans.MoaQuestionDao;
 
 //1:1문의 삭제 필터
-@WebFilter(filterName = "g4-questionOwner" , urlPatterns = {		
-				"/question/delete.do"
-				})
+//@WebFilter(filterName = "g4-questionOwner" , urlPatterns = {		
+//				"/question/delete.do"
+//				})
 public class QuestionOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;

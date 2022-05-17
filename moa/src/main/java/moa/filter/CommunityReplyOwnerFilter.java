@@ -7,7 +7,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,9 +14,9 @@ import moa.beans.CommunityReplyDao;
 import moa.beans.CommunityReplyDto;
 
 //커뮤니티(홍보게시판) 필터
-@WebFilter(urlPatterns = {		
-						"/community/reply_delete.do", "/community/reply_edit.do"				
-				})
+//@WebFilter(urlPatterns = {		
+//						"/community/reply_delete.do", "/community/reply_edit.do"				
+//				})
 public class CommunityReplyOwnerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
