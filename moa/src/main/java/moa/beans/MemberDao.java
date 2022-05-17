@@ -258,6 +258,7 @@ public class MemberDao {
 
 		int count = ps.executeUpdate();
 
+		con.close();
 		return count > 0;
 
 	}
@@ -386,6 +387,7 @@ public class MemberDao {
 			list.add(memberDto);
 		}
 
+		con.close();
 		return list;
 	}
 

@@ -21,7 +21,7 @@ $(function () {
 	
     $(".detail").hide();
     $(".reward-select").find("input[type=text]").attr("disabled", true);
-	
+	$(".reward-select").find("input[type=number]").attr("disabled", true);
 	// 넘어올 때 누른 리워드의 파라미터 번호를 받아서 넘어오면 체크가 돼있게 설정
 	var rewardCount = new URL(window.location.href).searchParams.get("rewardCount");
 	$(".reward-checkbox").each(function(){
@@ -50,11 +50,13 @@ $(function () {
 
             if ($(this).is(":checked")) {
                 $(this).parent("div").parent(".reward-select").find("input[type=text]").attr("disabled", false);
+                $(this).parent("div").parent(".reward-select").find("input[type=number]").attr("disabled", false);
                 $(this).parent("div").parent(".reward-select").addClass("is-check");
                 $("#reward-checklist").append(createDiv);
                 detail.show();
             } else {
                 $(this).parent("div").parent(".reward-select").find("input[type=text]").attr("disabled", true);
+                $(this).parent("div").parent(".reward-select").find("input[type=number]").attr("disabled", true);
                 $(this).parent("div").parent(".reward-select").removeClass("is-check");
                 detail.find("input[name=selectionRewardAmount]").val(1);
                 detail.find("input[name=selectionOption]").val("");
@@ -68,12 +70,14 @@ $(function () {
 
     //다음단계버튼 클릭 시 체크된 항목 리스트에 나타내기 총배송비 최종결제금액 계산해서 나타내기 체크안됐을때 못넘어가게 막음
 
-    $("#nextstep").click(function () {
+
+$("#nextstep").click(function () {
 
         var deliveryTotal = 0;
         var fundingTotal = 0;
         var count = 0;
         var checkCount = 0;
+        var optionCount = 0;
         $(".reward-checkbox").each(function () {
             if ($(this).is(":checked")) {
                 var rewardNo = $(this).val();
@@ -110,11 +114,18 @@ $(function () {
                     deliveryTotal += parseInt(withoutCommas(delivery.text()));
                     count++;
                 }
+                var selectionOption = $(this).parent("div").parent(".reward-select").find("input[name=selectionOption]").val();
+                console.log(selectionOption);
+                if(selectionOption != ""){
+               optionCount++;
+            }
             }
         });
         if(checkCount == 0){
-			alert("최소 한개 이상을 후원하여야 진행할 수 있습니다.");
-		}else{        
+         alert("최소 한개 이상을 후원하여야 진행할 수 있습니다.");
+      }else if(optionCount < checkCount){
+         alert("상세 옵션을 입력해주세요.");
+      }else{        
         $("#funding-total").text(withCommas(fundingTotal) + "원");
         $("#delivery-total").text(withCommas(deliveryTotal) + "원");
 
@@ -122,8 +133,9 @@ $(function () {
 
         move(++index);
         $('html').scrollTop(0);
-		}
+      }
     });
+
 
     //이전단계 버튼 누르면 넘어왔던 리워드 리스트 초기화
     $("#prevstep").click(function () {

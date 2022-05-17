@@ -123,6 +123,7 @@ public class MoaFaqDao {
 			list.add(moaFaqDto);
 		}
 
+		con.close();
 		return list;
 	}
 	
