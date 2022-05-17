@@ -74,6 +74,7 @@ $(function () {
         var fundingTotal = 0;
         var count = 0;
         var checkCount = 0;
+        var optionCount = 0;
         $(".reward-checkbox").each(function () {
             if ($(this).is(":checked")) {
                 var rewardNo = $(this).val();
@@ -110,10 +111,17 @@ $(function () {
                     deliveryTotal += parseInt(withoutCommas(delivery.text()));
                     count++;
                 }
+                var selectionOption = $(this).parent("div").parent(".reward-select").find("input[name=selectionOption]").val();
+                console.log(selectionOption);
+                if(selectionOption != ""){
+					optionCount++;
+				}
             }
         });
         if(checkCount == 0){
 			alert("최소 한개 이상을 후원하여야 진행할 수 있습니다.");
+		}else if(optionCount < checkCount){
+			alert("상세 옵션을 입력해주세요.");
 		}else{        
         $("#funding-total").text(withCommas(fundingTotal) + "원");
         $("#delivery-total").text(withCommas(deliveryTotal) + "원");
@@ -308,6 +316,8 @@ $(function () {
 			return false;
 		}
 	});
+	
+	
 	
 
 });

@@ -33,8 +33,12 @@
 	
 	
 	<!-- 필터 등록 -->
-<filter-mapping>
-		<filter-name>f1-UTF8</filter-name>
+	<filter>
+		<filter-name>utf8Filter</filter-name>
+		<filter-class>moa.filter.UTF8EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>utf8Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	

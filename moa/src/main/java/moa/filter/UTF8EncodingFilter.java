@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * 		= *.png :  모든 png 페이지
  * 	
  */
-@WebFilter(filterName = "f1-UTF8", urlPatterns ="/*")
+//@WebFilter(filterName = "f1-UTF8", urlPatterns ="/*")
 public class UTF8EncodingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
