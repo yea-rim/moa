@@ -4,7 +4,7 @@ $(function(){
     function joa() {
         var projectNo = new URL(window.location.href).searchParams.get("projectNo");
         $.ajax({
-            url: "http://localhost:8080/moa/ajax/joa.do?projectNo=" + projectNo,
+            url:  context + "/ajax/joa.do?projectNo=" + projectNo,
             type: "get",
             success: function (resp) {
                 if (resp == "insert") {

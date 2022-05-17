@@ -7,7 +7,7 @@
 	$(function() {
 		//후원금 현황 차트
 		$.ajax({
-			url : "http://localhost:8080/moa/ajax/funding_chart.do",
+			url : "<%=request.getContextPath()%>/ajax/funding_chart.do",
 			type : "post",
 			success : function(resp) {
 				//label: x축에 표시될 항목들
@@ -46,7 +46,7 @@
 		});
 		//가입경로 차트
 		$.ajax({
-			url : "http://localhost:8080/moa/ajax/join_chart.do",
+			url : "<%=request.getContextPath()%>/ajax/join_chart.do",
 			type : "post",
 			success : function(resp) {
 				//label: x축에 표시될 항목들

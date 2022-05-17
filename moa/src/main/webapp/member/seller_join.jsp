@@ -14,6 +14,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script type="text/javascript">
+	var context = "<%=request.getContextPath()%>";
 	$(function() {
 		
 		var status = {
@@ -50,7 +51,7 @@ MemberDto memberDto = memberDao.selectOne(memberNo);
 			var that = this;
 
 			$.ajax({
-				url : "http://localhost:8080/moa/ajax/sellerNick.do",
+				url : context + "/ajax/sellerNick.do",
 				type : "post",
 				data : {
 					sellerNick : sellerNick

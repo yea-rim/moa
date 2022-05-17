@@ -52,7 +52,7 @@
 
 							// 중복 검사
 							$.ajax({
-										url : "http://localhost:8080/moa/ajax/email.do?memberEmail="
+										url : "<%=request.getContextPath()%>/ajax/email.do?memberEmail="
 												+ memberEmail,
 										type : "get",
 										success : function(resp) {
@@ -107,7 +107,7 @@
 			var that = this;
 
 			$.ajax({
-				url : "http://localhost:8080/moa/ajax/nick.do",
+				url : "<%=request.getContextPath()%>/ajax/nick.do",
 				type : "post",
 				data : {
 					memberNick : memberNick
@@ -141,7 +141,7 @@
 
 
 			$.ajax({
-				url : "http://localhost:8080/moa/ajax/phone.do",
+				url : "<%=request.getContextPath()%>/ajax/phone.do",
 				type : "post",
 				data : {
 					memberPhone : memberPhone
