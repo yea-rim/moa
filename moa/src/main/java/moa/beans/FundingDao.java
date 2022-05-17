@@ -333,7 +333,12 @@ public class FundingDao {
 	//결제 실행 메서드
 	public boolean paymentCheck() throws Exception {
 		
-		String sql = "update (select * from funding where funding_cancel_date is null and funding_payment_date <= sysdate) set funding_ispayment = 1";
+		String sql = "update (select pro.*, vo.percent from ("
+				+ "select f.*, project_no from funding f inner join ("
+				+ "select project_no, funding_no from member_funding_info)s on f.funding_no = s.funding_no) pro inner join ("
+				+ "select p.project_no, v.percent from project p inner join project_vo v on p.project_no = v.project_no"
+				+ ") vo on pro.project_no = vo.project_no where vo.percent >= 100 and pro.funding_cancel_date is null and pro.funding_payment_date <= sysdate"
+				+ ") set funding_ispayment = 1";
 		
 		Connection con = JdbcUtils.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
