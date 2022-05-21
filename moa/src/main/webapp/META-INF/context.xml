@@ -7,9 +7,9 @@
 						auth = "Container" 
 						
 						driverClassName = "oracle.jdbc.OracleDriver" 
-						url = "jdbc:oracle:thin:@www.sysout.co.kr:11521:xe"
-						username = "kh20"
-						password = "kh20"
+						url = "jdbc:oracle:thin:@www.sysout.co.kr:1521:xe"
+						username = "kh95"
+						password = "kh95"
 						
 						maxTotal = "20"
 						maxIdle = "5"

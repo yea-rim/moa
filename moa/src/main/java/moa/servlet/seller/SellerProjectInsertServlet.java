@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,29 +74,46 @@ public class SellerProjectInsertServlet extends HttpServlet {
 			AttachDao attachDao = new AttachDao();
 
 			Enumeration files = mRequest.getFileNames(); //파일명정보를 배열로 만들다(files에 name들이 담겨있다)
-			while(files.hasMoreElements()){
-			    String name = (String)files.nextElement(); //각각의 파일 name을 String name에 담는다.
+			List<AttachDto> attachDtoList = new ArrayList<>();
+			List<String> fileNameList = new ArrayList<>();
+			while(files.hasMoreElements()) {
+				String name = (String)files.nextElement(); //각각의 파일 name을 String name에 담는다.
 			    String uploadName = mRequest.getOriginalFileName(name);
 			    String saveName = mRequest.getFilesystemName(name); //각각의 파일 name을 통해서 파일의 정보를 얻는다.
 			    String contentType = mRequest.getContentType(name);
-			    File target = mRequest.getFile(name);
-			    int fileSize = 0;
-			 	if(target != null)	fileSize = (int)target.length();	
 
 			 	//파일 정보 저장
 				AttachDto attachDto = new AttachDto();
-				attachDto.setAttachNo(attachDao.getSequence());
 				attachDto.setAttachUploadname(uploadName);
 				attachDto.setAttachSavename(saveName);
 				attachDto.setAttachType(contentType);
-				attachDto.setAttachSize(fileSize);
+//				attachDto.setAttachSize(fileSize);
+				
+				attachDtoList.add(attachDto);
+				fileNameList.add(name);
+			}
+			
+			Collections.reverse(attachDtoList);
+			Collections.reverse(fileNameList);
+			for(int i = 0; i < attachDtoList.size(); i++) {
 
-				attachDao.insert(attachDto);
-
+				String name = fileNameList.get(i).toString();
+				
+				System.out.println(name);
+				
+				File target = mRequest.getFile(name);
+			    int fileSize = 0;
+			 	if(target != null)	fileSize = (int)target.length();	
+				
+				attachDtoList.get(i).setAttachNo(attachDao.getSequence());
+				attachDtoList.get(i).setAttachSize(fileSize);
+				
+				attachDao.insert(attachDtoList.get(i));
+				
 				// 프로젝트 파일 정보 저장
 				ProjectAttachDto projectAttachDto = new ProjectAttachDto();
 				projectAttachDto.setProjectNo(projectNo);
-				projectAttachDto.setAttachNo(attachDto.getAttachNo());
+				projectAttachDto.setAttachNo(attachDtoList.get(i).getAttachNo());
 				if (name.contains("profileAttach")) {
 					projectAttachDto.setAttachType("프로필");
 				} else {
