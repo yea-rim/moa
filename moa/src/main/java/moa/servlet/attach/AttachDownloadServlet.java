@@ -34,7 +34,7 @@ public class AttachDownloadServlet extends HttpServlet{
 			}
 			
 			// 실제 파일 객체 생성
-			File target = new File(AttachDao.path, attachDto.getAttachSavename());
+			File target = new File("D:/upload/kh95/" + attachDto.getAttachSavename());
 			
 			
 			resp.setHeader("Content-Type", "application/octet-stream");
